@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class SpritePool : MonoBehaviour
@@ -11,7 +10,7 @@ public class SpritePool : MonoBehaviour
 
 	private void Awake()
 	{
-		parent = GameObject.FindWithTag("Floor").transform;
+		parent = GetComponent<Floor>().transform;
 	}
 
 	public SpriteRenderer Get()

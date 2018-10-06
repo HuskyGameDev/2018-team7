@@ -24,19 +24,22 @@ public class Room
 	// References to floor variables.
 	private SpritePool spritePool;
 	private Sprite[] sprites;
+	private RoomCollision collision;
 
 	public Vec2i Pos { get; private set; }
 	public Vector2 WorldPos { get; private set; }
 
-	public Room(int pX, int pY, SpritePool pool, Sprite[] sprites)
+	public Room(int pX, int pY, SpritePool spritePool, ColliderPool colliderPool, Sprite[] sprites)
 	{
 		tiles = new Tile[Width * Height];
 
 		Pos = new Vec2i(pX, pY);
 		WorldPos = new Vector2(pX * Width, pY * Height);
 
-		spritePool = pool;
+		this.spritePool = spritePool;
 		this.sprites = sprites;
+
+		collision = new RoomCollision(this, colliderPool);
 	}
 
 	// Returns a tile at the given location from this room. Fails if the location is out of bounds of the room.
@@ -97,5 +100,15 @@ public class Room
 
 		spriteList.Clear();
 		hasSprites = false;
+	}
+
+	public void SetColliders()
+	{
+		collision.Generate();
+	}
+
+	public void RemoveColliders()
+	{
+		collision.RemoveColliders();
 	}
 }

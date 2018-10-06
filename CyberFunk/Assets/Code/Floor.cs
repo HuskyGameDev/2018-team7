@@ -14,6 +14,7 @@ public class Floor : MonoBehaviour
 
 	// A pool for reusing sprites. This avoids instantiate/destroy and garbage collection spikes.
 	private SpritePool spritePool;
+	private ColliderPool colliderPool;
 
 	// Temporary way to access sprites - the tile ID - 1 (index into tile type enum) maps into this.
 	// Subtract 1 since air doesn't have a sprite.
@@ -24,6 +25,7 @@ public class Floor : MonoBehaviour
 	private void Awake()
 	{
 		spritePool = GetComponent<SpritePool>();
+		colliderPool = GetComponent<ColliderPool>();
 		generator = new FloorGenerator(this);
 		generator.Generate(RoomCount);
 	}
@@ -58,7 +60,7 @@ public class Floor : MonoBehaviour
 	{
 		Vec2i roomP = new Vec2i(x, y);
 		Assert.IsTrue(GetRoom(roomP) == null);
-		Room room = new Room(x, y, spritePool, sprites);
+		Room room = new Room(x, y, spritePool, colliderPool, sprites);
 		rooms.Add(roomP, room);
 		return room;
 	}

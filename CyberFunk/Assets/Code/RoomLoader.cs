@@ -77,6 +77,7 @@ public class RoomLoader : MonoBehaviour
 				if (!room.hasSprites)
 				{
 					room.SetSprites();
+					room.SetColliders();
 
 					if (activeRooms.Contains(room))
 						activeRooms.Remove(room);
@@ -86,6 +87,7 @@ public class RoomLoader : MonoBehaviour
 					if (activeRooms.Count > MaxActive)
 					{
 						activeRooms.Last.Value.RemoveSprites();
+						activeRooms.Last.Value.RemoveColliders();
 						activeRooms.RemoveLast();
 					}
 				}
