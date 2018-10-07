@@ -23,13 +23,12 @@ public class Room
 
 	// References to floor variables.
 	private SpritePool spritePool;
-	private Sprite[] sprites;
 	private RoomCollision collision;
 
 	public Vec2i Pos { get; private set; }
 	public Vector2 WorldPos { get; private set; }
 
-	public Room(int pX, int pY, SpritePool spritePool, ColliderPool colliderPool, Sprite[] sprites)
+	public Room(int pX, int pY, SpritePool spritePool, ColliderPool colliderPool)
 	{
 		tiles = new Tile[Width * Height];
 
@@ -37,8 +36,6 @@ public class Room
 		WorldPos = new Vector2(pX * Width, pY * Height);
 
 		this.spritePool = spritePool;
-		this.sprites = sprites;
-
 		collision = new RoomCollision(this, colliderPool);
 	}
 
@@ -75,13 +72,12 @@ public class Room
 				for (int x = 0; x < Width; x++)
 				{
 					Tile tile = GetTile(x, y);
+					TileProperties data = tile.Properties;
 
 					if (tile != TileType.Air)
 					{
-						Sprite sprite = sprites[(int)tile.id - 1];
-
 						SpriteRenderer rend = spritePool.Get();
-						rend.sprite = sprite;
+						rend.sprite = data.sprite;
 						rend.transform.position = WorldPos + new Vector2(x, y);
 
 						spriteList.Add(rend);

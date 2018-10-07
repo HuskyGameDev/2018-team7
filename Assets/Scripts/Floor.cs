@@ -18,16 +18,24 @@ public class Floor : MonoBehaviour
 
 	// Temporary way to access sprites - the tile ID - 1 (index into tile type enum) maps into this.
 	// Subtract 1 since air doesn't have a sprite.
-	[SerializeField] private Sprite[] sprites;
+	[SerializeField] private TileDataList data;
+
+	public static Floor Instance { get; private set; }
 
 	private FloorGenerator generator;
 
 	private void Awake()
 	{
+		Instance = this;
 		spritePool = GetComponent<SpritePool>();
 		colliderPool = GetComponent<ColliderPool>();
 		generator = new FloorGenerator(this);
 		generator.Generate(RoomCount);
+	}
+
+	public TileProperties GetTileProperties(Tile tile)
+	{
+		return data.GetProperties(tile);
 	}
 
 	// Returns the tile at the given location. Location is specified in world tile space.
@@ -60,7 +68,7 @@ public class Floor : MonoBehaviour
 	{
 		Vec2i roomP = new Vec2i(x, y);
 		Assert.IsTrue(GetRoom(roomP) == null);
-		Room room = new Room(x, y, spritePool, colliderPool, sprites);
+		Room room = new Room(x, y, spritePool, colliderPool);
 		rooms.Add(roomP, room);
 		return room;
 	}

@@ -1,9 +1,35 @@
-﻿using System.Collections.Generic;
+﻿
 using UnityEngine;
+using System.Collections.Generic;
 
 public static class Extensions
 {
-	// Fisher-Yates shuffle algorithm.
+	public static void SetX(this Transform t, float value)
+	{
+		Vector3 p = t.position;
+		p.x = value;
+		t.position = p;
+	}
+
+	public static void SetY(this Transform t, float value)
+	{
+		Vector3 p = t.position;
+		p.y = value;
+		t.position = p;
+	}
+
+	public static void SetZ(this Transform t, float value)
+	{
+		Vector3 p = t.position;
+		p.z = value;
+		t.position = p;
+	}
+
+	public static Color SetAlpha(this Color col, float alpha)
+	{
+		return new Color(col.r, col.g, col.b, alpha);
+	}
+
 	public static void Shuffle<T>(this IList<T> list)
 	{
 		int n = list.Count;

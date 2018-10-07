@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 489051866ed8be04bba42f582ac25ba2, type: 3}
+  m_Name: TileData
+  m_EditorClassIdentifier: 
+  data:
+  - name: Air
+    type: 0
+    variantCount: 1
+    variants:
+    - invisible: 1
+      hasCollider: 0
+      trigger: 0
+      colliderSize: {x: 0, y: 0}
+      colliderOffset: {x: 0, y: 0}
+      renderOffset: {x: 0, y: 0, z: 0}
+      sprite: {fileID: 0}
+      color:
+        serializedVersion: 2
+        rgba: 0
+  - name: Wall
+    type: 1
+    variantCount: 1
+    variants:
+    - invisible: 0
+      hasCollider: 1
+      trigger: 0
+      colliderSize: {x: 1, y: 1}
+      colliderOffset: {x: 0, y: 0}
+      renderOffset: {x: 0, y: 0, z: 0}
+      sprite: {fileID: 21300000, guid: a3b9499c0f3c47a4597b7459510ce236, type: 3}
+      color:
+        serializedVersion: 2
+        rgba: 0
+  - name: Floor
+    type: 2
+    variantCount: 1
+    variants:
+    - invisible: 0
+      hasCollider: 0
+      trigger: 0
+      colliderSize: {x: 0, y: 0}
+      colliderOffset: {x: 0, y: 0}
+      renderOffset: {x: 0, y: 0, z: 0}
+      sprite: {fileID: 21300000, guid: 3dfaa0e31f452ae498f285238b9661dd, type: 3}
+      color:
+        serializedVersion: 2
+        rgba: 0
+  - name: Stair
+    type: 3
+    variantCount: 1
+    variants:
+    - invisible: 0
+      hasCollider: 0
+      trigger: 0
+      colliderSize: {x: 0, y: 0}
+      colliderOffset: {x: 0, y: 0}
+      renderOffset: {x: 0, y: 0, z: 0}
+      sprite: {fileID: 21300000, guid: ce74712921535174682f5ac5f072eea5, type: 3}
+      color:
+        serializedVersion: 2
+        rgba: 0

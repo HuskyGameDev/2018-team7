@@ -4,10 +4,17 @@
 public struct Tile : IEquatable<Tile>
 {
 	public TileType id;
+	public ushort variant;
 
-	public Tile(TileType id)
+	public Tile(TileType id, ushort variant = 0)
 	{
 		this.id = id;
+		this.variant = variant;
+	}
+
+	public TileProperties Properties
+	{
+		get { return Floor.Instance.GetTileProperties(this); }
 	}
 
 	public static implicit operator Tile(TileType id)
