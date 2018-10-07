@@ -193,6 +193,9 @@ public class TileEditor : EditorWindow
 					props.color = EditorGUI.ColorField(new Rect(x + 165.0f, y, 150.0f, 15.0f), props.color);
 				}
 
+				y += 25.0f;
+				props.component = (TileComponent)EditorGUI.ObjectField(new Rect(x, y, 160.0f, 15.0f), props.component, typeof(TileComponent), false);
+
 				if (v % 2 == 0)
 				{
 					x += 400.0f;
