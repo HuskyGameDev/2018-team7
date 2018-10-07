@@ -26,6 +26,7 @@ MonoBehaviour:
       color:
         serializedVersion: 2
         rgba: 0
+      component: {fileID: 0}
   - name: Wall
     type: 1
     variantCount: 1
@@ -40,6 +41,7 @@ MonoBehaviour:
       color:
         serializedVersion: 2
         rgba: 0
+      component: {fileID: 0}
   - name: Floor
     type: 2
     variantCount: 1
@@ -54,17 +56,19 @@ MonoBehaviour:
       color:
         serializedVersion: 2
         rgba: 0
+      component: {fileID: 0}
   - name: Stair
     type: 3
     variantCount: 1
     variants:
     - invisible: 0
-      hasCollider: 0
-      trigger: 0
-      colliderSize: {x: 0, y: 0}
+      hasCollider: 1
+      trigger: 1
+      colliderSize: {x: 0.8, y: 0.8}
       colliderOffset: {x: 0, y: 0}
       renderOffset: {x: 0, y: 0, z: 0}
       sprite: {fileID: 21300000, guid: ce74712921535174682f5ac5f072eea5, type: 3}
       color:
         serializedVersion: 2
         rgba: 0
+      component: {fileID: 0}

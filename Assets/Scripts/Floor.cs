@@ -33,6 +33,16 @@ public class Floor : MonoBehaviour
 		generator.Generate(RoomCount);
 	}
 
+	public void Generate()
+	{
+		foreach (Room room in rooms.Values)
+			room.Destroy();
+
+		rooms.Clear();
+		generator.Generate(RoomCount);
+		GameObject.FindWithTag("Player").transform.position = new Vector3(5.0f, 5.0f);
+	}
+
 	public TileProperties GetTileProperties(Tile tile)
 	{
 		return data.GetProperties(tile);
@@ -71,5 +81,11 @@ public class Floor : MonoBehaviour
 		Room room = new Room(x, y, spritePool, colliderPool);
 		rooms.Add(roomP, room);
 		return room;
+	}
+
+	private void Update()
+	{
+		if (Input.GetKeyDown(KeyCode.P))
+			Generate();
 	}
 }

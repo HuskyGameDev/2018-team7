@@ -107,4 +107,10 @@ public class Room
 	{
 		collision.RemoveColliders();
 	}
+
+	public void Destroy()
+	{
+		RemoveColliders();
+		RemoveSprites();
+	}
 }
