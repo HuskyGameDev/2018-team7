@@ -5,17 +5,12 @@ public class ColliderPool : MonoBehaviour
 {
 	[SerializeField] private GameObject colliderObj;
 
-	private Queue<BoxCollider2D> pool = new Queue<BoxCollider2D>();
+	private Queue<TileCollider> pool = new Queue<TileCollider>();
 	private Transform parent;
 
-	private void Awake()
+	public TileCollider Get()
 	{
-		parent = GetComponent<Floor>().transform;
-	}
-
-	public BoxCollider2D Get()
-	{
-		BoxCollider2D col;
+		TileCollider col;
 
 		if (pool.Count > 0)
 		{
@@ -24,14 +19,14 @@ public class ColliderPool : MonoBehaviour
 		}
 		else
 		{
-			col = Instantiate(colliderObj).GetComponent<BoxCollider2D>();
-			col.transform.SetParent(parent);
+			col = Instantiate(colliderObj).GetComponent<TileCollider>();
+			col.transform.SetParent(transform);
 		}
 
 		return col;
 	}
 
-	public void ReturnColliders(List<BoxCollider2D> colliders)
+	public void ReturnColliders(List<TileCollider> colliders)
 	{
 		for (int i = 0; i < colliders.Count; i++)
 		{

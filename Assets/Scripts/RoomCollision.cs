@@ -8,7 +8,7 @@ public class RoomCollision
 	private ColliderPool pool;
 	private bool hasColliders;
 
-	private List<BoxCollider2D> colliders = new List<BoxCollider2D>();
+	private List<TileCollider> colliders = new List<TileCollider>();
 
 	public RoomCollision(Room room, ColliderPool pool)
 	{
@@ -31,9 +31,11 @@ public class RoomCollision
 
 				if (props.hasCollider)
 				{
-					BoxCollider2D col = pool.Get();
-					col.transform.position = new Vector2(worldPos.x + x, worldPos.y + y) + props.colliderOffset;
-					col.size = props.colliderSize;
+					TileCollider col = pool.Get();
+					col.SetPosition(new Vector2(worldPos.x + x, worldPos.y + y) + props.colliderOffset);
+					col.SetSize(props.colliderSize);
+					col.SetTile(tile);
+					col.SetTrigger(props.trigger);
 					colliders.Add(col);
 				}
 			}

@@ -304,9 +304,10 @@ GameObject:
   - component: {fileID: 1605337689}
   - component: {fileID: 1605337688}
   - component: {fileID: 1605337687}
+  - component: {fileID: 1605337693}
   m_Layer: 0
   m_Name: TestPlayer
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -423,3 +424,14 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1605337693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1605337686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca0525dbcd9c3d4499398ac9130c1d31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
