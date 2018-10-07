@@ -26,7 +26,7 @@ public class FloorGenerator
 		this.floor = floor;
 	}
 
-	private void BuildRoom(Room room)
+	private void BuildRoom(Room room, bool stairRoom)
 	{
 		// Add top and bottom walls.
 		for (int x = 1; x <= Room.LimX - 1; x++)
@@ -53,8 +53,13 @@ public class FloorGenerator
 		for (int y = 1; y <= Room.LimY - 1; y++)
 		{
 			for (int x = 1; x <= Room.LimX - 1; x++)
-				room.SetTile(x, y, TileType.Floor);
+                room.SetTile(x, y, TileType.Floor);
+            
 		}
+        if (stairRoom)
+        {
+            room.SetTile(Room.LimX / 2, Room.LimY / 2, TileType.Stair);
+        }
 	}
 
 	private Vec2i GetNextPos(Vec2i current)
@@ -106,11 +111,19 @@ public class FloorGenerator
 
 		// Used to pair two rooms together. These two rooms are connected and will have a path between them.
 		List<Connection> connections = new List<Connection>(roomCount);
-
+        int stairRoom = (int)Random.Range(roomCount / 2, roomCount);
 		for (int i = 0; i < roomCount; i++)
 		{
 			Room room = floor.CreateRoom(roomP.x, roomP.y);
-			BuildRoom(room);
+            if (i == stairRoom)
+            {
+                BuildRoom(room,true);
+            }
+            else
+            {
+                BuildRoom(room, false);
+            }
+			
 
 			Vec2i next = GetNextPos(roomP);
 

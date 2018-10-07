@@ -3,5 +3,6 @@ public enum TileType
 {
 	Air,
 	Wall, 
-	Floor
+	Floor,
+    Stair
 }
