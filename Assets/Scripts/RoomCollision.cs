@@ -27,11 +27,13 @@ public class RoomCollision
 			for (int x = 0; x < Room.Width; x++)
 			{
 				Tile tile = room.GetTile(x, y);
+				TileProperties props = tile.Properties;
 
-				if (tile != TileType.Air && tile != TileType.Floor)
+				if (props.hasCollider)
 				{
 					BoxCollider2D col = pool.Get();
-					col.transform.position = new Vector3(worldPos.x + x, worldPos.y + y);
+					col.transform.position = new Vector2(worldPos.x + x, worldPos.y + y) + props.colliderOffset;
+					col.size = props.colliderSize;
 					colliders.Add(col);
 				}
 			}
