@@ -6,10 +6,11 @@ using System.Collections.Generic;
 
 public class RoomLoader : MonoBehaviour
 {
-	private Floor floor;
-	private bool free = true;
+	[SerializeField] private Transform player;
 
-	private Room activeRoom;
+	private Floor floor;
+	private bool free = false;
+
 	private Camera cam;
 
 	private const int MaxActive = 4;
@@ -46,7 +47,7 @@ public class RoomLoader : MonoBehaviour
 		}
 		else
 		{
-			Vec2i pRoom = ToRoomPos(transform.position);
+			Vec2i pRoom = ToRoomPos(player.position);
 			return new RectInt(pRoom.x, pRoom.y, 0, 0);
 		}
 	}
@@ -57,13 +58,13 @@ public class RoomLoader : MonoBehaviour
 	private void Update()
 	{
 		// Testing code.
-		if (Input.GetKeyDown(KeyCode.F))
+		/*if (Input.GetKeyDown(KeyCode.F))
 			free = !free;
 
 		// Temporary camera movement code for testing purposes.
 		Vector2 move = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 		move *= (10.0f * Time.deltaTime);
-		transform.Translate(move);
+		transform.Translate(move);*/
 
 		RectInt rooms = GetIntersectingRooms(floor);
 
@@ -96,7 +97,7 @@ public class RoomLoader : MonoBehaviour
 
 		if (!free)
 		{
-			Room room = floor.GetRoom(ToRoomPos(transform.position));
+			Room room = floor.GetRoom(ToRoomPos(player.position));
 
 			if (room != null)
 			{
