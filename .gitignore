@@ -1,0 +1,8 @@
+Library/
+Temp/
+obj/
+.vs/
+.collabignore
+2018-team7.sln
+Assembly-CSharp.csproj
+Assembly-CSharp-Editor.csproj
