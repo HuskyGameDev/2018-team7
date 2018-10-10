@@ -4,39 +4,53 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
-    public GameObject bullet;
+    public GameObject bullet; // The bullet object for the player to shoot
 
-    public int health;
+    public int health; // the health of the player
+
+    // Returns the health of the player
     public int getHealth()
     {
         return health;
     }
 
+    // Sets the health of the player
     public void setHealth(int health)
     {
         this.health = health;
     }
 
-    public float bulletSpeed;
+    public float bulletSpeed; // the speed at which the player shoots
+
+    // Returns the bulletSpeed of the player
     public float getBulletSpeed()
     {
         return this.bulletSpeed;
     }
 
+
+    // Sets the bulletSpeed of the player
     public void setBulletSpeed(float bulletSpeed)
     {
         this.bulletSpeed = bulletSpeed;
     }
 
-    // Use this for initialization
+    /**
+     * Start
+     * Initializes the health and bulletSpeed variables
+     */ 
     void Start () {
         health = 100;
-        bulletSpeed = .05f;
+        bulletSpeed = .2f;
 	}
    
     
 	//NOT FINAL
 	// Update is called once per frame
+    /**
+     * Update
+     * Temporarily decides which direction the player is going to shoot
+     */ 
 	void Update () {
 
         //Shoots Right
