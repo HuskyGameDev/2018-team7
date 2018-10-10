@@ -23,9 +23,11 @@ public class RoomLoader : MonoBehaviour
 		floor = GameObject.FindWithTag("Floor").GetComponent<Floor>();
 	}
 
-	// Returns a rectangle representing all rooms that intersect the camera's view frustum.
-	// The minimum value is the room coordinates of the bottom-left room and the maximum
-	// value is the room coordinates of the upper-right room.
+	/// <summary>
+	/// Returns a rectangle representing all rooms that intersect the camera's view frustum.
+	/// The minimum value is the room coordinates of the bottom-left room and the maximum
+	/// value is the room coordinates of the upper-right room.
+	/// </summary>
 	public RectInt GetIntersectingRooms(Floor floor)
 	{
 		if (free)

@@ -6,7 +6,9 @@ using static Utils;
 
 public class Floor : MonoBehaviour
 {
-	// Should this be set at 10?
+	/// <summary>
+	/// The number of rooms in this floor.
+	/// </summary>
 	public int RoomCount { get; private set; } = 10;
 
 	// Sparse storage. A bit slower, but doesn't matter with our level size. Smaller memory footprint.
@@ -20,6 +22,7 @@ public class Floor : MonoBehaviour
 	// Subtract 1 since air doesn't have a sprite.
 	[SerializeField] private TileDataList data;
 
+	// Singleton instance.
 	public static Floor Instance { get; private set; }
 
 	private FloorGenerator generator;
@@ -33,6 +36,9 @@ public class Floor : MonoBehaviour
 		generator.Generate(RoomCount);
 	}
 
+	/// <summary>
+	/// Generate the floor. This creates and builds the rooms that comprise it. 
+	/// </summary>
 	public void Generate()
 	{
 		foreach (Room room in rooms.Values)
@@ -43,12 +49,18 @@ public class Floor : MonoBehaviour
 		GameObject.FindWithTag("Player").transform.position = new Vector3(5.0f, 5.0f);
 	}
 
+	/// <summary>
+	/// Returns the TileProperties object for the given tile type. This object
+	/// contains information about the tile, such as its visibility and collision information.
+	/// </summary>
 	public TileProperties GetTileProperties(Tile tile)
 	{
 		return data.GetProperties(tile);
 	}
 
-	// Returns the tile at the given location. Location is specified in world tile space.
+	/// <summary>
+	/// Returns the tile at the given location. Location is specified in world tile space.
+	/// </summary>
 	public Tile GetTile(int x, int y)
 	{
 		Vec2i roomP = ToRoomPos(x, y), lP = ToLocalPos(x, y);
@@ -56,7 +68,9 @@ public class Floor : MonoBehaviour
 		return room.GetTile(lP.x, lP.y);
 	}
 
-	// Sets the given tile at the given location. Location is specified in world tile space.
+	/// <summary>
+	/// Sets the given tile at the given location. Location is specified in world tile space.
+	/// </summary>
 	public void SetTile(int x, int y, Tile tile)
 	{
 		Vec2i roomP = ToRoomPos(x, y), localP = ToLocalPos(x, y);
@@ -64,7 +78,9 @@ public class Floor : MonoBehaviour
 		room.SetTile(localP.x, localP.y, tile);
 	}
 
-	// Returns the room at the given location in room coordinates. Returns null if the room doesn't exist.
+	/// <summary>
+	/// Returns the room at the given location in room coordinates. Returns null if the room doesn't exist.
+	/// </summary>
 	public Room GetRoom(Vec2i roomP)
 	{
 		Room room;
@@ -74,6 +90,9 @@ public class Floor : MonoBehaviour
 		return null;
 	}
 
+	/// <summary>
+	/// Creates a new room at the given room coordinates and adds it to the rooms list for this floor.
+	/// </summary>
 	public Room CreateRoom(int x, int y)
 	{
 		Vec2i roomP = new Vec2i(x, y);

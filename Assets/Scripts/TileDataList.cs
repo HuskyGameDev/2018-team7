@@ -2,10 +2,17 @@
 using System;
 using System.Collections.Generic;
 
+/// <summary>
+/// Stores tile data for the game, filled out by the tile data editor. 
+/// </summary>
 public class TileDataList : ScriptableObject
 {
 	[SerializeField] private TileData[] data;
 
+	/// <summary>
+	/// Create a new tile data list. It will use the tile types defined in the TileType
+	/// enumeration to add a data object for each.
+	/// </summary>
 	public void Init()
 	{
 		TileType[] values = (TileType[])Enum.GetValues(typeof(TileType));
@@ -21,6 +28,9 @@ public class TileDataList : ScriptableObject
 		}
 	}
 
+	/// <summary>
+	/// The number of tiles in this data list.
+	/// </summary>
 	public int Count
 	{
 		get
@@ -35,6 +45,9 @@ public class TileDataList : ScriptableObject
 		return data[(int)tile.id].GetProperties(tile.variant);
 	}
 
+	/// <summary>
+	/// Scan the tile types defined and ensure this tile data list matches them.
+	/// </summary>
 	public bool Refresh()
 	{
 		try

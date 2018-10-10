@@ -1,11 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Assertions;
 using static Utils;
 
 public class FloorGenerator
 {
+	// Used for connecting two rooms together via a pathway.
+	// Stores the axis the pathway will exist on as well as positions 
+	// for the pathway.
 	private struct Connection
 	{
 		public Vec2i a, b;
@@ -26,6 +27,7 @@ public class FloorGenerator
 		this.floor = floor;
 	}
 
+	// Generate all tiles for the given room.
 	private void BuildRoom(Room room, bool stairRoom)
 	{
 		// Add top and bottom walls.
@@ -54,14 +56,15 @@ public class FloorGenerator
 		{
 			for (int x = 1; x <= Room.LimX - 1; x++)
                 room.SetTile(x, y, TileType.Floor);
-            
 		}
+
         if (stairRoom)
         {
             room.SetTile(Room.LimX / 2, Room.LimY / 2, TileType.Stair);
         }
 	}
 
+	// Returns the position of the next room to generate.
 	private Vec2i GetNextPos(Vec2i current)
 	{
 		List<Vec2i> possibleRooms = new List<Vec2i>(4)
@@ -103,10 +106,12 @@ public class FloorGenerator
 		}
 	}
 
+	/// <summary>
+	/// Generates the specified number of rooms.
+	/// </summary>
 	public void Generate(int roomCount)
 	{
-		// Start at 15 so there's room to generate in all directions, keeping us in the positive range. 
-		// It's easier to support positive only. (Although probably doesn't matter much when we use a dictionary...)
+		// Room position.
 		Vec2i roomP = new Vec2i(0, 0);
 
 		// Used to pair two rooms together. These two rooms are connected and will have a path between them.
@@ -117,7 +122,7 @@ public class FloorGenerator
 			Room room = floor.CreateRoom(roomP.x, roomP.y);
             if (i == stairRoom)
             {
-                BuildRoom(room,true);
+                BuildRoom(room, true);
             }
             else
             {

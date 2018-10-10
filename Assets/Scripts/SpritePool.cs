@@ -13,6 +13,10 @@ public class SpritePool : MonoBehaviour
 		parent = GetComponent<Floor>().transform;
 	}
 
+	/// <summary>
+	/// Get a sprite from the sprite pool. If one doesn't exist, it will be instantiated.
+	/// Sprites are guaranteed to be enabled.
+	/// </summary>
 	public SpriteRenderer Get()
 	{
 		SpriteRenderer rend;
@@ -31,6 +35,9 @@ public class SpritePool : MonoBehaviour
 		return rend;
 	}
 
+	/// <summary>
+	/// Return the sprite to the sprite pool, disabling it in the process.
+	/// </summary>
 	public void Return(SpriteRenderer rend)
 	{
 		rend.enabled = false;

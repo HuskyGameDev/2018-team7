@@ -7,25 +7,74 @@ public class Room
 	// It's more efficient if height is a power of 2, but it probably doesn't matter. This way, if we use 32 
 	// pixels per unit and 16:9 resolution, we can fit 32x18 tiles on the screen. This of course depends on 
 	// the aspect ratio we decide on.
-	public const int Width = 32, Height = 18;
 
-	public const int HalfSizeX = Width / 2, HalfSizeY = Height / 2;
-	public const int LimX = Width - 1, LimY = Height - 1;
+	/// <summary>
+	/// The width of the room, in tiles.
+	/// </summary>
+	public const int Width = 32;
 
-	// Used to optimize division/remainder operations given the width is a power of 2.
-	public const int ShiftX = 5, MaskX = Width - 1;
+	/// <summary>
+	/// The height of the room, in tiles.
+	/// </summary>
+	public const int Height = 18;
+
+	/// <summary>
+	/// Half the width of a room, in tiles.
+	/// </summary>
+	public const int HalfSizeX = Width / 2;
+
+	/// <summary>
+	/// Half the height of a room, in tiles.
+	/// </summary>
+	public const int HalfSizeY = Height / 2;
+
+	/// <summary>
+	/// The room's limit on the x-axis, equivalent to the actual width - 1. This is used
+	/// when looping as the final value (considering 0 indexing).
+	/// </summary>
+	public const int LimX = Width - 1;
+
+	/// <summary>
+	/// The room's limit on the y-axis, equivalent to the actual width - 1. This is used
+	/// when looping as the final value (considering 0 indexing).
+	/// </summary>
+	public const int LimY = Height - 1;
+
+	/// <summary>
+	/// Used to optimize division. Saying x >> ShiftX is the same 
+	/// as saying x / Room.SizeX and truncating the result to an integer.
+	/// </summary>
+	public const int ShiftX = 5;
+
+	/// <summary>
+	/// Used for efficient remainder operations. It is technically the same as LimX, but I
+	/// keep it a separate value to show intent. Saying x & MaskX is the same as saying
+	/// x % MaskX + 1.
+	/// </summary>
+	public const int MaskX = Width - 1;
 
 	private Tile[] tiles;
 
+	/// <summary>
+	/// If true, this room has sprites and is being rendered.
+	/// </summary>
 	public bool hasSprites = false;
 
+	// Stores all sprites this room is using so that they can be returned during the unload process.
 	private List<SpriteRenderer> spriteList = new List<SpriteRenderer>();
 
 	// References to floor variables.
 	private SpritePool spritePool;
 	private RoomCollision collision;
 
+	/// <summary>
+	/// The room's position, in room coordinates.
+	/// </summary>
 	public Vec2i Pos { get; private set; }
+
+	/// <summary>
+	/// The room's world position in Unity world space.
+	/// </summary>
 	public Vector2 WorldPos { get; private set; }
 
 	public Room(int pX, int pY, SpritePool spritePool, ColliderPool colliderPool)
@@ -39,30 +88,38 @@ public class Room
 		collision = new RoomCollision(this, colliderPool);
 	}
 
-	// Returns a tile at the given location from this room. Fails if the location is out of bounds of the room.
-	// Coordinates are specified in local room space between 0 and room size - 1. 
+	/// <summary>
+	/// Returns a tile at the given location from this room. Fails if the location is out of bounds of the room.
+	/// Coordinates are specified in local room space between 0 and room size - 1. 
+	/// </summary>
 	public Tile GetTile(int x, int y)
 	{
 		Assert.IsTrue(InBounds(x, y));
 		return tiles[y * Width + x];
 	}
 
-	// Sets a tile at the given location from this room. Fails if the location is out of bounds of the room.
-	// Coordinates are specified in local room space between 0 and room size - 1.
+	/// <summary>
+	/// Sets a tile at the given location from this room. Fails if the location is out of bounds of the room.
+	/// Coordinates are specified in local room space between 0 and room size - 1.
+	/// </summary>
 	public void SetTile(int x, int y, Tile tile)
 	{
 		Assert.IsTrue(InBounds(x, y));
 		tiles[y * Width + x] = tile;
 	}
 
-	// Returns true if the given coordinates are within the boundaries of this room.
-	// Coordinates are specified in local room space between 0 and room size - 1.
+	/// <summary>
+	/// // Returns true if the given coordinates are within the boundaries of this room.
+	/// Coordinates are specified in local room space between 0 and room size - 1.
+	/// </summary>
 	public static bool InBounds(int x, int y)
 	{
 		return x >= 0 && x < Width && y >= 0 && y < Height;
 	}
 
-	// Draw all tiles in this room by setting sprite renderers at their locations from the pool.
+	/// <summary>
+	/// Draw all tiles in this room by setting sprite renderers at their locations from the pool.
+	/// </summary>
 	public void SetSprites()
 	{
 		if (!hasSprites)
@@ -89,6 +146,9 @@ public class Room
 		}
 	}
 
+	/// <summary>
+	/// Remove all sprites from this room. It will no longer be visible.
+	/// </summary>
 	public void RemoveSprites()
 	{
 		for (int i = 0; i < spriteList.Count; i++)
@@ -98,16 +158,25 @@ public class Room
 		hasSprites = false;
 	}
 
+	/// <summary>
+	/// Set colliders for this room. Once called, entities will be able to collide with the room.
+	/// </summary>
 	public void SetColliders()
 	{
 		collision.Generate();
 	}
 
+	/// <summary>
+	/// Remove colliders for this room. Once called, entities will no longer be able to collide with the room.
+	/// </summary>
 	public void RemoveColliders()
 	{
 		collision.RemoveColliders();
 	}
 
+	/// <summary>
+	/// Destroys this room, removing its colliders and sprites.
+	/// </summary>
 	public void Destroy()
 	{
 		RemoveColliders();

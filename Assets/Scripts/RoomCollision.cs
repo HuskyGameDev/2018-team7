@@ -16,6 +16,11 @@ public class RoomCollision
 		this.pool = pool;
 	}
 
+	/// <summary>
+	/// Scans the tiles in the room and uses their tile properties objects to
+	/// determine if they should have a collider or not. If so, adds one and
+	/// sets its properties according to the tile's requirement.
+	/// </summary>
 	public void Generate()
 	{
 		Assert.IsFalse(hasColliders);
@@ -44,12 +49,14 @@ public class RoomCollision
 		hasColliders = true;
 	}
 
+	/// <summary>
+	/// Remove all colliders from the room.
+	/// </summary>
 	public void RemoveColliders()
 	{
 		if (hasColliders)
 		{
 			pool.ReturnColliders(colliders);
-			colliders.Clear();
 			hasColliders = false;
 		}
 	}
