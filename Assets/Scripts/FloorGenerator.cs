@@ -4,6 +4,8 @@ using static Utils;
 
 public class FloorGenerator
 {
+	private ItemSpawner spawner;
+
 	// Used for connecting two rooms together via a pathway.
 	// Stores the axis the pathway will exist on as well as positions 
 	// for the pathway.
@@ -25,10 +27,11 @@ public class FloorGenerator
 	public FloorGenerator(Floor floor)
 	{
 		this.floor = floor;
+		spawner = GameObject.FindWithTag("ItemSpawner").GetComponent<ItemSpawner>();
 	}
 
 	// Generate all tiles for the given room.
-	private void BuildRoom(Room room, bool stairRoom)
+	private void BuildRoom(Room room, bool stairRoom, bool powerupRoom)
 	{
 		// Add top and bottom walls.
 		for (int x = 1; x <= Room.LimX - 1; x++)
@@ -62,6 +65,11 @@ public class FloorGenerator
         {
             room.SetTile(Room.LimX / 2, Room.LimY / 2, TileType.Stair);
         }
+
+		Vector2 wPos = room.WorldPos;
+
+		if (powerupRoom)
+			spawner.SpawnItem(wPos + RandomV2(3.0f, 3.0f, Room.LimX - 3.0f, Room.LimY - 3.0f));
 	}
 
 	// Returns the position of the next room to generate.
@@ -116,17 +124,19 @@ public class FloorGenerator
 
 		// Used to pair two rooms together. These two rooms are connected and will have a path between them.
 		List<Connection> connections = new List<Connection>(roomCount);
-        int stairRoom = (int)Random.Range(roomCount / 2, roomCount);
+        int stairRoom = Random.Range(roomCount / 2, roomCount);
+
 		for (int i = 0; i < roomCount; i++)
 		{
+			bool powerupRoom = Random.value < 0.5f;
 			Room room = floor.CreateRoom(roomP.x, roomP.y);
             if (i == stairRoom)
             {
-                BuildRoom(room, true);
+                BuildRoom(room, true, powerupRoom);
             }
             else
             {
-                BuildRoom(room, false);
+                BuildRoom(room, false, powerupRoom);
             }
 			
 

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Floor
   - Pickup
+  - ItemSpawner
   layers:
   - Default
   - TransparentFX

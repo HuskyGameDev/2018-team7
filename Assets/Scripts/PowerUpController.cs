@@ -34,18 +34,13 @@ public class PowerUpController : MonoBehaviour {
             Debug.Log("Cannot find movement");
         }
     }
-	
-	// Update is called once per frame
-	void Update () {
-        
-	}
 
     /**
      * OnTriggerEnter2D
      * Checks what 2D object the player has collided with
      * Uses coroutines in order to have the powerups time out in their methods
      */ 
-    void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerEnter(Collider collision)
     {
 
         Debug.Log(collision.name);

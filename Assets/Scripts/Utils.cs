@@ -97,6 +97,20 @@ public static class Utils
 		return TilePos(p.x, p.y);
 	}
 
+	public static Vector2 RandomV2(float min, float max)
+	{
+		float x = Random.Range(min, max);
+		float y = Random.Range(min, max);
+		return new Vector2(x, y);
+	}
+
+	public static Vector2 RandomV2(float minX, float minY, float maxX, float maxY)
+	{
+		float x = Random.Range(minX, maxX);
+		float y = Random.Range(minY, maxY);
+		return new Vector2(x, y);
+	}
+
 	/// <summary>
 	/// Swaps the two values.
 	/// </summary>
