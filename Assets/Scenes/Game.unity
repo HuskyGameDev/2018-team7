@@ -301,9 +301,11 @@ GameObject:
   - component: {fileID: 1605337692}
   - component: {fileID: 1605337691}
   - component: {fileID: 1605337690}
-  - component: {fileID: 1605337687}
   - component: {fileID: 1605337693}
   - component: {fileID: 1605337688}
+  - component: {fileID: 1605337689}
+  - component: {fileID: 1605337687}
+  - component: {fileID: 1605337694}
   m_Layer: 0
   m_Name: TestPlayer
   m_TagString: Player
@@ -319,10 +321,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1605337686}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c40632be2a87fa40bf7322cc36bf607, type: 3}
+  m_Script: {fileID: 11500000, guid: cb17dc4b76b54ce4ba2c48c5fda1e8c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
 --- !u!143 &1605337688
 CharacterController:
   m_ObjectHideFlags: 0
@@ -334,12 +335,26 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 2
   m_Height: 1
-  m_Radius: 0.5
+  m_Radius: 0.4
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1605337689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1605337686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a4de0190d332a84ea26e5b80ade89ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bullet: {fileID: 0}
+  health: 0
+  bulletSpeed: 0
 --- !u!23 &1605337690
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -406,3 +421,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca0525dbcd9c3d4499398ac9130c1d31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1605337694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1605337686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a8c4a905a5ff814baadf784dc6d0073, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pc: {fileID: 0}
+  speed: 0

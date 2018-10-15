@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class move : MonoBehaviour {
+public class Move : MonoBehaviour {
 
+    public CharacterController pc;
 
     public float speed;
 
@@ -20,7 +21,8 @@ public class move : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        speed = .03f;
+        speed = 10f;
+        pc = GetComponent<CharacterController>();
     }
 
     //NOT FINAL
@@ -33,32 +35,32 @@ public class move : MonoBehaviour {
 
         {
 
-            gameObject.transform.Translate(Vector3.left * speed);
-
+            //gameObject.transform.Translate(Vector3.left * speed);
+            pc.Move(Vector3.left * speed * Time.deltaTime);
         }
 
         if (Input.GetKey(KeyCode.D))
 
         {
 
-            gameObject.transform.Translate(Vector3.right * speed);
-
+            //gameObject.transform.Translate(Vector3.right * speed);
+            pc.Move(Vector3.right * speed * Time.deltaTime);
         }
 
         if (Input.GetKey(KeyCode.W))
 
         {
 
-            gameObject.transform.Translate(Vector3.up * speed);
-
+            //gameObject.transform.Translate(Vector3.up * speed);
+            pc.Move(Vector3.up * speed * Time.deltaTime);
         }
 
         if (Input.GetKey(KeyCode.S))
 
         {
 
-            gameObject.transform.Translate(Vector3.down * speed);
-
+            //gameObject.transform.Translate(Vector3.down * speed);
+            pc.Move(Vector3.down * speed * Time.deltaTime);
         }
 
     }

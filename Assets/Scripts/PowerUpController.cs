@@ -6,7 +6,7 @@ public class PowerUpController : MonoBehaviour {
 
     private PlayerController playerController; // the player object
 
-    private move playerMovement; // Object for the move class
+    private Move playerMovement; // Object for the move class
 	
     /**
      * Start
@@ -27,7 +27,7 @@ public class PowerUpController : MonoBehaviour {
         GameObject moveController = GameObject.FindWithTag("Player");
         if (playerControllerObject != null)
         {
-            playerMovement = moveController.GetComponent<move>();
+            playerMovement = moveController.GetComponent<Move>();
         }
         else
         {
