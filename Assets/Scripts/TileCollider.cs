@@ -2,12 +2,12 @@
 
 public class TileCollider : MonoBehaviour
 {
-	private BoxCollider2D col;
+	private BoxCollider col;
 	public Tile tile { get; set; }
 
 	private void Awake()
 	{
-		col = GetComponent<BoxCollider2D>();
+		col = GetComponent<BoxCollider>();
 	}
 
 	/// <summary>
@@ -32,7 +32,7 @@ public class TileCollider : MonoBehaviour
 	/// </summary>
 	public void SetSize(Vector2 size)
 	{
-		col.size = size;
+		col.size = new Vector3(size.x, size.y, 5.0f);
 	}
 
 	/// <summary>
