@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerCollision : MonoBehaviour
 {
-	private void OnTriggerEnter2D(Collider2D col)
+	private void OnTriggerEnter(Collider col)
 	{
 		TileCollider tC = col.GetComponent<TileCollider>();
 
