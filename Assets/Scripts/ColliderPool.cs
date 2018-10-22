@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 /// <summary>
 /// Maintains a pool of collider objects to be used by the game for tiles.
@@ -22,6 +23,12 @@ public class ColliderPool : MonoBehaviour
 		if (pool.Count > 0)
 		{
 			col = pool.Dequeue();
+
+			// HACK: Temporary fix. Something is making colliders in the queue become null.
+			// We should fix this properly.
+			if (col == null)
+				return Get();
+		
 			col.enabled = true;
 		}
 		else
