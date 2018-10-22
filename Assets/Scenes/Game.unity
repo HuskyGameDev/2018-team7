@@ -477,5 +477,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pc: {fileID: 0}
-  speed: 50
-  friction: -8
+  speed: 100
+  friction: -16
