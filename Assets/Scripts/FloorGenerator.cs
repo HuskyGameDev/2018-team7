@@ -128,7 +128,8 @@ public class FloorGenerator
 
 		for (int i = 0; i < roomCount; i++)
 		{
-			bool powerupRoom = Random.value < 0.5f;
+			bool powerupRoom = Random.value < 0.4f;
+
 			Room room = floor.CreateRoom(roomP.x, roomP.y);
             if (i == stairRoom)
             {

@@ -15,7 +15,7 @@ public class ItemSpawner : MonoBehaviour
     public void SpawnItem(Vector2 pos)
 	{
         whatToSpawn = Random.Range(0, items.Length);
-		forNaming = Instantiate(items[whatToSpawn], pos, Quaternion.identity);
+		forNaming = Instantiate(items[whatToSpawn], new Vector3(pos.x, pos.y, -1.0f), Quaternion.identity);
 		forNaming.name = items[whatToSpawn].name;
     }
 	
