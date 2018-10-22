@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TriggerDetection : MonoBehaviour {
 
-    public PlayerController pc;
+    private PlayerController pc;
 
     void Start()
     {
@@ -19,11 +19,12 @@ public class TriggerDetection : MonoBehaviour {
         }
     }
 
-        void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Test");
-        if (other.name == "TestPlayer")
+        Debug.Log("Collided with something.");
+        if (other.transform.parent.CompareTag("Player"))
         {
+			Debug.Log("Collided with the player.");
             pc.setHealth(pc.getHealth() - 10);
         }
     }

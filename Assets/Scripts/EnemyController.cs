@@ -4,28 +4,13 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-
-    public CharacterController enemy;
-    public PlayerController pc;
-    public GameObject child;
-    
     public float speed;
     public Transform target;
 
     // Use this for initialization
     void Start()
     {
-        GameObject playerControllerObject = GameObject.FindWithTag("Player");
-        if (playerControllerObject != null)
-        {
-            pc = playerControllerObject.GetComponent<PlayerController>();
-        }
-        else
-        {
-            Debug.Log("Cannot find Player");
-        }
         //StartCoroutine(WaitTime(2));
-        enemy = GetComponent<CharacterController>();
         speed = 5f;
     }
 
@@ -49,8 +34,6 @@ public class EnemyController : MonoBehaviour
             speed += 2f;
         }
     }
-
-    
 
     IEnumerator WaitTime(int timer)
     {
