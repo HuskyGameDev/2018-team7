@@ -82,6 +82,8 @@ public class PowerUpController : MonoBehaviour {
      */ 
     IEnumerator SpeedPickup()
     {
+		// NOTE: this may cause a bug with the speed up from holding shift.
+		// It probably doesn't matter since that's just for debug anyway.
         if (playerMovement.getSpeed() > 100)
         {
             playerMovement.setSpeed(playerMovement.getSpeed() / 2);
