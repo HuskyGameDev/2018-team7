@@ -82,6 +82,10 @@ public class PowerUpController : MonoBehaviour {
      */ 
     IEnumerator SpeedPickup()
     {
+        if (playerMovement.getSpeed() > 100)
+        {
+            playerMovement.setSpeed(playerMovement.getSpeed() / 2);
+        }
         playerMovement.setSpeed(playerMovement.getSpeed() * 2);
         yield return StartCoroutine(PickupWait(30));
         playerMovement.setSpeed(playerMovement.getSpeed() / 2);
