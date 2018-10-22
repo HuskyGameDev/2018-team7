@@ -51,8 +51,8 @@ public class PlayerController : MonoBehaviour {
      * Update
      * Temporarily decides which direction the player is going to shoot
      */ 
-	void Update () {
-
+	void Update ()
+	{
         //Shoots Right
         if (Input.GetKeyDown(KeyCode.RightArrow))
         { 

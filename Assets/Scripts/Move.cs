@@ -31,38 +31,9 @@ public class Move : MonoBehaviour {
     //Player can choose either
     void Update()
     {
-        if (Input.GetKey(KeyCode.A))
-
-        {
-
-            //gameObject.transform.Translate(Vector3.left * speed);
-            pc.Move(Vector3.left * speed * Time.deltaTime);
-        }
-
-        if (Input.GetKey(KeyCode.D))
-
-        {
-
-            //gameObject.transform.Translate(Vector3.right * speed);
-            pc.Move(Vector3.right * speed * Time.deltaTime);
-        }
-
-        if (Input.GetKey(KeyCode.W))
-
-        {
-
-            //gameObject.transform.Translate(Vector3.up * speed);
-            pc.Move(Vector3.up * speed * Time.deltaTime);
-        }
-
-        if (Input.GetKey(KeyCode.S))
-
-        {
-
-            //gameObject.transform.Translate(Vector3.down * speed);
-            pc.Move(Vector3.down * speed * Time.deltaTime);
-        }
-
+		Vector3 move = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+		move *= speed * Time.deltaTime;
+		pc.Move(move);
     }
 }
 
