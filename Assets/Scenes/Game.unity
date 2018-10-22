@@ -144,7 +144,6 @@ MonoBehaviour:
   - {fileID: 1208549350780950, guid: 539643ec876519b4ab92c403286228ac, type: 2}
   - {fileID: 1400127775581436, guid: 7ff1c390d18634e4db20831eec12bbbf, type: 2}
   - {fileID: 1954863385134096, guid: 0946f53ac3996bc4c9e9dc06e17630ad, type: 2}
-  spawnRate: 2
 --- !u!4 &233102905
 Transform:
   m_ObjectHideFlags: 0
@@ -352,7 +351,7 @@ GameObject:
   - component: {fileID: 1605337687}
   - component: {fileID: 1605337694}
   m_Layer: 0
-  m_Name: TestPlayer
+  m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -478,4 +477,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pc: {fileID: 0}
-  speed: 0
+  speed: 50
+  friction: -8

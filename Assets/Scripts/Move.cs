@@ -1,12 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Utils;
 
 public class Move : MonoBehaviour {
 
     public CharacterController pc;
 
-    public float speed;
+	public float speed;
+	public float friction;
+
+	private Vector2 velocity;
 
     public void setSpeed(float speed)
     {
@@ -21,7 +25,6 @@ public class Move : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        speed = 10f;
         pc = GetComponent<CharacterController>();
     }
 
@@ -31,9 +34,20 @@ public class Move : MonoBehaviour {
     //Player can choose either
     void Update()
     {
-		Vector3 move = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-		move *= speed * Time.deltaTime;
-		pc.Move(move);
+		Vector2 accel = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+
+		float len = accel.sqrMagnitude;
+
+		if (len > 1.0f)
+			accel *= (1.0f / Mathf.Sqrt(len));
+
+		accel *= speed;
+		accel += (velocity * friction);
+
+		Vector2 delta = accel * 0.5f * Square(Time.deltaTime) + velocity * Time.deltaTime;
+		velocity = accel * Time.deltaTime + velocity;
+
+		pc.Move(delta);
     }
 }
 
