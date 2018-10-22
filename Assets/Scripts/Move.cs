@@ -34,6 +34,11 @@ public class Move : MonoBehaviour {
     //Player can choose either
     void Update()
     {
+		float currentSpeed = speed;
+
+		if (Input.GetKey(KeyCode.LeftShift))
+			currentSpeed *= 3.0f;
+
 		Vector2 accel = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
 		float len = accel.sqrMagnitude;
@@ -41,7 +46,7 @@ public class Move : MonoBehaviour {
 		if (len > 1.0f)
 			accel *= (1.0f / Mathf.Sqrt(len));
 
-		accel *= speed;
+		accel *= currentSpeed;
 		accel += (velocity * friction);
 
 		Vector2 delta = accel * 0.5f * Square(Time.deltaTime) + velocity * Time.deltaTime;
