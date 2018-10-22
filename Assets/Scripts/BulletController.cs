@@ -1,10 +1,28 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-// This is a temporary fix since the required BulletController needed by other scripts was not included.
-// We need the project to compile so we can work on our parts of the project.
-// Delete this when the actual bullet controller is put in.
-public class BulletController : MonoBehaviour
-{
-	public float speedX = 0.0f;
-	public float speedY = 0.0f;
+public class BulletController : MonoBehaviour {
+
+    public float speedX = 0f;
+    public float speedY = 0f;
+    // NOT FINAL
+    // Use this for initialization
+    void Start () {
+        StartCoroutine(DestroyBullet());
+	}
+	
+	// Update is called once per frame
+	void Update () {
+
+        Vector2 position = transform.position;
+        position.x += speedX;
+        position.y += speedY;
+        transform.position = position;
+	}
+    IEnumerator DestroyBullet()
+    {
+        yield return new WaitForSeconds(2f);
+        Destroy(gameObject);
+    }
 }
