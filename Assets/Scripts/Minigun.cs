@@ -1,24 +1,21 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Minigun : MonoBehaviour {
-
-    public GameObject bullet;
+public class Minigun : Gun
+{
     public float timeBetweenShots = 0.05f;
 
     private float timestamp;
-    
-    // Use this for initialization
-    void Start () {
-   
+
+	protected override void Init()
+	{
+		speed = 0.2f;
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 
         //Shoots Right
-        if (Time.time >= timestamp && Input.GetButton("Fire4"))
+        if (Time.time >= timestamp && Input.GetKey(KeyCode.RightArrow))
         {
             timestamp = Time.time + timeBetweenShots;
             
@@ -29,7 +26,7 @@ public class Minigun : MonoBehaviour {
         }
 
         //Shoots Left
-        else if (Time.time >= timestamp && Input.GetButton("Fire3"))
+        else if (Time.time >= timestamp && Input.GetKey(KeyCode.LeftArrow))
         {
             timestamp = Time.time + timeBetweenShots;
 
@@ -39,7 +36,7 @@ public class Minigun : MonoBehaviour {
 
         }
         //Shoots Up
-        else if (Time.time >= timestamp && Input.GetButton("Fire1"))
+        else if (Time.time >= timestamp && Input.GetKey(KeyCode.UpArrow))
         {
             timestamp = Time.time + timeBetweenShots;
 
@@ -49,7 +46,7 @@ public class Minigun : MonoBehaviour {
 
         }
         //Shoots Down
-        else if (Time.time >= timestamp && Input.GetButton("Fire2"))
+        else if (Time.time >= timestamp && Input.GetKey(KeyCode.DownArrow))
         {
             timestamp = Time.time + timeBetweenShots;
 

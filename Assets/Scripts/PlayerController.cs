@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour {
+public class PlayerController : MonoBehaviour
+{
+	// The player's current gun.
+	private Gun gun;
 
-    public GameObject bullet; // The bullet object for the player to shoot
-
-    public int health; // the health of the player
+	public int health; // the health of the player
 
     // Returns the health of the player
     public int getHealth()
@@ -20,73 +21,40 @@ public class PlayerController : MonoBehaviour {
         this.health = health;
     }
 
-    public float bulletSpeed; // the speed at which the player shoots
+	public float getBulletSpeed()
+	{
+		return gun.speed;
+	}
 
-    // Returns the bulletSpeed of the player
-    public float getBulletSpeed()
-    {
-        return this.bulletSpeed;
-    }
+	public void setBulletSpeed(float speed)
+	{
+		gun.speed = speed;
+	}
 
-
-    // Sets the bulletSpeed of the player
-    public void setBulletSpeed(float bulletSpeed)
-    {
-        this.bulletSpeed = bulletSpeed;
-    }
-
-    /**
+	/**
      * Start
      * Initializes the health and bulletSpeed variables
-     */ 
-    void Start () {
-        health = 100;
-        bulletSpeed = .2f;
-	}
-   
-    
-	//NOT FINAL
-	// Update is called once per frame
-    /**
-     * Update
-     * Temporarily decides which direction the player is going to shoot
-     */ 
-	void Update ()
+     */
+	void Start()
 	{
-        //Shoots Right
-        if (Input.GetKeyDown(KeyCode.RightArrow))
-        { 
-            
-            GameObject go = (GameObject)Instantiate(bullet,
-            transform.position, Quaternion.identity);
-            go.GetComponent<BulletController>().speedX = bulletSpeed;
-        }
-        
-        //Shoots Left
-        else if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            GameObject go = (GameObject)Instantiate(bullet,
-            transform.position, Quaternion.identity);
-            go.GetComponent<BulletController>().speedX = -bulletSpeed;
-          
-        }
-        //Shoots Up
-        else if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-           
-            GameObject go = (GameObject)Instantiate(bullet,
-            transform.position, Quaternion.identity);
-            go.GetComponent<BulletController>().speedY = bulletSpeed;
-           
-        }
-        //Shoots Down
-        else if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            
-            GameObject go = (GameObject)Instantiate(bullet,
-            transform.position, Quaternion.identity);
-            go.GetComponent<BulletController>().speedY = -bulletSpeed;
-            
-        }
-    }
+		health = 100;
+		gun = GetComponent<Gun>();
+	}
+
+	// Changes the gun type to the type specified by T.
+	private void ChangeGun<T>() where T: Gun
+	{
+		Destroy(gun);
+		gun = gameObject.AddComponent<T>();
+		Debug.Log("Gun changed to " + typeof(T).FullName);
+	}
+
+	private void Update()
+	{
+		if (Input.GetKeyDown(KeyCode.Alpha1)) ChangeGun<Pistol>();
+		if (Input.GetKeyDown(KeyCode.Alpha2)) ChangeGun<Shotgun>();
+		if (Input.GetKeyDown(KeyCode.Alpha3)) ChangeGun<SMG>();
+		if (Input.GetKeyDown(KeyCode.Alpha4)) ChangeGun<Sniper>();
+		if (Input.GetKeyDown(KeyCode.Alpha5)) ChangeGun<Minigun>();
+	}
 }

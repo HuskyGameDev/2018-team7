@@ -2,24 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Sniper : MonoBehaviour
+public class Sniper : Gun
 {
-
-    public GameObject bullet;
     public float timeBetweenShots = 1.0f;
 
     private float timestamp;
 
-    // Use this for initialization
-    void Start()
+	protected override void Init()
+	{
+		speed = 0.1f;
+	}
+
+	// Update is called once per frame
+	void Update()
     {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
         //Shoots Right
         if (Time.time >= timestamp && Input.GetKeyDown(KeyCode.RightArrow))
         {
@@ -28,7 +24,7 @@ public class Sniper : MonoBehaviour
 
             GameObject go = (GameObject)Instantiate(bullet,
             transform.position, Quaternion.identity);
-            go.GetComponent<BulletController>().speedX = 0.05f;
+            go.GetComponent<BulletController>().speedX = speed;
         }
 
         //Shoots Left
@@ -39,7 +35,7 @@ public class Sniper : MonoBehaviour
 
             GameObject go = (GameObject)Instantiate(bullet,
             transform.position, Quaternion.identity);
-            go.GetComponent<BulletController>().speedX = -0.05f;
+            go.GetComponent<BulletController>().speedX = -speed;
 
         }
         //Shoots Up
@@ -50,7 +46,7 @@ public class Sniper : MonoBehaviour
 
             GameObject go = (GameObject)Instantiate(bullet,
             transform.position, Quaternion.identity);
-            go.GetComponent<BulletController>().speedY = 0.05f;
+            go.GetComponent<BulletController>().speedY = speed;
 
         }
         //Shoots Down
@@ -61,7 +57,7 @@ public class Sniper : MonoBehaviour
 
             GameObject go = (GameObject)Instantiate(bullet,
             transform.position, Quaternion.identity);
-            go.GetComponent<BulletController>().speedY = -0.05f;
+            go.GetComponent<BulletController>().speedY = -speed;
 
         }
 

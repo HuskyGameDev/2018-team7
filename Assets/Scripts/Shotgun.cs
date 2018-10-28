@@ -2,95 +2,76 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shotgun : MonoBehaviour {
-    public int pelletCount;
-    public float spreadAngle;
-    public float pelletFireVel = 1;
-    public GameObject pellet;
+public class Shotgun : Gun
+{
+	private int pelletCount = 10;
+	private float spreadAngle;
     public Transform BarrelExit;
 
-    List<Quaternion> pellets;
+	protected override void Init()
+	{
+		speed = 0.4f;
+	}
 
-    // Use this for initialization
-    void Awake() {
-        
+	List<Quaternion> pellets;
+
+    void Awake()
+	{
+		// Temp
+		BarrelExit = transform;
+
         pellets = new List<Quaternion>(pelletCount);
         for (int i = 0; i < pelletCount; i++)
         {
             pellets.Add(Quaternion.Euler(Vector3.zero));
         }
 
+		spreadAngle = 45.0f;
     }
 
     // Update is called once per frame
-    void Update() {
+    void Update()
+	{
+		if (Input.GetKeyDown(KeyCode.UpArrow))
+		{
+			for (int i = pellets.Count - 1; i >= 0; i--)
+			{
+				pellets[i] = Random.rotation;
+				GameObject p = Instantiate(bullet, BarrelExit.position, BarrelExit.rotation);
+				p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellets[i], spreadAngle);
+				p.GetComponent<BulletController>().speedY = speed;
+			}
+		}
+		if (Input.GetKeyDown(KeyCode.DownArrow))
+		{
+			for (int i = pellets.Count - 1; i >= 0; i--)
+			{
+				pellets[i] = Random.rotation;
+				GameObject p = Instantiate(bullet, BarrelExit.position, BarrelExit.rotation);
+				p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellets[i], spreadAngle);
+				p.GetComponent<BulletController>().speedY = -speed;
+			}
+		}
+		if (Input.GetKeyDown(KeyCode.LeftArrow))
+		{
+			for (int i = pellets.Count - 1; i >= 0; i--)
+			{
+				pellets[i] = Random.rotation;
+				GameObject p = Instantiate(bullet, BarrelExit.position, BarrelExit.rotation);
+				p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellets[i], spreadAngle);
+				p.GetComponent<BulletController>().speedX = -speed;
+			}
+		}
+		if (Input.GetKeyDown(KeyCode.RightArrow))
+		{
+			for (int i = pellets.Count - 1; i >= 0; i--)
+			{
+				pellets[i] = Random.rotation;
+				GameObject p = Instantiate(bullet, BarrelExit.position, BarrelExit.rotation);
+				p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellets[i], spreadAngle);
+				p.GetComponent<BulletController>().speedX = speed;
+			}
+		}
 
-        if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            Fire();
-        }
-        else if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            Fire();
-        }
-        else if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            Fire();
-        }
-        else if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            Fire();
-        }
-
-    }
-    void Fire()
-    {
-        int i = 0;
-
-        if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            foreach (Quaternion quat in pellets)
-            {
-                pellets[i] = Random.rotation;
-                GameObject p = Instantiate(pellet, BarrelExit.position, BarrelExit.rotation);
-                p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellets[i], spreadAngle);
-                p.GetComponent<Rigidbody2D>().AddForce(p.transform.up * pelletFireVel);
-                i++;
-            }
-        }
-        if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            foreach (Quaternion quat in pellets)
-            {
-                pellets[i] = Random.rotation;
-                GameObject p = Instantiate(pellet, BarrelExit.position, BarrelExit.rotation);
-                p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellets[i], spreadAngle);
-                p.GetComponent<Rigidbody2D>().AddForce(-(p.transform.up * pelletFireVel));
-                i++;
-            }
-        }
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            foreach (Quaternion quat in pellets)
-            {
-                pellets[i] = Random.rotation;
-                GameObject p = Instantiate(pellet, BarrelExit.position, BarrelExit.rotation);
-                p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellets[i], spreadAngle);
-                p.GetComponent<Rigidbody2D>().AddForce(-(p.transform.right * pelletFireVel));
-                i++;
-            }
-        }
-        if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            foreach (Quaternion quat in pellets)
-            {
-                pellets[i] = Random.rotation;
-                GameObject p = Instantiate(pellet, BarrelExit.position, BarrelExit.rotation);
-                p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellets[i], spreadAngle);
-                p.GetComponent<Rigidbody2D>().AddForce(p.transform.right * pelletFireVel);
-                i++;
-            }
-        }
-    }
-   
+	}
 }

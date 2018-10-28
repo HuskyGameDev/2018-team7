@@ -21,11 +21,9 @@ public class TriggerDetection : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Collided with something.");
-        if (other.transform.parent.CompareTag("Player"))
-        {
-			Debug.Log("Collided with the player.");
-            pc.setHealth(pc.getHealth() - 10);
-        }
+		Transform parent = other.transform.parent;
+
+		if (parent != null && parent.CompareTag("Player"))
+			pc.setHealth(pc.getHealth() - 10);
     }
 }
