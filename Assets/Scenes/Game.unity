@@ -515,7 +515,6 @@ GameObject:
   - component: {fileID: 1605337689}
   - component: {fileID: 1605337687}
   - component: {fileID: 1605337694}
-  - component: {fileID: 1605337695}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -643,22 +642,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a8c4a905a5ff814baadf784dc6d0073, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pc: {fileID: 0}
+  pc: {fileID: 1605337688}
   speed: 100
   friction: -16
---- !u!114 &1605337695
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1605337686}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4884a5e76533d74399fdb0d7e6a8da2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speedX: 0
-  speedY: 0
 --- !u!1 &1955784000
 GameObject:
   m_ObjectHideFlags: 0
