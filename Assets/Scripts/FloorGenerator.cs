@@ -61,6 +61,16 @@ public class FloorGenerator
                 room.SetTile(x, y, TileType.Floor);
 		}
 
+		int obstacleCount = Random.Range(0, 6);
+
+		// Add some random obstacles for collision testing.
+		for (int i = 0; i < obstacleCount; i++)
+		{
+			int x = Random.Range(2, Room.LimX - 1);
+			int y = Random.Range(2, Room.LimY - 1);
+			room.SetTile(x, y, TileType.Wall);
+		}
+
         if (stairRoom)
         {
             room.SetTile(Room.LimX / 2, Room.LimY / 2, TileType.Stair);

@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour
@@ -7,11 +6,15 @@ public class EnemyController : MonoBehaviour
     public float speed;
     public Transform target;
 
+	private CharacterController controller;
+
     // Use this for initialization
     void Start()
     {
         //StartCoroutine(WaitTime(2));
         speed = 5f;
+
+		controller = GetComponent<CharacterController>();
     }
 
     // Update is called once per frame
@@ -23,7 +26,7 @@ public class EnemyController : MonoBehaviour
         if (Vector3.Distance(transform.position, target.position) > 1f)
         {
             Vector3 pcDirection = (target.position - transform.position).normalized;
-            transform.Translate(pcDirection * speed * Time.deltaTime);
+            controller.Move(pcDirection * speed * Time.deltaTime);
             transform.SetZ(-.1f);
         }
 
