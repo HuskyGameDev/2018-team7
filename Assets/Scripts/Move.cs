@@ -40,7 +40,6 @@ public class Move : MonoBehaviour {
 		if (Input.GetKey(KeyCode.LeftShift))
 			currentSpeed *= 3.0f;
 
-        Debug.Log(currentSpeed);
 		Vector2 accel = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
 		float len = accel.sqrMagnitude;

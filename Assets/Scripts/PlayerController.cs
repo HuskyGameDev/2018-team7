@@ -25,7 +25,6 @@ public class PlayerController : MonoBehaviour
 		gun.speed = speed;
 	}
 
-
 	/**
      * Start
      * Initializes the health and bulletSpeed variables

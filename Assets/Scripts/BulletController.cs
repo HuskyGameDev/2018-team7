@@ -16,11 +16,12 @@ public class BulletController : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
 	{
-		// Only rotate on z. This is a little hacky.
+		// Only rotate on z.
 		Vector3 rot = transform.rotation.eulerAngles;
 		transform.rotation = Quaternion.Euler(0.0f, 0.0f, rot.z);
 
 		transform.Translate(new Vector3(speedX, speedY), Space.Self);
+		transform.SetZ(-1.0f);
 	}
 
     IEnumerator DestroyBullet()

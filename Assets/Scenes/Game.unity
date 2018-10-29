@@ -308,10 +308,10 @@ MonoBehaviour:
   - {fileID: 1208549350780950, guid: 539643ec876519b4ab92c403286228ac, type: 2}
   - {fileID: 1400127775581436, guid: 7ff1c390d18634e4db20831eec12bbbf, type: 2}
   - {fileID: 1954863385134096, guid: 0946f53ac3996bc4c9e9dc06e17630ad, type: 2}
-  - {fileID: 1386404838667288, guid: ab8afa1ac846b3948b92cb7761a4e8f3, type: 2}
-  - {fileID: 1273204478419478, guid: de29e25e975450b46b09fa31fcaa11a0, type: 2}
-  - {fileID: 1482416244701846, guid: 635f8da4b5bbfa142b4cf3649b47aa01, type: 2}
-  - {fileID: 1412399656324280, guid: 16e7e86f27d22a044acd17ee7976f8f7, type: 2}
+  - {fileID: 1386404838667288, guid: c5b04cb414199864d8e3ab1e976a8417, type: 2}
+  - {fileID: 1273204478419478, guid: a2405f91e413c644ca0ab8875260cb33, type: 2}
+  - {fileID: 1482416244701846, guid: 684b650fa6f2cf44ab819dfefd5657b7, type: 2}
+  - {fileID: 1412399656324280, guid: 4b2f973dd56c42a4693b4fb73e977a1c, type: 2}
 --- !u!4 &233102905
 Transform:
   m_ObjectHideFlags: 0
@@ -822,7 +822,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0
   target: {fileID: 1605337692}
-  health: 0
 --- !u!4 &1250687187
 Transform:
   m_ObjectHideFlags: 0
@@ -945,7 +944,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a4de0190d332a84ea26e5b80ade89ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
 --- !u!23 &1605337690
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1025,7 +1023,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pc: {fileID: 1605337688}
-  speed: 100
   friction: -16
 --- !u!114 &1605337695
 MonoBehaviour:
