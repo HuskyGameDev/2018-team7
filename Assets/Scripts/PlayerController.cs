@@ -7,27 +7,13 @@ public class PlayerController : MonoBehaviour
 	// The player's current gun.
 	private Gun gun;
 
-	public int health; // the health of the player
+	public int health { get; set; } // the health of the player
 
     // Gun enablers
     public bool shotgun { get; set; }
     public bool smg { get; set; }
     public bool sniper { get; set; }
     public bool minigun { get; set; }
-
-
-
-    // Returns the health of the player
-    public int getHealth()
-    {
-        return health;
-    }
-
-    // Sets the health of the player
-    public void setHealth(int health)
-    {
-        this.health = health;
-    }
 
 	public float getBulletSpeed()
 	{

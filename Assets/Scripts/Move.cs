@@ -7,7 +7,7 @@ public class Move : MonoBehaviour {
 
     public CharacterController pc;
 
-	public float speed;
+	public float speed { get; set; }
 	public float friction;
 
 	private Vector2 velocity;
@@ -26,6 +26,7 @@ public class Move : MonoBehaviour {
     void Start()
     {
         pc = GetComponent<CharacterController>();
+        speed = 100f;
     }
 
     //NOT FINAL
@@ -39,6 +40,7 @@ public class Move : MonoBehaviour {
 		if (Input.GetKey(KeyCode.LeftShift))
 			currentSpeed *= 3.0f;
 
+        Debug.Log(currentSpeed);
 		Vector2 accel = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
 		float len = accel.sqrMagnitude;

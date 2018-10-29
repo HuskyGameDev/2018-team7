@@ -24,6 +24,6 @@ public class TriggerDetection : MonoBehaviour {
 		Transform parent = other.transform.parent;
 
 		if (parent != null && parent.CompareTag("Player"))
-			pc.setHealth(pc.getHealth() - 10);
+            pc.health = pc.health - 10;
     }
 }

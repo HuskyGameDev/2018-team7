@@ -96,7 +96,8 @@ public class PowerUpController : MonoBehaviour {
      */ 
     void HealthPickup()
     {
-        playerController.setHealth(playerController.getHealth() + 20);
+        if (playerController.health < 100)
+            playerController.health = playerController.health + 20;
     }
 
     /**
@@ -108,7 +109,7 @@ public class PowerUpController : MonoBehaviour {
     {
 		// NOTE: this may cause a bug with the speed up from holding shift.
 		// It probably doesn't matter since that's just for debug anyway.
-        if (playerMovement.getSpeed() > 100)
+        if (playerMovement.speed > 100)
         {
             playerMovement.setSpeed(playerMovement.getSpeed() / 2);
         }
