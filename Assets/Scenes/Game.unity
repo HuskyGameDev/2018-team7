@@ -308,6 +308,10 @@ MonoBehaviour:
   - {fileID: 1208549350780950, guid: 539643ec876519b4ab92c403286228ac, type: 2}
   - {fileID: 1400127775581436, guid: 7ff1c390d18634e4db20831eec12bbbf, type: 2}
   - {fileID: 1954863385134096, guid: 0946f53ac3996bc4c9e9dc06e17630ad, type: 2}
+  - {fileID: 1386404838667288, guid: ab8afa1ac846b3948b92cb7761a4e8f3, type: 2}
+  - {fileID: 1273204478419478, guid: de29e25e975450b46b09fa31fcaa11a0, type: 2}
+  - {fileID: 1482416244701846, guid: 635f8da4b5bbfa142b4cf3649b47aa01, type: 2}
+  - {fileID: 1412399656324280, guid: 16e7e86f27d22a044acd17ee7976f8f7, type: 2}
 --- !u!4 &233102905
 Transform:
   m_ObjectHideFlags: 0
@@ -818,6 +822,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0
   target: {fileID: 1605337692}
+  health: 0
 --- !u!4 &1250687187
 Transform:
   m_ObjectHideFlags: 0

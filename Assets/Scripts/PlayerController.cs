@@ -9,6 +9,14 @@ public class PlayerController : MonoBehaviour
 
 	public int health; // the health of the player
 
+    // Gun enablers
+    public bool shotgun { get; set; }
+    public bool smg { get; set; }
+    public bool sniper { get; set; }
+    public bool minigun { get; set; }
+
+
+
     // Returns the health of the player
     public int getHealth()
     {
@@ -31,6 +39,7 @@ public class PlayerController : MonoBehaviour
 		gun.speed = speed;
 	}
 
+
 	/**
      * Start
      * Initializes the health and bulletSpeed variables
@@ -39,6 +48,10 @@ public class PlayerController : MonoBehaviour
 	{
 		health = 100;
 		gun = GetComponent<Gun>();
+        shotgun = false;
+        smg = false;
+        sniper = false;
+        minigun = false;
 	}
 
 	// Changes the gun type to the type specified by T.
@@ -52,9 +65,9 @@ public class PlayerController : MonoBehaviour
 	private void Update()
 	{
 		if (Input.GetKeyDown(KeyCode.Alpha1)) ChangeGun<Pistol>();
-		if (Input.GetKeyDown(KeyCode.Alpha2)) ChangeGun<Shotgun>();
-		if (Input.GetKeyDown(KeyCode.Alpha3)) ChangeGun<SMG>();
-		if (Input.GetKeyDown(KeyCode.Alpha4)) ChangeGun<Sniper>();
-		if (Input.GetKeyDown(KeyCode.Alpha5)) ChangeGun<Minigun>();
+		if (Input.GetKeyDown(KeyCode.Alpha2) && shotgun) ChangeGun<Shotgun>();
+		if (Input.GetKeyDown(KeyCode.Alpha3) && smg) ChangeGun<SMG>();
+		if (Input.GetKeyDown(KeyCode.Alpha4) && sniper) ChangeGun<Sniper>();
+		if (Input.GetKeyDown(KeyCode.Alpha5) && minigun) ChangeGun<Minigun>();
 	}
 }

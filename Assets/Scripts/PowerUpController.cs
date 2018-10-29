@@ -62,6 +62,30 @@ public class PowerUpController : MonoBehaviour {
         {
             StartCoroutine(ShootingSpeedPickUp());
         }
+
+        // If collision is with Sniper pickup, enable the sniper
+        if (collision.name == "Sniper")
+        {
+            playerController.sniper = true;
+        }
+
+        // If collision is with Smg pickup, enable the sniper
+        if (collision.name == "SMG")
+        {
+            playerController.smg = true;
+        }
+
+        // If collision is with Minigun pickup, enable the sniper
+        if (collision.name == "Minigun")
+        {
+            playerController.minigun = true;
+        }
+
+        // If collision is with Shotgun pickup, enable the sniper
+        if (collision.name == "Shotgun")
+        {
+            playerController.shotgun = true;
+        }
         Destroy(collision.gameObject);
         
     }
