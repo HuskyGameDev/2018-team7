@@ -1,18 +1,36 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class Pistol : Gun
 {
-	/**
+
+    public AudioClip gunClip;
+    public AudioSource audioSource;
+    GameObject player;
+
+    private void Start()
+    {
+        audioSource = player.GetComponent<AudioSource>();
+        Debug.Log(player.GetComponent<AudioSource>().name);
+        audioSource.clip = gunClip; //Set the sound for the pistol
+        audioSource.Play();
+
+    }
+
+    /**
 	* Update
 	* Temporarily decides which direction the player is going to shoot
+    * 
+    * 
+    * 
 	*/
-	void Update()
+    void Update()
 	{
 		//Shoots Right
 		if (Input.GetKeyDown(KeyCode.RightArrow))
 		{
-
-			GameObject go = (GameObject)Instantiate(bullet,
+            audioSource.Play(); //Play gunshot 
+            GameObject go = (GameObject)Instantiate(bullet,
 			transform.position, Quaternion.identity);
 			go.GetComponent<BulletController>().speedX = speed;
 		}
@@ -20,7 +38,8 @@ public class Pistol : Gun
 		//Shoots Left
 		else if (Input.GetKeyDown(KeyCode.LeftArrow))
 		{
-			GameObject go = (GameObject)Instantiate(bullet,
+            audioSource.Play(); //Play gunshot 
+            GameObject go = (GameObject)Instantiate(bullet,
 			transform.position, Quaternion.identity);
 			go.GetComponent<BulletController>().speedX = -speed;
 
@@ -28,8 +47,8 @@ public class Pistol : Gun
 		//Shoots Up
 		else if (Input.GetKeyDown(KeyCode.UpArrow))
 		{
-
-			GameObject go = (GameObject)Instantiate(bullet,
+            audioSource.Play(); //Play gunshot 
+            GameObject go = (GameObject)Instantiate(bullet,
 			transform.position, Quaternion.identity);
 			go.GetComponent<BulletController>().speedY = speed;
 
@@ -37,11 +56,14 @@ public class Pistol : Gun
 		//Shoots Down
 		else if (Input.GetKeyDown(KeyCode.DownArrow))
 		{
-
-			GameObject go = (GameObject)Instantiate(bullet,
+            audioSource.Play(); //Play gunshot 
+            GameObject go = (GameObject)Instantiate(bullet,
 			transform.position, Quaternion.identity);
 			go.GetComponent<BulletController>().speedY = -speed;
 
 		}
 	}
+
+    
+
 }
