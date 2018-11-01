@@ -5,6 +5,7 @@ TextureImporter:
     21300000: Health_bar_empty_0
     21300002: Health_bar_empty_1
     21300004: Health_bar_empty_2
+    21300006: Health_bar_empty_3
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -175,6 +176,26 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 5fafcd8f13e5b4649bb61679cd99c833
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Health_bar_empty_3
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 544
+        width: 610
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 79fa0422d6d07ce4cb5a895fde803abd
       vertices: []
       indices: 
       edges: []

@@ -5,6 +5,7 @@ TextureImporter:
     21300000: Health_bar_filled_0
     21300002: Health bar_filled_0
     21300004: Health bar_filled_1
+    21300006: Health bar_filled_2
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -175,6 +176,26 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: b01d38c4a3c1e044c9a87e8a520f8ff0
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Health bar_filled_2
+      rect:
+        serializedVersion: 2
+        x: 187
+        y: 702
+        width: 610
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f9f01817b0936854fa900c47361aed8c
       vertices: []
       indices: 
       edges: []
