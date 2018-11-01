@@ -10,8 +10,8 @@ public class Pistol : Gun
 
     private void Start()
     {
-        audioSource = player.GetComponent<AudioSource>();
-        Debug.Log(player.GetComponent<AudioSource>().name);
+        audioSource = player.GetComponent<AudioSource>(); //Attempt to get the AudioSource off of the player
+        Debug.Log(player.GetComponent<AudioSource>().name); //Print out if you actually got it
         audioSource.clip = gunClip; //Set the sound for the pistol
         audioSource.Play();
 
@@ -20,9 +20,6 @@ public class Pistol : Gun
     /**
 	* Update
 	* Temporarily decides which direction the player is going to shoot
-    * 
-    * 
-    * 
 	*/
     void Update()
 	{
