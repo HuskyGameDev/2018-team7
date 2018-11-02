@@ -18,11 +18,13 @@ public class EnemyController : MonoBehaviour
     }
 
     // Update is called once per frame
+    // Changes the direction of the enemy's movement towards the player once per frame
     void Update()
     {
         //transform.LookAt(target.position);
         //transform.Rotate(new Vector3(0, -90, 0), Space.Self);
 
+        // if away from the player move towards him/her
         if (Vector3.Distance(transform.position, target.position) > 1f)
         {
             Vector3 pcDirection = (target.position - transform.position).normalized;
@@ -30,6 +32,7 @@ public class EnemyController : MonoBehaviour
             transform.SetZ(-.1f);
         }
 
+        // if on top of the player, slow down
         if (Vector3.Distance(transform.position, target.position) == 0f)
         {
             speed -= 2f;
