@@ -109,6 +109,7 @@ public class PowerUpController : MonoBehaviour {
     {
 		// NOTE: this may cause a bug with the speed up from holding shift.
 		// It probably doesn't matter since that's just for debug anyway.
+        // If the player already has a speed increase, disable it then apply a new one
         if (playerMovement.speed > 100)
         {
             playerMovement.setSpeed(playerMovement.getSpeed() / 2);
