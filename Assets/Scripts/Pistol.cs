@@ -1,27 +1,21 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 public class Pistol : Gun
 {
+	protected override void Init()
+	{
+		base.Init();
+		audioSource.clip = Resources.Load<AudioClip>("Sounds/Guns/Handgun");
+		Assert.IsNotNull(audioSource.clip);
+	}
 
-    public AudioClip gunClip;
-    public AudioSource audioSource;
-    GameObject player;
-
-    private void Start()
-    {
-        audioSource = player.GetComponent<AudioSource>(); //Attempt to get the AudioSource off of the player
-        Debug.Log(player.GetComponent<AudioSource>().name); //Print out if you actually got it
-        audioSource.clip = gunClip; //Set the sound for the pistol
-        audioSource.Play();
-
-    }
-
-    /**
+	/**
 	* Update
 	* Temporarily decides which direction the player is going to shoot
 	*/
-    void Update()
+	void Update()
 	{
 		//Shoots Right
 		if (Input.GetKeyDown(KeyCode.RightArrow))

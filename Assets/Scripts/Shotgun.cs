@@ -11,6 +11,7 @@ public class Shotgun : Gun
 	protected override void Init()
 	{
 		speed = 0.4f;
+		audioSource.clip = Resources.Load<AudioClip>("Sounds/Guns/Shotgun");
 	}
 
 	List<Quaternion> pellets;
@@ -34,6 +35,8 @@ public class Shotgun : Gun
 	{
 		if (Input.GetKeyDown(KeyCode.UpArrow))
 		{
+			audioSource.Play();
+
 			for (int i = pellets.Count - 1; i >= 0; i--)
 			{
 				pellets[i] = Random.rotation;
@@ -44,6 +47,8 @@ public class Shotgun : Gun
 		}
 		if (Input.GetKeyDown(KeyCode.DownArrow))
 		{
+			audioSource.Play();
+
 			for (int i = pellets.Count - 1; i >= 0; i--)
 			{
 				pellets[i] = Random.rotation;
@@ -54,6 +59,8 @@ public class Shotgun : Gun
 		}
 		if (Input.GetKeyDown(KeyCode.LeftArrow))
 		{
+			audioSource.Play();
+
 			for (int i = pellets.Count - 1; i >= 0; i--)
 			{
 				pellets[i] = Random.rotation;
@@ -64,6 +71,8 @@ public class Shotgun : Gun
 		}
 		if (Input.GetKeyDown(KeyCode.RightArrow))
 		{
+			audioSource.Play();
+
 			for (int i = pellets.Count - 1; i >= 0; i--)
 			{
 				pellets[i] = Random.rotation;
