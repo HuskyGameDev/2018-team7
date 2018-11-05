@@ -4,13 +4,13 @@ public class Gun : MonoBehaviour
 {
 	protected GameObject bullet;
 	protected PlayerController pc;
-	public float speed; // the speed at which the player shoots
+	[HideInInspector] public float speed; // the speed at which the player shoots
 	public AudioSource audioSource;
 
 	protected void Start()
 	{
 		pc = GetComponent<PlayerController>();
-		audioSource = GetComponent<AudioSource>();
+		audioSource = transform.Find("Gun Audio Source").GetComponent<AudioSource>();
 		bullet = Resources.Load<GameObject>("Bullet");
 		Init();
 	}
