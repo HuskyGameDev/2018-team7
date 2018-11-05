@@ -11,6 +11,7 @@ public class Sniper : Gun
 	protected override void Init()
 	{
 		speed = 0.1f;
+		audioSource.clip = Resources.Load<AudioClip>("Sounds/Guns/Sniper Rifle");
 	}
 
 	// Update is called once per frame
@@ -19,6 +20,8 @@ public class Sniper : Gun
         //Shoots Right
         if (Time.time >= timestamp && Input.GetKeyDown(KeyCode.RightArrow))
         {
+			audioSource.Play();
+
            //Instantiate(bullet, transform.position, transform.rotation);
             timestamp = Time.time + timeBetweenShots;
 
@@ -30,8 +33,10 @@ public class Sniper : Gun
         //Shoots Left
         else if (Time.time >= timestamp && Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            //Instantiate(bullet, transform.position, transform.rotation);
-            timestamp = Time.time + timeBetweenShots;
+			audioSource.Play();
+
+			//Instantiate(bullet, transform.position, transform.rotation);
+			timestamp = Time.time + timeBetweenShots;
 
             GameObject go = (GameObject)Instantiate(bullet,
             transform.position, Quaternion.identity);
@@ -41,8 +46,10 @@ public class Sniper : Gun
         //Shoots Up
         else if (Time.time >= timestamp && Input.GetKeyDown(KeyCode.UpArrow))
         {
-            //Instantiate(bullet, transform.position, transform.rotation);
-            timestamp = Time.time + timeBetweenShots;
+			audioSource.Play();
+
+			//Instantiate(bullet, transform.position, transform.rotation);
+			timestamp = Time.time + timeBetweenShots;
 
             GameObject go = (GameObject)Instantiate(bullet,
             transform.position, Quaternion.identity);
@@ -52,8 +59,10 @@ public class Sniper : Gun
         //Shoots Down
         else if (Time.time >= timestamp && Input.GetKeyDown(KeyCode.DownArrow))
         {
-            //Instantiate(bullet, transform.position, transform.rotation);
-            timestamp = Time.time + timeBetweenShots;
+			audioSource.Play();
+
+			//Instantiate(bullet, transform.position, transform.rotation);
+			timestamp = Time.time + timeBetweenShots;
 
             GameObject go = (GameObject)Instantiate(bullet,
             transform.position, Quaternion.identity);
