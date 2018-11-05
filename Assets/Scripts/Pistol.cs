@@ -8,13 +8,14 @@ public class Pistol : Gun
     public AudioSource audioSource;
     GameObject player;
 
-    private void Start()
+    private new void Start()
     {
+		base.Start();
+		player = GameObject.FindWithTag("Player");
         audioSource = player.GetComponent<AudioSource>(); //Attempt to get the AudioSource off of the player
         Debug.Log(player.GetComponent<AudioSource>().name); //Print out if you actually got it
         audioSource.clip = gunClip; //Set the sound for the pistol
         audioSource.Play();
-
     }
 
     /**

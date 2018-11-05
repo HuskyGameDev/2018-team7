@@ -6,7 +6,7 @@ public class Gun : MonoBehaviour
 	protected PlayerController pc;
 	public float speed; // the speed at which the player shoots
 
-	private void Start()
+	protected void Start()
 	{
 		pc = GetComponent<PlayerController>();
 		bullet = Resources.Load<GameObject>("Bullet");
