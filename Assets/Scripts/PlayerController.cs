@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
 	{
 		return gun.speed;
 	}
-
+    
 	public void setBulletSpeed(float speed)
 	{
 		gun.speed = speed;
