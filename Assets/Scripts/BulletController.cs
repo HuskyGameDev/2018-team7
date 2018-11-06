@@ -35,5 +35,12 @@ public class BulletController : MonoBehaviour {
 		// Default layer - walls.
 		if (other.gameObject.layer == 0)
 			Destroy(gameObject);
+
+		// Enemy layer.
+		if (other.gameObject.layer == 9)
+		{
+			other.GetComponentInParent<EnemyController>().ApplyDamage(4);
+			Destroy(gameObject);
+		}
 	}
 }

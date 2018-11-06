@@ -4,8 +4,8 @@ using UnityEngine;
 
 
 /*
- * Author: Noah de Longpre' 
- * 
+ * Author: Noah de Longpre'
+ * Edited by Jason Bricco
  * Generates the footstep sounds for the player character.
  * 
  */
@@ -37,8 +37,7 @@ public class WalkSound : MonoBehaviour
         if (cc.isGrounded == true && cc.velocity.magnitude > 2f && audioSource.isPlaying == false)
         {
             //If it isn't already playing a sound and the player is moving.
-            GetComponent<AudioSource>().Play();
-
+            audioSource.Play();
         }
     }
 

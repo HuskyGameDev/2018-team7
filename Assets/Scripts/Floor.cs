@@ -11,12 +11,17 @@ public class Floor : MonoBehaviour
 	/// </summary>
 	public int RoomCount { get; private set; } = 10;
 
+	// The current floor the player is on.
+	public int FloorID { get; private set; }
+
 	// Sparse storage. A bit slower, but doesn't matter with our level size. Smaller memory footprint.
 	private Dictionary<Vec2i, Room> rooms = new Dictionary<Vec2i, Room>();
 
 	// A pool for reusing sprites. This avoids instantiate/destroy and garbage collection spikes.
 	private SpritePool spritePool;
 	private ColliderPool colliderPool;
+
+	[SerializeField] private GameObject enemyPrefab;
 
 	// Temporary way to access sprites - the tile ID - 1 (index into tile type enum) maps into this.
 	// Subtract 1 since air doesn't have a sprite.
@@ -32,8 +37,8 @@ public class Floor : MonoBehaviour
 		Instance = this;
 		spritePool = GetComponent<SpritePool>();
 		colliderPool = GetComponent<ColliderPool>();
-		generator = new FloorGenerator(this);
-		generator.Generate(RoomCount);
+		generator = new FloorGenerator(this, enemyPrefab);
+		Generate();
 	}
 
 	/// <summary>
@@ -47,6 +52,9 @@ public class Floor : MonoBehaviour
 		rooms.Clear();
 		generator.Generate(RoomCount);
 		GameObject.FindWithTag("Player").transform.position = new Vector3(5.0f, 5.0f);
+
+		FloorID++;
+		Debug.Log("Entering floor " + FloorID);
 	}
 
 	/// <summary>

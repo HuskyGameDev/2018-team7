@@ -5,6 +5,7 @@ using static Utils;
 public class FloorGenerator
 {
 	private ItemSpawner spawner;
+	private GameObject enemyPrefab;
 
 	// Used for connecting two rooms together via a pathway.
 	// Stores the axis the pathway will exist on as well as positions 
@@ -24,9 +25,10 @@ public class FloorGenerator
 
 	private Floor floor;
 
-	public FloorGenerator(Floor floor)
+	public FloorGenerator(Floor floor, GameObject enemyPrefab)
 	{
 		this.floor = floor;
+		this.enemyPrefab = enemyPrefab;
 		spawner = GameObject.FindWithTag("ItemSpawner").GetComponent<ItemSpawner>();
 	}
 
@@ -80,6 +82,14 @@ public class FloorGenerator
 
 		if (powerupRoom)
 			spawner.SpawnItem(wPos + RandomV2(3.0f, 3.0f, Room.LimX - 3.0f, Room.LimY - 3.0f));
+
+		int enemyCount = Random.Range(3, 6);
+
+		for (int i = 0; i < enemyCount; i++)
+		{
+			Vector2 enemyP = wPos + RandomV2(3.0f, 3.0f, Room.LimX - 3.0f, Room.LimY - 3.0f);
+			Object.Instantiate(enemyPrefab, enemyP, Quaternion.identity);
+		}
 	}
 
 	// Returns the position of the next room to generate.
