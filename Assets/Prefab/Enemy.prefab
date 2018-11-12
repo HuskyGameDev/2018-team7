@@ -40,6 +40,7 @@ GameObject:
   - component: {fileID: 114471165337239314}
   - component: {fileID: 143766872734567328}
   - component: {fileID: 212174449863229828}
+  - component: {fileID: 114553196331776366}
   m_Layer: 10
   m_Name: Enemy
   m_TagString: Untagged
@@ -113,7 +114,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
-  target: {fileID: 0}
 --- !u!114 &114488246992675828
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -125,6 +125,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eba3ffe5591efe2438e4676321f8c05f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114553196331776366
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1460564031892300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f837bec82bfa764438587fa27f624d19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  guns:
+  - {fileID: 1386404838667288, guid: c5b04cb414199864d8e3ab1e976a8417, type: 2}
+  - {fileID: 1273204478419478, guid: a2405f91e413c644ca0ab8875260cb33, type: 2}
+  - {fileID: 1412399656324280, guid: 4b2f973dd56c42a4693b4fb73e977a1c, type: 2}
+  - {fileID: 1482416244701846, guid: 684b650fa6f2cf44ab819dfefd5657b7, type: 2}
 --- !u!143 &143766872734567328
 CharacterController:
   m_ObjectHideFlags: 1
