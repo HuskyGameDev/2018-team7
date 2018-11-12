@@ -14,6 +14,7 @@ public class EnemyController : MonoBehaviour
 	private Transform target;
 
 	private int health = 10;
+	public Room room;
 
 	// Use this for initialization
 	void Start()

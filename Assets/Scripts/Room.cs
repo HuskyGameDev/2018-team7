@@ -66,6 +66,7 @@ public class Room
 	// References to floor variables.
 	private SpritePool spritePool;
 	private RoomCollision collision;
+	public RoomPathfinding pathfinding;
 
 	/// <summary>
 	/// The room's position, in room coordinates.
@@ -90,7 +91,9 @@ public class Room
 		WorldPos = new Vector2(pX * Width, pY * Height);
 
 		this.spritePool = spritePool;
+
 		collision = new RoomCollision(this, colliderPool);
+		pathfinding = new RoomPathfinding(this);
 	}
 
 	/// <summary>
@@ -231,5 +234,10 @@ public class Room
 	{
 		RemoveColliders();
 		RemoveSprites();
+	}
+
+	public bool InBounds(Vec2i p)
+	{
+		return p.x >= 0 && p.y >= 0 && p.x < Width && p.y < Height;
 	}
 }

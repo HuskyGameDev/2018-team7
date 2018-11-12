@@ -89,6 +89,7 @@ public class FloorGenerator
 		{
 			Vector2 enemyP = wPos + RandomV2(3.0f, 3.0f, Room.LimX - 3.0f, Room.LimY - 3.0f);
 			GameObject enemy = Object.Instantiate(enemyPrefab, enemyP, Quaternion.identity);
+			enemy.GetComponent<EnemyController>().room = room;
 			room.AddEnemy(enemy);
 		}
 
