@@ -88,8 +88,11 @@ public class FloorGenerator
 		for (int i = 0; i < enemyCount; i++)
 		{
 			Vector2 enemyP = wPos + RandomV2(3.0f, 3.0f, Room.LimX - 3.0f, Room.LimY - 3.0f);
-			Object.Instantiate(enemyPrefab, enemyP, Quaternion.identity);
+			GameObject enemy = Object.Instantiate(enemyPrefab, enemyP, Quaternion.identity);
+			room.AddEnemy(enemy);
 		}
+
+		room.Lock();
 	}
 
 	// Returns the position of the next room to generate.
@@ -119,8 +122,8 @@ public class FloorGenerator
 
 				int startX = a.x + Room.LimX, y = a.y + Room.HalfSizeY;
 
-				for (int x = startX; x < startX + 2; x++)
-					floor.SetTile(x, y, TileType.Floor);
+				floor.SetTile(startX, y, TileType.TempWall);
+				floor.SetTile(startX + 1, y, TileType.Floor);
 			}
 			else
 			{
@@ -128,8 +131,8 @@ public class FloorGenerator
 
 				int startY = a.y + Room.LimY, x = a.x + Room.HalfSizeX;
 
-				for (int y = startY; y < startY + 2; y++)
-					floor.SetTile(x, y, TileType.Floor);
+				floor.SetTile(x, startY, TileType.TempWall);
+				floor.SetTile(x, startY + 1, TileType.Floor);
 			}
 		}
 	}
@@ -160,7 +163,6 @@ public class FloorGenerator
                 BuildRoom(room, false, powerupRoom);
             }
 			
-
 			Vec2i next = GetNextPos(roomP);
 
 			connections.Add(new Connection(roomP, next, roomP.x != next.x));

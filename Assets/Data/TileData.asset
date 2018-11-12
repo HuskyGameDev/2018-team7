@@ -72,3 +72,18 @@ MonoBehaviour:
         serializedVersion: 2
         rgba: 0
       component: {fileID: 0}
+  - name: TempWall
+    type: 4
+    variantCount: 1
+    variants:
+    - invisible: 0
+      hasCollider: 1
+      trigger: 0
+      colliderSize: {x: 1, y: 1}
+      colliderOffset: {x: 0, y: 0}
+      renderOffset: {x: 0, y: 0, z: 0}
+      sprite: {fileID: 0}
+      color:
+        serializedVersion: 2
+        rgba: 0
+      component: {fileID: 0}

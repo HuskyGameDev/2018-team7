@@ -77,6 +77,8 @@ public class RoomLoader : MonoBehaviour
 				Room room = floor.GetRoom(new Vec2i(x, y));
 				if (room == null) continue;
 
+				room.CheckForUnlock();
+
 				if (!room.hasSprites)
 				{
 					room.SetSprites();

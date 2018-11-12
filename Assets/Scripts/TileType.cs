@@ -4,5 +4,6 @@ public enum TileType
 	Air,
 	Wall, 
 	Floor,
-    Stair
+    Stair,
+	TempWall
 }
