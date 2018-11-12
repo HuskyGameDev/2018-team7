@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4000361572463700}
   - component: {fileID: 212223960691395628}
   - component: {fileID: 65456208746137436}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: BulletSpeed
   m_TagString: Pickup
   m_Icon: {fileID: 0}

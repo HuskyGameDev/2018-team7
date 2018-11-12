@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4445605512802098}
   - component: {fileID: 212230439060474432}
   - component: {fileID: 65964377192130922}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SMG
   m_TagString: Pickup
   m_Icon: {fileID: 0}
