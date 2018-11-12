@@ -77,6 +77,11 @@ public class Room
 	/// </summary>
 	public Vector2 WorldPos { get; private set; }
 
+	// If true, this room cannot be exited until all enemies in it are killed.
+	private bool locked;
+
+	private List<GameObject> enemies = new List<GameObject>();
+
 	public Room(int pX, int pY, SpritePool spritePool, ColliderPool colliderPool)
 	{
 		tiles = new Tile[Width * Height];
@@ -106,6 +111,11 @@ public class Room
 	{
 		Assert.IsTrue(InBounds(x, y));
 		tiles[y * Width + x] = tile;
+	}
+
+	public void AddEnemy(GameObject enemy)
+	{
+		enemies.Add(enemy);
 	}
 
 	/// <summary>
@@ -143,6 +153,46 @@ public class Room
 			}
 
 			hasSprites = true;
+		}
+	}
+
+	private void Rebuild()
+	{
+		RemoveSprites();
+		RemoveColliders();
+		SetSprites();
+		SetColliders();
+	}
+
+
+	public void Lock()
+	{
+		locked = true;
+	}
+
+	private void Unlock()
+	{
+		for (int i = 0; i < tiles.Length; i++)
+		{
+			if (tiles[i].id == TileType.TempWall)
+				tiles[i] = TileType.Floor;
+		}
+
+		Rebuild();
+	}
+
+	public void CheckForUnlock()
+	{
+		if (locked)
+		{
+			for (int i = enemies.Count - 1; i >= 0; i--)
+			{
+				if (enemies[i] == null)
+					enemies.RemoveAt(i);
+			}
+
+			if (enemies.Count == 0)
+				Unlock();
 		}
 	}
 
