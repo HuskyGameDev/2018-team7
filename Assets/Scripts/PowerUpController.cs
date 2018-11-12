@@ -42,9 +42,6 @@ public class PowerUpController : MonoBehaviour {
      */ 
     void OnTriggerEnter(Collider collision)
     {
-
-        Debug.Log(collision.name);
-
         // If collision is with Health powerup, call healthPickup
         if (collision.name == "Health")
         {
