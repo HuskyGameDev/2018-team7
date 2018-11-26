@@ -3,6 +3,15 @@
 public class Minigun : Gun
 {
     public float timeBetweenShots = 0.05f;
+	public int pelletCount;
+    public float spreadAngle;
+    public float pelletFireVel = 1;
+    public Transform BarrelExit;
+    public GameObject bullet;
+
+
+    List<Quaternion> pellets;
+
 
     private float timestamp;
 
@@ -13,48 +22,75 @@ public class Minigun : Gun
 
 	// Update is called once per frame
 	void Update () {
-
-        //Shoots Right
-        if (Time.time >= timestamp && Input.GetKey(KeyCode.RightArrow))
+		 if (Time.time >= timestamp && Input.GetButton("Fire1"))
         {
-            timestamp = Time.time + timeBetweenShots;
-            
-
-            GameObject go = (GameObject)Instantiate(bullet,
-            transform.position, Quaternion.identity);
-            go.GetComponent<BulletController>().speedX = 0.05f;
+            Fire();
         }
-
-        //Shoots Left
-        else if (Time.time >= timestamp && Input.GetKey(KeyCode.LeftArrow))
+        else if (Time.time >= timestamp && Input.GetButton("Fire2"))
         {
-            timestamp = Time.time + timeBetweenShots;
-
-            GameObject go = (GameObject)Instantiate(bullet,
-            transform.position, Quaternion.identity);
-            go.GetComponent<BulletController>().speedX = -0.05f;
-
+            Fire();
         }
-        //Shoots Up
-        else if (Time.time >= timestamp && Input.GetKey(KeyCode.UpArrow))
+        else if (Time.time >= timestamp && Input.GetButton("Fire3"))
         {
-            timestamp = Time.time + timeBetweenShots;
-
-            GameObject go = (GameObject)Instantiate(bullet,
-            transform.position, Quaternion.identity);
-            go.GetComponent<BulletController>().speedY = 0.05f;
-
+            Fire();
         }
-        //Shoots Down
-        else if (Time.time >= timestamp && Input.GetKey(KeyCode.DownArrow))
+        else if (Time.time >= timestamp && Input.GetButton("Fire4"))
         {
-            timestamp = Time.time + timeBetweenShots;
-
-            GameObject go = (GameObject)Instantiate(bullet,
-            transform.position, Quaternion.identity);
-            go.GetComponent<BulletController>().speedY = -0.05f;
-
+            Fire();
         }
-		
 	}
+  void Fire()
+    {
+        int i = 0;
+
+        if (Time.time >= timestamp && Input.GetButton("Fire1"))
+        {
+            foreach (Quaternion quat in pellets)
+            {
+                timestamp = Time.time + timeBetweenShots;
+                pellets[i] = Random.rotation;
+                GameObject p = Instantiate(bullet, BarrelExit.position, BarrelExit.rotation);
+                p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellets[i], spreadAngle);
+                p.GetComponent<Rigidbody2D>().AddForce(p.transform.up * pelletFireVel);
+                i++;
+            }
+        }
+        if (Time.time >= timestamp && Input.GetButton("Fire2"))
+        {
+            foreach (Quaternion quat in pellets)
+            {
+                timestamp = Time.time + timeBetweenShots;
+                pellets[i] = Random.rotation;
+                GameObject p = Instantiate(bullet, BarrelExit.position, BarrelExit.rotation);
+                p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellets[i], spreadAngle);
+                p.GetComponent<Rigidbody2D>().AddForce(-(p.transform.up * pelletFireVel));
+                i++;
+            }
+        }
+        if (Time.time >= timestamp && Input.GetButton("Fire3"))
+        {
+            foreach (Quaternion quat in pellets)
+            {
+                timestamp = Time.time + timeBetweenShots;
+                pellets[i] = Random.rotation;
+                GameObject p = Instantiate(bullet, BarrelExit.position, BarrelExit.rotation);
+                p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellets[i], spreadAngle);
+                p.GetComponent<Rigidbody2D>().AddForce(-(p.transform.right * pelletFireVel));
+                i++;
+            }
+        }
+        if (Time.time >= timestamp && Input.GetButton("Fire4"))
+        {
+            foreach (Quaternion quat in pellets)
+            {
+                timestamp = Time.time + timeBetweenShots;
+                pellets[i] = Random.rotation;
+                GameObject p = Instantiate(bullet, BarrelExit.position, BarrelExit.rotation);
+                p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellets[i], spreadAngle);
+                p.GetComponent<Rigidbody2D>().AddForce(p.transform.right * pelletFireVel);
+                i++;
+            }
+        }
+    }
+
 }
