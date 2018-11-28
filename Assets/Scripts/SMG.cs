@@ -42,7 +42,7 @@ public class SMG : Gun
 				GameObject p = Instantiate(bullet, transform.position, transform.rotation); // TEMP: BarrelExit is null.
 				p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellets[i], spreadAngle);
 				p.GetComponent<Rigidbody>().isKinematic = false; // NOTE: temp fix to make it work with 3D physics quickly. We probably shouldn't be using forces, though...
-				p.GetComponent<Rigidbody>().AddForce(p.transform.up * pelletFireVel);
+				p.GetComponent<Rigidbody>().AddForce(Vector2.right * pelletFireVel);
 			}
 		}
 
@@ -57,7 +57,7 @@ public class SMG : Gun
 				GameObject p = Instantiate(bullet, transform.position, transform.rotation); // TEMP: BarrelExit is null.
 				p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellets[i], spreadAngle);
 				p.GetComponent<Rigidbody>().isKinematic = false; // NOTE: temp fix to make it work with 3D physics quickly. We probably shouldn't be using forces, though...
-				p.GetComponent<Rigidbody>().AddForce(p.transform.up * pelletFireVel);
+				p.GetComponent<Rigidbody>().AddForce(Vector2.left * pelletFireVel);
 			}
 
 		}
@@ -72,7 +72,7 @@ public class SMG : Gun
 				GameObject p = Instantiate(bullet, transform.position, transform.rotation); // TEMP: BarrelExit is null.
 				p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellets[i], spreadAngle);
 				p.GetComponent<Rigidbody>().isKinematic = false; // NOTE: temp fix to make it work with 3D physics quickly. We probably shouldn't be using forces, though...
-				p.GetComponent<Rigidbody>().AddForce(p.transform.up * pelletFireVel);
+				p.GetComponent<Rigidbody>().AddForce(Vector2.up * pelletFireVel);
 			}
 		}
 		//Shoots Down
@@ -86,7 +86,7 @@ public class SMG : Gun
 				GameObject p = Instantiate(bullet, transform.position, transform.rotation); // TEMP: BarrelExit is null.
 				p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellets[i], spreadAngle);
 				p.GetComponent<Rigidbody>().isKinematic = false; // NOTE: temp fix to make it work with 3D physics quickly. We probably shouldn't be using forces, though...
-				p.GetComponent<Rigidbody>().AddForce(p.transform.up * pelletFireVel);
+				p.GetComponent<Rigidbody>().AddForce(Vector2.down * pelletFireVel);
 			}
 		}
 	}
