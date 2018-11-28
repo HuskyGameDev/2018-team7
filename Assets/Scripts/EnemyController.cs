@@ -48,14 +48,6 @@ public class EnemyController : MonoBehaviour
 				controller.Move(pcDirection * speed * Time.deltaTime);
 				transform.SetZ(-.1f);
 			}
-
-			// if on top of the player, slow down
-			if (Mathf.Approximately(dist, 0.0f))
-			{
-				speed -= 2f;
-				StartCoroutine(WaitTime(1));
-				speed += 2f;
-			}
 		}
     }
 

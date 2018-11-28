@@ -24,6 +24,10 @@ public class TriggerDetection : MonoBehaviour {
 		Transform parent = other.transform.parent;
 
 		if (parent != null && parent.CompareTag("Player"))
-            pc.health = pc.health - 10;
+		{
+			pc.health = pc.health - 10;
+			Vector3 dir = (other.transform.position - transform.position).normalized;
+			parent.GetComponent<Move>().ApplyKnockback(dir, 25.0f);
+		}
     }
 }

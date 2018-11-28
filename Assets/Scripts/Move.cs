@@ -29,10 +29,11 @@ public class Move : MonoBehaviour {
         speed = 100f;
     }
 
-    //NOT FINAL
-    // Update is called once per frame
-    //Moves the player with the arrow keys and WASD keys
-    //Player can choose either
+	public void ApplyKnockback(Vector3 dir, float force)
+	{
+		velocity = dir * force;
+	}
+
     void Update()
     {
 		float currentSpeed = speed;
