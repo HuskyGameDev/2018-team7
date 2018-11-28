@@ -1,13 +1,12 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 
 public class SMG : Gun
 {
     public float timeBetweenShots = 0.11111f;
-	private int pelletCount = 2;
+	private int pelletCount = 1;
     public float spreadAngle;
-    public float pelletFireVel = 1;
+	public float pelletFireVel = 500;
     //public GameObject pellet;
     public Transform BarrelExit;
     private float timestamp;
@@ -32,63 +31,63 @@ public class SMG : Gun
     // Update is called once per frame
     void Update()
 	{
-		int i = 0;
 		//Shoots Right
 		if (Time.time >= timestamp && Input.GetKey(KeyCode.RightArrow))
 		{
-			foreach (Quaternion quat in pellets)
+			for (int i = 0; i < pellets.Count; i++)
 			{
 				timestamp = Time.time + timeBetweenShots;
 				pellets[i] = Random.rotation;
 				//GameObject p = Instantiate(bullet, BarrelExit.position, BarrelExit.rotation);
 				GameObject p = Instantiate(bullet, transform.position, transform.rotation); // TEMP: BarrelExit is null.
 				p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellets[i], spreadAngle);
-				p.GetComponent<Rigidbody2D>().AddForce(p.transform.up * pelletFireVel);
-				i++;
+				p.GetComponent<Rigidbody>().isKinematic = false; // NOTE: temp fix to make it work with 3D physics quickly. We probably shouldn't be using forces, though...
+				p.GetComponent<Rigidbody>().AddForce(p.transform.up * pelletFireVel);
 			}
 		}
 
 		//Shoots Left
 		else if (Time.time >= timestamp && Input.GetKey(KeyCode.LeftArrow))
 		{
-			foreach (Quaternion quat in pellets)
+			for (int i = 0; i < pellets.Count; i++)
 			{
 				timestamp = Time.time + timeBetweenShots;
 				pellets[i] = Random.rotation;
-				GameObject p = Instantiate(bullet, BarrelExit.position, BarrelExit.rotation);
+				//GameObject p = Instantiate(bullet, BarrelExit.position, BarrelExit.rotation);
+				GameObject p = Instantiate(bullet, transform.position, transform.rotation); // TEMP: BarrelExit is null.
 				p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellets[i], spreadAngle);
-				p.GetComponent<Rigidbody2D>().AddForce(p.transform.up * pelletFireVel);
-				i++;
+				p.GetComponent<Rigidbody>().isKinematic = false; // NOTE: temp fix to make it work with 3D physics quickly. We probably shouldn't be using forces, though...
+				p.GetComponent<Rigidbody>().AddForce(p.transform.up * pelletFireVel);
 			}
 
 		}
 		//Shoots Up
 		else if (Time.time >= timestamp && Input.GetKey(KeyCode.UpArrow))
 		{
-			foreach (Quaternion quat in pellets)
+			for (int i = 0; i < pellets.Count; i++)
 			{
 				timestamp = Time.time + timeBetweenShots;
 				pellets[i] = Random.rotation;
-				GameObject p = Instantiate(bullet, BarrelExit.position, BarrelExit.rotation);
+				//GameObject p = Instantiate(bullet, BarrelExit.position, BarrelExit.rotation);
+				GameObject p = Instantiate(bullet, transform.position, transform.rotation); // TEMP: BarrelExit is null.
 				p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellets[i], spreadAngle);
-				p.GetComponent<Rigidbody2D>().AddForce(p.transform.up * pelletFireVel);
-				i++;
+				p.GetComponent<Rigidbody>().isKinematic = false; // NOTE: temp fix to make it work with 3D physics quickly. We probably shouldn't be using forces, though...
+				p.GetComponent<Rigidbody>().AddForce(p.transform.up * pelletFireVel);
 			}
-
 		}
 		//Shoots Down
 		else if (Time.time >= timestamp && Input.GetKey(KeyCode.DownArrow))
 		{
-			foreach (Quaternion quat in pellets)
+			for (int i = 0; i < pellets.Count; i++)
 			{
 				timestamp = Time.time + timeBetweenShots;
 				pellets[i] = Random.rotation;
-				GameObject p = Instantiate(bullet, BarrelExit.position, BarrelExit.rotation);
+				//GameObject p = Instantiate(bullet, BarrelExit.position, BarrelExit.rotation);
+				GameObject p = Instantiate(bullet, transform.position, transform.rotation); // TEMP: BarrelExit is null.
 				p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellets[i], spreadAngle);
-				p.GetComponent<Rigidbody2D>().AddForce(p.transform.up * pelletFireVel);
-				i++;
+				p.GetComponent<Rigidbody>().isKinematic = false; // NOTE: temp fix to make it work with 3D physics quickly. We probably shouldn't be using forces, though...
+				p.GetComponent<Rigidbody>().AddForce(p.transform.up * pelletFireVel);
 			}
-
 		}
 	}
 }
