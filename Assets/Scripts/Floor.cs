@@ -27,6 +27,12 @@ public class Floor : MonoBehaviour
 	// Subtract 1 since air doesn't have a sprite.
 	[SerializeField] private TileDataList data;
 
+	// Currently the min room is always (0, 0) and the max room is the last room generated.
+	// This could change if we make the generator more sophisticated.
+	public Vec2i MaxRoom { get; set; }
+
+	public FloorPathfinder Pathfinder { get; private set; }
+
 	// Singleton instance.
 	public static Floor Instance { get; private set; }
 
@@ -39,6 +45,9 @@ public class Floor : MonoBehaviour
 		colliderPool = GetComponent<ColliderPool>();
 		generator = new FloorGenerator(this, enemyPrefab);
 		Generate();
+
+		Pathfinder = new FloorPathfinder(this);
+		Pathfinder.Generate();
 	}
 
 	/// <summary>
@@ -73,6 +82,9 @@ public class Floor : MonoBehaviour
 	{
 		Vec2i roomP = ToRoomPos(x, y), lP = ToLocalPos(x, y);
 		Room room = GetRoom(roomP);
+
+		if (room == null) return TileType.Air;
+
 		return room.GetTile(lP.x, lP.y);
 	}
 
@@ -114,5 +126,8 @@ public class Floor : MonoBehaviour
 	{
 		if (Input.GetKeyDown(KeyCode.P))
 			Generate();
+
+		if (Input.GetMouseButtonDown(0))
+			Pathfinder.PrintCellInfoAtCursor();
 	}
 }

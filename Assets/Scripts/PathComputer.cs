@@ -16,7 +16,7 @@ public sealed class PathComputer
 	private Vec2i target;
 	private Stack<Vector2> path;
 
-	private Room room;
+	private FloorPathfinder floor;
 	private PathNode[,] nodes;
 
 	private SortedList<Vec2i, PathNode> openList = new SortedList<Vec2i, PathNode>();
@@ -25,12 +25,12 @@ public sealed class PathComputer
 	private int successorCount = 0;
 	private PathNode[] successors = new PathNode[8];
 
-	public PathComputer(Room room, PathCellInfo[,] grid)
+	public PathComputer(FloorPathfinder floor, PathCellInfo[,] grid)
 	{
-		this.room = room;
+		this.floor = floor;
 		this.grid = grid;
 
-		nodes = new PathNode[Room.Width, Room.Height];
+		nodes = new PathNode[grid.GetLength(0), grid.GetLength(1)];
 	}
 
 	public void SetInfo(Vec2i start, Vec2i target, Stack<Vector2> path)
@@ -62,7 +62,7 @@ public sealed class PathComputer
 		{
 			Vec2i next = pos + Vec2i.Directions[i];
 
-			if (room.InBounds(next) && grid[next.x, next.y].passable)
+			if (floor.InBounds(next) && grid[next.x, next.y].passable)
 				successors[successorCount++] = GetNode(next);
 		}
 
@@ -71,7 +71,7 @@ public sealed class PathComputer
 			Vec2i dir = Vec2i.Directions[i];
 			Vec2i next = pos + dir;
 
-			if (room.InBounds(next))
+			if (floor.InBounds(next))
 			{
 				PathCellInfo diag = grid[next.x, next.y];
 
@@ -93,7 +93,7 @@ public sealed class PathComputer
 
 		while (current.pos != start)
 		{
-			path.Push(new Vector2(current.pos.x + 0.5f, current.pos.y + 0.5f));
+			path.Push(new Vector2(current.pos.x, current.pos.y));
 			current = current.parent;
 			Assert.IsNotNull(current);
 		}
@@ -104,12 +104,10 @@ public sealed class PathComputer
 	private int ComputeHeuristic(Vec2i start, Vec2i end)
 		=> Mathf.Abs(end.x - start.x) + Mathf.Abs(end.y - start.y);
 
-	public void FindPath(Action callback)
-	{
-		ThreadPool.QueueUserWorkItem(FindPath, callback);
-	}
 
-	private void FindPath(object dataPtr)
+	// This could be multithreaded, but we would have to address thread contention.
+	// ThreadPool.QueueUserWorkItem(FindPath, callback);
+	public void FindPath(Action callback)
 	{
 		try
 		{
@@ -124,7 +122,6 @@ public sealed class PathComputer
 				if (current.pos == target)
 				{
 					TracePath(current);
-					var callback = (Action)dataPtr;
 					callback.Invoke();
 					return;
 				}

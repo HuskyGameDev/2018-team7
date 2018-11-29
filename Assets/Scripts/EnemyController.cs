@@ -1,20 +1,37 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
+using static Utils;
+
+using Debug = UnityEngine.Debug;
 
 public class EnemyController : MonoBehaviour
 {
-	public float speed;
+	public float detectRange;
+	[HideInInspector] public float speed;
 
 	private CharacterController controller;
 	private SpriteRenderer rend;
 
 	private Transform player; // Used to see where the player is.
 
-	// Separate from 'player' so we can make this null if the enemy has no target.
-	private Transform target;
-
 	private int health = 10;
 	public Room room;
+
+	// The path the enemy will follow.
+	private Stack<Vector2> path = new Stack<Vector2>();
+
+	private bool followingPath;
+	//private bool pathDrawn;
+	private Vector2? nextCell;
+
+	private float timer;
+
+	public Vector2 Pos
+	{
+		get { return transform.position; }
+	}
 
 	// Use this for initialization
 	void Start()
@@ -28,36 +45,107 @@ public class EnemyController : MonoBehaviour
 		player = GameObject.FindWithTag("Player").transform;
 
 		transform.SetZ(-0.1f);
-    }
 
-    // Update is called once per frame
-    // Changes the direction of the enemy's movement towards the player once per frame
-    void Update()
+		timer = Random.Range(1.5f, 2.5f);
+	}
+
+	private void PathFinished()
+	{
+		nextCell = path.Pop();
+		//pathDrawn = false;
+	}
+
+	private void GetPath()
+	{
+		Floor floor = Floor.Instance;
+		floor.Pathfinder.FindPath(TilePos(transform.position), TilePos(player.position), path, PathFinished);
+		followingPath = true;
+	}
+
+	private void Move(Vector2 dir)
+	{
+		controller.Move(dir * speed * Time.deltaTime);
+		transform.SetZ(-.1f);
+	}
+
+	// Update is called once per frame
+	// Changes the direction of the enemy's movement towards the player once per frame
+	void Update()
     {
-		float dist = Vector3.Distance(transform.position, player.position);
+		timer -= Time.deltaTime;
 
-		if (dist <= 5.0f)
-			target = player;
+		//DrawPath();
 
-		if (target != null)
+		if (nextCell.HasValue)
 		{
-			// if away from the player move towards him/her
-			if (dist > 1f)
+			if (timer <= 0.0f)
 			{
-				Vector3 pcDirection = (target.position - transform.position).normalized;
-				controller.Move(pcDirection * speed * Time.deltaTime);
-				transform.SetZ(-.1f);
+				GetPath();
+				timer = 1.0f;
+			}
+
+			Vector2 next = nextCell.Value;
+			Vector2 dir = (next - Pos).normalized;
+
+			Move(dir);
+
+			if ((next - Pos).sqrMagnitude < 0.09f)
+			{
+				if (path.Count > 0)
+					nextCell = path.Pop();
+				else
+				{
+					nextCell = null;
+					followingPath = false;
+				}
 			}
 		}
-    }
+		else
+		{
+			float dist = Vector2.Distance(Pos, player.position);
 
-    IEnumerator WaitTime(int timer)
+			if (dist <= 1.0f)
+			{
+				Vector2 dir = ((Vector2)player.position - Pos).normalized;
+				Move(dir);
+			}
+			else
+			{
+				if (!followingPath && dist <= detectRange)
+					GetPath();
+			}
+		}
+	}
+
+	//private void DrawPath()
+	//{
+	//	if (!pathDrawn && followingPath && path.Count > 0)
+	//	{
+	//		Vector3[] v3 = new Vector3[path.Count];
+
+	//		int i = 0;
+	//		foreach (Vector2 v in path)
+	//			v3[i++] = new Vector3(v.x, v.y, -5.0f);
+
+	//		GameObject line = new GameObject("Debug Path");
+	//		LineRenderer lR = line.AddComponent<LineRenderer>();
+	//		lR.widthMultiplier = 0.2f;
+	//		lR.positionCount = v3.Length;
+	//		lR.SetPositions(v3);
+
+	//		Destroy(line, 10.0f);
+	//		pathDrawn = true;
+	//	}
+	//}
+
+	IEnumerator WaitTime(int time)
     {
-        yield return new WaitForSeconds(timer);
+        yield return new WaitForSeconds(time);
     }
 
 	public void ApplyDamage(int damage)
 	{
+		Debug.Log("Enemy hit, does it have a cell to move to? " + nextCell != null);
 		health -= damage;
 
 		if (health <= 0)

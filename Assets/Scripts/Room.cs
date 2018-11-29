@@ -66,7 +66,6 @@ public class Room
 	// References to floor variables.
 	private SpritePool spritePool;
 	private RoomCollision collision;
-	public RoomPathfinding pathfinding;
 
 	/// <summary>
 	/// The room's position, in room coordinates.
@@ -93,7 +92,6 @@ public class Room
 		this.spritePool = spritePool;
 
 		collision = new RoomCollision(this, colliderPool);
-		pathfinding = new RoomPathfinding(this);
 	}
 
 	/// <summary>

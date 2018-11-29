@@ -155,6 +155,8 @@ public class FloorGenerator
 			bool powerupRoom = Random.value < 0.6f;
 
 			Room room = floor.CreateRoom(roomP.x, roomP.y);
+			floor.MaxRoom = roomP;
+
             if (i == stairRoom)
             {
                 BuildRoom(room, true, powerupRoom);

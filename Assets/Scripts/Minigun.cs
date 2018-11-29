@@ -9,10 +9,8 @@ public class Minigun : Gun
     public float spreadAngle;
     public float pelletFireVel = 1;
     public Transform BarrelExit;
-    public GameObject bullet;
 
-
-    List<Quaternion> pellets;
+	List<Quaternion> pellets = new List<Quaternion>();
 
 
     private float timestamp;

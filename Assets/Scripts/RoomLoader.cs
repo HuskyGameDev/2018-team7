@@ -1,7 +1,6 @@
 ﻿
 using UnityEngine;
 using static Utils;
-using static UnityEngine.Mathf;
 using System.Collections.Generic;
 
 public class RoomLoader : MonoBehaviour
