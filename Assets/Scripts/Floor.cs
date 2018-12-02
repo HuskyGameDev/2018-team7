@@ -41,13 +41,31 @@ public class Floor : MonoBehaviour
 	private void Awake()
 	{
 		Instance = this;
+
 		spritePool = GetComponent<SpritePool>();
 		colliderPool = GetComponent<ColliderPool>();
-		generator = new FloorGenerator(this, enemyPrefab);
-		Generate();
 
+		generator = new FloorGenerator(this, enemyPrefab);
 		Pathfinder = new FloorPathfinder(this);
-		Pathfinder.Generate();
+
+		Generate();
+	}
+
+	public void Destroy()
+	{
+		foreach (Room room in rooms.Values)
+			room.Destroy();
+
+		rooms.Clear();
+
+		GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+		GameObject[] pickups = GameObject.FindGameObjectsWithTag("Pickup");
+
+		for (int i = 0; i < enemies.Length; i++)
+			Destroy(enemies[i]);
+
+		for (int i = 0; i < pickups.Length; i++)
+			Destroy(pickups[i]);
 	}
 
 	/// <summary>
@@ -55,15 +73,13 @@ public class Floor : MonoBehaviour
 	/// </summary>
 	public void Generate()
 	{
-		foreach (Room room in rooms.Values)
-			room.Destroy();
-
-		rooms.Clear();
 		generator.Generate(RoomCount);
 		GameObject.FindWithTag("Player").transform.position = new Vector3(5.0f, 5.0f);
 
 		FloorID++;
 		Debug.Log("Entering floor " + FloorID);
+
+		Pathfinder.Generate();
 	}
 
 	/// <summary>
@@ -117,7 +133,7 @@ public class Floor : MonoBehaviour
 	{
 		Vec2i roomP = new Vec2i(x, y);
 		Assert.IsTrue(GetRoom(roomP) == null);
-		Room room = new Room(x, y, spritePool, colliderPool);
+		Room room = new Room(x, y, spritePool, colliderPool, this);
 		rooms.Add(roomP, room);
 		return room;
 	}

@@ -2,6 +2,7 @@
 using UnityEngine.Assertions;
 using System.Collections.Generic;
 using System;
+using System.Threading;
 
 public sealed class FloorPathfinder
 {
@@ -20,10 +21,14 @@ public sealed class FloorPathfinder
 		int height = (floor.MaxRoom.y + 1) * Room.Height;
 
 		grid = new PathCellInfo[width, height];
+		UpdateArea(0, 0, width, height);
+	}
 
-		for (int y = 0; y < height; y++)
+	public void UpdateArea(int startX, int startY, int endX, int endY)
+	{
+		for (int y = startY; y < endY; y++)
 		{
-			for (int x = 0; x < width; x++)
+			for (int x = startX; x < endX; x++)
 			{
 				Tile tile = floor.GetTile(x, y);
 
@@ -72,7 +77,10 @@ public sealed class FloorPathfinder
 			Assert.IsTrue(grid[start.x, start.y].passable);
 			Assert.IsTrue(grid[target.x, target.y].passable);
 
+			// This allows for multithreading this in the future if necessary - a different PathComputer
+			// instance must be used per thread to avoid thread contention.
 			PathComputer d = GetData();
+
 			d.SetInfo(start, target, path);
 			d.FindPath(callback);
 		}

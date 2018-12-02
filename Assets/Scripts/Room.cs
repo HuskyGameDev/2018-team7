@@ -55,6 +55,8 @@ public class Room
 
 	private Tile[] tiles;
 
+	private RectInt tileRect;
+
 	/// <summary>
 	/// If true, this room has sprites and is being rendered.
 	/// </summary>
@@ -82,12 +84,16 @@ public class Room
 
 	private List<GameObject> enemies = new List<GameObject>();
 
-	public Room(int pX, int pY, SpritePool spritePool, ColliderPool colliderPool)
+	private Floor floor;
+
+	public Room(int pX, int pY, SpritePool spritePool, ColliderPool colliderPool, Floor floor)
 	{
+		this.floor = floor;
 		tiles = new Tile[Width * Height];
 
 		Pos = new Vec2i(pX, pY);
-		WorldPos = new Vector2(pX * Width, pY * Height);
+		tileRect = new RectInt(pX * Width, pY * Height, Width, Height);
+		WorldPos = new Vector2(tileRect.xMin, tileRect.yMin);
 
 		this.spritePool = spritePool;
 
@@ -163,6 +169,7 @@ public class Room
 		RemoveColliders();
 		SetSprites();
 		SetColliders();
+		floor.Pathfinder.UpdateArea(tileRect.xMin, tileRect.yMin, tileRect.xMax, tileRect.yMax);
 	}
 
 
