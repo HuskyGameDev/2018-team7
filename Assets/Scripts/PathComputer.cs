@@ -104,7 +104,6 @@ public sealed class PathComputer
 	private int ComputeHeuristic(Vec2i start, Vec2i end)
 		=> Mathf.Abs(end.x - start.x) + Mathf.Abs(end.y - start.y);
 
-
 	// This could be multithreaded, but we would have to address thread contention.
 	// ThreadPool.QueueUserWorkItem(FindPath, callback);
 	public void FindPath(Action callback)
