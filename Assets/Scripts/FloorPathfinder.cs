@@ -16,8 +16,8 @@ public sealed class FloorPathfinder
 
 	public void Generate()
 	{
-		int width = floor.MaxRoom.x * Room.Width;
-		int height = floor.MaxRoom.y * Room.Height;
+		int width = (floor.MaxRoom.x + 1) * Room.Width;
+		int height = (floor.MaxRoom.y + 1) * Room.Height;
 
 		grid = new PathCellInfo[width, height];
 

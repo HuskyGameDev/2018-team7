@@ -72,6 +72,9 @@ public class EnemyController : MonoBehaviour
 	// Changes the direction of the enemy's movement towards the player once per frame
 	void Update()
     {
+		if (path.Count == 0)
+			followingPath = false;
+
 		timer -= Time.deltaTime;
 
 		//DrawPath();
