@@ -8,6 +8,8 @@ public class Move : MonoBehaviour {
     public CharacterController pc;
 
 	public float speed { get; set; }
+	public float SpeedModifier { get; set; } = 1.0f;
+
 	public float friction;
 
 	private Vector2 velocity;
@@ -36,7 +38,7 @@ public class Move : MonoBehaviour {
 
     void Update()
     {
-		float currentSpeed = speed;
+		float currentSpeed = speed * SpeedModifier;
 
 		if (Input.GetKey(KeyCode.LeftShift))
 			currentSpeed *= 3.0f;

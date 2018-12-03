@@ -7,7 +7,6 @@ public class SMG : Gun
 	private int pelletCount = 1;
     public float spreadAngle;
 	public float pelletFireVel = 500;
-    //public GameObject pellet;
     public Transform BarrelExit;
     private float timestamp;
 

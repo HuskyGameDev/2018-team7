@@ -148,7 +148,6 @@ public class EnemyController : MonoBehaviour
 
 	public void ApplyDamage(int damage)
 	{
-		Debug.Log("Enemy hit, does it have a cell to move to? " + nextCell != null);
 		health -= damage;
 
 		if (health <= 0)
