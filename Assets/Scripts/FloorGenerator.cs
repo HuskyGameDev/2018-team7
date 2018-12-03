@@ -23,6 +23,10 @@ public class FloorGenerator
 		}
 	}
 
+	private delegate void PatternFunc(Room room);
+
+	private PatternFunc[] patterns;
+
 	private Floor floor;
 
 	public FloorGenerator(Floor floor, GameObject enemyPrefab)
@@ -30,10 +34,14 @@ public class FloorGenerator
 		this.floor = floor;
 		this.enemyPrefab = enemyPrefab;
 		spawner = GameObject.FindWithTag("ItemSpawner").GetComponent<ItemSpawner>();
+
+		patterns = new PatternFunc[3];
+		patterns[0] = NormalPattern;
+		patterns[1] = ExtraObstacles;
+		patterns[2] = WallsPattern;
 	}
 
-	// Generate all tiles for the given room.
-	private void BuildRoom(Room room, bool stairRoom, bool powerupRoom)
+	private void AddBase(Room room)
 	{
 		// Add top and bottom walls.
 		for (int x = 1; x <= Room.LimX - 1; x++)
@@ -60,8 +68,13 @@ public class FloorGenerator
 		for (int y = 1; y <= Room.LimY - 1; y++)
 		{
 			for (int x = 1; x <= Room.LimX - 1; x++)
-                room.SetTile(x, y, TileType.Floor);
+				room.SetTile(x, y, TileType.Floor);
 		}
+	}
+
+	private void NormalPattern(Room room)
+	{
+		AddBase(room);
 
 		int obstacleCount = Random.Range(0, 6);
 
@@ -72,6 +85,56 @@ public class FloorGenerator
 			int y = Random.Range(2, Room.LimY - 1);
 			room.SetTile(x, y, TileType.Wall);
 		}
+	}
+
+	private void ExtraObstacles(Room room)
+	{
+		AddBase(room);
+
+		int obstacleCount = Random.Range(10, 25);
+
+		for (int i = 0; i < obstacleCount; i++)
+		{
+			int x = Random.Range(2, Room.LimX - 1);
+			int y = Random.Range(2, Room.LimY - 1);
+			room.SetTile(x, y, TileType.Wall);
+		}
+	}
+
+	private void WallsPattern(Room room)
+	{
+		AddBase(room);
+
+		int count = Random.Range(2, 4);
+
+		for (int i = 0; i < count; i++)
+		{
+			bool vertical = Random.value < 0.5f;
+
+			int startX = Random.Range(2, 12);
+			int startY = Random.Range(2, 8);
+
+			if (vertical)
+			{
+				int dist = Random.Range(4, 9);
+
+				for (int j = startY; j < startY + dist; j++)
+					room.SetTile(startX, j, TileType.Wall);
+			}
+			else
+			{
+				int dist = Random.Range(8, 15);
+
+				for (int j = startX; j < startX + dist; j++)
+					room.SetTile(j, startY, TileType.Wall);
+			}
+		}
+	}
+
+	// Generate all tiles for the given room.
+	private void BuildRoom(Room room, bool stairRoom, bool powerupRoom)
+	{
+		patterns[Random.Range(0, patterns.Length)].Invoke(room);
 
         if (stairRoom)
         {
