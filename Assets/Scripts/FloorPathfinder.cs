@@ -75,7 +75,9 @@ public sealed class FloorPathfinder
 
 			Assert.IsTrue(InBounds(start));
 			Assert.IsTrue(grid[start.x, start.y].passable);
-			Assert.IsTrue(grid[target.x, target.y].passable);
+
+			if (!grid[target.x, target.y].passable)
+				return;
 
 			// This allows for multithreading this in the future if necessary - a different PathComputer
 			// instance must be used per thread to avoid thread contention.
