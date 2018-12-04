@@ -839,6 +839,8 @@ GameObject:
   - component: {fileID: 822830425}
   - component: {fileID: 822830426}
   - component: {fileID: 822830427}
+  - component: {fileID: 822830428}
+  - component: {fileID: 822830429}
   m_Layer: 8
   m_Name: Trigger
   m_TagString: Untagged
@@ -886,6 +888,28 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &822830428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 822830424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca0525dbcd9c3d4499398ac9130c1d31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &822830429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 822830424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb17dc4b76b54ce4ba2c48c5fda1e8c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &843899866
 GameObject:
   m_ObjectHideFlags: 0
@@ -1301,48 +1325,6 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4efd45669998a0a4f8147d0724b03e7b, type: 2}
   m_IsPrefabAsset: 0
---- !u!1001 &1548566140
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4795802397776570, guid: ed57df7214f25e046b7b15f75b81046a, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0.91
-      objectReference: {fileID: 0}
-    - target: {fileID: 4795802397776570, guid: ed57df7214f25e046b7b15f75b81046a, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4795802397776570, guid: ed57df7214f25e046b7b15f75b81046a, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: -0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 4795802397776570, guid: ed57df7214f25e046b7b15f75b81046a, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4795802397776570, guid: ed57df7214f25e046b7b15f75b81046a, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4795802397776570, guid: ed57df7214f25e046b7b15f75b81046a, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4795802397776570, guid: ed57df7214f25e046b7b15f75b81046a, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4795802397776570, guid: ed57df7214f25e046b7b15f75b81046a, type: 2}
-      propertyPath: m_RootOrder
-      value: 6
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: ed57df7214f25e046b7b15f75b81046a, type: 2}
-  m_IsPrefabAsset: 0
 --- !u!1 &1605337686
 GameObject:
   m_ObjectHideFlags: 0
@@ -1353,10 +1335,8 @@ GameObject:
   - component: {fileID: 1605337692}
   - component: {fileID: 1605337691}
   - component: {fileID: 1605337690}
-  - component: {fileID: 1605337693}
   - component: {fileID: 1605337688}
   - component: {fileID: 1605337689}
-  - component: {fileID: 1605337687}
   - component: {fileID: 1605337694}
   - component: {fileID: 1605337696}
   - component: {fileID: 1605337697}
@@ -1368,17 +1348,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1605337687
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1605337686}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb17dc4b76b54ce4ba2c48c5fda1e8c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!143 &1605337688
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1465,17 +1434,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1605337693
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1605337686}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca0525dbcd9c3d4499398ac9130c1d31, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1605337694
 MonoBehaviour:
   m_ObjectHideFlags: 0

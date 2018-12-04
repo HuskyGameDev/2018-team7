@@ -40,7 +40,7 @@ public class Shotgun : Gun
 			for (int i = pellets.Count - 1; i >= 0; i--)
 			{
 				pellets[i] = Random.rotation;
-				GameObject p = Instantiate(bullet, BarrelExit.position, BarrelExit.rotation);
+				GameObject p = CreateBullet(BarrelExit, BarrelExit.rotation);
 				p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellets[i], spreadAngle);
 				p.GetComponent<BulletController>().speedY = speed;
 			}
@@ -52,7 +52,7 @@ public class Shotgun : Gun
 			for (int i = pellets.Count - 1; i >= 0; i--)
 			{
 				pellets[i] = Random.rotation;
-				GameObject p = Instantiate(bullet, BarrelExit.position, BarrelExit.rotation);
+				GameObject p = CreateBullet(BarrelExit, BarrelExit.rotation);
 				p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellets[i], spreadAngle);
 				p.GetComponent<BulletController>().speedY = -speed;
 			}
@@ -64,7 +64,7 @@ public class Shotgun : Gun
 			for (int i = pellets.Count - 1; i >= 0; i--)
 			{
 				pellets[i] = Random.rotation;
-				GameObject p = Instantiate(bullet, BarrelExit.position, BarrelExit.rotation);
+				GameObject p = CreateBullet(BarrelExit, BarrelExit.rotation);
 				p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellets[i], spreadAngle);
 				p.GetComponent<BulletController>().speedX = -speed;
 			}
@@ -76,7 +76,7 @@ public class Shotgun : Gun
 			for (int i = pellets.Count - 1; i >= 0; i--)
 			{
 				pellets[i] = Random.rotation;
-				GameObject p = Instantiate(bullet, BarrelExit.position, BarrelExit.rotation);
+				GameObject p = CreateBullet(BarrelExit, BarrelExit.rotation);
 				p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellets[i], spreadAngle);
 				p.GetComponent<BulletController>().speedX = speed;
 			}

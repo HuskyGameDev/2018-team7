@@ -43,4 +43,14 @@ public class TileCollider : MonoBehaviour
 	{
 		col.isTrigger = trigger;
 	}
+
+	public void Enable()
+	{
+		col.enabled = true;
+	}
+
+	public void Disable()
+	{
+		col.enabled = false;
+	}
 }

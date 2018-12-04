@@ -8,6 +8,8 @@ TagManager:
   - Pickup
   - ItemSpawner
   - GunAudioSource
+  - Enemy
+  - Collider
   layers:
   - Default
   - TransparentFX
@@ -22,8 +24,8 @@ TagManager:
   - Controller
   - Projectile
   - Pickup
-  - 
-  - 
+  - Obstacle
+  - TriggerObstacle
   - 
   - 
   - 

@@ -35,7 +35,7 @@ public class Minigun : Gun
 			{
 				timestamp = Time.time + timeBetweenShots;
 				pellet = Random.rotation;
-				GameObject p = Instantiate(bullet, BarrelExit.position, BarrelExit.rotation);
+				GameObject p = CreateBullet(BarrelExit, BarrelExit.rotation);
 				p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellet, spreadAngle);
 				p.GetComponent<Rigidbody>().isKinematic = false;
 				p.GetComponent<BulletController>().speedY = speed;
@@ -46,7 +46,7 @@ public class Minigun : Gun
 			{
 				timestamp = Time.time + timeBetweenShots;
 				pellet = Random.rotation;
-				GameObject p = Instantiate(bullet, BarrelExit.position, BarrelExit.rotation);
+				GameObject p = CreateBullet(BarrelExit, BarrelExit.rotation);
 				p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellet, spreadAngle);
 				p.GetComponent<BulletController>().speedY = -speed;
 			}
@@ -56,7 +56,7 @@ public class Minigun : Gun
 			{
 				timestamp = Time.time + timeBetweenShots;
 				pellet = Random.rotation;
-				GameObject p = Instantiate(bullet, BarrelExit.position, BarrelExit.rotation);
+				GameObject p = CreateBullet(BarrelExit, BarrelExit.rotation);
 				p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellet, spreadAngle);
 				p.GetComponent<Rigidbody>().isKinematic = false;
 				p.GetComponent<BulletController>().speedX = -speed;
@@ -67,7 +67,7 @@ public class Minigun : Gun
 			{
 				timestamp = Time.time + timeBetweenShots;
 				pellet = Random.rotation;
-				GameObject p = Instantiate(bullet, BarrelExit.position, BarrelExit.rotation);
+				GameObject p = CreateBullet(BarrelExit, BarrelExit.rotation);
 				p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellet, spreadAngle);
 				p.GetComponent<Rigidbody>().isKinematic = false;
 				p.GetComponent<BulletController>().speedX = speed;

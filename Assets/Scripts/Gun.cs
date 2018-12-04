@@ -16,6 +16,13 @@ public class Gun : MonoBehaviour
 		Init();
 	}
 
+	protected GameObject CreateBullet(Transform t, Quaternion rot = default(Quaternion))
+	{
+		GameObject go = Instantiate(bullet, t.position, rot);
+		Physics.IgnoreCollision(go.GetComponent<BoxCollider>(), t.GetComponentInChildren<BoxCollider>());
+		return go;
+	}
+
 	protected virtual void Init()
 	{
 		speed = 0.2f;

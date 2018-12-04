@@ -41,6 +41,7 @@ public class RoomCollision
 					col.SetSize(props.colliderSize);
 					col.SetTile(tile);
 					col.SetTrigger(props.trigger);
+					col.gameObject.layer = props.trigger ? 14 : 13;
 					colliders.Add(col);
 				}
 			}
@@ -54,10 +55,8 @@ public class RoomCollision
 	/// </summary>
 	public void RemoveColliders()
 	{
-		if (hasColliders)
-		{
-			pool.ReturnColliders(colliders);
-			hasColliders = false;
-		}
+		Assert.IsTrue(hasColliders);
+		pool.ReturnColliders(colliders);
+		hasColliders = false;
 	}
 }

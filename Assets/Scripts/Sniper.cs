@@ -25,9 +25,8 @@ public class Sniper : Gun
            //Instantiate(bullet, transform.position, transform.rotation);
             timestamp = Time.time + timeBetweenShots;
 
-            GameObject go = (GameObject)Instantiate(bullet,
-            transform.position, Quaternion.identity);
-            go.GetComponent<BulletController>().speedX = speed;
+			GameObject go = CreateBullet(transform);
+			go.GetComponent<BulletController>().speedX = speed;
         }
 
         //Shoots Left
@@ -38,9 +37,8 @@ public class Sniper : Gun
 			//Instantiate(bullet, transform.position, transform.rotation);
 			timestamp = Time.time + timeBetweenShots;
 
-            GameObject go = (GameObject)Instantiate(bullet,
-            transform.position, Quaternion.identity);
-            go.GetComponent<BulletController>().speedX = -speed;
+			GameObject go = CreateBullet(transform);
+			go.GetComponent<BulletController>().speedX = -speed;
 
         }
         //Shoots Up
@@ -51,9 +49,8 @@ public class Sniper : Gun
 			//Instantiate(bullet, transform.position, transform.rotation);
 			timestamp = Time.time + timeBetweenShots;
 
-            GameObject go = (GameObject)Instantiate(bullet,
-            transform.position, Quaternion.identity);
-            go.GetComponent<BulletController>().speedY = speed;
+			GameObject go = CreateBullet(transform);
+			go.GetComponent<BulletController>().speedY = speed;
 
         }
         //Shoots Down
@@ -64,9 +61,8 @@ public class Sniper : Gun
 			//Instantiate(bullet, transform.position, transform.rotation);
 			timestamp = Time.time + timeBetweenShots;
 
-            GameObject go = (GameObject)Instantiate(bullet,
-            transform.position, Quaternion.identity);
-            go.GetComponent<BulletController>().speedY = -speed;
+			GameObject go = CreateBullet(transform);
+			go.GetComponent<BulletController>().speedY = -speed;
 
         }
 

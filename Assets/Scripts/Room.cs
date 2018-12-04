@@ -186,11 +186,12 @@ public class Room
 				tiles[i] = TileType.Floor;
 		}
 
+		locked = false;
 		Rebuild();
 	}
 
 	public void CheckForUnlock()
-	{
+	{ 
 		if (locked)
 		{
 			for (int i = enemies.Count - 1; i >= 0; i--)

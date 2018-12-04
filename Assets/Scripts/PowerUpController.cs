@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PowerUpController : MonoBehaviour {
+public class PowerUpController : MonoBehaviour
+{
 
     private PlayerController playerController; // the player object
 
@@ -42,49 +43,41 @@ public class PowerUpController : MonoBehaviour {
      */ 
     void OnTriggerEnter(Collider collision)
     {
-        // If collision is with Health powerup, call healthPickup
-        if (collision.name == "Health")
-        {
-            HealthPickup();
-        }
+		if (collision.CompareTag("Pickup"))
+		{
+			switch (collision.name)
+			{
+				case "Health":
+					HealthPickup();
+					break;
 
-        // If collison is with Speed powerup, call SpeedPickup
-        if (collision.name == "Speed")
-        {
-            StartCoroutine(SpeedPickup());
-        }
+				case "Speed":
+					StartCoroutine(SpeedPickup());
+					break;
 
-        // If collision is with BulletSpeed powerup, call ShootingSpeedPickup
-        if (collision.name == "BulletSpeed")
-        {
-            StartCoroutine(ShootingSpeedPickUp());
-        }
+				case "BulletSpeed":
+					StartCoroutine(ShootingSpeedPickUp());
+					break;
 
-        // If collision is with Sniper pickup, enable the sniper
-        if (collision.name == "Sniper")
-        {
-            playerController.sniper = true;
-        }
+				case "Sniper":
+					playerController.sniper = true;
+					break;
 
-        // If collision is with Smg pickup, enable the sniper
-        if (collision.name == "SMG")
-        {
-            playerController.smg = true;
-        }
+				case "SMG":
+					playerController.smg = true;
+					break;
 
-        // If collision is with Minigun pickup, enable the sniper
-        if (collision.name == "Minigun")
-        {
-            playerController.minigun = true;
-        }
+				case "Minigun":
+					playerController.minigun = true;
+					break;
 
-        // If collision is with Shotgun pickup, enable the sniper
-        if (collision.name == "Shotgun")
-        {
-            playerController.shotgun = true;
-        }
-        Destroy(collision.gameObject);
-        
+				case "Shotgun":
+					playerController.shotgun = true;
+					break;
+			}
+
+			Destroy(collision.gameObject);
+		}
     }
 
     /**

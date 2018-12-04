@@ -21,8 +21,7 @@ public class Pistol : Gun
 		if (Input.GetKeyDown(KeyCode.RightArrow))
 		{
             audioSource.Play(); //Play gunshot 
-            GameObject go = (GameObject)Instantiate(bullet,
-			transform.position, Quaternion.identity);
+			GameObject go = CreateBullet(transform);
 			go.GetComponent<BulletController>().speedX = speed;
 		}
 
@@ -30,8 +29,7 @@ public class Pistol : Gun
 		else if (Input.GetKeyDown(KeyCode.LeftArrow))
 		{
             audioSource.Play(); //Play gunshot 
-            GameObject go = (GameObject)Instantiate(bullet,
-			transform.position, Quaternion.identity);
+			GameObject go = CreateBullet(transform);
 			go.GetComponent<BulletController>().speedX = -speed;
 
 		}
@@ -39,8 +37,7 @@ public class Pistol : Gun
 		else if (Input.GetKeyDown(KeyCode.UpArrow))
 		{
             audioSource.Play(); //Play gunshot 
-            GameObject go = (GameObject)Instantiate(bullet,
-			transform.position, Quaternion.identity);
+			GameObject go = CreateBullet(transform);
 			go.GetComponent<BulletController>().speedY = speed;
 
 		}
@@ -48,8 +45,7 @@ public class Pistol : Gun
 		else if (Input.GetKeyDown(KeyCode.DownArrow))
 		{
             audioSource.Play(); //Play gunshot 
-            GameObject go = (GameObject)Instantiate(bullet,
-			transform.position, Quaternion.identity);
+			GameObject go = CreateBullet(transform);
 			go.GetComponent<BulletController>().speedY = -speed;
 
 		}

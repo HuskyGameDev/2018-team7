@@ -77,8 +77,6 @@ public class Floor : MonoBehaviour
 		GameObject.FindWithTag("Player").transform.position = new Vector3(5.0f, 5.0f);
 
 		FloorID++;
-		Debug.Log("Entering floor " + FloorID);
-
 		Pathfinder.Generate();
 	}
 
@@ -142,8 +140,5 @@ public class Floor : MonoBehaviour
 	{
 		if (Input.GetKeyDown(KeyCode.P))
 			Generate();
-
-		if (Input.GetMouseButtonDown(0))
-			Pathfinder.PrintCellInfoAtCursor();
 	}
 }

@@ -47,13 +47,6 @@ public sealed class FloorPathfinder
 		}
 	}
 
-	public void PrintCellInfoAtCursor()
-	{
-		Vector3 world = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-		Vec2i tile = Utils.TilePos(world);
-		Debug.Log(grid[tile.x, tile.y]);
-	}
-
 	public bool InBounds(Vec2i p)
 	{
 		return p.x >= 0 && p.y >= 00 && p.x < grid.GetLength(0) && p.y < grid.GetLength(1);

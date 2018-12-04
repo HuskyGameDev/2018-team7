@@ -220,14 +220,7 @@ public class FloorGenerator
 			Room room = floor.CreateRoom(roomP.x, roomP.y);
 			floor.MaxRoom = roomP;
 
-            if (i == stairRoom)
-            {
-                BuildRoom(room, true, powerupRoom);
-            }
-            else
-            {
-                BuildRoom(room, false, powerupRoom);
-            }
+            BuildRoom(room, i == stairRoom, powerupRoom);
 			
 			Vec2i next = GetNextPos(roomP);
 

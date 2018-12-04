@@ -12,10 +12,6 @@ public class RoomLoader : MonoBehaviour
 
 	private Camera cam;
 
-	private const int MaxActive = 4;
-
-	private LinkedList<Room> activeRooms = new LinkedList<Room>();
-
 	private void Awake()
 	{
 		cam = GetComponent<Camera>();
@@ -82,18 +78,6 @@ public class RoomLoader : MonoBehaviour
 				{
 					room.SetSprites();
 					room.SetColliders();
-
-					if (activeRooms.Contains(room))
-						activeRooms.Remove(room);
-
-					activeRooms.AddFirst(room);
-
-					if (activeRooms.Count > MaxActive)
-					{
-						activeRooms.Last.Value.RemoveSprites();
-						activeRooms.Last.Value.RemoveColliders();
-						activeRooms.RemoveLast();
-					}
 				}
 			}
 		}

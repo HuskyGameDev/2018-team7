@@ -1,15 +1,14 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletController : MonoBehaviour {
-
+public class BulletController : MonoBehaviour
+{
     public float speedX = 0f;
     public float speedY = 0f;
 
-    // NOT FINAL
     // Use this for initialization
-    void Start () {
+    void Start ()
+	{
         StartCoroutine(DestroyBullet());
 	}
 	
@@ -32,15 +31,10 @@ public class BulletController : MonoBehaviour {
 
 	private void OnTriggerEnter(Collider other)
 	{
-		// Default layer - walls.
-		if (other.gameObject.layer == 0)
-			Destroy(gameObject);
-
 		// Enemy layer.
 		if (other.gameObject.layer == 9)
-		{
 			other.GetComponentInParent<EnemyController>().ApplyDamage(4);
-			Destroy(gameObject);
-		}
+
+		Destroy(gameObject);
 	}
 }

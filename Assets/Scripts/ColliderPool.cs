@@ -28,8 +28,8 @@ public class ColliderPool : MonoBehaviour
 			// We should fix this properly.
 			if (col == null)
 				return Get();
-		
-			col.enabled = true;
+
+			col.Enable();
 		}
 		else
 		{
@@ -47,7 +47,7 @@ public class ColliderPool : MonoBehaviour
 	{
 		for (int i = 0; i < colliders.Count; i++)
 		{
-			colliders[i].enabled = false;
+			colliders[i].Disable();
 			pool.Enqueue(colliders[i]);
 		}
 
