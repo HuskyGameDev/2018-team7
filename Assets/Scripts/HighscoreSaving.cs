@@ -17,7 +17,7 @@ public class HighscoreSaving : MonoBehaviour {
     public Text text3;
     public Text text4;
     public Text text5; //All of the text that should be output to the Leaderboard
-    public Text text6;
+    public Text text6; //References to these are set inside the Unity Inspector
     public Text text7;
     public Text text8;
     public Text text9;
@@ -31,20 +31,7 @@ public class HighscoreSaving : MonoBehaviour {
     void Start () {
 
         Load();  //Loads the information from the file if it exists
-        //Save(10000, "Noah");
-        //Save(20000, "Sarah");
     }
-	
-	// Update is called once per frame
-	void Update () {
-        //Nothing to update, just needs to run once during load. 
-
-
-        
-
-	}
-
-
 
     public void Save(long newScore, string newName)
     {
@@ -52,40 +39,31 @@ public class HighscoreSaving : MonoBehaviour {
         FileStream file = File.Open(Application.persistentDataPath + "/highScore.dat", FileMode.OpenOrCreate); //Open or create the file if it doesn't exist
 
         PlayerData newData = new PlayerData(newScore, newName); //Save a possible new entry as PlayerData Type
-        //data.name = newName; //Save new name
-        //data.highscore = newScore; //Save new score
 
         LeaderSort(newData); //Sort the data like a Leaderboard
-
-        bf.Serialize(file, LB);
+	//New person could have been added, but now it's sorted, and ready to put back
+	    
+        bf.Serialize(file, LB); //Make it able to be pushed to the file
         file.Close();
 
-        updateScores();
+        updateScores(); //Update what is shown on screen in case something changed
     }
     
     public void Load()
     {
-        LB = new PlayerData[10];
-
-        //Testing
-        for (int i = 0; i < LB_MAX; i++)
-        {
-            LB[i] = new PlayerData(i, "Testing" + i);
-        }
-
+        LB = new PlayerData[10]; //Empty the leaderboard before you load it in.
 
         if (File.Exists(Application.persistentDataPath + "/highScore.dat")) //If someone has played this before, and a highscore exists
         {
-            BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Open(Application.persistentDataPath + "/highScore.dat", FileMode.Open);
-            LB = (PlayerData[]) bf.Deserialize(file);
-            file.Close();
+            BinaryFormatter bf = new BinaryFormatter();  //Open new formatter
+            FileStream file = File.Open(Application.persistentDataPath + "/highScore.dat", FileMode.Open); //Open the existing file
+            LB = (PlayerData[]) bf.Deserialize(file); //Make the file readable to me again
+            file.Close(); //Close the file because I read from it already. 
 
         }
-
-        //PlayerData fake = new PlayerData(0, "Bob");
-        //LeaderSort(fake);
-        updateScores();
+	
+	//I now have either nothing, or the new leaderboard. 
+        updateScores(); //Update what is shown on screen
 
         
 
@@ -96,17 +74,18 @@ public class HighscoreSaving : MonoBehaviour {
     //Sort the leaderboard, and only keep the top 10 values.
     private void LeaderSort(PlayerData newPlayerData)
     {
-        PlayerData[] temp = new PlayerData[LB_MAX + 1];
-        PlayerData swap = null;
+        PlayerData[] temp = new PlayerData[LB_MAX + 1]; //Set it to be bigger than what the max is
+        PlayerData swap = null; 
         
-
+	//Fill the temp array with real values so I don't manipulate current real data. 
         for(int i = 0; i < LB_MAX; i++)
         {
             temp[i] = LB[i];
         }
-        temp[LB_MAX] = newPlayerData; //Put it in there and sort
+        temp[LB_MAX] = newPlayerData; //Put the new value on the end.
 
-
+	
+	//Basic bubble sort to sort the 11 values that could exist.
         for (int i = 0; i < temp.Length; i++)
             for(int j = 0; j < temp.Length; j++)
             {
@@ -119,7 +98,7 @@ public class HighscoreSaving : MonoBehaviour {
                 }
             }
 
-        //Shave off the extra that was added to see if it was part of the pack
+        //Shave off the extra that was added to see if it was part of the pack of 10, or whatever the max on the leaderboard is.
         for(int i = 0; i < LB_MAX; i++)
         {
             LB[i] = temp[i];
@@ -130,6 +109,8 @@ public class HighscoreSaving : MonoBehaviour {
 
     void updateScores()
     {
+	    
+	//Literally just updates the text that's seen on screen.
         text1.text  = LB[0].toString();
         text2.text  = LB[1].toString();
         text3.text  = LB[2].toString();
@@ -148,9 +129,10 @@ public class HighscoreSaving : MonoBehaviour {
     
 
 
-    [Serializable]
+    [Serializable] //Make it Serializable? Easier to put into a file. 
     class PlayerData
     {
+	//Private class to hold data about player
         public PlayerData(long newScore, string newName)
             {
                 name = newName;
@@ -160,7 +142,7 @@ public class HighscoreSaving : MonoBehaviour {
         public long highscore;
         public string name;
 
-
+	//A way to print the information out. 
         public string toString()
         {
             string ans = "";
@@ -170,11 +152,6 @@ public class HighscoreSaving : MonoBehaviour {
 
     }
 
-    //[Serializable]
-    //class CurrentLeaderboard
-    //{
-    //    public PlayerData[] leaderboard;
-    //}
 
 
 }
