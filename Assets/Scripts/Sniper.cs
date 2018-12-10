@@ -10,7 +10,7 @@ public class Sniper : Gun
 
 	protected override void Init()
 	{
-		speed = 0.1f;
+		speed = 18.0f;
 		audioSource.clip = Resources.Load<AudioClip>("Sounds/Guns/Sniper Rifle");
 	}
 

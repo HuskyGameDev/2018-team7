@@ -19,7 +19,7 @@ public class BulletController : MonoBehaviour
 		Vector3 rot = transform.rotation.eulerAngles;
 		transform.rotation = Quaternion.Euler(0.0f, 0.0f, rot.z);
 
-		transform.Translate(new Vector3(speedX, speedY), Space.Self);
+		transform.Translate(new Vector3(speedX, speedY) * Time.deltaTime, Space.Self);
 		transform.SetZ(-1.0f);
 	}
 

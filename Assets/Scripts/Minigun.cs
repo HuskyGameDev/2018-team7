@@ -16,7 +16,7 @@ public class Minigun : Gun
 
 	protected override void Init()
 	{
-		speed = 0.2f;
+		speed = 15.0f;
 		timeBetweenShots = 0.05f;
 		BarrelExit = gameObject.transform;
 		pelletCount = 1;

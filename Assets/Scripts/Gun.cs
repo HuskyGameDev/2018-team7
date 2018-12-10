@@ -25,6 +25,6 @@ public class Gun : MonoBehaviour
 
 	protected virtual void Init()
 	{
-		speed = 0.2f;
+		speed = 15.0f;
 	}
 }

@@ -14,7 +14,7 @@ public class SMG : Gun
 
 	protected override void Init()
 	{
-		speed = 0.1f;
+		speed = 8.0f;
 	}
 
 	// Update is called once per frame

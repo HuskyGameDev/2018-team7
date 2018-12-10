@@ -10,7 +10,7 @@ public class Shotgun : Gun
 
 	protected override void Init()
 	{
-		speed = 0.4f;
+		speed = 25.0f;
 		audioSource.clip = Resources.Load<AudioClip>("Sounds/Guns/Shotgun");
 	}
 
