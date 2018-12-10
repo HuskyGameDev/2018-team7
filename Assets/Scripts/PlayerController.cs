@@ -1,11 +1,30 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
 	// The player's current gun.
 	private Gun gun;
 
-	public int health { get; set; } // the health of the player
+	public bool Dead { get; set; } = false;
+
+	private int _health;
+
+	// the health of the player
+	public int health
+	{
+		get { return _health; }
+		set
+		{
+			_health = value;
+			if (_health <= 0)
+			{
+				gameObject.SetActive(false);
+				Dead = true;
+				Invoke("LoadGameOver", 3.0f);
+			}
+		}
+	}
 
     // Gun enablers
     public bool shotgun { get; set; }
@@ -52,5 +71,10 @@ public class PlayerController : MonoBehaviour
 		if (Input.GetKeyDown(KeyCode.Alpha3) && smg) ChangeGun<SMG>();
 		if (Input.GetKeyDown(KeyCode.Alpha4) && sniper) ChangeGun<Sniper>();
 		if (Input.GetKeyDown(KeyCode.Alpha5) && minigun) ChangeGun<Minigun>();
+	}
+
+	private void LoadGameOver()
+	{
+		SceneManager.LoadScene("GameOver");
 	}
 }

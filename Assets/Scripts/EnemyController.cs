@@ -15,6 +15,7 @@ public class EnemyController : MonoBehaviour
 	private SpriteRenderer rend;
 
 	private Transform player; // Used to see where the player is.
+	private PlayerController pc;
 
 	private int health = 10;
 	public Room room;
@@ -43,6 +44,7 @@ public class EnemyController : MonoBehaviour
 		rend = GetComponent<SpriteRenderer>();
 
 		player = GameObject.FindWithTag("Player").transform;
+		pc = player.GetComponent<PlayerController>();
 
 		transform.SetZ(-0.1f);
 
@@ -72,6 +74,9 @@ public class EnemyController : MonoBehaviour
 	// Changes the direction of the enemy's movement towards the player once per frame
 	void Update()
     {
+		if (pc.Dead)
+			return;
+
 		if (path.Count == 0)
 			followingPath = false;
 
