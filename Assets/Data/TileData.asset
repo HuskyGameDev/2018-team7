@@ -52,7 +52,7 @@ MonoBehaviour:
       colliderSize: {x: 0, y: 0}
       colliderOffset: {x: 0, y: 0}
       renderOffset: {x: 0, y: 0, z: 0}
-      sprite: {fileID: 21300000, guid: 3dfaa0e31f452ae498f285238b9661dd, type: 3}
+      sprite: {fileID: 21300000, guid: 1724ea33096decf4eb4b28459f5f75a4, type: 3}
       color:
         serializedVersion: 2
         rgba: 0
