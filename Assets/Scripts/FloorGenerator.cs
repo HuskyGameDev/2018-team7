@@ -144,13 +144,13 @@ public class FloorGenerator
 		Vector2 wPos = room.WorldPos;
 
 		if (powerupRoom)
-			spawner.SpawnItem(wPos + RandomV2(3.0f, 3.0f, Room.LimX - 3.0f, Room.LimY - 3.0f));
+			spawner.SpawnItem(RandomFreePosition(room));
 
 		int enemyCount = Random.Range(3, 6);
 
 		for (int i = 0; i < enemyCount; i++)
 		{
-			Vector2 enemyP = wPos + RandomV2(3.0f, 3.0f, Room.LimX - 3.0f, Room.LimY - 3.0f);
+			Vector2 enemyP = RandomFreePosition(room);
 			GameObject enemy = Object.Instantiate(enemyPrefab, enemyP, Quaternion.identity);
 			enemy.GetComponent<EnemyController>().room = room;
 			room.AddEnemy(enemy);
@@ -233,5 +233,19 @@ public class FloorGenerator
 		connections.RemoveAt(connections.Count - 1);
 
 		AddConnections(connections);
+	}
+
+	private Vector2 RandomFreePosition(Room room)
+	{
+		int x, y;
+
+		do
+		{
+			x = Random.Range(0, Room.Width - 1);
+			y = Random.Range(0, Room.Height - 1);
+		}
+		while (room.GetTile(x, y) != TileType.Floor);
+
+		return room.WorldPos + new Vector2(x, y);
 	}
 }
