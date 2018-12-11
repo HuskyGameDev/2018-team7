@@ -6,6 +6,7 @@ using static Utils;
 public class Move : MonoBehaviour {
 
     public CharacterController pc;
+	private PlayerController playerController;
 
 	public float speed { get; set; }
 	public float SpeedModifier { get; set; } = 1.0f;
@@ -28,6 +29,7 @@ public class Move : MonoBehaviour {
     void Start()
     {
         pc = GetComponent<CharacterController>();
+		playerController = GetComponent<PlayerController>();
         speed = 100f;
     }
 
@@ -44,6 +46,7 @@ public class Move : MonoBehaviour {
 			currentSpeed *= 3.0f;
 
 		Vector2 accel = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+		playerController.UpdateSprite(accel);
 
 		float len = accel.sqrMagnitude;
 
@@ -57,6 +60,7 @@ public class Move : MonoBehaviour {
 		velocity = accel * Time.deltaTime + velocity;
 
 		pc.Move(delta);
+		transform.SetZ(-0.1f);
     }
 }
 

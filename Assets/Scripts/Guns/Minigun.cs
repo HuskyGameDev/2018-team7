@@ -33,6 +33,7 @@ public class Minigun : Gun
 			// Up
 			if (Input.GetButton("Fire1"))
 			{
+				pc.ChangeFacing(Facing.Back);
 				timestamp = Time.time + timeBetweenShots;
 				pellet = Random.rotation;
 				GameObject p = CreateBullet(BarrelExit, BarrelExit.rotation);
@@ -44,6 +45,7 @@ public class Minigun : Gun
 			// Down
 			if (Input.GetButton("Fire2"))
 			{
+				pc.ChangeFacing(Facing.Front);
 				timestamp = Time.time + timeBetweenShots;
 				pellet = Random.rotation;
 				GameObject p = CreateBullet(BarrelExit, BarrelExit.rotation);
@@ -54,6 +56,7 @@ public class Minigun : Gun
 			// Left
 			if (Input.GetButton("Fire3"))
 			{
+				pc.ChangeFacing(Facing.Left);
 				timestamp = Time.time + timeBetweenShots;
 				pellet = Random.rotation;
 				GameObject p = CreateBullet(BarrelExit, BarrelExit.rotation);
@@ -65,6 +68,7 @@ public class Minigun : Gun
 			// Right
 			if (Input.GetButton("Fire4"))
 			{
+				pc.ChangeFacing(Facing.Right);
 				timestamp = Time.time + timeBetweenShots;
 				pellet = Random.rotation;
 				GameObject p = CreateBullet(BarrelExit, BarrelExit.rotation);

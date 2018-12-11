@@ -33,6 +33,8 @@ public class SMG : Gun
 		//Shoots Right
 		if (Time.time >= timestamp && Input.GetKey(KeyCode.RightArrow))
 		{
+			pc.ChangeFacing(Facing.Right);
+
 			for (int i = 0; i < pellets.Count; i++)
 			{
 				timestamp = Time.time + timeBetweenShots;
@@ -47,6 +49,8 @@ public class SMG : Gun
 		//Shoots Left
 		else if (Time.time >= timestamp && Input.GetKey(KeyCode.LeftArrow))
 		{
+			pc.ChangeFacing(Facing.Left);
+
 			for (int i = 0; i < pellets.Count; i++)
 			{
 				timestamp = Time.time + timeBetweenShots;
@@ -61,6 +65,8 @@ public class SMG : Gun
 		//Shoots Up
 		else if (Time.time >= timestamp && Input.GetKey(KeyCode.UpArrow))
 		{
+			pc.ChangeFacing(Facing.Back);
+
 			for (int i = 0; i < pellets.Count; i++)
 			{
 				timestamp = Time.time + timeBetweenShots;
@@ -74,6 +80,8 @@ public class SMG : Gun
 		//Shoots Down
 		else if (Time.time >= timestamp && Input.GetKey(KeyCode.DownArrow))
 		{
+			pc.ChangeFacing(Facing.Front);
+
 			for (int i = 0; i < pellets.Count; i++)
 			{
 				timestamp = Time.time + timeBetweenShots;

@@ -35,6 +35,7 @@ public class Shotgun : Gun
 	{
 		if (Input.GetKeyDown(KeyCode.UpArrow))
 		{
+			pc.ChangeFacing(Facing.Back);
 			audioSource.Play();
 
 			for (int i = pellets.Count - 1; i >= 0; i--)
@@ -47,6 +48,7 @@ public class Shotgun : Gun
 		}
 		if (Input.GetKeyDown(KeyCode.DownArrow))
 		{
+			pc.ChangeFacing(Facing.Front);
 			audioSource.Play();
 
 			for (int i = pellets.Count - 1; i >= 0; i--)
@@ -59,6 +61,7 @@ public class Shotgun : Gun
 		}
 		if (Input.GetKeyDown(KeyCode.LeftArrow))
 		{
+			pc.ChangeFacing(Facing.Left);
 			audioSource.Play();
 
 			for (int i = pellets.Count - 1; i >= 0; i--)
@@ -71,6 +74,7 @@ public class Shotgun : Gun
 		}
 		if (Input.GetKeyDown(KeyCode.RightArrow))
 		{
+			pc.ChangeFacing(Facing.Right);
 			audioSource.Play();
 
 			for (int i = pellets.Count - 1; i >= 0; i--)

@@ -1,6 +1,11 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
+public enum Facing
+{
+	Right, Left, Front, Back
+}
+
 public class PlayerController : MonoBehaviour
 {
 	// The player's current gun.
@@ -32,6 +37,9 @@ public class PlayerController : MonoBehaviour
     public bool sniper { get; set; }
     public bool minigun { get; set; }
 
+	private SpriteRenderer rend;
+	public Sprite[] sprites;
+
 	public float getBulletSpeed()
 	{
 		return gun.speed;
@@ -54,6 +62,25 @@ public class PlayerController : MonoBehaviour
         smg = false;
         sniper = false;
         minigun = false;
+
+		rend = GetComponent<SpriteRenderer>();
+	}
+
+	public void ChangeFacing(Facing facing)
+	{
+		rend.sprite = sprites[(int)facing];
+	}
+
+	public void UpdateSprite(Vector2 accel)
+	{
+		if (accel.x > 0.5f)
+			ChangeFacing(Facing.Right);
+		else if (accel.x < -0.5f)
+			ChangeFacing(Facing.Left);
+		else if (accel.y < -0.5f)
+			ChangeFacing(Facing.Front);
+		else if (accel.y > 0.5f)
+			ChangeFacing(Facing.Back);
 	}
 
 	// Changes the gun type to the type specified by T.

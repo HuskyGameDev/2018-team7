@@ -20,6 +20,7 @@ public class Pistol : Gun
 		//Shoots Right
 		if (Input.GetKeyDown(KeyCode.RightArrow))
 		{
+			pc.ChangeFacing(Facing.Right);
             audioSource.Play(); //Play gunshot 
 			GameObject go = CreateBullet(transform);
 			go.GetComponent<BulletController>().speedX = speed;
@@ -28,7 +29,8 @@ public class Pistol : Gun
 		//Shoots Left
 		else if (Input.GetKeyDown(KeyCode.LeftArrow))
 		{
-            audioSource.Play(); //Play gunshot 
+			pc.ChangeFacing(Facing.Left);
+			audioSource.Play(); //Play gunshot 
 			GameObject go = CreateBullet(transform);
 			go.GetComponent<BulletController>().speedX = -speed;
 
@@ -36,7 +38,8 @@ public class Pistol : Gun
 		//Shoots Up
 		else if (Input.GetKeyDown(KeyCode.UpArrow))
 		{
-            audioSource.Play(); //Play gunshot 
+			pc.ChangeFacing(Facing.Back);
+			audioSource.Play(); //Play gunshot 
 			GameObject go = CreateBullet(transform);
 			go.GetComponent<BulletController>().speedY = speed;
 
@@ -44,7 +47,8 @@ public class Pistol : Gun
 		//Shoots Down
 		else if (Input.GetKeyDown(KeyCode.DownArrow))
 		{
-            audioSource.Play(); //Play gunshot 
+			pc.ChangeFacing(Facing.Front);
+			audioSource.Play(); //Play gunshot 
 			GameObject go = CreateBullet(transform);
 			go.GetComponent<BulletController>().speedY = -speed;
 

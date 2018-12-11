@@ -20,6 +20,7 @@ public class Sniper : Gun
         //Shoots Right
         if (Time.time >= timestamp && Input.GetKeyDown(KeyCode.RightArrow))
         {
+			pc.ChangeFacing(Facing.Right);
 			audioSource.Play();
 
            //Instantiate(bullet, transform.position, transform.rotation);
@@ -32,6 +33,7 @@ public class Sniper : Gun
         //Shoots Left
         else if (Time.time >= timestamp && Input.GetKeyDown(KeyCode.LeftArrow))
         {
+			pc.ChangeFacing(Facing.Left);
 			audioSource.Play();
 
 			//Instantiate(bullet, transform.position, transform.rotation);
@@ -44,6 +46,7 @@ public class Sniper : Gun
         //Shoots Up
         else if (Time.time >= timestamp && Input.GetKeyDown(KeyCode.UpArrow))
         {
+			pc.ChangeFacing(Facing.Back);
 			audioSource.Play();
 
 			//Instantiate(bullet, transform.position, transform.rotation);
@@ -56,6 +59,7 @@ public class Sniper : Gun
         //Shoots Down
         else if (Time.time >= timestamp && Input.GetKeyDown(KeyCode.DownArrow))
         {
+			pc.ChangeFacing(Facing.Front);
 			audioSource.Play();
 
 			//Instantiate(bullet, transform.position, transform.rotation);
