@@ -13,6 +13,9 @@ public class PlayerController : MonoBehaviour
 
 	public bool Dead { get; set; } = false;
 
+	// The room the player is currently in.
+	private Room room;
+
 	private int _health;
 
 	// the health of the player
@@ -98,6 +101,9 @@ public class PlayerController : MonoBehaviour
 		if (Input.GetKeyDown(KeyCode.Alpha3) && smg) ChangeGun<SMG>();
 		if (Input.GetKeyDown(KeyCode.Alpha4) && sniper) ChangeGun<Sniper>();
 		if (Input.GetKeyDown(KeyCode.Alpha5) && minigun) ChangeGun<Minigun>();
+
+		room = Floor.Instance.GetRoom(Utils.ToRoomPos(transform.position));
+		room.ActivateEnemies();
 	}
 
 	private void LoadGameOver()

@@ -82,7 +82,8 @@ public class Room
 	// If true, this room cannot be exited until all enemies in it are killed.
 	private bool locked;
 
-	private List<GameObject> enemies = new List<GameObject>();
+	private List<EnemyController> enemies = new List<EnemyController>();
+	private bool enemiesActive = false;
 
 	private Floor floor;
 
@@ -122,7 +123,19 @@ public class Room
 
 	public void AddEnemy(GameObject enemy)
 	{
-		enemies.Add(enemy);
+		Assert.IsNotNull(enemy.GetComponent<EnemyController>());
+		enemies.Add(enemy.GetComponent<EnemyController>());
+	}
+
+	public void ActivateEnemies()
+	{
+		if (!enemiesActive)
+		{
+			for (int i = 0; i < enemies.Count; i++)
+				enemies[i].enabled = true;
+
+			enemiesActive = true;
+		}
 	}
 
 	/// <summary>
