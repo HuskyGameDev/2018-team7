@@ -30,8 +30,7 @@ public class Shotgun : Gun
 		spreadAngle = 45.0f;
     }
 
-    // Update is called once per frame
-    void Update()
+	public override void CheckFire()
 	{
 		if (Input.GetKeyDown(KeyCode.UpArrow))
 		{

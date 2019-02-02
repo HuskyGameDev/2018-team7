@@ -40,6 +40,9 @@ public class Move : MonoBehaviour {
 
     void Update()
     {
+		if (Time.timeScale == 0.0f)
+			return;
+
 		float currentSpeed = speed * SpeedModifier;
 
 		if (Input.GetKey(KeyCode.LeftShift))

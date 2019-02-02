@@ -27,8 +27,7 @@ public class SMG : Gun
         }
     }
 
-    // Update is called once per frame
-    void Update()
+	public override void CheckFire()
 	{
 		//Shoots Right
 		if (Time.time >= timestamp && Input.GetKey(KeyCode.RightArrow))

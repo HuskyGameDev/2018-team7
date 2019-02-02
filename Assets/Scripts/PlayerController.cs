@@ -108,6 +108,9 @@ public class PlayerController : MonoBehaviour
 
 	private void Update()
 	{
+		if (Time.timeScale == 0.0f)
+			return;
+
 		if (Input.GetKeyDown(KeyCode.Alpha1)) ChangeGun<Pistol>();
 		if (Input.GetKeyDown(KeyCode.Alpha2) && shotgun) ChangeGun<Shotgun>();
 		if (Input.GetKeyDown(KeyCode.Alpha3) && smg) ChangeGun<SMG>();
@@ -116,6 +119,8 @@ public class PlayerController : MonoBehaviour
 
 		room = Floor.Instance.GetRoom(Utils.ToRoomPos(transform.position));
 		room.ActivateEnemies();
+
+		gun.CheckFire();
 	}
 
 	private void LoadGameOver()

@@ -27,4 +27,6 @@ public class Gun : MonoBehaviour
 	{
 		speed = 15.0f;
 	}
+
+	public virtual void CheckFire() { }
 }

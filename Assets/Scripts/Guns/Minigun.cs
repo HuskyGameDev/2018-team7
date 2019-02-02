@@ -25,8 +25,7 @@ public class Minigun : Gun
 		pellet = Quaternion.Euler(Vector3.zero);
 	}
 
-	// Update is called once per frame
-	void Update ()
+	public override void CheckFire()
 	{
 		if (Time.time >= timestamp)
 		{

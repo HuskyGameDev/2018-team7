@@ -14,9 +14,8 @@ public class Sniper : Gun
 		audioSource.clip = Resources.Load<AudioClip>("Sounds/Guns/Sniper Rifle");
 	}
 
-	// Update is called once per frame
-	void Update()
-    {
+	public override void CheckFire()
+	{
         //Shoots Right
         if (Time.time >= timestamp && Input.GetKeyDown(KeyCode.RightArrow))
         {

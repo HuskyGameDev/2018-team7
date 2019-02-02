@@ -11,17 +11,13 @@ public class Pistol : Gun
 		Assert.IsNotNull(audioSource.clip);
 	}
 
-	/**
-	* Update
-	* Temporarily decides which direction the player is going to shoot
-	*/
-	void Update()
+	public override void CheckFire()
 	{
 		//Shoots Right
 		if (Input.GetKeyDown(KeyCode.RightArrow))
 		{
 			pc.ChangeFacing(Facing.Right);
-            audioSource.Play(); //Play gunshot 
+			audioSource.Play(); //Play gunshot 
 			GameObject go = CreateBullet(transform);
 			go.GetComponent<BulletController>().speedX = speed;
 		}
@@ -54,7 +50,4 @@ public class Pistol : Gun
 
 		}
 	}
-
-    
-
 }
