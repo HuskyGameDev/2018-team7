@@ -13,6 +13,17 @@ public class PlayerController : MonoBehaviour
 
 	public bool Dead { get; set; } = false;
 
+	private CharacterController controller;
+
+	/// <summary>
+	/// Returns the position at the player's feet. The character controller is centered around the area
+	/// we wish to return and is specified using an offset from the transform position.
+	/// </summary>
+	public Vector2 FeetPosition
+	{
+		get { return transform.position + controller.center; }
+	}
+
 	// The room the player is currently in.
 	private Room room;
 
@@ -66,6 +77,7 @@ public class PlayerController : MonoBehaviour
         sniper = false;
         minigun = false;
 
+		controller = GetComponent<CharacterController>();
 		rend = GetComponent<SpriteRenderer>();
 	}
 

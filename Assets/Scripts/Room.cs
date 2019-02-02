@@ -185,7 +185,6 @@ public class Room
 		floor.Pathfinder.UpdateArea(tileRect.xMin, tileRect.yMin, tileRect.xMax, tileRect.yMax);
 	}
 
-
 	public void Lock()
 	{
 		locked = true;

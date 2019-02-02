@@ -13,8 +13,6 @@ public class EnemyController : MonoBehaviour
 
 	private CharacterController controller;
 	private SpriteRenderer rend;
-
-	private Transform player; // Used to see where the player is.
 	private PlayerController pc;
 
 	private int health = 10;
@@ -43,8 +41,7 @@ public class EnemyController : MonoBehaviour
 		controller = GetComponent<CharacterController>();
 		rend = GetComponent<SpriteRenderer>();
 
-		player = GameObject.FindWithTag("Player").transform;
-		pc = player.GetComponent<PlayerController>();
+		pc = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
 
 		transform.SetZ(-0.1f);
 
@@ -60,7 +57,7 @@ public class EnemyController : MonoBehaviour
 	private void GetPath()
 	{
 		Floor floor = Floor.Instance;
-		floor.Pathfinder.FindPath(TilePos(transform.position), TilePos(player.position), path, PathFinished);
+		floor.Pathfinder.FindPath(TilePos(transform.position), TilePos(pc.FeetPosition), path, PathFinished);
 		followingPath = true;
 	}
 
@@ -110,11 +107,11 @@ public class EnemyController : MonoBehaviour
 		}
 		else
 		{
-			float dist = Vector2.Distance(Pos, player.position);
+			float dist = Vector2.Distance(Pos, pc.FeetPosition);
 
 			if (dist <= 1.0f)
 			{
-				Vector2 dir = ((Vector2)player.position - Pos).normalized;
+				Vector2 dir = ((Vector2)pc.FeetPosition - Pos).normalized;
 				Move(dir);
 			}
 			else
