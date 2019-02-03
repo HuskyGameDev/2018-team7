@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class GameController : MonoBehaviour
 {
 	private static int seed = -1;
+
 	public bool Paused { get; private set; }
 
 	[SerializeField] private Text seedText;
@@ -16,9 +17,7 @@ public class GameController : MonoBehaviour
 	private void Awake()
 	{
 		Instance = this;
-
-		if (seed == -1)
-			SetSeed(Random.Range(int.MinValue, int.MaxValue));
+		SetSeed(seed == -1 ? Random.Range(int.MinValue, int.MaxValue) : seed);
 	}
 
 	private void SetSeed(int newSeed)
@@ -52,7 +51,7 @@ public class GameController : MonoBehaviour
 	{
 		if (input.text.Length > 0)
 		{
-			SetSeed(int.Parse(input.text));
+			seed = int.Parse(input.text);
 			Time.timeScale = 1.0f;
 			SceneManager.LoadScene("Game");
 		}
