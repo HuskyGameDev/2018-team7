@@ -171,11 +171,6 @@ public class EnemyController : MonoBehaviour
 	// Spawns a new weapon with at a 25% chance at the Vector3 position
 	public void SpawnWeapon(Vector3 pos)
 	{
-		int decide = Random.Range(0, 4);
-		if (decide == 1)
-		{
-			DropRate drop = GetComponent<DropRate>();
-			drop.SpawnGun(pos.x, pos.y);
-		}
+		GetComponent<DropRate>().SpawnGun(pos.x, pos.y);
 	}
 }

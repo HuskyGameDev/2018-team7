@@ -153,6 +153,7 @@ public class FloorGenerator
 			Vector2 enemyP = RandomFreePosition(room);
 			GameObject enemy = Object.Instantiate(enemyPrefab, enemyP, Quaternion.identity);
 			enemy.GetComponent<EnemyController>().room = room;
+			enemy.GetComponent<DropRate>().SetWeaponDrop();
 			room.AddEnemy(enemy);
 		}
 
