@@ -7,6 +7,8 @@ public class Shotgun : Gun
 	private int pelletCount = 10;
 	private float spreadAngle;
     public Transform BarrelExit;
+    private float timeBetweenShots = 1.0f;
+    private float timeStamp;
 
 	protected override void Init()
 	{
@@ -32,11 +34,11 @@ public class Shotgun : Gun
 
 	public override void CheckFire()
 	{
-		if (Input.GetKeyDown(KeyCode.UpArrow))
+		if (Time.time >= timeStamp && Input.GetKeyDown(KeyCode.UpArrow))
 		{
 			pc.ChangeFacing(Facing.Back);
 			audioSource.Play();
-
+            timeStamp = Time.time + timeBetweenShots;
 			for (int i = pellets.Count - 1; i >= 0; i--)
 			{
 				pellets[i] = Random.rotation;
@@ -45,12 +47,12 @@ public class Shotgun : Gun
 				p.GetComponent<BulletController>().speedY = speed;
 			}
 		}
-		if (Input.GetKeyDown(KeyCode.DownArrow))
+		else if (Time.time >= timeStamp && Input.GetKeyDown(KeyCode.DownArrow))
 		{
 			pc.ChangeFacing(Facing.Front);
 			audioSource.Play();
-
-			for (int i = pellets.Count - 1; i >= 0; i--)
+            timeStamp = Time.time + timeBetweenShots;
+            for (int i = pellets.Count - 1; i >= 0; i--)
 			{
 				pellets[i] = Random.rotation;
 				GameObject p = CreateBullet(BarrelExit, BarrelExit.rotation);
@@ -58,12 +60,12 @@ public class Shotgun : Gun
 				p.GetComponent<BulletController>().speedY = -speed;
 			}
 		}
-		if (Input.GetKeyDown(KeyCode.LeftArrow))
+		else if (Time.time >= timeStamp && Input.GetKeyDown(KeyCode.LeftArrow))
 		{
 			pc.ChangeFacing(Facing.Left);
 			audioSource.Play();
-
-			for (int i = pellets.Count - 1; i >= 0; i--)
+            timeStamp = Time.time + timeBetweenShots;
+            for (int i = pellets.Count - 1; i >= 0; i--)
 			{
 				pellets[i] = Random.rotation;
 				GameObject p = CreateBullet(BarrelExit, BarrelExit.rotation);
@@ -71,12 +73,12 @@ public class Shotgun : Gun
 				p.GetComponent<BulletController>().speedX = -speed;
 			}
 		}
-		if (Input.GetKeyDown(KeyCode.RightArrow))
+		else if (Time.time >= timeStamp && Input.GetKeyDown(KeyCode.RightArrow))
 		{
 			pc.ChangeFacing(Facing.Right);
 			audioSource.Play();
-
-			for (int i = pellets.Count - 1; i >= 0; i--)
+            timeStamp = Time.time + timeBetweenShots;
+            for (int i = pellets.Count - 1; i >= 0; i--)
 			{
 				pellets[i] = Random.rotation;
 				GameObject p = CreateBullet(BarrelExit, BarrelExit.rotation);

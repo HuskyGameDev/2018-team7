@@ -5,10 +5,22 @@ public class BulletController : MonoBehaviour
 {
     public float speedX = 0f;
     public float speedY = 0f;
+    private PlayerController playerController;
 
     // Use this for initialization
     void Start ()
 	{
+        // retrieve the player object
+        GameObject playerControllerObject = GameObject.FindWithTag("Player");
+        if (playerControllerObject != null)
+        {
+            playerController = playerControllerObject.GetComponent<PlayerController>();
+        }
+        else
+        {
+            Debug.Log("Cannot find Player");
+        }
+
         StartCoroutine(DestroyBullet());
 	}
 	
@@ -31,10 +43,15 @@ public class BulletController : MonoBehaviour
 
 	private void OnTriggerEnter(Collider other)
 	{
-		// Enemy layer.
-		if (other.gameObject.layer == 9)
-			other.GetComponentInParent<EnemyController>().ApplyDamage(4);
+        // Enemy layer.
+        if (other.gameObject.layer == 9)
+        {
+            other.GetComponentInParent<EnemyController>().ApplyDamage(4);
 
-		Destroy(gameObject);
+            // if the weapon is a sniper, don't destroy
+            if (playerController.sniper)
+                return;
+        }    
+        Destroy(gameObject);
 	}
 }
