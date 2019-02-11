@@ -28,5 +28,8 @@ public class Gun : MonoBehaviour
 		speed = 15.0f;
 	}
 
+	// All gun firing should go through this virtual method. This allows us to, for example, block all gun
+	// firing when the game is paused. If every gun implements its own update method, then we have to
+	// duplicate the checking code for every single gun - not the best code design.
 	public virtual void CheckFire() { }
 }
