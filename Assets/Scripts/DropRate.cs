@@ -7,6 +7,12 @@ public class DropRate : MonoBehaviour
 	private bool doSpawn = false;
 	private int gunToSpawn;
 
+	/// <summary>
+	/// Determines which weapon will drop, if any, for this entity. This is called in advance instead of deciding at the time the drop 
+	/// is requested for seeding. If we generate random numbers at the time the entity is killed, then the player's choice in killing enemies in
+	/// some order or skipping some (if allowed) would affect all the random numbers that generate after. So all generation of random numbers should
+	/// happen once at floor load time.
+	/// </summary>
 	public void SetWeaponDrop()
 	{
 		int decide = Random.Range(0, 4);

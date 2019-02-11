@@ -127,6 +127,10 @@ public class Room
 		enemies.Add(enemy.GetComponent<EnemyController>());
 	}
 
+	/// <summary>
+	/// Makes all entities linked to this room become active. This causes them to update
+	/// their AI and act.
+	/// </summary>
 	public void ActivateEnemies()
 	{
 		if (!enemiesActive)
