@@ -12,14 +12,16 @@ public class Stats : MonoBehaviour {
 
     private void Awake()
     {
-        DontDestroyOnLoad(this);
+        DontDestroyOnLoad(this); //When you load into the GameOver scene, don't destroy this gameObject.
     }
 
     public void setScore(long newScore)
     {
-        score = newScore;
+        score = newScore; //A way to set the score in the stats file.
     }
 
+    
+    //Reset the stats back to what they were to start, (For play again, or initial load.)
     public void resetStats()
     {
       health = 100f;
