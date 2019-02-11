@@ -10,6 +10,8 @@ TagManager:
   - GunAudioSource
   - Enemy
   - Collider
+  - Stats
+  - HighscoreSaving
   layers:
   - Default
   - TransparentFX

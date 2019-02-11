@@ -46,7 +46,7 @@ public class HighscoreSaving : MonoBehaviour {
         bf.Serialize(file, LB); //Make it able to be pushed to the file
         file.Close();
 
-        updateScores(); //Update what is shown on screen in case something changed
+        //updateScores(); //Update what is shown on screen in case something changed
     }
     
     public void Load()
