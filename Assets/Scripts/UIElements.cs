@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HealthBar : MonoBehaviour {
+public class UIElements : MonoBehaviour {
     private PlayerController playerController;
     private Floor floor;
     private Stats stats;
