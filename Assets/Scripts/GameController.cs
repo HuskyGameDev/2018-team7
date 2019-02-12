@@ -16,6 +16,8 @@ public class GameController : MonoBehaviour
 
 	public static GameController Instance { get; private set; }
 
+	private bool soundMuted;
+
 	private void Awake()
 	{
 		Instance = this;
@@ -69,6 +71,22 @@ public class GameController : MonoBehaviour
 			seed = int.Parse(input.text);
 			Time.timeScale = 1.0f;
 			SceneManager.LoadScene("Game");
+		}
+	}
+
+	public void MuteSoundButtonHandler(Text buttonText)
+	{
+		if (soundMuted)
+		{
+			AudioListener.volume = 1.0f;
+			soundMuted = false;
+			buttonText.text = "Mute Sound";
+		}
+		else
+		{
+			AudioListener.volume = 0.0f;
+			soundMuted = true;
+			buttonText.text = "Unmute Sound";
 		}
 	}
 
