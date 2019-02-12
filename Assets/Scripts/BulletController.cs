@@ -49,7 +49,7 @@ public class BulletController : MonoBehaviour
             other.GetComponentInParent<EnemyController>().ApplyDamage(4);
 
             // if the weapon is a sniper, don't destroy
-            if (playerController.sniper)
+            if (playerController.Gun == GunType.Sniper)
                 return;
         }    
         Destroy(gameObject);

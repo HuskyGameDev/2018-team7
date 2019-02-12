@@ -14,18 +14,18 @@ public class Minigun : Gun
 
     private float timestamp;
 
-	protected override void Init()
+	protected override void Start()
 	{
 		speed = 15.0f;
 		timeBetweenShots = 0.05f;
-		BarrelExit = gameObject.transform;
+		BarrelExit = pc.transform;
 		pelletCount = 1;
 		spreadAngle = 10.0f;
 		pelletFireVel = 400;
 		pellet = Quaternion.Euler(Vector3.zero);
 	}
 
-	public override void CheckFire()
+	public override void Fire(PlayerController pc)
 	{
 		if (Time.time >= timestamp)
 		{

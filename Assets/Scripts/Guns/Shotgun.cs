@@ -10,29 +10,30 @@ public class Shotgun : Gun
     private float timeBetweenShots = 1.0f;
     private float timeStamp;
 
-	protected override void Init()
+	protected override void Start()
 	{
 		speed = 25.0f;
+
+		// Temp
+		BarrelExit = pc.transform;
+
+		pellets = new List<Quaternion>(pelletCount);
+		for (int i = 0; i < pelletCount; i++)
+		{
+			pellets.Add(Quaternion.Euler(Vector3.zero));
+		}
+
+		spreadAngle = 45.0f;
+	}
+
+	public override void Activate(PlayerController pc)
+	{
 		audioSource.clip = Resources.Load<AudioClip>("Sounds/Guns/Shotgun");
 	}
 
 	List<Quaternion> pellets;
 
-    void Awake()
-	{
-		// Temp
-		BarrelExit = transform;
-
-        pellets = new List<Quaternion>(pelletCount);
-        for (int i = 0; i < pelletCount; i++)
-        {
-            pellets.Add(Quaternion.Euler(Vector3.zero));
-        }
-
-		spreadAngle = 45.0f;
-    }
-
-	public override void CheckFire()
+	public override void Fire(PlayerController pc)
 	{
 		if (Time.time >= timeStamp && Input.GetKeyDown(KeyCode.UpArrow))
 		{

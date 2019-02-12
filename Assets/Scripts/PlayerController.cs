@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Assertions;
 
 public enum Facing
 {
@@ -9,7 +10,7 @@ public enum Facing
 public class PlayerController : MonoBehaviour
 {
 	// The player's current gun.
-	private Gun gun;
+	public int Gun { get; private set; }
 
 	public bool Dead { get; set; } = false;
 
@@ -45,23 +46,26 @@ public class PlayerController : MonoBehaviour
 		}
 	}
 
-    // Gun enablers
-    public bool shotgun { get; set; }
-    public bool smg { get; set; }
-    public bool sniper { get; set; }
-    public bool minigun { get; set; }
+	// Stores guns the player has. An entry will be null if the player hasn't
+	// unlocked that gun yet.
+	private Gun[] guns = new Gun[GunType.Count];
 
 	private SpriteRenderer rend;
 	public Sprite[] sprites;
 
+	public AudioSource GetGunAudioSource()
+	{
+		return transform.Find("Gun Audio Source").GetComponent<AudioSource>();
+	}
+
 	public float getBulletSpeed()
 	{
-		return gun.speed;
+		return guns[Gun].speed;
 	}
     
 	public void setBulletSpeed(float speed)
 	{
-		gun.speed = speed;
+		guns[Gun].speed = speed;
 	}
 
 	/**
@@ -71,11 +75,9 @@ public class PlayerController : MonoBehaviour
 	void Start()
 	{
 		health = 100;
-		gun = GetComponent<Gun>();
-        shotgun = false;
-        smg = false;
-        sniper = false;
-        minigun = false;
+
+		AddGun<Pistol>(GunType.Pistol);
+		Gun = GunType.Pistol;
 
 		controller = GetComponent<CharacterController>();
 		rend = GetComponent<SpriteRenderer>();
@@ -98,12 +100,25 @@ public class PlayerController : MonoBehaviour
 			ChangeFacing(Facing.Back);
 	}
 
-	// Changes the gun type to the type specified by T.
-	private void ChangeGun<T>() where T: Gun
+	private void ChangeGun(int type)
 	{
-		Destroy(gun);
-		gun = gameObject.AddComponent<T>();
-		Debug.Log("Gun changed to " + typeof(T).FullName);
+		if (HasGun(type))
+		{
+			Gun = type;
+			guns[type].Activate(this);
+		}
+	}
+
+	public void AddGun<T>(int type) where T: Gun, new()
+	{
+		T gun = new T();
+		gun.Init(this);
+		guns[type] = gun;
+	}
+
+	public bool HasGun(int type)
+	{
+		return guns[type] != null;
 	}
 
 	private void Update()
@@ -111,16 +126,16 @@ public class PlayerController : MonoBehaviour
 		if (Time.timeScale == 0.0f)
 			return;
 
-		if (Input.GetKeyDown(KeyCode.Alpha1)) ChangeGun<Pistol>();
-		if (Input.GetKeyDown(KeyCode.Alpha2) && shotgun) ChangeGun<Shotgun>();
-		if (Input.GetKeyDown(KeyCode.Alpha3) && smg) ChangeGun<SMG>();
-		if (Input.GetKeyDown(KeyCode.Alpha4) && sniper) ChangeGun<Sniper>();
-		if (Input.GetKeyDown(KeyCode.Alpha5) && minigun) ChangeGun<Minigun>();
+		if (Input.GetKeyDown(KeyCode.Alpha1)) ChangeGun(GunType.Pistol);
+		if (Input.GetKeyDown(KeyCode.Alpha2)) ChangeGun(GunType.Shotgun);
+		if (Input.GetKeyDown(KeyCode.Alpha3)) ChangeGun(GunType.SMG);
+		if (Input.GetKeyDown(KeyCode.Alpha4)) ChangeGun(GunType.Sniper);
+		if (Input.GetKeyDown(KeyCode.Alpha5)) ChangeGun(GunType.Minigun);
 
 		room = Floor.Instance.GetRoom(Utils.ToRoomPos(transform.position));
 		room.ActivateEnemies();
 
-		gun.CheckFire();
+		guns[Gun].Fire(this);
 	}
 
 	private void LoadGameOver()

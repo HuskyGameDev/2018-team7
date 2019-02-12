@@ -12,22 +12,18 @@ public class SMG : Gun
 
     List<Quaternion> pellets;
 
-	protected override void Init()
+	protected override void Start()
 	{
 		speed = 8.0f;
+
+		pellets = new List<Quaternion>(pelletCount);
+		for (int i = 0; i < pelletCount; i++)
+		{
+			pellets.Add(Quaternion.Euler(Vector3.zero));
+		}
 	}
 
-	// Update is called once per frame
-	void Awake()
-    {
-        pellets = new List<Quaternion>(pelletCount);
-        for (int i = 0; i < pelletCount; i++)
-        {
-            pellets.Add(Quaternion.Euler(Vector3.zero));
-        }
-    }
-
-	public override void CheckFire()
+	public override void Fire(PlayerController pc)
 	{
 		//Shoots Right
 		if (Time.time >= timestamp && Input.GetKey(KeyCode.RightArrow))
@@ -38,7 +34,7 @@ public class SMG : Gun
 			{
 				timestamp = Time.time + timeBetweenShots;
 				pellets[i] = Random.rotation;
-				GameObject p = CreateBullet(transform, transform.rotation);
+				GameObject p = CreateBullet(pc.transform, pc.transform.rotation);
 				p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellets[i], spreadAngle);
 				p.GetComponent<Rigidbody>().isKinematic = false; // NOTE: temp fix to make it work with 3D physics quickly. We probably shouldn't be using forces, though...
 				p.GetComponent<Rigidbody>().AddForce(Vector2.right * pelletFireVel);
@@ -54,7 +50,7 @@ public class SMG : Gun
 			{
 				timestamp = Time.time + timeBetweenShots;
 				pellets[i] = Random.rotation;
-				GameObject p = CreateBullet(transform, transform.rotation);
+				GameObject p = CreateBullet(pc.transform, pc.transform.rotation);
 				p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellets[i], spreadAngle);
 				p.GetComponent<Rigidbody>().isKinematic = false; // NOTE: temp fix to make it work with 3D physics quickly. We probably shouldn't be using forces, though...
 				p.GetComponent<Rigidbody>().AddForce(Vector2.left * pelletFireVel);
@@ -70,7 +66,7 @@ public class SMG : Gun
 			{
 				timestamp = Time.time + timeBetweenShots;
 				pellets[i] = Random.rotation;
-				GameObject p = CreateBullet(transform, transform.rotation);
+				GameObject p = CreateBullet(pc.transform, pc.transform.rotation);
 				p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellets[i], spreadAngle);
 				p.GetComponent<Rigidbody>().isKinematic = false; // NOTE: temp fix to make it work with 3D physics quickly. We probably shouldn't be using forces, though...
 				p.GetComponent<Rigidbody>().AddForce(Vector2.up * pelletFireVel);
@@ -85,7 +81,7 @@ public class SMG : Gun
 			{
 				timestamp = Time.time + timeBetweenShots;
 				pellets[i] = Random.rotation;
-				GameObject p = CreateBullet(transform, transform.rotation);
+				GameObject p = CreateBullet(pc.transform, pc.transform.rotation);
 				p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellets[i], spreadAngle);
 				p.GetComponent<Rigidbody>().isKinematic = false; // NOTE: temp fix to make it work with 3D physics quickly. We probably shouldn't be using forces, though...
 				p.GetComponent<Rigidbody>().AddForce(Vector2.down * pelletFireVel);

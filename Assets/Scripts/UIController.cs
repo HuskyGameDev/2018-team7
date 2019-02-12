@@ -62,19 +62,16 @@ public class UIController : MonoBehaviour {
 	// Update is called once per frame
     // Update the UI to display the image for each of the objects
 	void Update () {
-		if (playerController.shotgun)
+		if (playerController.HasGun(GunType.Shotgun))
             shotgunSlot.enabled = true;
        
-        if (playerController.smg)
+        if (playerController.HasGun(GunType.SMG))
             smgSlot.enabled = true;
 
-        if (playerController.shotgun)
-            shotgunSlot.enabled = true;
-
-        if (playerController.sniper)
+        if (playerController.HasGun(GunType.Sniper))
             sniperSlot.enabled = true;
 
-        if (playerController.minigun)
+        if (playerController.HasGun(GunType.Minigun))
             minigunSlot.enabled = true;
 	}
 }

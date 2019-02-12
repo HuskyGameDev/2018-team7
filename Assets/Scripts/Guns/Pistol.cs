@@ -1,24 +1,15 @@
-﻿using System.Collections;
-using UnityEngine;
-using UnityEngine.Assertions;
+﻿using UnityEngine;
 
 public class Pistol : Gun
 {
-	protected override void Init()
-	{
-		base.Init();
-		audioSource.clip = Resources.Load<AudioClip>("Sounds/Guns/Handgun");
-		Assert.IsNotNull(audioSource.clip);
-	}
-
-	public override void CheckFire()
+	public override void Fire(PlayerController pc)
 	{
 		//Shoots Right
 		if (Input.GetKeyDown(KeyCode.RightArrow))
 		{
 			pc.ChangeFacing(Facing.Right);
 			audioSource.Play(); //Play gunshot 
-			GameObject go = CreateBullet(transform);
+			GameObject go = CreateBullet(pc.transform);
 			go.GetComponent<BulletController>().speedX = speed;
 		}
 
@@ -27,7 +18,7 @@ public class Pistol : Gun
 		{
 			pc.ChangeFacing(Facing.Left);
 			audioSource.Play(); //Play gunshot 
-			GameObject go = CreateBullet(transform);
+			GameObject go = CreateBullet(pc.transform);
 			go.GetComponent<BulletController>().speedX = -speed;
 
 		}
@@ -36,7 +27,7 @@ public class Pistol : Gun
 		{
 			pc.ChangeFacing(Facing.Back);
 			audioSource.Play(); //Play gunshot 
-			GameObject go = CreateBullet(transform);
+			GameObject go = CreateBullet(pc.transform);
 			go.GetComponent<BulletController>().speedY = speed;
 
 		}
@@ -45,7 +36,7 @@ public class Pistol : Gun
 		{
 			pc.ChangeFacing(Facing.Front);
 			audioSource.Play(); //Play gunshot 
-			GameObject go = CreateBullet(transform);
+			GameObject go = CreateBullet(pc.transform);
 			go.GetComponent<BulletController>().speedY = -speed;
 
 		}

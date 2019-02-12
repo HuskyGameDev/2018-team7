@@ -60,19 +60,19 @@ public class PowerUpController : MonoBehaviour
 					break;
 
 				case "Sniper":
-					playerController.sniper = true;
+					playerController.AddGun<Sniper>(GunType.Sniper);
 					break;
 
 				case "SMG":
-					playerController.smg = true;
+					playerController.AddGun<SMG>(GunType.SMG);
 					break;
 
 				case "Minigun":
-					playerController.minigun = true;
+					playerController.AddGun<Minigun>(GunType.Minigun);
 					break;
 
 				case "Shotgun":
-					playerController.shotgun = true;
+					playerController.AddGun<Shotgun>(GunType.Shotgun);
 					break;
 			}
 

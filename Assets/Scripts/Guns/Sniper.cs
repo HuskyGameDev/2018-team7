@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Sniper : Gun
 {
@@ -8,13 +6,17 @@ public class Sniper : Gun
 
     private float timestamp;
 
-	protected override void Init()
+	protected override void Start()
 	{
 		speed = 18.0f;
+	}
+
+	public override void Activate(PlayerController pc)
+	{
 		audioSource.clip = Resources.Load<AudioClip>("Sounds/Guns/Sniper Rifle");
 	}
 
-	public override void CheckFire()
+	public override void Fire(PlayerController pc)
 	{
         //Shoots Right
         if (Time.time >= timestamp && Input.GetKeyDown(KeyCode.RightArrow))
@@ -25,7 +27,7 @@ public class Sniper : Gun
            //Instantiate(bullet, transform.position, transform.rotation);
             timestamp = Time.time + timeBetweenShots;
 
-			GameObject go = CreateBullet(transform);
+			GameObject go = CreateBullet(pc.transform);
 			go.GetComponent<BulletController>().speedX = speed;
         }
 
@@ -38,7 +40,7 @@ public class Sniper : Gun
 			//Instantiate(bullet, transform.position, transform.rotation);
 			timestamp = Time.time + timeBetweenShots;
 
-			GameObject go = CreateBullet(transform);
+			GameObject go = CreateBullet(pc.transform);
 			go.GetComponent<BulletController>().speedX = -speed;
 
         }
@@ -51,7 +53,7 @@ public class Sniper : Gun
 			//Instantiate(bullet, transform.position, transform.rotation);
 			timestamp = Time.time + timeBetweenShots;
 
-			GameObject go = CreateBullet(transform);
+			GameObject go = CreateBullet(pc.transform);
 			go.GetComponent<BulletController>().speedY = speed;
 
         }
@@ -64,7 +66,7 @@ public class Sniper : Gun
 			//Instantiate(bullet, transform.position, transform.rotation);
 			timestamp = Time.time + timeBetweenShots;
 
-			GameObject go = CreateBullet(transform);
+			GameObject go = CreateBullet(pc.transform);
 			go.GetComponent<BulletController>().speedY = -speed;
 
         }
