@@ -8,6 +8,8 @@ public class GameController : MonoBehaviour
 	// This is static so that its value is preserved between scene changes.
 	private static int seed = -1;
 
+	public const int MaxSeed = 100000000;
+
 	public bool Paused { get; private set; }
 
 	[SerializeField] private Text seedText;
@@ -24,7 +26,7 @@ public class GameController : MonoBehaviour
 
 		// Awake is called when the game scene is loaded. If we have a seed set,
 		// we want to use that seed - the level regenerated with a certain seed requested.
-		SetSeed(seed == -1 ? Random.Range(int.MinValue, int.MaxValue) : seed);
+		SetSeed(seed == -1 ? Random.Range(0, MaxSeed) : seed);
 	}
 
 	private void SetSeed(int newSeed)
@@ -61,6 +63,7 @@ public class GameController : MonoBehaviour
 	{
 		pauseMenu.SetActive(false);
 		newLevelInput.SetActive(true);
+		newLevelInput.transform.Find("InputField").GetComponent<InputField>().Select();
 	}
 
 	// Called when the Play button from the pause menu UI is pressed.
@@ -68,10 +71,18 @@ public class GameController : MonoBehaviour
 	{
 		if (input.text.Length > 0)
 		{
-			seed = int.Parse(input.text);
-			Time.timeScale = 1.0f;
-			SceneManager.LoadScene("Game");
+			if (int.TryParse(input.text, out seed))
+			{
+				if (seed >= 0 && seed < MaxSeed)
+				{
+					Time.timeScale = 1.0f;
+					SceneManager.LoadScene("Game");
+					return;
+				}
+			}
 		}
+
+		input.text = "";
 	}
 
 	public void MuteSoundButtonHandler(Text buttonText)
