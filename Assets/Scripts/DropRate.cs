@@ -19,7 +19,7 @@ public class DropRate : MonoBehaviour
 		if (decide == 1)
 		{
 			doSpawn = true;
-			gunToSpawn = Random.Range(1, 101);
+			gunToSpawn = Random.Range(1, 100);
 		}
 	}
 

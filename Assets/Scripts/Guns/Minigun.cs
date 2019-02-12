@@ -35,10 +35,9 @@ public class Minigun : Gun
 				pc.ChangeFacing(Facing.Back);
 				timestamp = Time.time + timeBetweenShots;
 				pellet = Random.rotation;
-				GameObject p = CreateBullet(BarrelExit, BarrelExit.rotation);
+				BulletController p = CreateBullet(BarrelExit, BarrelExit.rotation);
 				p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellet, spreadAngle);
-				p.GetComponent<Rigidbody>().isKinematic = false;
-				p.GetComponent<BulletController>().speedY = speed;
+				p.SetVelocity(Vector3.up * speed);
 			}
 
 			// Down
@@ -47,9 +46,9 @@ public class Minigun : Gun
 				pc.ChangeFacing(Facing.Front);
 				timestamp = Time.time + timeBetweenShots;
 				pellet = Random.rotation;
-				GameObject p = CreateBullet(BarrelExit, BarrelExit.rotation);
+				BulletController p = CreateBullet(BarrelExit, BarrelExit.rotation);
 				p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellet, spreadAngle);
-				p.GetComponent<BulletController>().speedY = -speed;
+				p.SetVelocity(Vector3.down * speed);
 			}
 
 			// Left
@@ -58,10 +57,9 @@ public class Minigun : Gun
 				pc.ChangeFacing(Facing.Left);
 				timestamp = Time.time + timeBetweenShots;
 				pellet = Random.rotation;
-				GameObject p = CreateBullet(BarrelExit, BarrelExit.rotation);
+				BulletController p = CreateBullet(BarrelExit, BarrelExit.rotation);
 				p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellet, spreadAngle);
-				p.GetComponent<Rigidbody>().isKinematic = false;
-				p.GetComponent<BulletController>().speedX = -speed;
+				p.SetVelocity(Vector3.left * speed);
 			}
 
 			// Right
@@ -70,10 +68,9 @@ public class Minigun : Gun
 				pc.ChangeFacing(Facing.Right);
 				timestamp = Time.time + timeBetweenShots;
 				pellet = Random.rotation;
-				GameObject p = CreateBullet(BarrelExit, BarrelExit.rotation);
+				BulletController p = CreateBullet(BarrelExit, BarrelExit.rotation);
 				p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellet, spreadAngle);
-				p.GetComponent<Rigidbody>().isKinematic = false;
-				p.GetComponent<BulletController>().speedX = speed;
+				p.SetVelocity(Vector3.right * speed);
 			}
 		}
 	}

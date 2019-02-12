@@ -2,9 +2,9 @@
 
 public class Sniper : Gun
 {
-    public float timeBetweenShots = 1.0f;
+	public float timeBetweenShots = 1.0f;
 
-    private float timestamp;
+	private float timestamp;
 
 	protected override void Start()
 	{
@@ -18,58 +18,57 @@ public class Sniper : Gun
 
 	public override void Fire(PlayerController pc)
 	{
-        //Shoots Right
-        if (Time.time >= timestamp && Input.GetKeyDown(KeyCode.RightArrow))
-        {
+		//Shoots Right
+		if (Time.time >= timestamp && Input.GetKeyDown(KeyCode.RightArrow))
+		{
 			pc.ChangeFacing(Facing.Right);
 			audioSource.Play();
 
-           //Instantiate(bullet, transform.position, transform.rotation);
-            timestamp = Time.time + timeBetweenShots;
+			//Instantiate(bullet, transform.position, transform.rotation);
+			timestamp = Time.time + timeBetweenShots;
 
-			GameObject go = CreateBullet(pc.transform);
-			go.GetComponent<BulletController>().speedX = speed;
-        }
+			BulletController go = CreateBullet(pc.transform);
+			go.SetVelocity(Vector3.right * speed);
+		}
 
-        //Shoots Left
-        else if (Time.time >= timestamp && Input.GetKeyDown(KeyCode.LeftArrow))
-        {
+		//Shoots Left
+		else if (Time.time >= timestamp && Input.GetKeyDown(KeyCode.LeftArrow))
+		{
 			pc.ChangeFacing(Facing.Left);
 			audioSource.Play();
 
 			//Instantiate(bullet, transform.position, transform.rotation);
 			timestamp = Time.time + timeBetweenShots;
 
-			GameObject go = CreateBullet(pc.transform);
-			go.GetComponent<BulletController>().speedX = -speed;
+			BulletController go = CreateBullet(pc.transform);
+			go.SetVelocity(Vector3.left * speed);
 
-        }
-        //Shoots Up
-        else if (Time.time >= timestamp && Input.GetKeyDown(KeyCode.UpArrow))
-        {
+		}
+		//Shoots Up
+		else if (Time.time >= timestamp && Input.GetKeyDown(KeyCode.UpArrow))
+		{
 			pc.ChangeFacing(Facing.Back);
 			audioSource.Play();
 
 			//Instantiate(bullet, transform.position, transform.rotation);
 			timestamp = Time.time + timeBetweenShots;
 
-			GameObject go = CreateBullet(pc.transform);
-			go.GetComponent<BulletController>().speedY = speed;
+			BulletController go = CreateBullet(pc.transform);
+			go.SetVelocity(Vector3.up * speed);
 
-        }
-        //Shoots Down
-        else if (Time.time >= timestamp && Input.GetKeyDown(KeyCode.DownArrow))
-        {
+		}
+		//Shoots Down
+		else if (Time.time >= timestamp && Input.GetKeyDown(KeyCode.DownArrow))
+		{
 			pc.ChangeFacing(Facing.Front);
 			audioSource.Play();
 
 			//Instantiate(bullet, transform.position, transform.rotation);
 			timestamp = Time.time + timeBetweenShots;
 
-			GameObject go = CreateBullet(pc.transform);
-			go.GetComponent<BulletController>().speedY = -speed;
+			BulletController go = CreateBullet(pc.transform);
+			go.SetVelocity(Vector3.down * speed);
 
-        }
-
-    }
+		}
+	}
 }

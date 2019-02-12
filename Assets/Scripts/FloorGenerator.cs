@@ -212,7 +212,7 @@ public class FloorGenerator
 
 		// Used to pair two rooms together. These two rooms are connected and will have a path between them.
 		List<Connection> connections = new List<Connection>(roomCount);
-        int stairRoom = Random.Range(roomCount / 2, roomCount);
+		int stairRoom = Random.Range(roomCount / 2, roomCount);
 
 		for (int i = 0; i < roomCount; i++)
 		{

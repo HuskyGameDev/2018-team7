@@ -43,9 +43,9 @@ public class Shotgun : Gun
 			for (int i = pellets.Count - 1; i >= 0; i--)
 			{
 				pellets[i] = Random.rotation;
-				GameObject p = CreateBullet(BarrelExit, BarrelExit.rotation);
+				BulletController p = CreateBullet(BarrelExit, BarrelExit.rotation);
 				p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellets[i], spreadAngle);
-				p.GetComponent<BulletController>().speedY = speed;
+				p.SetVelocity(Vector3.up * speed);
 			}
 		}
 		else if (Time.time >= timeStamp && Input.GetKeyDown(KeyCode.DownArrow))
@@ -56,9 +56,9 @@ public class Shotgun : Gun
             for (int i = pellets.Count - 1; i >= 0; i--)
 			{
 				pellets[i] = Random.rotation;
-				GameObject p = CreateBullet(BarrelExit, BarrelExit.rotation);
+				BulletController p = CreateBullet(BarrelExit, BarrelExit.rotation);
 				p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellets[i], spreadAngle);
-				p.GetComponent<BulletController>().speedY = -speed;
+				p.SetVelocity(Vector3.down * speed);
 			}
 		}
 		else if (Time.time >= timeStamp && Input.GetKeyDown(KeyCode.LeftArrow))
@@ -69,9 +69,9 @@ public class Shotgun : Gun
             for (int i = pellets.Count - 1; i >= 0; i--)
 			{
 				pellets[i] = Random.rotation;
-				GameObject p = CreateBullet(BarrelExit, BarrelExit.rotation);
+				BulletController p = CreateBullet(BarrelExit, BarrelExit.rotation);
 				p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellets[i], spreadAngle);
-				p.GetComponent<BulletController>().speedX = -speed;
+				p.SetVelocity(Vector3.left * speed);
 			}
 		}
 		else if (Time.time >= timeStamp && Input.GetKeyDown(KeyCode.RightArrow))
@@ -82,9 +82,9 @@ public class Shotgun : Gun
             for (int i = pellets.Count - 1; i >= 0; i--)
 			{
 				pellets[i] = Random.rotation;
-				GameObject p = CreateBullet(BarrelExit, BarrelExit.rotation);
+				BulletController p = CreateBullet(BarrelExit, BarrelExit.rotation);
 				p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellets[i], spreadAngle);
-				p.GetComponent<BulletController>().speedX = speed;
+				p.SetVelocity(Vector3.right * speed);
 			}
 		}
 

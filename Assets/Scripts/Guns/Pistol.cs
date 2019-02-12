@@ -9,8 +9,8 @@ public class Pistol : Gun
 		{
 			pc.ChangeFacing(Facing.Right);
 			audioSource.Play(); //Play gunshot 
-			GameObject go = CreateBullet(pc.transform);
-			go.GetComponent<BulletController>().speedX = speed;
+			BulletController go = CreateBullet(pc.transform);
+			go.SetVelocity(Vector3.right * speed);
 		}
 
 		//Shoots Left
@@ -18,8 +18,8 @@ public class Pistol : Gun
 		{
 			pc.ChangeFacing(Facing.Left);
 			audioSource.Play(); //Play gunshot 
-			GameObject go = CreateBullet(pc.transform);
-			go.GetComponent<BulletController>().speedX = -speed;
+			BulletController go = CreateBullet(pc.transform);
+			go.SetVelocity(Vector3.left * speed);
 
 		}
 		//Shoots Up
@@ -27,8 +27,8 @@ public class Pistol : Gun
 		{
 			pc.ChangeFacing(Facing.Back);
 			audioSource.Play(); //Play gunshot 
-			GameObject go = CreateBullet(pc.transform);
-			go.GetComponent<BulletController>().speedY = speed;
+			BulletController go = CreateBullet(pc.transform);
+			go.SetVelocity(Vector3.up * speed);
 
 		}
 		//Shoots Down
@@ -36,9 +36,8 @@ public class Pistol : Gun
 		{
 			pc.ChangeFacing(Facing.Front);
 			audioSource.Play(); //Play gunshot 
-			GameObject go = CreateBullet(pc.transform);
-			go.GetComponent<BulletController>().speedY = -speed;
-
+			BulletController go = CreateBullet(pc.transform);
+			go.SetVelocity(Vector3.down * speed);
 		}
 	}
 }

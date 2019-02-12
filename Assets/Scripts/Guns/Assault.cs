@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+#if false
 public class Assault : MonoBehaviour
 {
 
@@ -21,9 +22,8 @@ public class Assault : MonoBehaviour
     void Update()
     {
 
-
-        //Shoots Right
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+		//Shoots Right
+		if (Input.GetKeyDown(KeyCode.RightArrow))
         {
            
             GameObject go = (GameObject)Instantiate(bullet,
@@ -87,4 +87,4 @@ public class Assault : MonoBehaviour
         }
     }
 }
-
+#endif

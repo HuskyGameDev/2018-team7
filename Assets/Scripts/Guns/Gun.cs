@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using UnityEngine.Assertions;
+using System.Collections.Generic;
 
 /// <summary>
 /// Maps integer IDs to gun types.
@@ -11,23 +11,53 @@ public static class GunType
 
 public class Gun
 {
-	protected GameObject bullet;
+	protected GameObject bulletPrefab;
 	protected PlayerController pc;
 	protected AudioSource audioSource;
 	[HideInInspector] public float speed; // the speed at which the player shoots
 
-	protected GameObject CreateBullet(Transform t, Quaternion rot = default(Quaternion))
+	private Queue<BulletController> bulletPool = new Queue<BulletController>();
+
+	protected BulletController CreateBullet(Transform t, Quaternion rot = default(Quaternion))
 	{
-		GameObject go = GameObject.Instantiate(bullet, t.position, rot);
-		Physics.IgnoreCollision(go.GetComponent<BoxCollider>(), t.GetComponentInChildren<BoxCollider>());
-		return go;
+		BulletController bullet = GetBullet();
+		bullet.transform.position = t.position;
+		bullet.transform.rotation = rot;
+		Physics.IgnoreCollision(bullet.GetComponent<BoxCollider>(), t.GetComponentInChildren<BoxCollider>());
+		return bullet;
+	}
+
+	protected BulletController GetBullet()
+	{
+		BulletController bullet;
+
+		if (bulletPool.Count > 0)
+		{
+			bullet = bulletPool.Dequeue();
+			bullet.gameObject.SetActive(true);
+		}
+		else
+		{
+			bullet = Object.Instantiate(bulletPrefab, Vector3.zero, Quaternion.identity).GetComponent<BulletController>();
+			bullet.GetComponent<Rigidbody>().isKinematic = false;
+			bullet.gun = this;
+		}
+
+		bullet.OnFired();
+		return bullet;
+	}
+
+	public void ReturnBullet(BulletController obj)
+	{
+		obj.gameObject.SetActive(false);
+		bulletPool.Enqueue(obj);
 	}
 
 	public void Init(PlayerController pc)
 	{
 		this.pc = pc;
 		audioSource = pc.GetGunAudioSource();
-		bullet = Resources.Load<GameObject>("Bullet");
+		bulletPrefab = Resources.Load<GameObject>("Bullet");
 		Start();
 	}
 
