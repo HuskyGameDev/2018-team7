@@ -60,10 +60,5 @@ public class RoomCollision
 			pool.ReturnColliders(colliders);
 			hasColliders = false;
 		}
-		else
-		{
-			Debug.LogWarning("Tried to remove the colliders from a room that doesn't have any.");
-			Debug.LogWarning("Room: " + room.Pos);
-		}
 	}
 }
