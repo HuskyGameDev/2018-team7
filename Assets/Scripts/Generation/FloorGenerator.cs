@@ -4,13 +4,13 @@ using static Utils;
 
 public class FloorGenerator
 {
-	private ItemSpawner spawner;
-	private GameObject enemyPrefab;
+	protected ItemSpawner spawner;
+	protected GameObject enemyPrefab;
 
 	// Used for connecting two rooms together via a pathway.
 	// Stores the axis the pathway will exist on as well as positions 
 	// for the pathway.
-	private struct Connection
+	protected struct Connection
 	{
 		public Vec2i a, b;
 		public bool xAxis;
@@ -23,11 +23,11 @@ public class FloorGenerator
 		}
 	}
 
-	private delegate void PatternFunc(Room room);
+	protected delegate void PatternFunc(Room room);
 
-	private PatternFunc[] patterns;
+	protected PatternFunc[] patterns;
 
-	private Floor floor;
+	protected Floor floor;
 
 	public FloorGenerator(Floor floor, GameObject enemyPrefab)
 	{
@@ -41,7 +41,7 @@ public class FloorGenerator
 		patterns[2] = WallsPattern;
 	}
 
-	private void AddBase(Room room)
+	protected void AddBase(Room room)
 	{
 		// Add top and bottom walls.
 		for (int x = 1; x <= Room.LimX - 1; x++)
@@ -72,7 +72,7 @@ public class FloorGenerator
 		}
 	}
 
-	private void NormalPattern(Room room)
+	protected void NormalPattern(Room room)
 	{
 		AddBase(room);
 
@@ -87,7 +87,7 @@ public class FloorGenerator
 		}
 	}
 
-	private void ExtraObstacles(Room room)
+	protected void ExtraObstacles(Room room)
 	{
 		AddBase(room);
 
@@ -101,7 +101,7 @@ public class FloorGenerator
 		}
 	}
 
-	private void WallsPattern(Room room)
+	protected void WallsPattern(Room room)
 	{
 		AddBase(room);
 
@@ -131,15 +131,33 @@ public class FloorGenerator
 		}
 	}
 
-	// Generate all tiles for the given room.
-	private void BuildRoom(Room room, bool stairRoom, bool powerupRoom)
+	protected Vector2 RandomFreePosition(Room room)
+	{
+		int x, y;
+
+		do
+		{
+			x = Random.Range(0, Room.Width - 1);
+			y = Random.Range(0, Room.Height - 1);
+		}
+		while (room.GetTile(x, y) != TileType.Floor);
+
+		return room.WorldPos + new Vector2(x, y);
+	}
+
+	protected virtual Vec2i GetNextPos(Vec2i current)
+	{
+		return Vec2i.Zero;
+	}
+
+	protected virtual void BuildRoom(Room room, bool stairRoom, bool powerupRoom)
 	{
 		patterns[Random.Range(0, patterns.Length)].Invoke(room);
 
-        if (stairRoom)
-        {
-            room.SetTile(Room.LimX / 2, Room.LimY / 2, TileType.Stair);
-        }
+		if (stairRoom)
+		{
+			room.SetTile(Room.LimX / 2, Room.LimY / 2, TileType.Stair);
+		}
 
 		Vector2 wPos = room.WorldPos;
 
@@ -160,19 +178,12 @@ public class FloorGenerator
 		room.Lock();
 	}
 
-	// Returns the position of the next room to generate.
-	private Vec2i GetNextPos(Vec2i current)
-	{
-		List<Vec2i> possibleRooms = new List<Vec2i>(4)
-		{
-			current + Vec2i.Directions[Direction.Front],
-			current + Vec2i.Directions[Direction.Right]
-		};
+	/// <summary>
+	/// Generates the specified number of rooms.
+	/// </summary>
+	public virtual void Generate(int roomCount) { }
 
-		return possibleRooms[Random.Range(0, possibleRooms.Count)];
-	}
-
-	private void AddConnections(List<Connection> connections)
+	protected void AddConnections(List<Connection> connections)
 	{
 		for (int c = 0; c < connections.Count; c++)
 		{
@@ -200,53 +211,5 @@ public class FloorGenerator
 				floor.SetTile(x, startY + 1, TileType.Floor);
 			}
 		}
-	}
-
-	/// <summary>
-	/// Generates the specified number of rooms.
-	/// </summary>
-	public void Generate(int roomCount)
-	{
-		// Room position.
-		Vec2i roomP = new Vec2i(0, 0);
-
-		// Used to pair two rooms together. These two rooms are connected and will have a path between them.
-		List<Connection> connections = new List<Connection>(roomCount);
-		int stairRoom = Random.Range(roomCount / 2, roomCount);
-
-		for (int i = 0; i < roomCount; i++)
-		{
-			bool powerupRoom = Random.value < 0.6f;
-
-			Room room = floor.CreateRoom(roomP.x, roomP.y);
-			floor.MaxRoom = roomP;
-
-            BuildRoom(room, i == stairRoom, powerupRoom);
-			
-			Vec2i next = GetNextPos(roomP);
-
-			connections.Add(new Connection(roomP, next, roomP.x != next.x));
-			roomP = next;
-		}
-
-		// Remove the last connection because it doesn't connect to a room (it's what would connect to
-		// the next room if we added another).
-		connections.RemoveAt(connections.Count - 1);
-
-		AddConnections(connections);
-	}
-
-	private Vector2 RandomFreePosition(Room room)
-	{
-		int x, y;
-
-		do
-		{
-			x = Random.Range(0, Room.Width - 1);
-			y = Random.Range(0, Room.Height - 1);
-		}
-		while (room.GetTile(x, y) != TileType.Floor);
-
-		return room.WorldPos + new Vector2(x, y);
 	}
 }

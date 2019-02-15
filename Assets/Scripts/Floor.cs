@@ -30,12 +30,14 @@ public class Floor : MonoBehaviour
 	// Currently the min room is always (0, 0) and the max room is the last room generated.
 	// This could change if we make the generator more sophisticated.
 	public Vec2i MaxRoom { get; set; }
+	public Vec2i MinRoom { get; set; }
 
 	public FloorPathfinder Pathfinder { get; private set; }
 
 	// Singleton instance.
 	public static Floor Instance { get; private set; }
 
+	private FloorGenerator[] generators = new FloorGenerator[2];
 	private FloorGenerator generator;
 
 	private void Awake()
@@ -45,7 +47,9 @@ public class Floor : MonoBehaviour
 		spritePool = GetComponent<SpritePool>();
 		colliderPool = GetComponent<ColliderPool>();
 
-		generator = new FloorGenerator(this, enemyPrefab);
+		generators[0] = new LinearGenerator(this, enemyPrefab);
+		generators[1] = new MultiDirGenerator(this, enemyPrefab);
+
 		Pathfinder = new FloorPathfinder(this);
 
 		Generate();
@@ -73,6 +77,8 @@ public class Floor : MonoBehaviour
 	/// </summary>
 	public void Generate()
 	{
+		generator = generators[Random.Range(0, generators.Length)];
+
 		generator.Generate(RoomCount);
 		GameObject.FindWithTag("Player").transform.position = new Vector3(5.0f, 5.0f);
 
@@ -126,9 +132,12 @@ public class Floor : MonoBehaviour
 
 	/// <summary>
 	/// Creates a new room at the given room coordinates and adds it to the rooms list for this floor.
+	/// Note: As is, rooms cannot be negative due to the pathfinding code, though the dictionary we use
+	/// to store rooms supports negatives.
 	/// </summary>
 	public Room CreateRoom(int x, int y)
 	{
+		Assert.IsTrue(x >= 0 && y >= 0);
 		Vec2i roomP = new Vec2i(x, y);
 		Assert.IsTrue(GetRoom(roomP) == null);
 		Room room = new Room(x, y, spritePool, colliderPool, this);
