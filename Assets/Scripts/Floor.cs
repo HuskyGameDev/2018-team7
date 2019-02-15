@@ -30,14 +30,13 @@ public class Floor : MonoBehaviour
 	// Currently the min room is always (0, 0) and the max room is the last room generated.
 	// This could change if we make the generator more sophisticated.
 	public Vec2i MaxRoom { get; set; }
-	public Vec2i MinRoom { get; set; }
 
 	public FloorPathfinder Pathfinder { get; private set; }
 
 	// Singleton instance.
 	public static Floor Instance { get; private set; }
 
-	private FloorGenerator[] generators = new FloorGenerator[2];
+	private FloorGenerator[] generators = new FloorGenerator[1];
 	private FloorGenerator generator;
 
 	private void Awake()
@@ -48,7 +47,6 @@ public class Floor : MonoBehaviour
 		colliderPool = GetComponent<ColliderPool>();
 
 		generators[0] = new LinearGenerator(this, enemyPrefab);
-		generators[1] = new MultiDirGenerator(this, enemyPrefab);
 
 		Pathfinder = new FloorPathfinder(this);
 
