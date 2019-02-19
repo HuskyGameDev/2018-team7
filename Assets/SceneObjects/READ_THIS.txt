@@ -1,1 +1,0 @@
-Insert these items into the scene underneath the Canvas for it to work, otherwise it breaks :D

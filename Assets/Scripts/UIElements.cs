@@ -34,7 +34,8 @@ public class UIElements : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+	{
         text.text = floor.FloorID.ToString(); //Update the UI for the player
         stats.setScore(floor.FloorID); //Update the stats file when the floor changes
         float pos = ((playerController.health / 100f )*130f)-65f;
