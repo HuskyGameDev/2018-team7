@@ -183,6 +183,17 @@ public class FloorGenerator
 	/// </summary>
 	public virtual void Generate(int roomCount) { }
 
+	private struct PathOrder
+	{
+		public TileType a, b;
+
+		public PathOrder(TileType a, TileType b)
+		{
+			this.a = a;
+			this.b = b;
+		}
+	}
+
 	protected void AddConnections(List<Connection> connections)
 	{
 		for (int c = 0; c < connections.Count; c++)
@@ -192,23 +203,33 @@ public class FloorGenerator
 			Vec2i a = info.a * new Vec2i(Room.Width, Room.Height);
 			Vec2i b = info.b * new Vec2i(Room.Width, Room.Height);
 
+			PathOrder order = new PathOrder(TileType.TempWall, TileType.Floor);
+
 			if (info.xAxis)
 			{
-				if (b.x < a.x) Swap(ref a, ref b);
+				if (b.x < a.x)
+				{
+					Swap(ref a, ref b);
+					Swap(ref order.a, ref order.b);
+				}
 
 				int startX = a.x + Room.LimX, y = a.y + Room.HalfSizeY;
 
-				floor.SetTile(startX, y, TileType.TempWall);
-				floor.SetTile(startX + 1, y, TileType.Floor);
+				floor.SetTile(startX, y, order.a);
+				floor.SetTile(startX + 1, y, order.b);
 			}
 			else
 			{
-				if (b.y < a.y) Swap(ref a, ref b);
+				if (b.y < a.y)
+				{
+					Swap(ref a, ref b);
+					Swap(ref order.a, ref order.b);
+				}
 
 				int startY = a.y + Room.LimY, x = a.x + Room.HalfSizeX;
 
-				floor.SetTile(x, startY, TileType.TempWall);
-				floor.SetTile(x, startY + 1, TileType.Floor);
+				floor.SetTile(x, startY, order.a);
+				floor.SetTile(x, startY + 1, order.b);
 			}
 		}
 	}

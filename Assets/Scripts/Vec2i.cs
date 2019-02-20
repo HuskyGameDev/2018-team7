@@ -16,6 +16,7 @@ public struct Vec2i : IEquatable<Vec2i>
 	};
 
 	public static readonly Vec2i Zero = new Vec2i(0, 0);
+	public static readonly Vec2i NegOne = new Vec2i(-1, -1);
 
 	public Vec2i(int x, int y)
 	{
