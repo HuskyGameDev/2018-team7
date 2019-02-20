@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
 
 	public bool Dead { get; set; } = false;
 
+	public Facing FacingDir { get; private set; }
+
 	private CharacterController controller;
 
 	/// <summary>
@@ -85,6 +87,7 @@ public class PlayerController : MonoBehaviour
 
 	public void ChangeFacing(Facing facing)
 	{
+		FacingDir = facing;
 		rend.sprite = sprites[(int)facing];
 	}
 

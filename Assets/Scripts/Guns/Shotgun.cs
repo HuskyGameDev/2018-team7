@@ -9,6 +9,7 @@ public class Shotgun : Gun
     public Transform BarrelExit;
     private float timeBetweenShots = 1.0f;
     private float timeStamp;
+	List<Quaternion> pellets;
 
 	protected override void Start()
 	{
@@ -31,8 +32,6 @@ public class Shotgun : Gun
 		audioSource.clip = Resources.Load<AudioClip>("Sounds/Guns/Shotgun");
 	}
 
-	List<Quaternion> pellets;
-
 	public override void Fire(PlayerController pc)
 	{
 		if (Time.time >= timeStamp && Input.GetKeyDown(KeyCode.UpArrow))
@@ -43,9 +42,9 @@ public class Shotgun : Gun
 			for (int i = pellets.Count - 1; i >= 0; i--)
 			{
 				pellets[i] = Random.rotation;
-				BulletController p = CreateBullet(BarrelExit, BarrelExit.rotation);
+				BulletController p = CreateBullet(BarrelExit);
 				p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellets[i], spreadAngle);
-				p.SetVelocity(Vector3.up * speed);
+				p.SetSpeed(speed);
 			}
 		}
 		else if (Time.time >= timeStamp && Input.GetKeyDown(KeyCode.DownArrow))
@@ -56,9 +55,9 @@ public class Shotgun : Gun
             for (int i = pellets.Count - 1; i >= 0; i--)
 			{
 				pellets[i] = Random.rotation;
-				BulletController p = CreateBullet(BarrelExit, BarrelExit.rotation);
+				BulletController p = CreateBullet(BarrelExit);
 				p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellets[i], spreadAngle);
-				p.SetVelocity(Vector3.down * speed);
+				p.SetSpeed(speed);
 			}
 		}
 		else if (Time.time >= timeStamp && Input.GetKeyDown(KeyCode.LeftArrow))
@@ -69,9 +68,9 @@ public class Shotgun : Gun
             for (int i = pellets.Count - 1; i >= 0; i--)
 			{
 				pellets[i] = Random.rotation;
-				BulletController p = CreateBullet(BarrelExit, BarrelExit.rotation);
+				BulletController p = CreateBullet(BarrelExit);
 				p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellets[i], spreadAngle);
-				p.SetVelocity(Vector3.left * speed);
+				p.SetSpeed(speed);
 			}
 		}
 		else if (Time.time >= timeStamp && Input.GetKeyDown(KeyCode.RightArrow))
@@ -82,9 +81,9 @@ public class Shotgun : Gun
             for (int i = pellets.Count - 1; i >= 0; i--)
 			{
 				pellets[i] = Random.rotation;
-				BulletController p = CreateBullet(BarrelExit, BarrelExit.rotation);
+				BulletController p = CreateBullet(BarrelExit);
 				p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellets[i], spreadAngle);
-				p.SetVelocity(Vector3.right * speed);
+				p.SetSpeed(speed);
 			}
 		}
 

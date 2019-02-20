@@ -18,11 +18,11 @@ public class Gun
 
 	private Queue<BulletController> bulletPool = new Queue<BulletController>();
 
-	protected BulletController CreateBullet(Transform t, Quaternion rot = default(Quaternion))
+	protected BulletController CreateBullet(Transform t)
 	{
 		BulletController bullet = GetBullet();
 		bullet.transform.position = t.position;
-		bullet.transform.rotation = rot;
+		bullet.ChangeFacing(pc.FacingDir);
 		Physics.IgnoreCollision(bullet.GetComponent<BoxCollider>(), t.GetComponentInChildren<BoxCollider>());
 		return bullet;
 	}

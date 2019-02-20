@@ -30,9 +30,9 @@ public class BulletController : MonoBehaviour
 		StartCoroutine(DestroyBullet());
 	}
 
-	public void SetVelocity(Vector3 vel)
+	public void SetSpeed(float speed)
 	{
-		velocity = vel;
+		velocity = Vector3.right * speed;
 	}
 
 	// Update is called once per frame
@@ -44,6 +44,28 @@ public class BulletController : MonoBehaviour
 
 		transform.Translate(velocity * Time.deltaTime, Space.Self);
 		transform.SetZ(-1.0f);
+	}
+
+	public void ChangeFacing(Facing facing)
+	{
+		switch (facing)
+		{
+			case Facing.Back:
+				transform.rotation = Quaternion.Euler(0.0f, 0.0f, 90.0f);
+				break;
+
+			case Facing.Front:
+				transform.rotation = Quaternion.Euler(0.0f, 0.0f, 270.0f);
+				break;
+
+			case Facing.Right:
+				transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
+				break;
+
+			case Facing.Left:
+				transform.rotation = Quaternion.Euler(0.0f, 0.0f, 180.0f);
+				break;
+		}
 	}
 
 	IEnumerator DestroyBullet()

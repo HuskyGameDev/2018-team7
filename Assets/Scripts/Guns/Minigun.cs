@@ -35,9 +35,9 @@ public class Minigun : Gun
 				pc.ChangeFacing(Facing.Back);
 				timestamp = Time.time + timeBetweenShots;
 				pellet = Random.rotation;
-				BulletController p = CreateBullet(BarrelExit, BarrelExit.rotation);
+				BulletController p = CreateBullet(BarrelExit);
 				p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellet, spreadAngle);
-				p.SetVelocity(Vector3.up * speed);
+				p.SetSpeed(speed);
 			}
 
 			// Down
@@ -46,9 +46,9 @@ public class Minigun : Gun
 				pc.ChangeFacing(Facing.Front);
 				timestamp = Time.time + timeBetweenShots;
 				pellet = Random.rotation;
-				BulletController p = CreateBullet(BarrelExit, BarrelExit.rotation);
+				BulletController p = CreateBullet(BarrelExit);
 				p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellet, spreadAngle);
-				p.SetVelocity(Vector3.down * speed);
+				p.SetSpeed(speed);
 			}
 
 			// Left
@@ -57,9 +57,9 @@ public class Minigun : Gun
 				pc.ChangeFacing(Facing.Left);
 				timestamp = Time.time + timeBetweenShots;
 				pellet = Random.rotation;
-				BulletController p = CreateBullet(BarrelExit, BarrelExit.rotation);
+				BulletController p = CreateBullet(BarrelExit);
 				p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellet, spreadAngle);
-				p.SetVelocity(Vector3.left * speed);
+				p.SetSpeed(speed);
 			}
 
 			// Right
@@ -68,9 +68,9 @@ public class Minigun : Gun
 				pc.ChangeFacing(Facing.Right);
 				timestamp = Time.time + timeBetweenShots;
 				pellet = Random.rotation;
-				BulletController p = CreateBullet(BarrelExit, BarrelExit.rotation);
+				BulletController p = CreateBullet(BarrelExit);
 				p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellet, spreadAngle);
-				p.SetVelocity(Vector3.right * speed);
+				p.SetSpeed(speed);
 			}
 		}
 	}

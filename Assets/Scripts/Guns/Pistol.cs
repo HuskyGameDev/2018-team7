@@ -10,7 +10,7 @@ public class Pistol : Gun
 			pc.ChangeFacing(Facing.Right);
 			audioSource.Play(); //Play gunshot 
 			BulletController go = CreateBullet(pc.transform);
-			go.SetVelocity(Vector3.right * speed);
+			go.SetSpeed(speed);
 		}
 
 		//Shoots Left
@@ -19,7 +19,7 @@ public class Pistol : Gun
 			pc.ChangeFacing(Facing.Left);
 			audioSource.Play(); //Play gunshot 
 			BulletController go = CreateBullet(pc.transform);
-			go.SetVelocity(Vector3.left * speed);
+			go.SetSpeed(speed);
 
 		}
 		//Shoots Up
@@ -28,7 +28,7 @@ public class Pistol : Gun
 			pc.ChangeFacing(Facing.Back);
 			audioSource.Play(); //Play gunshot 
 			BulletController go = CreateBullet(pc.transform);
-			go.SetVelocity(Vector3.up * speed);
+			go.SetSpeed(speed);
 
 		}
 		//Shoots Down
@@ -37,7 +37,7 @@ public class Pistol : Gun
 			pc.ChangeFacing(Facing.Front);
 			audioSource.Play(); //Play gunshot 
 			BulletController go = CreateBullet(pc.transform);
-			go.SetVelocity(Vector3.down * speed);
+			go.SetSpeed(speed);
 		}
 	}
 }

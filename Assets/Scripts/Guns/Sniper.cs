@@ -28,7 +28,7 @@ public class Sniper : Gun
 			timestamp = Time.time + timeBetweenShots;
 
 			BulletController go = CreateBullet(pc.transform);
-			go.SetVelocity(Vector3.right * speed);
+			go.SetSpeed(speed);
 		}
 
 		//Shoots Left
@@ -41,7 +41,7 @@ public class Sniper : Gun
 			timestamp = Time.time + timeBetweenShots;
 
 			BulletController go = CreateBullet(pc.transform);
-			go.SetVelocity(Vector3.left * speed);
+			go.SetSpeed(speed);
 
 		}
 		//Shoots Up
@@ -54,7 +54,7 @@ public class Sniper : Gun
 			timestamp = Time.time + timeBetweenShots;
 
 			BulletController go = CreateBullet(pc.transform);
-			go.SetVelocity(Vector3.up * speed);
+			go.SetSpeed(speed);
 
 		}
 		//Shoots Down
@@ -67,7 +67,7 @@ public class Sniper : Gun
 			timestamp = Time.time + timeBetweenShots;
 
 			BulletController go = CreateBullet(pc.transform);
-			go.SetVelocity(Vector3.down * speed);
+			go.SetSpeed(speed);
 
 		}
 	}
