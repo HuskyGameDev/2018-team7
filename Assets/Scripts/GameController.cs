@@ -55,6 +55,7 @@ public class GameController : MonoBehaviour
 		Paused = false;
 		Time.timeScale = 1.0f;
 		pauseMenu.SetActive(false);
+		newLevelInput.SetActive(false);
 	}
 	
 	// Linked to the pause menu UI. This is called when the UI button is clicked, and causes the
