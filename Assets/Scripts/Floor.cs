@@ -6,11 +6,6 @@ using static Utils;
 
 public class Floor : MonoBehaviour
 {
-	/// <summary>
-	/// The number of rooms in this floor.
-	/// </summary>
-	public int RoomCount { get; private set; } = 10;
-
 	// The current floor the player is on.
 	public int FloorID { get; private set; }
 
@@ -77,7 +72,7 @@ public class Floor : MonoBehaviour
 	{
 		generator = generators[Random.Range(0, generators.Length)];
 
-		generator.Generate(RoomCount);
+		generator.Generate();
 		GameObject.FindWithTag("Player").transform.position = new Vector3(5.0f, 5.0f);
 
 		FloorID++;

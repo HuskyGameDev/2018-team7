@@ -18,14 +18,15 @@ public class LinearGenerator : FloorGenerator
 		return possibleRooms[Random.Range(0, possibleRooms.Count)];
 	}
 
-	public override void Generate(int roomCount)
+	public override void Generate()
 	{
+		int roomCount = Random.Range(8, 13);
+
 		// Room position.
 		Vec2i roomP = new Vec2i(0, 0);
 
 		// Used to pair two rooms together. These two rooms are connected and will have a path between them.
 		List<Connection> connections = new List<Connection>(roomCount);
-		int stairRoom = Random.Range(roomCount / 2, roomCount);
 
 		for (int i = 0; i < roomCount; i++)
 		{
@@ -63,7 +64,7 @@ public class LinearGenerator : FloorGenerator
 				BuildRoom(room, true, powerupRoom);
 				break;
 			}
-			else BuildRoom(room, i == stairRoom, powerupRoom);
+			else BuildRoom(room, i == roomCount - 1, powerupRoom);
 
 			roomP = next;
 		}

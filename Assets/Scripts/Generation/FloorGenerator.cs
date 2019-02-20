@@ -155,9 +155,7 @@ public class FloorGenerator
 		patterns[Random.Range(0, patterns.Length)].Invoke(room);
 
 		if (stairRoom)
-		{
-			room.SetTile(Room.LimX / 2, Room.LimY / 2, TileType.Stair);
-		}
+			room.hasStairs = true;
 
 		Vector2 wPos = room.WorldPos;
 
@@ -181,7 +179,7 @@ public class FloorGenerator
 	/// <summary>
 	/// Generates the specified number of rooms.
 	/// </summary>
-	public virtual void Generate(int roomCount) { }
+	public virtual void Generate() { }
 
 	private struct PathOrder
 	{

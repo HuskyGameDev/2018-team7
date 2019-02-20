@@ -62,6 +62,11 @@ public class Room
 	/// </summary>
 	public bool hasSprites = false;
 
+	/// <summary>
+	/// If true, this room will have stairs once the enemies are defeated.
+	/// </summary>
+	public bool hasStairs = false;
+
 	// Stores all sprites this room is using so that they can be returned during the unload process.
 	private List<SpriteRenderer> spriteList = new List<SpriteRenderer>();
 
@@ -201,6 +206,9 @@ public class Room
 			if (tiles[i].id == TileType.TempWall)
 				tiles[i] = TileType.Floor;
 		}
+
+		if (hasStairs)
+			SetTile(Room.LimX / 2, Room.LimY / 2, TileType.Stair);
 
 		locked = false;
 		Rebuild();
