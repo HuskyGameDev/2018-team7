@@ -111,16 +111,16 @@ public class HighscoreSaving : MonoBehaviour {
     {
 	    
 	//Literally just updates the text that's seen on screen.
-        text1.text  = LB[0].toString();
-        text2.text  = LB[1].toString();
-        text3.text  = LB[2].toString();
-        text4.text  = LB[3].toString();
-        text5.text  = LB[4].toString();
-        text6.text  = LB[5].toString();
-        text7.text  = LB[6].toString();
-        text8.text  = LB[7].toString();
-        text9.text  = LB[8].toString();
-        text10.text = LB[9].toString();
+        //text1.text  = LB[0].toString();
+        //text2.text  = LB[1].toString();
+        //text3.text  = LB[2].toString();
+        //text4.text  = LB[3].toString();
+        //text5.text  = LB[4].toString();
+        //text6.text  = LB[5].toString();
+        //text7.text  = LB[6].toString();
+        //text8.text  = LB[7].toString();
+        //text9.text  = LB[8].toString();
+        //text10.text = LB[9].toString();
 
 
 

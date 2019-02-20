@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Assertions;
+using System.Collections;
 
 public enum Facing
 {
@@ -70,19 +70,34 @@ public class PlayerController : MonoBehaviour
 		guns[Gun].speed = speed;
 	}
 
+	private IEnumerator TintRed()
+	{
+		rend.color = Color.red;
+		yield return new WaitForSeconds(0.1f);
+		rend.color = Color.white;
+	}
+
+	public void TakeDamage(int damage)
+	{
+		health -= damage;
+
+		if (!Dead)
+			StartCoroutine(TintRed());
+	}
+
 	/**
      * Start
      * Initializes the health and bulletSpeed variables
      */
 	void Start()
 	{
+		rend = GetComponent<SpriteRenderer>();
+		controller = GetComponent<CharacterController>();
+
 		health = 100;
 
 		AddGun<Pistol>(GunType.Pistol);
 		Gun = GunType.Pistol;
-
-		controller = GetComponent<CharacterController>();
-		rend = GetComponent<SpriteRenderer>();
 	}
 
 	public void ChangeFacing(Facing facing)
