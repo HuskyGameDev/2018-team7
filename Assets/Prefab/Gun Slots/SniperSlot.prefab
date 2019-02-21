@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 224543118177023142}
   - component: {fileID: 222503685143204178}
   - component: {fileID: 114293245354394486}
+  - component: {fileID: 114996630340586738}
   m_Layer: 5
   m_Name: SniperSlot
   m_TagString: Untagged
@@ -55,6 +56,18 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114996630340586738
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1425759611777634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41fdf2360e446014fb25934c11f46e3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  value: 3
 --- !u!222 &222503685143204178
 CanvasRenderer:
   m_ObjectHideFlags: 1

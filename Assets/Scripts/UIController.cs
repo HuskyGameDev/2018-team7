@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
@@ -19,6 +20,20 @@ public class UIController : MonoBehaviour
 		playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
 	}
 
+	// Inserts the gun slot into the correct location based on its ID value.
+	// This ensures the gun slots are shown in the correct order (1 to 5).
+	private void Reorder()
+	{
+		GunSlotID[] slots = verticalLayout.GetComponentsInChildren<GunSlotID>();
+		Array.Sort(slots);
+
+		for (int i = 0; i < slots.Length; i++)
+			slots[i].transform.SetParent(null);
+
+		for (int i = 0; i < slots.Length; i++)
+			slots[i].transform.SetParent(verticalLayout);
+	}
+
 	// Update is called once per frame
 	// Update the UI to display the image for each of the objects
 	void Update()
@@ -27,8 +42,8 @@ public class UIController : MonoBehaviour
 		{
 			if (!loaded[i] && playerController.HasGun(i))
 			{
-				Transform t = Instantiate(gunSlots[i], verticalLayout).transform;
-				t.SetSiblingIndex(i);
+				Instantiate(gunSlots[i], verticalLayout);
+				Reorder();
 				loaded[i] = true;
 			}
 		}

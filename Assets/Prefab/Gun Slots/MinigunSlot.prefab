@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 224763287183928448}
   - component: {fileID: 222021140614625642}
   - component: {fileID: 114476710699645010}
+  - component: {fileID: 114856400500837392}
   m_Layer: 5
   m_Name: MinigunSlot
   m_TagString: Untagged
@@ -55,6 +56,18 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114856400500837392
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1096141223748688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41fdf2360e446014fb25934c11f46e3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  value: 4
 --- !u!222 &222021140614625642
 CanvasRenderer:
   m_ObjectHideFlags: 1
