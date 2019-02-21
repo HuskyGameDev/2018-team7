@@ -19,7 +19,7 @@ public class TriggerDetection : MonoBehaviour {
         }
     }
 
-    void OnTriggerEnter(Collider other)
+    void OnTriggerStay(Collider other)
     {
 		Transform parent = other.transform.parent;
 
