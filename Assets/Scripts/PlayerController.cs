@@ -39,7 +39,9 @@ public class PlayerController : MonoBehaviour
 		set
 		{
 			_health = value;
-			if (_health <= 0)
+			_health = Mathf.Clamp(_health, 0, 100);
+
+			if (_health == 0)
 			{
 				gameObject.SetActive(false);
 				Dead = true;
