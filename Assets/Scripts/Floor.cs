@@ -65,6 +65,20 @@ public class Floor : MonoBehaviour
 			Destroy(pickups[i]);
 	}
 
+	private void ClearAround(Vec2i p)
+	{
+		Vec2i roomP = ToRoomPos(p);
+		Vec2i local = ToLocalPos(p);
+
+		Room room = GetRoom(roomP);
+
+		for (int y = -1; y <= 1; y++)
+		{
+			for (int x = -1; x <= 1; x++)
+				room.SetTile(local.x + x, local.y + y, TileType.Floor);
+		}
+	}
+
 	/// <summary>
 	/// Generate the floor. This creates and builds the rooms that comprise it. 
 	/// </summary>
@@ -73,6 +87,8 @@ public class Floor : MonoBehaviour
 		generator = generators[Random.Range(0, generators.Length)];
 
 		generator.Generate();
+
+		ClearAround(new Vec2i(5, 5));
 		GameObject.FindWithTag("Player").transform.position = new Vector3(5.0f, 5.0f);
 
 		FloorID++;
