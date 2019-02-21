@@ -29,6 +29,11 @@ public class GameController : MonoBehaviour
 		SetSeed(seed == -1 ? Random.Range(0, MaxSeed) : seed);
 	}
 
+	public static void ResetSeed()
+	{
+		seed = -1;
+	}
+
 	private void SetSeed(int newSeed)
 	{
 		seed = newSeed;

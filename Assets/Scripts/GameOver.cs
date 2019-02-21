@@ -13,14 +13,16 @@ public class GameOver : MonoBehaviour
 
     public void PlayAgain()
 	{
-        //SaveRun();
+		//SaveRun();
+		GameController.ResetSeed();
         SceneManager.LoadScene("Game");
 	}
 
 	public void Menu()
 	{
-        //SaveRun();
-        SceneManager.LoadScene("MainMenu");
+		//SaveRun();
+		GameController.ResetSeed();
+		SceneManager.LoadScene("MainMenu");
 	}
 
     /* Trying to figure out how to get this information after it changes scene.
