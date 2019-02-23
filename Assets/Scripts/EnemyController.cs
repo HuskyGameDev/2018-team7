@@ -9,7 +9,7 @@ using Debug = UnityEngine.Debug;
 public class EnemyController : MonoBehaviour
 {
 	public float detectRange;
-	[HideInInspector] public float speed;
+	private float speed;
 
 	private CharacterController controller;
 	private SpriteRenderer rend;
@@ -35,8 +35,8 @@ public class EnemyController : MonoBehaviour
 	// Use this for initialization
 	void Start()
     {
-        //StartCoroutine(WaitTime(2));
-        speed = 2.5f;
+		int floor = Floor.Instance.FloorID;
+		speed = Mathf.Min(2.5f + ((floor - 1) * 0.25f), 10.0f);
 
 		controller = GetComponent<CharacterController>();
 		rend = GetComponent<SpriteRenderer>();
