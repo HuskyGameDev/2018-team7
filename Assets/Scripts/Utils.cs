@@ -120,4 +120,12 @@ public static class Utils
 		a = b;
 		b = temp;
 	}
+
+	public static Quaternion LookX(Vector3 right)
+	{
+		Quaternion rightToUp = Quaternion.Euler(0f, 0f, 90f);
+		Quaternion upToTarget = Quaternion.LookRotation(Vector3.forward, right);
+
+		return upToTarget * rightToUp;
+	}
 }

@@ -27,7 +27,7 @@ public class Sniper : Gun
 			//Instantiate(bullet, transform.position, transform.rotation);
 			timestamp = Time.time + timeBetweenShots;
 
-			BulletController go = CreateBullet(pc.transform);
+			Bullet go = CreateBullet(pc.transform);
 			go.SetSpeed(speed);
 		}
 
@@ -40,7 +40,7 @@ public class Sniper : Gun
 			//Instantiate(bullet, transform.position, transform.rotation);
 			timestamp = Time.time + timeBetweenShots;
 
-			BulletController go = CreateBullet(pc.transform);
+			Bullet go = CreateBullet(pc.transform);
 			go.SetSpeed(speed);
 
 		}
@@ -53,7 +53,7 @@ public class Sniper : Gun
 			//Instantiate(bullet, transform.position, transform.rotation);
 			timestamp = Time.time + timeBetweenShots;
 
-			BulletController go = CreateBullet(pc.transform);
+			Bullet go = CreateBullet(pc.transform);
 			go.SetSpeed(speed);
 
 		}
@@ -66,7 +66,7 @@ public class Sniper : Gun
 			//Instantiate(bullet, transform.position, transform.rotation);
 			timestamp = Time.time + timeBetweenShots;
 
-			BulletController go = CreateBullet(pc.transform);
+			Bullet go = CreateBullet(pc.transform);
 			go.SetSpeed(speed);
 
 		}

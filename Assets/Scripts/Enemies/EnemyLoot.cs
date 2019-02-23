@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DropRate : MonoBehaviour
+public class EnemyLoot : MonoBehaviour
 {
 	private bool doSpawn = false;
 	private int gunToSpawn;

@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletController : MonoBehaviour
+public class Bullet : MonoBehaviour
 {
 	private Vector3 velocity;
-	private PlayerController playerController;
+	private PlayerController pc;
 
 	// The gun this bullet belongs to.
 	public Gun gun { get; set; }
+	public BulletPool Pool { get; set; }
 
 	// Use this for initialization
 	void Start()
@@ -17,7 +18,7 @@ public class BulletController : MonoBehaviour
 		GameObject playerControllerObject = GameObject.FindWithTag("Player");
 		if (playerControllerObject != null)
 		{
-			playerController = playerControllerObject.GetComponent<PlayerController>();
+			pc = playerControllerObject.GetComponent<PlayerController>();
 		}
 		else
 		{
@@ -71,21 +72,31 @@ public class BulletController : MonoBehaviour
 	IEnumerator DestroyBullet()
 	{
 		yield return new WaitForSeconds(2f);
-		gun.ReturnBullet(this);
+		Pool.ReturnBullet(this);
 	}
 
 	private void OnTriggerEnter(Collider other)
 	{
-		// Enemy layer.
+		// 8 - player layer, 9 - enemy layer.
 		if (other.gameObject.layer == 9)
 		{
-			other.GetComponentInParent<EnemyController>().ApplyDamage(4);
+			other.GetComponentInParent<Enemy>().ApplyDamage(4);
 
 			// if the weapon is a sniper, don't destroy
-			if (playerController.Gun == GunType.Sniper)
+			if (pc.Gun == GunType.Sniper)
 				return;
 		}
+		else if (other.gameObject.layer == 8)
+		{
+			pc.TakeDamage(10);
 
-		gun.ReturnBullet(this);
+			if (!pc.Dead)
+			{
+				Vector3 dir = (other.transform.position - transform.position).normalized;
+				other.GetComponentInParent<Move>().ApplyKnockback(dir, 25.0f);
+			}
+		}
+
+		Pool.ReturnBullet(this);
 	}
 }

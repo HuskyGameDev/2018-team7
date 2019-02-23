@@ -42,7 +42,7 @@ public class Shotgun : Gun
 			for (int i = pellets.Count - 1; i >= 0; i--)
 			{
 				pellets[i] = Random.rotation;
-				BulletController p = CreateBullet(BarrelExit);
+				Bullet p = CreateBullet(BarrelExit);
 				p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellets[i], spreadAngle);
 				p.SetSpeed(speed);
 			}
@@ -55,7 +55,7 @@ public class Shotgun : Gun
             for (int i = pellets.Count - 1; i >= 0; i--)
 			{
 				pellets[i] = Random.rotation;
-				BulletController p = CreateBullet(BarrelExit);
+				Bullet p = CreateBullet(BarrelExit);
 				p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellets[i], spreadAngle);
 				p.SetSpeed(speed);
 			}
@@ -68,7 +68,7 @@ public class Shotgun : Gun
             for (int i = pellets.Count - 1; i >= 0; i--)
 			{
 				pellets[i] = Random.rotation;
-				BulletController p = CreateBullet(BarrelExit);
+				Bullet p = CreateBullet(BarrelExit);
 				p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellets[i], spreadAngle);
 				p.SetSpeed(speed);
 			}
@@ -81,7 +81,7 @@ public class Shotgun : Gun
             for (int i = pellets.Count - 1; i >= 0; i--)
 			{
 				pellets[i] = Random.rotation;
-				BulletController p = CreateBullet(BarrelExit);
+				Bullet p = CreateBullet(BarrelExit);
 				p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellets[i], spreadAngle);
 				p.SetSpeed(speed);
 			}

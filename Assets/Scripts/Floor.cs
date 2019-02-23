@@ -16,7 +16,7 @@ public class Floor : MonoBehaviour
 	private SpritePool spritePool;
 	private ColliderPool colliderPool;
 
-	[SerializeField] private GameObject enemyPrefab;
+	[SerializeField] private GameObject[] enemyPrefabs;
 
 	// Temporary way to access sprites - the tile ID - 1 (index into tile type enum) maps into this.
 	// Subtract 1 since air doesn't have a sprite.
@@ -41,7 +41,7 @@ public class Floor : MonoBehaviour
 		spritePool = GetComponent<SpritePool>();
 		colliderPool = GetComponent<ColliderPool>();
 
-		generators[0] = new LinearGenerator(this, enemyPrefab);
+		generators[0] = new LinearGenerator(this, enemyPrefabs);
 
 		Pathfinder = new FloorPathfinder(this);
 

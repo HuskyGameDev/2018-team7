@@ -33,7 +33,7 @@ public class SMG : Gun
 			{
 				timestamp = Time.time + timeBetweenShots;
 				pellets[i] = Random.rotation;
-				BulletController p = CreateBullet(pc.transform);
+				Bullet p = CreateBullet(pc.transform);
 				p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellets[i], spreadAngle);
 				p.SetSpeed(speed);
 			}
@@ -48,7 +48,7 @@ public class SMG : Gun
 			{
 				timestamp = Time.time + timeBetweenShots;
 				pellets[i] = Random.rotation;
-				BulletController p = CreateBullet(pc.transform);
+				Bullet p = CreateBullet(pc.transform);
 				p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellets[i], spreadAngle);
 				p.SetSpeed(speed);
 			}
@@ -63,7 +63,7 @@ public class SMG : Gun
 			{
 				timestamp = Time.time + timeBetweenShots;
 				pellets[i] = Random.rotation;
-				BulletController p = CreateBullet(pc.transform);
+				Bullet p = CreateBullet(pc.transform);
 				p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellets[i], spreadAngle);
 				p.SetSpeed(speed);
 			}
@@ -77,7 +77,7 @@ public class SMG : Gun
 			{
 				timestamp = Time.time + timeBetweenShots;
 				pellets[i] = Random.rotation;
-				BulletController p = CreateBullet(pc.transform);
+				Bullet p = CreateBullet(pc.transform);
 				p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellets[i], spreadAngle);
 				p.SetSpeed(speed);
 			}

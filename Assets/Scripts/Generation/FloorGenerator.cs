@@ -5,7 +5,7 @@ using static Utils;
 public class FloorGenerator
 {
 	protected ItemSpawner spawner;
-	protected GameObject enemyPrefab;
+	protected GameObject[] enemyPrefabs;
 
 	// Used for connecting two rooms together via a pathway.
 	// Stores the axis the pathway will exist on as well as positions 
@@ -29,10 +29,10 @@ public class FloorGenerator
 
 	protected Floor floor;
 
-	public FloorGenerator(Floor floor, GameObject enemyPrefab)
+	public FloorGenerator(Floor floor, GameObject[] enemyPrefabs)
 	{
 		this.floor = floor;
-		this.enemyPrefab = enemyPrefab;
+		this.enemyPrefabs = enemyPrefabs;
 		spawner = GameObject.FindWithTag("ItemSpawner").GetComponent<ItemSpawner>();
 
 		patterns = new PatternFunc[3];
@@ -150,6 +150,14 @@ public class FloorGenerator
 		return Vec2i.Zero;
 	}
 
+	private void SpawnEnemy(EnemyType type, Room room, Vector2 pos)
+	{
+		GameObject enemy = Object.Instantiate(enemyPrefabs[(int)type], pos, Quaternion.identity);
+		enemy.GetComponent<Enemy>().room = room;
+		enemy.GetComponent<EnemyLoot>()?.SetWeaponDrop();
+		room.AddEnemy(enemy);
+	}
+
 	protected virtual void BuildRoom(Room room, bool stairRoom, bool powerupRoom)
 	{
 		patterns[Random.Range(0, patterns.Length)].Invoke(room);
@@ -166,11 +174,8 @@ public class FloorGenerator
 
 		for (int i = 0; i < enemyCount; i++)
 		{
-			Vector2 enemyP = RandomFreePosition(room);
-			GameObject enemy = Object.Instantiate(enemyPrefab, enemyP, Quaternion.identity);
-			enemy.GetComponent<EnemyController>().room = room;
-			enemy.GetComponent<DropRate>().SetWeaponDrop();
-			room.AddEnemy(enemy);
+			EnemyType type = Random.value < 0.2f ? EnemyType.Sentry : EnemyType.Helicopter;
+			SpawnEnemy(type, room, RandomFreePosition(room));
 		}
 
 		room.Lock();

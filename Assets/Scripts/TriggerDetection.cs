@@ -2,25 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TriggerDetection : MonoBehaviour {
+public class TriggerDetection : MonoBehaviour
+{
+	private PlayerController pc;
 
-    private PlayerController pc;
+	void Start()
+	{
+		GameObject playerControllerObject = GameObject.FindWithTag("Player");
+		if (playerControllerObject != null)
+		{
+			pc = playerControllerObject.GetComponent<PlayerController>();
+		}
+		else
+		{
+			Debug.Log("Cannot find Player");
+		}
+	}
 
-    void Start()
-    {
-        GameObject playerControllerObject = GameObject.FindWithTag("Player");
-        if (playerControllerObject != null)
-        {
-            pc = playerControllerObject.GetComponent<PlayerController>();
-        }
-        else
-        {
-            Debug.Log("Cannot find Player");
-        }
-    }
-
-    void OnTriggerStay(Collider other)
-    {
+	void OnTriggerStay(Collider other)
+	{
 		Transform parent = other.transform.parent;
 
 		if (parent != null && parent.CompareTag("Player"))
@@ -29,5 +29,5 @@ public class TriggerDetection : MonoBehaviour {
 			Vector3 dir = (other.transform.position - transform.position).normalized;
 			parent.GetComponent<Move>().ApplyKnockback(dir, 25.0f);
 		}
-    }
+	}
 }

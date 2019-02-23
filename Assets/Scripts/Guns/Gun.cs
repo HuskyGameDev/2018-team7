@@ -11,54 +11,26 @@ public static class GunType
 
 public class Gun
 {
-	protected GameObject bulletPrefab;
 	protected PlayerController pc;
 	protected AudioSource audioSource;
 	[HideInInspector] public float speed; // the speed at which the player shoots
 
-	private Queue<BulletController> bulletPool = new Queue<BulletController>();
-
-	protected BulletController CreateBullet(Transform t)
-	{
-		BulletController bullet = GetBullet();
-		bullet.transform.position = t.position;
-		bullet.ChangeFacing(pc.FacingDir);
-		Physics.IgnoreCollision(bullet.GetComponent<BoxCollider>(), t.GetComponentInChildren<BoxCollider>());
-		return bullet;
-	}
-
-	protected BulletController GetBullet()
-	{
-		BulletController bullet;
-
-		if (bulletPool.Count > 0)
-		{
-			bullet = bulletPool.Dequeue();
-			bullet.gameObject.SetActive(true);
-		}
-		else
-		{
-			bullet = Object.Instantiate(bulletPrefab, Vector3.zero, Quaternion.identity).GetComponent<BulletController>();
-			bullet.GetComponent<Rigidbody>().isKinematic = false;
-			bullet.gun = this;
-		}
-
-		bullet.OnFired();
-		return bullet;
-	}
-
-	public void ReturnBullet(BulletController obj)
-	{
-		obj.gameObject.SetActive(false);
-		bulletPool.Enqueue(obj);
-	}
+	protected BulletPool bulletPool = new BulletPool();
 
 	public void Init(PlayerController pc)
 	{
 		this.pc = pc;
 		audioSource = pc.GetGunAudioSource();
-		bulletPrefab = Resources.Load<GameObject>("Bullet");
 		Start();
+	}
+
+	protected Bullet CreateBullet(Transform t)
+	{
+		Bullet bullet = bulletPool.CreateBullet(t);
+		bullet.ChangeFacing(pc.FacingDir);
+		bullet.gun = this;
+		bullet.gameObject.layer = 11;
+		return bullet;
 	}
 
 	protected virtual void Start()

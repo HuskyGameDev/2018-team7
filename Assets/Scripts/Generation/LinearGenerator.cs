@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class LinearGenerator : FloorGenerator
 {
-	public LinearGenerator(Floor floor, GameObject enemyPrefab) : base(floor, enemyPrefab) { }
+	public LinearGenerator(Floor floor, GameObject[] enemyPrefabs) : base(floor, enemyPrefabs) { }
 
 	protected override Vec2i GetNextPos(Vec2i current)
 	{
