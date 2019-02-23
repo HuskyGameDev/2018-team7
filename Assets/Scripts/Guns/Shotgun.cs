@@ -24,7 +24,7 @@ public class Shotgun : Gun
 			pellets.Add(Quaternion.Euler(Vector3.zero));
 		}
 
-		spreadAngle = 45.0f;
+		spreadAngle = 15.0f;
 	}
 
 	public override void Activate(PlayerController pc)
