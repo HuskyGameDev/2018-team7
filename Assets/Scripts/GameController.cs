@@ -107,6 +107,12 @@ public class GameController : MonoBehaviour
 		}
 	}
 
+	public void MainMenuButtonHandler()
+	{
+		Unpause();
+		SceneManager.LoadScene("MainMenu");
+	}
+
 	private void Update()
 	{
 		if (Input.GetKeyDown(KeyCode.Escape))
