@@ -26,13 +26,14 @@ public class HighscoreSaving : MonoBehaviour {
     void Start () {
 
         int score = PlayerPrefs.GetInt("Score");
-        
+		Debug.Log("Score: " + score);
         SaveScore(score, name);
     }
 
     public void SaveScore(long newScore, string newName)
-    {
+	{
         BinaryFormatter bf = new BinaryFormatter(); //Honestly unsure, but it works
+
         FileStream file = File.Open(Application.persistentDataPath + "/highScore.dat", FileMode.OpenOrCreate); //Open or create the file if it doesn't exist
 
         PlayerData newData = new PlayerData(newScore, newName); //Save a possible new entry as PlayerData Type

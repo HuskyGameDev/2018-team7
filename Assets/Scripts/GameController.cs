@@ -16,6 +16,8 @@ public class GameController : MonoBehaviour
 	[SerializeField] private GameObject pauseMenu;
 	[SerializeField] private GameObject newLevelInput;
 
+	private int score;
+
 	public static GameController Instance { get; private set; }
 
 	private bool soundMuted;
@@ -42,6 +44,16 @@ public class GameController : MonoBehaviour
 		Random.InitState(newSeed);
 
 		seedText.text = "Seed: " + newSeed.ToString();
+	}
+
+	public void AddScore(int value)
+	{
+		score += value;
+	}
+
+	public void SetScore(int value)
+	{
+		score = value;
 	}
 
 	public void Pause()
@@ -121,5 +133,10 @@ public class GameController : MonoBehaviour
 				Unpause();
 			else Pause();
 		}
+	}
+
+	private void OnDestroy()
+	{
+		PlayerPrefs.SetInt("Score", score);
 	}
 }

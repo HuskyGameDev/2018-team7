@@ -92,6 +92,7 @@ public class Floor : MonoBehaviour
 		GameObject.FindWithTag("Player").transform.position = new Vector3(5.0f, 5.0f);
 
 		FloorID++;
+		GameController.Instance.SetScore(FloorID);
 		Pathfinder.Generate();
 	}
 
