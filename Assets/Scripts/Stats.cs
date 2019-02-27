@@ -12,7 +12,7 @@ public class Stats : MonoBehaviour {
 
     private void Awake()
     {
-        DontDestroyOnLoad(this); //When you load into the GameOver scene, don't destroy this gameObject.
+       // DontDestroyOnLoad(this); //When you load into the GameOver scene, don't destroy this gameObject.
     }
 
     public void setScore(long newScore)

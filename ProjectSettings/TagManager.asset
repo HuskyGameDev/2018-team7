@@ -12,6 +12,8 @@ TagManager:
   - Collider
   - Stats
   - HighscoreSaving
+  - InputField
+  - Score
   layers:
   - Default
   - TransparentFX

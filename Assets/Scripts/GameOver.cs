@@ -2,49 +2,44 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameOver : MonoBehaviour
 {
     private HighscoreSaving HS;
     private Stats stats;
-    long score;
-   
+
+    public InputField IF;
+    public Text score;
+
+    public void Awake()
+    {
+        score.text = "Score = " + PlayerPrefs.GetInt("Score");
+    }
+
 
 
     public void PlayAgain()
 	{
-		//SaveRun();
+
 		GameController.ResetSeed();
         SceneManager.LoadScene("Game");
 	}
 
 	public void Menu()
 	{
-		//SaveRun();
 		GameController.ResetSeed();
 		SceneManager.LoadScene("MainMenu");
 	}
 
-    /* Trying to figure out how to get this information after it changes scene.
-     * 
-     * https://forum.unity.com/threads/how-to-pass-information-from-one-scene-to-another.23344/
-     * 
-     *
-    public void SaveRun()
+    public void SaveGame()
     {
-        score = stats.score;
-        HS.Save(score, "TestyTest420");
-        stats.resetStats();
-    }
-
-    public void Awake()
-    {
-        GameObject highScoreObject = GameObject.FindWithTag("HighscoreSaving");
-        GameObject statsObject = GameObject.FindWithTag("Stats");
-        HS = highScoreObject.GetComponent<HighscoreSaving>();
-        stats = statsObject.GetComponent<Stats>();
+        GameObject InputFieldGO = GameObject.FindWithTag("InputField");
+        IF = InputFieldGO.GetComponent<InputField>();
+        HS.SaveScore(PlayerPrefs.GetInt("Score"), IF.text);
 
     }
-    */
+
+
 
 }

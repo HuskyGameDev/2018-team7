@@ -43,6 +43,7 @@ public class UIElements : MonoBehaviour
 	{
 		text.text = floor.FloorID.ToString(); //Update the UI for the player
 		stats.setScore(floor.FloorID); //Update the stats file when the floor changes
+        PlayerPrefs.SetInt("Score", floor.FloorID);
 		float pos = ((playerController.health / 100f) * 130f) - 65f;
 		t.anchoredPosition = new Vector2(pos, t.anchoredPosition.y);
 	}
