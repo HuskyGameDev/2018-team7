@@ -41,7 +41,7 @@ public class Shotgun : Gun
             timeStamp = Time.time + timeBetweenShots;
 			for (int i = pellets.Count - 1; i >= 0; i--)
 			{
-				pellets[i] = Random.rotation;
+				pellets[i] = UnityEngine.Random.rotation;
 				Bullet p = CreateBullet(BarrelExit);
 				p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellets[i], spreadAngle);
 				p.SetSpeed(speed);
@@ -54,7 +54,7 @@ public class Shotgun : Gun
             timeStamp = Time.time + timeBetweenShots;
             for (int i = pellets.Count - 1; i >= 0; i--)
 			{
-				pellets[i] = Random.rotation;
+				pellets[i] = UnityEngine.Random.rotation;
 				Bullet p = CreateBullet(BarrelExit);
 				p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellets[i], spreadAngle);
 				p.SetSpeed(speed);
@@ -67,7 +67,7 @@ public class Shotgun : Gun
             timeStamp = Time.time + timeBetweenShots;
             for (int i = pellets.Count - 1; i >= 0; i--)
 			{
-				pellets[i] = Random.rotation;
+				pellets[i] = UnityEngine.Random.rotation;
 				Bullet p = CreateBullet(BarrelExit);
 				p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellets[i], spreadAngle);
 				p.SetSpeed(speed);
@@ -80,7 +80,7 @@ public class Shotgun : Gun
             timeStamp = Time.time + timeBetweenShots;
             for (int i = pellets.Count - 1; i >= 0; i--)
 			{
-				pellets[i] = Random.rotation;
+				pellets[i] = UnityEngine.Random.rotation;
 				Bullet p = CreateBullet(BarrelExit);
 				p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellets[i], spreadAngle);
 				p.SetSpeed(speed);

@@ -135,6 +135,32 @@ public class PlayerController : MonoBehaviour
 		gun.Init(this);
 		guns[type] = gun;
 	}
+    public void AddGun(int type)
+    {
+        // Pistol = 0, Shotgun = 1, SMG = 2, Sniper = 3, Minigun = 4, Count = 5
+        if (type == 0)
+        {
+            AddGun<Pistol>(GunType.Pistol);
+        }
+        else if (type == 1)
+        {
+            AddGun<Shotgun>(GunType.Shotgun);
+        }
+        else if (type == 2)
+        {
+            AddGun<SMG>(GunType.SMG);
+        }
+        else if (type == 3)
+        {
+            AddGun<Sniper>(GunType.Sniper);
+        }
+        else if (type == 4)
+        {
+            AddGun<Minigun>(GunType.Minigun);
+        }
+
+    }
+    
 
 	public bool HasGun(int type)
 	{
@@ -157,6 +183,26 @@ public class PlayerController : MonoBehaviour
 
 		guns[Gun].Fire(this);
 	}
+    public bool[] GetGunArray()
+    {
+        bool[] ret = new bool[GunType.Count];
+        for(int i = 0; i < GunType.Count; i++)
+        {
+            ret[i] = HasGun(i);
+        }
+        return ret;
+    }
+    //this breaks once new guns are added, be wary
+    public void SetGunArray(bool[] gunArray)
+    {
+        for (int i = 0; i < GunType.Count; i++)
+        {
+            if (gunArray[i])
+            {
+                AddGun(i);
+            }
+        }
+    }
 
 	private void LoadGameOver()
 	{

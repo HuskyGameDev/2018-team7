@@ -55,7 +55,7 @@ public class Klusterfunk : MonoBehaviour
         {
             foreach (Quaternion quat in pellets)
             {
-                pellets[i] = Random.rotation;
+                pellets[i] = UnityEngine.Random.rotation;
                 GameObject p = Instantiate(pellet, BarrelExit.position, BarrelExit.rotation);
                 p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellets[i], spreadAngle);
                 p.GetComponent<Rigidbody2D>().AddForce(p.transform.up * pelletFireVel);
@@ -66,7 +66,7 @@ public class Klusterfunk : MonoBehaviour
         {
             foreach (Quaternion quat in pellets)
             {
-                pellets[i] = Random.rotation;
+                pellets[i] = UnityEngine.Random.rotation;
                 GameObject p = Instantiate(pellet, BarrelExit.position, BarrelExit.rotation);
                 p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellets[i], spreadAngle);
                 p.GetComponent<Rigidbody2D>().AddForce(-(p.transform.up * pelletFireVel));
@@ -77,7 +77,7 @@ public class Klusterfunk : MonoBehaviour
         {
             foreach (Quaternion quat in pellets)
             {
-                pellets[i] = Random.rotation;
+                pellets[i] = UnityEngine.Random.rotation;
                 GameObject p = Instantiate(pellet, BarrelExit.position, BarrelExit.rotation);
                 p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellets[i], spreadAngle);
                 p.GetComponent<Rigidbody2D>().AddForce(-(p.transform.right * pelletFireVel));
@@ -88,7 +88,7 @@ public class Klusterfunk : MonoBehaviour
         {
             foreach (Quaternion quat in pellets)
             {
-                pellets[i] = Random.rotation;
+                pellets[i] = UnityEngine.Random.rotation;
                 GameObject p = Instantiate(pellet, BarrelExit.position, BarrelExit.rotation);
                 p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellets[i], spreadAngle);
                 p.GetComponent<Rigidbody2D>().AddForce(p.transform.right * pelletFireVel);

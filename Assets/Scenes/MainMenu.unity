@@ -446,7 +446,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 760927820}
-        m_MethodName: 
+        m_MethodName: Load
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -526,8 +526,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -7.6, y: -87.9}
-  m_SizeDelta: {x: 46.79, y: 31.38}
+  m_AnchoredPosition: {x: -8.4, y: -87.9}
+  m_SizeDelta: {x: 75.19, y: 31.38}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &977125107
 MonoBehaviour:
@@ -805,7 +805,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Play
+  m_Text: 'New Game
 
 '
 --- !u!222 &984059355
@@ -882,7 +882,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Loadout
+  m_Text: Load
 --- !u!222 &1200841286
 CanvasRenderer:
   m_ObjectHideFlags: 0

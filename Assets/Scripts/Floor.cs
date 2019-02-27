@@ -7,7 +7,7 @@ using static Utils;
 public class Floor : MonoBehaviour
 {
 	// The current floor the player is on.
-	public int FloorID { get; private set; }
+	public int FloorID { get; set; }
 
 	// Sparse storage. A bit slower, but doesn't matter with our level size. Smaller memory footprint.
 	private Dictionary<Vec2i, Room> rooms = new Dictionary<Vec2i, Room>();
