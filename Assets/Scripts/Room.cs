@@ -174,7 +174,8 @@ public class Room
 					{
 						SpriteRenderer rend = spritePool.Get();
 						rend.sprite = data.sprite;
-						rend.transform.position = WorldPos + new Vector2(x, y);
+						Vector2 wP = WorldPos + new Vector2(x, y);
+						rend.transform.position = new Vector3(wP.x, wP.y, 1.0f);
 
 						spriteList.Add(rend);
 					}
