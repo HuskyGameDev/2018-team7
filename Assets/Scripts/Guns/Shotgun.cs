@@ -7,12 +7,12 @@ public class Shotgun : Gun
 	private int pelletCount = 10;
 	private float spreadAngle;
     public Transform BarrelExit;
-    private float timeBetweenShots = 1.0f;
     private float timeStamp;
 	List<Quaternion> pellets;
 
 	protected override void Start()
 	{
+		fireRate = 0.75f;
 		speed = 25.0f;
 
 		// Temp
@@ -32,60 +32,36 @@ public class Shotgun : Gun
 		audioSource.clip = Resources.Load<AudioClip>("Sounds/Guns/Shotgun");
 	}
 
-	public override void Fire(PlayerController pc)
+	private void DoFire(Facing facing)
 	{
-		if (Time.time >= timeStamp && Input.GetKeyDown(KeyCode.UpArrow))
+		pc.ChangeFacing(facing);
+		audioSource.Play();
+
+		for (int i = pellets.Count - 1; i >= 0; i--)
 		{
-			pc.ChangeFacing(Facing.Back);
-			audioSource.Play();
-            timeStamp = Time.time + timeBetweenShots;
-			for (int i = pellets.Count - 1; i >= 0; i--)
-			{
-				pellets[i] = UnityEngine.Random.rotation;
-				Bullet p = CreateBullet(BarrelExit);
-				p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellets[i], spreadAngle);
-				p.SetSpeed(speed);
-			}
-		}
-		else if (Time.time >= timeStamp && Input.GetKeyDown(KeyCode.DownArrow))
-		{
-			pc.ChangeFacing(Facing.Front);
-			audioSource.Play();
-            timeStamp = Time.time + timeBetweenShots;
-            for (int i = pellets.Count - 1; i >= 0; i--)
-			{
-				pellets[i] = UnityEngine.Random.rotation;
-				Bullet p = CreateBullet(BarrelExit);
-				p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellets[i], spreadAngle);
-				p.SetSpeed(speed);
-			}
-		}
-		else if (Time.time >= timeStamp && Input.GetKeyDown(KeyCode.LeftArrow))
-		{
-			pc.ChangeFacing(Facing.Left);
-			audioSource.Play();
-            timeStamp = Time.time + timeBetweenShots;
-            for (int i = pellets.Count - 1; i >= 0; i--)
-			{
-				pellets[i] = UnityEngine.Random.rotation;
-				Bullet p = CreateBullet(BarrelExit);
-				p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellets[i], spreadAngle);
-				p.SetSpeed(speed);
-			}
-		}
-		else if (Time.time >= timeStamp && Input.GetKeyDown(KeyCode.RightArrow))
-		{
-			pc.ChangeFacing(Facing.Right);
-			audioSource.Play();
-            timeStamp = Time.time + timeBetweenShots;
-            for (int i = pellets.Count - 1; i >= 0; i--)
-			{
-				pellets[i] = UnityEngine.Random.rotation;
-				Bullet p = CreateBullet(BarrelExit);
-				p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellets[i], spreadAngle);
-				p.SetSpeed(speed);
-			}
+			pellets[i] = Random.rotation;
+			Bullet p = CreateBullet(BarrelExit);
+			p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellets[i], spreadAngle);
+			p.SetSpeed(speed);
 		}
 
+		timeBeforeFire = fireRate;
+	}
+
+	public override void Fire(PlayerController pc)
+	{
+		timeBeforeFire -= Time.deltaTime;
+
+		if (timeBeforeFire < 0.0f)
+		{
+			if (Input.GetKey(KeyCode.UpArrow))
+				DoFire(Facing.Back);
+			else if (Input.GetKey(KeyCode.DownArrow))
+				DoFire(Facing.Front);
+			else if (Input.GetKey(KeyCode.LeftArrow))
+				DoFire(Facing.Left);
+			else if (Input.GetKey(KeyCode.RightArrow))
+				DoFire(Facing.Right);
+		}
 	}
 }

@@ -16,6 +16,9 @@ public class Gun
 	protected AudioSource audioSource;
 	[HideInInspector] public float speed; // the speed at which the player shoots
 
+	protected float fireRate = 0.0f;
+	protected float timeBeforeFire = 0.0f;
+
 	protected BulletPool bulletPool = new BulletPool();
 
 	public void Init(PlayerController pc)
@@ -36,6 +39,7 @@ public class Gun
 
 	protected virtual void Start()
 	{
+		fireRate = 0.25f;
 		speed = 15.0f;
 	}
 

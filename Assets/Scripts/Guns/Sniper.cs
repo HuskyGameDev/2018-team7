@@ -2,12 +2,9 @@
 
 public class Sniper : Gun
 {
-	public float timeBetweenShots = 1.0f;
-
-	private float timestamp;
-
 	protected override void Start()
 	{
+		fireRate = 0.6f;
 		speed = 18.0f;
 	}
 
@@ -16,59 +13,29 @@ public class Sniper : Gun
 		audioSource.clip = Resources.Load<AudioClip>("Sounds/Guns/Sniper Rifle");
 	}
 
+	private void DoFire(Facing facing)
+	{
+		pc.ChangeFacing(facing);
+		audioSource.Play();
+		Bullet go = CreateBullet(pc.transform);
+		go.SetSpeed(speed);
+		timeBeforeFire = fireRate;
+	}
+
 	public override void Fire(PlayerController pc)
 	{
-		//Shoots Right
-		if (Time.time >= timestamp && Input.GetKeyDown(KeyCode.RightArrow))
+		timeBeforeFire -= Time.deltaTime;
+
+		if (timeBeforeFire < 0.0f)
 		{
-			pc.ChangeFacing(Facing.Right);
-			audioSource.Play();
-
-			//Instantiate(bullet, transform.position, transform.rotation);
-			timestamp = Time.time + timeBetweenShots;
-
-			Bullet go = CreateBullet(pc.transform);
-			go.SetSpeed(speed);
-		}
-
-		//Shoots Left
-		else if (Time.time >= timestamp && Input.GetKeyDown(KeyCode.LeftArrow))
-		{
-			pc.ChangeFacing(Facing.Left);
-			audioSource.Play();
-
-			//Instantiate(bullet, transform.position, transform.rotation);
-			timestamp = Time.time + timeBetweenShots;
-
-			Bullet go = CreateBullet(pc.transform);
-			go.SetSpeed(speed);
-
-		}
-		//Shoots Up
-		else if (Time.time >= timestamp && Input.GetKeyDown(KeyCode.UpArrow))
-		{
-			pc.ChangeFacing(Facing.Back);
-			audioSource.Play();
-
-			//Instantiate(bullet, transform.position, transform.rotation);
-			timestamp = Time.time + timeBetweenShots;
-
-			Bullet go = CreateBullet(pc.transform);
-			go.SetSpeed(speed);
-
-		}
-		//Shoots Down
-		else if (Time.time >= timestamp && Input.GetKeyDown(KeyCode.DownArrow))
-		{
-			pc.ChangeFacing(Facing.Front);
-			audioSource.Play();
-
-			//Instantiate(bullet, transform.position, transform.rotation);
-			timestamp = Time.time + timeBetweenShots;
-
-			Bullet go = CreateBullet(pc.transform);
-			go.SetSpeed(speed);
-
+			if (Input.GetKey(KeyCode.RightArrow))
+				DoFire(Facing.Right);
+			else if (Input.GetKey(KeyCode.LeftArrow))
+				DoFire(Facing.Left);
+			else if (Input.GetKey(KeyCode.UpArrow))
+				DoFire(Facing.Back);
+			else if (Input.GetKey(KeyCode.DownArrow))
+				DoFire(Facing.Front);
 		}
 	}
 }

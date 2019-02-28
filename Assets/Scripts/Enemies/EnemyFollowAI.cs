@@ -58,13 +58,13 @@ public class EnemyFollowAI : MonoBehaviour
 
 	void Update()
 	{
+		timer -= Time.deltaTime;
+
 		if (enemy.pc.Dead || Time.timeScale == 0.0f)
 			return;
 
 		if (path.Count == 0)
 			followingPath = false;
-
-		timer -= Time.deltaTime;
 
 		if (nextCell.HasValue)
 		{
