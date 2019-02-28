@@ -26,13 +26,15 @@ public class HighscoreSaving : MonoBehaviour {
     void Start () {
 
         int score = PlayerPrefs.GetInt("Score");
+        string name = PlayerPrefs.GetString("Name");
 		Debug.Log("Score: " + score);
+        Debug.Log("Name: " + name);
         SaveScore(score, name);
     }
 
     public void SaveScore(long newScore, string newName)
 	{
-        BinaryFormatter bf = new BinaryFormatter(); //Honestly unsure, but it works
+        BinaryFormatter bf = new BinaryFormatter(); //It's what writes or reads from the file. 
 
         FileStream file = File.Open(Application.persistentDataPath + "/highScore.dat", FileMode.OpenOrCreate); //Open or create the file if it doesn't exist
 
@@ -44,7 +46,7 @@ public class HighscoreSaving : MonoBehaviour {
         bf.Serialize(file, LB); //Make it able to be pushed to the file
         file.Close();
 
-        //updateScores(); //Update what is shown on screen in case something changed
+       
     }
     
 
@@ -57,7 +59,10 @@ public class HighscoreSaving : MonoBehaviour {
 	//Fill the temp array with real values so I don't manipulate current real data. 
         for(int i = 0; i < LB_MAX; i++)
         {
+            
             temp[i] = LB[i];
+         
+                
         }
         temp[LB_MAX] = newPlayerData; //Put the new value on the end.
 
@@ -67,13 +72,14 @@ public class HighscoreSaving : MonoBehaviour {
         {
             for (int j = 0; j < temp.Length; j++)
             {
-                if (temp[i].highscore > temp[j].highscore)
+                if (temp[i].highscore > temp[j].highscore )
                 {
                     //Swap
                     swap = temp[i];
                     temp[i] = temp[j];
                     temp[j] = swap;
                 }
+                
             }
         }
 
@@ -86,11 +92,20 @@ public class HighscoreSaving : MonoBehaviour {
 
     }
 
-   
 
-    
+    /*
+    else if(temp[i].highscore == null && temp[j].highscore != null)
+                {
+                    temp[i] = temp[j];
+                }
+                else if (temp[i].highscore != null && temp[j].highscore == null)
+                {
+                    //Do nothing? 
+                }
 
+        && temp[i].highscore != null && temp[j].highscore != null
 
+    */
     [Serializable] //Make it Serializable? Easier to put into a file. 
     class PlayerData
     {
