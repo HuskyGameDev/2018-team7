@@ -35,10 +35,11 @@ public class FloorGenerator
 		this.enemyPrefabs = enemyPrefabs;
 		spawner = GameObject.FindWithTag("ItemSpawner").GetComponent<ItemSpawner>();
 
-		patterns = new PatternFunc[3];
+		patterns = new PatternFunc[4];
 		patterns[0] = NormalPattern;
 		patterns[1] = ExtraObstacles;
 		patterns[2] = WallsPattern;
+		patterns[3] = XPattern;
 	}
 
 	protected void AddBase(Room room)
@@ -128,6 +129,20 @@ public class FloorGenerator
 				for (int j = startX; j < startX + dist; j++)
 					room.SetTile(j, startY, TileType.Wall);
 			}
+		}
+	}
+
+	protected void XPattern(Room room)
+	{
+		AddBase(room);
+		int y = Room.Height - 3;
+
+		for (int x = 5; x < 15; x++, y--)
+		{
+			room.SetTile(x, y, TileType.Wall);
+			room.SetTile(x, Room.Height - 1 - y, TileType.Wall);
+			room.SetTile(Room.Width - 1 - x, y, TileType.Wall);
+			room.SetTile(Room.Width - 1 - x, Room.Height - 1 - y, TileType.Wall);
 		}
 	}
 
