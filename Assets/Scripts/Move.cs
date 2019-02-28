@@ -46,7 +46,7 @@ public class Move : MonoBehaviour {
 		float currentSpeed = speed * SpeedModifier;
 
 		if (Input.GetKey(KeyCode.LeftShift))
-			currentSpeed *= 3.0f;
+			currentSpeed *= 2.0f;
 
 		Vector2 accel = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 		playerController.UpdateSprite(accel);

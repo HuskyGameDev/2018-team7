@@ -14,6 +14,8 @@ public class Enemy : MonoBehaviour
 	protected SpriteRenderer rend;
 	public PlayerController pc { get; private set; }
 
+	private Color baseColor;
+
 	public Vector2 Pos
 	{
 		get { return transform.position; }
@@ -22,6 +24,7 @@ public class Enemy : MonoBehaviour
 	private void Awake()
 	{
 		rend = GetComponent<SpriteRenderer>();
+		baseColor = rend.color;
 		pc = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
 	}
 
@@ -50,10 +53,9 @@ public class Enemy : MonoBehaviour
 	{
 		if (rend != null)
 		{
-			Color def = rend.color;
 			rend.color = Color.red;
 			yield return new WaitForSeconds(0.1f);
-			rend.color = def;
+			rend.color = baseColor;
 		}
 	}
 }
