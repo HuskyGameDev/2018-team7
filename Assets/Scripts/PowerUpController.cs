@@ -86,8 +86,8 @@ public class PowerUpController : MonoBehaviour
      */ 
     void HealthPickup()
     {
-        if (playerController.health < 100)
-            playerController.health = playerController.health + 20;
+		if (playerController.health < 100)
+			playerController.Heal(20);
     }
 
     /**

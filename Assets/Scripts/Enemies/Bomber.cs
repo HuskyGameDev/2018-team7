@@ -5,13 +5,15 @@ using UnityEngine;
 public class Bomber : MonoBehaviour
 {
     private PlayerController pc;
-    private float range = 5f;
+	private float range = 1.0f;
     private Transform target;
+	private ParticleSystem ps;
 
     // Start is called before the first frame update
     void Start()
     {
         pc = GetComponent<Enemy>().pc;
+		ps = GetComponent<ParticleSystem>();
         target = pc.transform;    
     }
 
@@ -24,7 +26,18 @@ public class Bomber : MonoBehaviour
 
     private void Explode()
     {
-        pc.health -= 50;
-        Destroy(gameObject);
+		Vector3 dir = (target.position - transform.position).normalized;
+		pc.ApplyDamage(50, dir, 50.0f);
+
+		// Disable the visual rendering and the running of this script.
+		// We do this since we can't destroy the enemy until the particles finish playing.
+		GetComponent<SpriteRenderer>().enabled = false;
+		enabled = false;
+
+		ps.Play();
+
+		// Destroy after the particles have fully played out
+		// to prevent them from being cut off.
+		Destroy(gameObject, ps.main.startLifetime.constant);
     }
 }

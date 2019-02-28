@@ -155,8 +155,8 @@ public class FloorGenerator
 
 		do
 		{
-			x = Random.Range(0, Room.Width - 1);
-			y = Random.Range(0, Room.Height - 1);
+			x = Random.Range(4, Room.Width - 4);
+			y = Random.Range(4, Room.Height - 4);
 		}
 		while (room.GetTile(x, y) != TileType.Floor);
 
@@ -192,7 +192,15 @@ public class FloorGenerator
 
 		for (int i = 0; i < enemyCount; i++)
 		{
-			EnemyType type = Random.value < 0.2f ? EnemyType.Sentry : EnemyType.Helicopter;
+			float val = Random.value;
+			EnemyType type;
+
+			if (val < 0.2f)
+				type = EnemyType.Sentry;
+			else if (val < 0.4f)
+				type = EnemyType.Bomber;
+			else type = EnemyType.Helicopter;
+
 			SpawnEnemy(type, room, RandomFreePosition(room));
 		}
 

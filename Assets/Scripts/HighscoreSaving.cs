@@ -38,15 +38,22 @@ public class HighscoreSaving : MonoBehaviour {
 
         FileStream file = File.Open(Application.persistentDataPath + "/highScore.dat", FileMode.OpenOrCreate); //Open or create the file if it doesn't exist
 
-        PlayerData newData = new PlayerData(newScore, newName); //Save a possible new entry as PlayerData Type
+		try
+		{
+			PlayerData newData = new PlayerData(newScore, newName); //Save a possible new entry as PlayerData Type
 
-        LeaderSort(newData); //Sort the data like a Leaderboard
-	//New person could have been added, but now it's sorted, and ready to put back
-	    
-        bf.Serialize(file, LB); //Make it able to be pushed to the file
-        file.Close();
-
-       
+			LeaderSort(newData); //Sort the data like a Leaderboard
+								 //New person could have been added, but now it's sorted, and ready to put back
+		}
+		catch (NullReferenceException)
+		{
+			Debug.Log("TODO: Fix this NullReferenceException!");
+		}
+		finally
+		{
+			bf.Serialize(file, LB); //Make it able to be pushed to the file
+			file.Close();
+		}
     }
     
 

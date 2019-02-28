@@ -9,7 +9,9 @@ using static Utils;
 [RequireComponent(typeof(CharacterController))]
 public class EnemyFollowAI : MonoBehaviour
 {
+	public float baseSpeed;
 	public float detectRange;
+
 	private float speed;
 
 	private CharacterController controller;
@@ -27,7 +29,7 @@ public class EnemyFollowAI : MonoBehaviour
 	void Start()
 	{
 		int floor = Floor.Instance.FloorID;
-		speed = Mathf.Min(2.5f + ((floor - 1) * 0.25f), 10.0f);
+		speed = Mathf.Min(baseSpeed + ((floor - 1) * 0.25f), 10.0f);
 
 		controller = GetComponent<CharacterController>();
 		transform.SetZ(-0.1f);
@@ -63,8 +65,6 @@ public class EnemyFollowAI : MonoBehaviour
 			followingPath = false;
 
 		timer -= Time.deltaTime;
-
-		//DrawPath();
 
 		if (nextCell.HasValue)
 		{

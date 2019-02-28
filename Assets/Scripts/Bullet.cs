@@ -88,13 +88,8 @@ public class Bullet : MonoBehaviour
 		}
 		else if (other.gameObject.layer == 8)
 		{
-			pc.TakeDamage(10);
-
-			if (!pc.Dead)
-			{
-				Vector3 dir = (other.transform.position - transform.position).normalized;
-				other.GetComponentInParent<Move>().ApplyKnockback(dir, 25.0f);
-			}
+			Vector3 dir = (other.transform.position - transform.position).normalized;
+			pc.ApplyDamage(10, dir, 25.0f);
 		}
 
 		Pool.ReturnBullet(this);

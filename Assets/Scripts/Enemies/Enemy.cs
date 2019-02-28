@@ -3,7 +3,7 @@ using System.Collections;
 
 public enum EnemyType
 {
-	Helicopter, Sentry
+	Helicopter, Sentry, Bomber
 }
 
 public class Enemy : MonoBehaviour
@@ -50,9 +50,10 @@ public class Enemy : MonoBehaviour
 	{
 		if (rend != null)
 		{
+			Color def = rend.color;
 			rend.color = Color.red;
 			yield return new WaitForSeconds(0.1f);
-			rend.color = Color.white;
+			rend.color = def;
 		}
 	}
 }

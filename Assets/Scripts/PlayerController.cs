@@ -32,11 +32,13 @@ public class PlayerController : MonoBehaviour
 
 	private int _health;
 
-	// the health of the player
+	// The health of the player
+	// This should not be set directly outside of this class. 
+	// Use ApplyDamage() and Heal() instead.
 	public int health
 	{
 		get { return _health; }
-		set
+		private set
 		{
 			_health = value;
 			_health = Mathf.Clamp(_health, 0, 100);
@@ -79,12 +81,20 @@ public class PlayerController : MonoBehaviour
 		rend.color = Color.white;
 	}
 
-	public void TakeDamage(int damage)
+	public void ApplyDamage(int damage, Vector3 knockbackDir = default(Vector3), float knockbackForce = 0.0f)
 	{
 		health -= damage;
 
 		if (!Dead)
+		{
 			StartCoroutine(TintRed());
+			GetComponent<Move>().ApplyKnockback(knockbackDir, knockbackForce);
+		}
+	}
+
+	public void Heal(int amount)
+	{
+		health += amount;
 	}
 
 	/**
