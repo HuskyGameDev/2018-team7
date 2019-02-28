@@ -137,7 +137,10 @@ public class FloorGenerator
 		AddBase(room);
 		int y = Room.Height - 3;
 
-		for (int x = 5; x < 15; x++, y--)
+		int start = Random.Range(2, 5);
+		int end = start + 10;
+
+		for (int x = start; x < end; x++, y--)
 		{
 			room.SetTile(x, y, TileType.Wall);
 			room.SetTile(x, Room.Height - 1 - y, TileType.Wall);
