@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyShooting : MonoBehaviour
+public class BossShooting : MonoBehaviour
 {
     public Vector3 bulletSet = new Vector3(0, 0.5f, 0);
     public GameObject bulletPrefab;
