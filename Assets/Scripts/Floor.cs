@@ -7,7 +7,7 @@ using static Utils;
 public class Floor : MonoBehaviour
 {
 	// The current floor the player is on.
-	public int FloorID { get; set; }
+	public int FloorID { get; private set; } = 1;
 
 	// Sparse storage. A bit slower, but doesn't matter with our level size. Smaller memory footprint.
 	private Dictionary<Vec2i, Room> rooms = new Dictionary<Vec2i, Room>();
@@ -34,7 +34,7 @@ public class Floor : MonoBehaviour
 	private FloorGenerator[] generators = new FloorGenerator[1];
 	private FloorGenerator generator;
 
-	private void Awake()
+	private void Start()
 	{
 		Instance = this;
 
@@ -45,7 +45,7 @@ public class Floor : MonoBehaviour
 
 		Pathfinder = new FloorPathfinder(this);
 
-		Generate();
+		Generate(FloorID);
 	}
 
 	public void Destroy()
@@ -83,10 +83,12 @@ public class Floor : MonoBehaviour
 	/// <summary>
 	/// Generate the floor. This creates and builds the rooms that comprise it. 
 	/// </summary>
-	public void Generate()
+	public void Generate(int floorID)
 	{
-		generator = generators[Random.Range(0, generators.Length)];
+		// Seeds the random generator.
+		Random.InitState((GameController.seed + floorID) % GameController.MaxSeed);
 
+		generator = generators[Random.Range(0, generators.Length)];
 		generator.Generate();
 
 		// Ensure the player cannot spawn inside of walls by clearing any nearby walls.
@@ -95,7 +97,7 @@ public class Floor : MonoBehaviour
 
 		GameObject.FindWithTag("Player").transform.position = new Vector3(5.0f, 5.0f);
 
-		FloorID++;
+		FloorID = floorID;
 		GameController.Instance.SetScore(FloorID);
 		Pathfinder.Generate();
 	}
@@ -157,11 +159,5 @@ public class Floor : MonoBehaviour
 		Room room = new Room(x, y, spritePool, colliderPool, this);
 		rooms.Add(roomP, room);
 		return room;
-	}
-
-	private void Update()
-	{
-		if (Input.GetKeyDown(KeyCode.P))
-			Generate();
 	}
 }

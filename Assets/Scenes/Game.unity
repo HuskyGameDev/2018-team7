@@ -255,7 +255,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: QuickLoad
+  m_Text: Quick Load
 --- !u!222 &129276248
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2140,7 +2140,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'QuickSave
+  m_Text: 'Quick Save
 
 '
 --- !u!222 &1221684560

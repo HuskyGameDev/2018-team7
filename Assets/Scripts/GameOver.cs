@@ -17,11 +17,8 @@ public class GameOver : MonoBehaviour
         score.text = "Score = " + PlayerPrefs.GetInt("Score");
     }
 
-
-
     public void PlayAgain()
 	{
-
 		GameController.ResetSeed();
         SceneManager.LoadScene("Game");
 	}
@@ -37,9 +34,5 @@ public class GameOver : MonoBehaviour
         GameObject InputFieldGO = GameObject.FindWithTag("InputField");
         IF = InputFieldGO.GetComponent<InputField>();
         HS.SaveScore(PlayerPrefs.GetInt("Score"), IF.text);
-
     }
-
-
-
 }

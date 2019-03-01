@@ -12,8 +12,9 @@ public class PlayerCollision : MonoBehaviour
 			{
 				// Generate a new floor when colliding with stairs.
 				case TileType.Stair:
-					Floor.Instance.Destroy();
-					Floor.Instance.Generate();
+					Floor floor = Floor.Instance;
+					floor.Destroy();
+					floor.Generate(floor.FloorID + 1);
 					break;
 			}
 		}

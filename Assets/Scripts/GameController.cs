@@ -5,11 +5,13 @@ using System;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 
+using Random = UnityEngine.Random;
+
 public class GameController : MonoBehaviour
 {
 	// Stores the seed being used to generate the current game.
 	// This is static so that its value is preserved between scene changes.
-	private static int seed = -1;
+	public static int seed { get; private set; } = -1;
 
 	public const int MaxSeed = 100000000;
 
@@ -31,7 +33,7 @@ public class GameController : MonoBehaviour
 
 		// Awake is called when the game scene is loaded. If we have a seed set,
 		// we want to use that seed - the level regenerated with a certain seed requested.
-		SetSeed(seed == -1 ? UnityEngine.Random.Range(0, MaxSeed) : seed);
+		SetSeed(seed == -1 ? Random.Range(0, MaxSeed) : seed);
 	}
 
 	public static void ResetSeed()
@@ -42,10 +44,6 @@ public class GameController : MonoBehaviour
 	private void SetSeed(int newSeed)
 	{
 		seed = newSeed;
-
-		// Seeds the random generator.
-		UnityEngine.Random.InitState(newSeed);
-
 		seedText.text = "Seed: " + newSeed.ToString();
 	}
 
@@ -98,10 +96,12 @@ public class GameController : MonoBehaviour
 	{
 		if (input.text.Length > 0)
 		{
-			if (int.TryParse(input.text, out seed))
+			int value;
+			if (int.TryParse(input.text, out value))
 			{
-				if (seed >= 0 && seed < MaxSeed)
+				if (value >= 0 && value < MaxSeed)
 				{
+					seed = value;
 					Time.timeScale = 1.0f;
 					SceneManager.LoadScene("Game");
 					return;
@@ -155,40 +155,36 @@ public class GameController : MonoBehaviour
 		newSave.score = newSave.floor;
 
 		BinaryFormatter bf = new BinaryFormatter(); //Honestly unsure, but it works
-		FileStream file = File.Open(Application.persistentDataPath + "/savegame.dat", FileMode.OpenOrCreate); //Open or create the file if it doesn't exist
-
-
+		FileStream file = File.Open(Application.persistentDataPath + "/SaveGame.dat", FileMode.OpenOrCreate); //Open or create the file if it doesn't exist
 
 		bf.Serialize(file, newSave); //Make it able to be pushed to the file
 		file.Close();
 
-		//updateScores(); //Update what is shown on screen in case something changed
+		Debug.Log("Game saved!");
 	}
 	//
 	public void QuickLoadButtonHandler()
 	{
 		SaveData loaded = new SaveData(null, null, null, null); //empty savedata to add the file info to
 
-		if (File.Exists(Application.persistentDataPath + "/highScore.dat")) //If someone has played this before, and a highscore exists
+		if (File.Exists(Application.persistentDataPath + "/SaveGame.dat")) //If someone has played this before, and a highscore exists
 		{
 			BinaryFormatter bf = new BinaryFormatter();  //Open new formatter
 			FileStream file = File.Open(Application.persistentDataPath + "/SaveGame.dat", FileMode.Open); //Open the existing file
 			loaded = (SaveData)bf.Deserialize(file); //Make the file readable to me again
 			file.Close(); //Close the file because I read from it already. 
 
-			seed = loaded.seed ?? 0;//set seed to the loaded seed, if loaded one is null somehow set it to 0
-
-			Floor.Instance.FloorID = loaded.floor ?? 1;
+			SetSeed(loaded.seed ?? Random.Range(0, MaxSeed));
 
 			PlayerController pc = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
 			pc.SetGunArray(loaded.guns);
+			
+			Floor floor = Floor.Instance;
+			floor.Destroy();
+			floor.Generate(loaded.floor ?? 1);
+			Unpause();
 
-
-			//Time.timeScale = 1.0f;
-			//SceneManager.LoadScene("Game");
-			return;
-
-
+			Debug.Log("Game loaded!");
 		}
 	}
 
