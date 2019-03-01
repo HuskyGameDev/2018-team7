@@ -1,10 +1,15 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Generates rooms linearly - that is, there's one path from the first room to the last room.
+/// It can generate rooms in any of the four directions.
+/// </summary>
 public class LinearGenerator : FloorGenerator
 {
 	public LinearGenerator(Floor floor, GameObject[] enemyPrefabs) : base(floor, enemyPrefabs) { }
 
+	// Returns the position the next room will generate in.
 	protected override Vec2i GetNextPos(Vec2i current)
 	{
 		List<Vec2i> possibleRooms = new List<Vec2i>(4)
@@ -18,6 +23,9 @@ public class LinearGenerator : FloorGenerator
 		return possibleRooms[Random.Range(0, possibleRooms.Count)];
 	}
 
+	/// <summary>
+	/// Creates all the rooms making up the floor.
+	/// </summary>
 	public override void Generate()
 	{
 		int roomCount = Random.Range(8, 13);

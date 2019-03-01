@@ -73,6 +73,7 @@ public class FloorGenerator
 		}
 	}
 
+	// Room pattern with some obstacles.
 	protected void NormalPattern(Room room)
 	{
 		AddBase(room);
@@ -88,6 +89,7 @@ public class FloorGenerator
 		}
 	}
 
+	// Normal pattern but with more obstacle walls.
 	protected void ExtraObstacles(Room room)
 	{
 		AddBase(room);
@@ -102,6 +104,7 @@ public class FloorGenerator
 		}
 	}
 
+	// Adds random linear walls to the room.
 	protected void WallsPattern(Room room)
 	{
 		AddBase(room);
@@ -132,6 +135,7 @@ public class FloorGenerator
 		}
 	}
 
+	// Adds an x-pattern of walls in the room.
 	protected void XPattern(Room room)
 	{
 		AddBase(room);
@@ -149,6 +153,8 @@ public class FloorGenerator
 		}
 	}
 
+	// Returns a random position in the room not blocked by 
+	// an obstacle, and inset by 4 tiles from each wall.
 	protected Vector2 RandomFreePosition(Room room)
 	{
 		int x, y;

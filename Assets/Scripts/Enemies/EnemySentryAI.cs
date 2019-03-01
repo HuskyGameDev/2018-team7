@@ -13,8 +13,13 @@ public class EnemySentryAI : MonoBehaviour
 	private void Start()
 	{
 		int floor = Floor.Instance.FloorID;
+
+		// Set bullet speed and time between shots based on the floor we're on.
+		// Bullet speed starts at 10 and goes up 1.5 per floor, up to a max of 50.
+		// Time between shots starts at 1.5 seconds and falls to a minimum of 0.2 seconds.
 		bulletSpeed = Mathf.Min(10.0f + ((floor - 1) * 1.5f), 50.0f);
 		timeBetweenShots = Mathf.Max(1.5f - (((floor - 1) / 2) * 0.15f), 0.2f);
+
 		pc = GetComponent<Enemy>().pc;
 		target = pc.transform;
 	}

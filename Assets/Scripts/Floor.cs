@@ -65,6 +65,7 @@ public class Floor : MonoBehaviour
 			Destroy(pickups[i]);
 	}
 
+	// Clears all tiles immediately around the given tile position to floor tiles.
 	private void ClearAround(Vec2i p)
 	{
 		Vec2i roomP = ToRoomPos(p);
@@ -88,7 +89,10 @@ public class Floor : MonoBehaviour
 
 		generator.Generate();
 
+		// Ensure the player cannot spawn inside of walls by clearing any nearby walls.
+		// TODO: We need to make sure there's no case where the player will get trapped from this.
 		ClearAround(new Vec2i(5, 5));
+
 		GameObject.FindWithTag("Player").transform.position = new Vector3(5.0f, 5.0f);
 
 		FloorID++;

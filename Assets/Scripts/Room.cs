@@ -175,6 +175,9 @@ public class Room
 						SpriteRenderer rend = spritePool.Get();
 						rend.sprite = data.sprite;
 						Vector2 wP = WorldPos + new Vector2(x, y);
+
+						// Tile z position is set to 1 so it is behind all dynamic entities.
+						// This prevents sprite sorting issues. 
 						rend.transform.position = new Vector3(wP.x, wP.y, 1.0f);
 
 						spriteList.Add(rend);

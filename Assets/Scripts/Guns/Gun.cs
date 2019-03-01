@@ -16,7 +16,10 @@ public class Gun
 	protected AudioSource audioSource;
 	[HideInInspector] public float speed; // the speed at which the player shoots
 
+	// The gun can fire every 'fireRate' number of seconds.
 	protected float fireRate = 0.0f;
+
+	// The time remaining before the gun can fire again.
 	protected float timeBeforeFire = 0.0f;
 
 	protected BulletPool bulletPool = new BulletPool();

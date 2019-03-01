@@ -29,6 +29,9 @@ public class EnemyFollowAI : MonoBehaviour
 	void Start()
 	{
 		int floor = Floor.Instance.FloorID;
+
+		// Set the enemy's speed based on the floor we're on. For each additional floor,
+		// the enemy will get 0.25 higher speed up to a max speed of 10.0.
 		speed = Mathf.Min(baseSpeed + ((floor - 1) * 0.25f), 10.0f);
 
 		controller = GetComponent<CharacterController>();

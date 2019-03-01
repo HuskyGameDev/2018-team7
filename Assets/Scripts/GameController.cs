@@ -49,11 +49,17 @@ public class GameController : MonoBehaviour
 		seedText.text = "Seed: " + newSeed.ToString();
 	}
 
+	/// <summary>
+	/// Add to the existing score value.
+	/// </summary>
 	public void AddScore(int value)
 	{
 		score += value;
 	}
 
+	/// <summary>
+	/// Overwrite the existing score value with a new one.
+	/// </summary>
 	public void SetScore(int value)
 	{
 		score = value;
@@ -106,6 +112,10 @@ public class GameController : MonoBehaviour
 		input.text = "";
 	}
 
+	/// <summary>
+	/// Linked to the pause menu UI. If the sound is currently muted, unmutes it. 
+	/// Otherwise, mutes it. This mutes all sound in the game from all sources.
+	/// </summary>
 	public void MuteSoundButtonHandler(Text buttonText)
 	{
 		if (soundMuted)
@@ -122,9 +132,14 @@ public class GameController : MonoBehaviour
 		}
 	}
 
+	/// <summary>
+	/// Linked to the pause menu. Loads the main menu scene.
+	/// </summary>
 	public void MainMenuButtonHandler()
 	{
+		// Unpause resets Time.timeScale, which is global.
 		Unpause();
+
 		SceneManager.LoadScene("MainMenu");
 	}
 

@@ -1,12 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
+/// <summary>
+/// Stores bullet game objects so that they can be reused without instantiating/destroying.
+/// </summary>
 public class BulletPool
 {
 	private GameObject bulletPrefab;
 
 	private Queue<Bullet> bulletPool = new Queue<Bullet>();
 
+	/// <summary>
+	/// Returns a new bullet from the pool and sets its position to the position given.
+	/// The bullet won't collide with the object firing it.
+	/// </summary>
 	public Bullet CreateBullet(Transform t)
 	{
 		Bullet bullet = GetBullet();
@@ -15,6 +22,7 @@ public class BulletPool
 		return bullet;
 	}
 
+	// Returns a new bullet from the pool if one exists. If not, instantiates a new one.
 	private Bullet GetBullet()
 	{
 		Bullet bullet;
@@ -34,10 +42,15 @@ public class BulletPool
 			bullet.Pool = this;
 		}
 
+		// Starts the coroutine to destroy the bullet after a certain amount of time.
 		bullet.OnFired();
+
 		return bullet;
 	}
 
+	/// <summary>
+	/// Returns the bullet back to the pool, setting it inactive in the process.
+	/// </summary>
 	public void ReturnBullet(Bullet obj)
 	{
 		obj.gameObject.SetActive(false);
