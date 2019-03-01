@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyLoot : MonoBehaviour
 {
 	private bool doSpawn = false;
-	private int gunToSpawn;
+	private float gunToSpawn;
 
 	/// <summary>
 	/// Determines which weapon will drop, if any, for this entity. This is called in advance instead of deciding at the time the drop 
