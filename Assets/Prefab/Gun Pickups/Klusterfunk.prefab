@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 65957684317555926}
   - component: {fileID: 54414679109632192}
   m_Layer: 12
-  m_Name: Sniper
+  m_Name: Klusterfunk
   m_TagString: Pickup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -67,8 +67,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.64000005, y: 0.32, z: 5}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.18937247, y: 0.32, z: 5}
+  m_Center: {x: -0.00000008187727, y: 0, z: 0}
 --- !u!212 &212369296076053514
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -104,7 +104,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 91fc822c91feb914fbcb03223f5cdfea, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1ac8663674e3c5d4f91e7bcbd91957ff, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

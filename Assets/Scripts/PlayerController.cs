@@ -139,39 +139,43 @@ public class PlayerController : MonoBehaviour
 		}
 	}
 
-	public void AddGun<T>(int type) where T: Gun, new()
+	private void AddGun<T>(int type) where T: Gun, new()
 	{
 		T gun = new T();
 		gun.Init(this);
 		guns[type] = gun;
 	}
+
     public void AddGun(int type)
     {
-        // Pistol = 0, Shotgun = 1, SMG = 2, Sniper = 3, Minigun = 4, Count = 5
-        if (type == 0)
-        {
-            AddGun<Pistol>(GunType.Pistol);
-        }
-        else if (type == 1)
-        {
-            AddGun<Shotgun>(GunType.Shotgun);
-        }
-        else if (type == 2)
-        {
-            AddGun<SMG>(GunType.SMG);
-        }
-        else if (type == 3)
-        {
-            AddGun<Sniper>(GunType.Sniper);
-        }
-        else if (type == 4)
-        {
-            AddGun<Minigun>(GunType.Minigun);
-        }
+		switch (type)
+		{
+			case GunType.Pistol:
+				AddGun<Pistol>(GunType.Pistol);
+				break;
 
+			case GunType.Shotgun:
+				AddGun<Shotgun>(GunType.Shotgun);
+				break;
+
+			case GunType.SMG:
+				AddGun<SMG>(GunType.SMG);
+				break;
+
+			case GunType.Sniper:
+				AddGun<Sniper>(GunType.Sniper);
+				break;
+
+			case GunType.Minigun:
+				AddGun<Minigun>(GunType.Minigun);
+				break;
+
+			case GunType.Klusterfunk:
+				AddGun<Klusterfunk>(GunType.Klusterfunk);
+				break;
+		}
     }
-    
-
+   
 	public bool HasGun(int type)
 	{
 		return guns[type] != null;
@@ -187,6 +191,7 @@ public class PlayerController : MonoBehaviour
 		if (Input.GetKeyDown(KeyCode.Alpha3)) ChangeGun(GunType.SMG);
 		if (Input.GetKeyDown(KeyCode.Alpha4)) ChangeGun(GunType.Sniper);
 		if (Input.GetKeyDown(KeyCode.Alpha5)) ChangeGun(GunType.Minigun);
+		if (Input.GetKeyDown(KeyCode.Alpha6)) ChangeGun(GunType.Klusterfunk);
 
 		room = Floor.Instance.GetRoom(Utils.ToRoomPos(transform.position));
 		room.ActivateEnemies();

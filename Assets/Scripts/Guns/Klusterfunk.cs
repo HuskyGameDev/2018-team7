@@ -2,99 +2,61 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Klusterfunk : MonoBehaviour
+public class Klusterfunk : Gun
 {
-    public int pelletCount;
-    public float spreadAngle;
-    public float pelletFireVel = 1;
-    public GameObject pellet;
-    public Transform BarrelExit;
-   
+	private int pelletCount = 1;
+	private float spreadAngle;
+	public Transform BarrelExit;
+	private float timeStamp;
+	List<Quaternion> pellets;
 
-    List<Quaternion> pellets;
+	protected override void Start()
+	{
+		fireRate = 0.01f;
+		speed = 25.0f;
 
-    // Use this for initialization
-    void Awake()
-    {
+		// Temp
+		BarrelExit = pc.transform;
 
-        pellets = new List<Quaternion>(pelletCount);
-        for (int i = 0; i < pelletCount; i++)
-        {
-            pellets.Add(Quaternion.Euler(Vector3.zero));
-        }
+		pellets = new List<Quaternion>(pelletCount);
+		for (int i = 0; i < pelletCount; i++)
+		{
+			pellets.Add(Quaternion.Euler(Vector3.zero));
+		}
 
-    }
+		spreadAngle = 360.0f;
+	}
 
-    // Update is called once per frame
-    void Update()
-    {
+	private void DoFire(Facing facing)
+	{
+		pc.ChangeFacing(facing);
+		audioSource.Play();
 
-        if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            Fire();
-        }
-        else if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            Fire();
-        }
-        else if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            Fire();
-        }
-        else if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            Fire();
-        }
+		for (int i = pellets.Count - 1; i >= 0; i--)
+		{
+			pellets[i] = Random.rotation;
+			Bullet p = CreateBullet(BarrelExit);
+			p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellets[i], spreadAngle);
+			p.SetSpeed(speed);
+		}
 
-    }
-    void Fire()
-    {
-        int i = 0;
+		timeBeforeFire = fireRate;
+	}
 
-        if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            foreach (Quaternion quat in pellets)
-            {
-                pellets[i] = UnityEngine.Random.rotation;
-                GameObject p = Instantiate(pellet, BarrelExit.position, BarrelExit.rotation);
-                p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellets[i], spreadAngle);
-                p.GetComponent<Rigidbody2D>().AddForce(p.transform.up * pelletFireVel);
-                i++;
-            }
-        }
-        if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            foreach (Quaternion quat in pellets)
-            {
-                pellets[i] = UnityEngine.Random.rotation;
-                GameObject p = Instantiate(pellet, BarrelExit.position, BarrelExit.rotation);
-                p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellets[i], spreadAngle);
-                p.GetComponent<Rigidbody2D>().AddForce(-(p.transform.up * pelletFireVel));
-                i++;
-            }
-        }
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            foreach (Quaternion quat in pellets)
-            {
-                pellets[i] = UnityEngine.Random.rotation;
-                GameObject p = Instantiate(pellet, BarrelExit.position, BarrelExit.rotation);
-                p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellets[i], spreadAngle);
-                p.GetComponent<Rigidbody2D>().AddForce(-(p.transform.right * pelletFireVel));
-                i++;
-            }
-        }
-        if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            foreach (Quaternion quat in pellets)
-            {
-                pellets[i] = UnityEngine.Random.rotation;
-                GameObject p = Instantiate(pellet, BarrelExit.position, BarrelExit.rotation);
-                p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellets[i], spreadAngle);
-                p.GetComponent<Rigidbody2D>().AddForce(p.transform.right * pelletFireVel);
-                i++;
-            }
-        }
-    }
+	public override void Fire(PlayerController pc)
+	{
+		timeBeforeFire -= Time.deltaTime;
 
+		if (timeBeforeFire < 0.0f)
+		{
+			if (Input.GetKey(KeyCode.UpArrow))
+				DoFire(Facing.Back);
+			else if (Input.GetKey(KeyCode.DownArrow))
+				DoFire(Facing.Front);
+			else if (Input.GetKey(KeyCode.LeftArrow))
+				DoFire(Facing.Left);
+			else if (Input.GetKey(KeyCode.RightArrow))
+				DoFire(Facing.Right);
+		}
+	}
 }

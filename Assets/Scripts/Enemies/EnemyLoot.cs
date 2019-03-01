@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class EnemyLoot : MonoBehaviour
 {
@@ -25,55 +23,24 @@ public class EnemyLoot : MonoBehaviour
 
 	public GameObject[] guns;
 
-	/**
-		Drop Rates:
-		Shotgun = 20%
-		SMG = 50%
-		Sniper = 25%
-		Minigun = 5%
-	 */
+	private GameObject SpawnPickup(string name, float x, float y)
+	{
+		int temp = GetGun(name);
+		GameObject forNaming = Instantiate(guns[temp], new Vector3(x, y, -1.0f), Quaternion.identity);
+		forNaming.name = guns[temp].name;
+		return forNaming;
+	}
+
 	 // Spawns a new gun based off of the comment above at x, y
 	 public GameObject SpawnGun(float x, float y)
 	 {
 		if (doSpawn)
 		{
-			GameObject forNaming;
-
-			if (gunToSpawn < 0.005f)
-			{
-				int temp = GetGun("Klusterfunk");
-				forNaming = Instantiate(guns[temp], new Vector3(x, y, -1.0f), Quaternion.identity);
-				forNaming.name = guns[temp].name;
-				return forNaming;
-			}
-			else if (gunToSpawn < 0.5f)
-			{
-				int temp = GetGun("Shotgun");
-				forNaming = Instantiate(guns[temp], new Vector3(x, y, -1.0f), Quaternion.identity);
-				forNaming.name = guns[temp].name;
-				return forNaming;
-			}
-			else if (gunToSpawn < 0.7f)
-			{
-				int temp = GetGun("SMG");
-				forNaming = Instantiate(guns[temp], new Vector3(x, y, -1.0f), Quaternion.identity);
-				forNaming.name = guns[temp].name;
-				return forNaming;
-			}
-			else if (gunToSpawn < 0.95f)
-			{
-				int temp = GetGun("Sniper");
-				forNaming = Instantiate(guns[temp], new Vector3(x, y, -1.0f), Quaternion.identity);
-				forNaming.name = guns[temp].name;
-				return forNaming;
-			}
-			else
-			{
-				int temp = GetGun("Minigun");
-				forNaming = Instantiate(guns[temp], new Vector3(x, y, -1.0f), Quaternion.identity);
-				forNaming.name = guns[temp].name;
-				return forNaming;
-			}
+			if (gunToSpawn < 0.005f) return SpawnPickup("Klusterfunk", x, y);
+			else if (gunToSpawn < 0.5f) return SpawnPickup("Shotgun", x, y);
+			else if (gunToSpawn < 0.7f) return SpawnPickup("SMG", x, y);
+			else if (gunToSpawn < 0.95f) return SpawnPickup("Sniper", x, y);
+			else return SpawnPickup("Minigun", x, y);
 		}
 
 		return null;

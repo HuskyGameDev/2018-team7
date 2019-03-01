@@ -6,34 +6,16 @@ public class PowerUpController : MonoBehaviour
 {
 
     private PlayerController playerController; // the player object
-
     private Move playerMovement; // Object for the move class
 	
     /**
      * Start
      * Instantiates the playerController and the playerMovement objects for later use
      */
-	void Start () {
-        GameObject playerControllerObject = GameObject.FindWithTag("Player");
-        if (playerControllerObject != null)
-        {
-            playerController = playerControllerObject.GetComponent<PlayerController>();
-        }
-        else
-        {
-            Debug.Log("Cannot find Player");
-        }
-
-
-        GameObject moveController = GameObject.FindWithTag("Player");
-        if (playerControllerObject != null)
-        {
-            playerMovement = moveController.GetComponent<Move>();
-        }
-        else
-        {
-            Debug.Log("Cannot find movement");
-        }
+	void Start ()
+	{
+		playerController = GetComponentInParent<PlayerController>();
+		playerMovement = GetComponentInParent<Move>();
     }
 
     /**
@@ -60,19 +42,23 @@ public class PowerUpController : MonoBehaviour
 					break;
 
 				case "Sniper":
-					playerController.AddGun<Sniper>(GunType.Sniper);
+					playerController.AddGun(GunType.Sniper);
 					break;
 
 				case "SMG":
-					playerController.AddGun<SMG>(GunType.SMG);
+					playerController.AddGun(GunType.SMG);
 					break;
 
 				case "Minigun":
-					playerController.AddGun<Minigun>(GunType.Minigun);
+					playerController.AddGun(GunType.Minigun);
 					break;
 
 				case "Shotgun":
-					playerController.AddGun<Shotgun>(GunType.Shotgun);
+					playerController.AddGun(GunType.Shotgun);
+					break;
+
+				case "Klusterfunk":
+					playerController.AddGun(GunType.Klusterfunk);
 					break;
 			}
 

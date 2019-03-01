@@ -7,7 +7,7 @@ using System.Collections.Generic;
 /// </summary>
 public static class GunType
 {
-	public const int Pistol = 0, Shotgun = 1, SMG = 2, Sniper = 3, Minigun = 4, Count = 5;
+	public const int Pistol = 0, Shotgun = 1, SMG = 2, Sniper = 3, Minigun = 4, Klusterfunk = 5, Count = 6;
 }
 
 public class Gun

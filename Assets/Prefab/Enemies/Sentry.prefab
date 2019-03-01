@@ -152,6 +152,7 @@ MonoBehaviour:
   - {fileID: 1273204478419478, guid: a2405f91e413c644ca0ab8875260cb33, type: 2}
   - {fileID: 1412399656324280, guid: 4b2f973dd56c42a4693b4fb73e977a1c, type: 2}
   - {fileID: 1482416244701846, guid: 684b650fa6f2cf44ab819dfefd5657b7, type: 2}
+  - {fileID: 1482416244701846, guid: f8d8d8bf433f90e4aa8a6c1ab602efc6, type: 2}
 --- !u!212 &212176022921022404
 SpriteRenderer:
   m_ObjectHideFlags: 1
