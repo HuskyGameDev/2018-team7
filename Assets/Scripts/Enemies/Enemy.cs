@@ -8,7 +8,7 @@ public enum EnemyType
 
 public class Enemy : MonoBehaviour
 {
-	[SerializeField] private int health;
+	public int health;
 	public Room room;
 
 	protected SpriteRenderer rend;

@@ -5,7 +5,6 @@ using UnityEngine;
 public class bossman : MonoBehaviour
 {
     //FIRST PHASE
-    float health = 100;
     public Transform[] bossPos;
     public Transform[] holes;
     public GameObject rocket;
@@ -16,7 +15,10 @@ public class bossman : MonoBehaviour
     //public Transform player;
     public Transform myTransform;
     public float maxSpeed;
-    //THIRD PHASE
+	//THIRD PHASE
+
+	Enemy enemy;
+	EnemyFollowAI follow;
 
     // Use this for initialization
     void Start()
@@ -24,30 +26,29 @@ public class bossman : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("player");
         StartCoroutine("Boss");
 
-        //transform.position = waypoints[waypointIndex].transform.position;
+		//transform.position = waypoints[waypointIndex].transform.position;
 
-
+		enemy = GetComponent<Enemy>();
+		follow = GetComponent<EnemyFollowAI>();
+		follow.enabled = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-       // while (true)
-        {
-            //PHASE THREE
-           // if (health <= 10)
-            {
+		//PHASE THREE
+		if (enemy.health <= 10)
+		{
               
 
-            }
-            //PHASE TWO
-           // else if (health <= 50 && health > 10)
-            {
-               // transform.LookAt(player);
-                //transform.Translate(Vector3.forward * maxSpeed * Time.deltaTime);
-            }
         }
-
+		//PHASE TWO
+        else if (enemy.health <= 50 && enemy.health > 10)
+		{
+			follow.enabled = true;
+            // transform.LookAt(player);
+            //transform.Translate(Vector3.forward * maxSpeed * Time.deltaTime);
+        }
     }
     //PHASE ONE
     IEnumerator Boss()

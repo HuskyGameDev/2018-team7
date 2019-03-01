@@ -19,7 +19,7 @@ public class EnemyLoot : MonoBehaviour
 		if (decide == 1)
 		{
 			doSpawn = true;
-			gunToSpawn = Random.Range(1, 100);
+			gunToSpawn = Random.value;
 		}
 	}
 
@@ -38,28 +38,36 @@ public class EnemyLoot : MonoBehaviour
 		if (doSpawn)
 		{
 			GameObject forNaming;
-			if (gunToSpawn >= 1 && gunToSpawn < 50)
+
+			if (gunToSpawn < 0.005f)
+			{
+				int temp = GetGun("Klusterfunk");
+				forNaming = Instantiate(guns[temp], new Vector3(x, y, -1.0f), Quaternion.identity);
+				forNaming.name = guns[temp].name;
+				return forNaming;
+			}
+			else if (gunToSpawn < 0.5f)
 			{
 				int temp = GetGun("Shotgun");
 				forNaming = Instantiate(guns[temp], new Vector3(x, y, -1.0f), Quaternion.identity);
 				forNaming.name = guns[temp].name;
 				return forNaming;
 			}
-			else if (gunToSpawn >= 50 && gunToSpawn < 70)
+			else if (gunToSpawn < 0.7f)
 			{
 				int temp = GetGun("SMG");
 				forNaming = Instantiate(guns[temp], new Vector3(x, y, -1.0f), Quaternion.identity);
 				forNaming.name = guns[temp].name;
 				return forNaming;
 			}
-			else if (gunToSpawn >= 70 && gunToSpawn < 95)
+			else if (gunToSpawn < 0.95f)
 			{
 				int temp = GetGun("Sniper");
 				forNaming = Instantiate(guns[temp], new Vector3(x, y, -1.0f), Quaternion.identity);
 				forNaming.name = guns[temp].name;
 				return forNaming;
 			}
-			else if (gunToSpawn >= 95 && gunToSpawn < 100)
+			else
 			{
 				int temp = GetGun("Minigun");
 				forNaming = Instantiate(guns[temp], new Vector3(x, y, -1.0f), Quaternion.identity);
