@@ -10,14 +10,16 @@ public class UIController : MonoBehaviour
 	[Space(-10, order=1)]
 	[Header("GunType enum in Gun.cs", order=3)]
 	[SerializeField] private GameObject[] gunSlots;
+	private RectTransform[] transforms;
 
 	private bool[] loaded = new bool[GunType.Count];
 
-	private PlayerController playerController;
+	private PlayerController pc;
 
 	private void Awake()
 	{
-		playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+		pc = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+		transforms = new RectTransform[gunSlots.Length];
 	}
 
 	// Inserts the gun slot into the correct location based on its ID value.
@@ -40,9 +42,14 @@ public class UIController : MonoBehaviour
 	{
 		for (int i = 0; i < GunType.Count; i++)
 		{
-			if (!loaded[i] && playerController.HasGun(i))
+			// Until we get pistol art I want to leave the pistol slot at size 32, 32 (pistol is i == 0).
+			if (i != 0 && loaded[i])
+				transforms[i].sizeDelta = i == pc.Gun ? new Vector2(72.0f, 72.0f) : new Vector2(45.0f, 45.0f);
+
+			if (!loaded[i] && pc.HasGun(i))
 			{
-				Instantiate(gunSlots[i], verticalLayout);
+				RectTransform t = Instantiate(gunSlots[i], verticalLayout).GetComponent<RectTransform>();
+				transforms[i] = t;
 				Reorder();
 				loaded[i] = true;
 			}

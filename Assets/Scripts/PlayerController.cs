@@ -207,6 +207,7 @@ public class PlayerController : MonoBehaviour
         }
         return ret;
     }
+
     //this breaks once new guns are added, be wary
     public void SetGunArray(bool[] gunArray)
     {
