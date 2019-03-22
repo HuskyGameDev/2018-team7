@@ -174,16 +174,20 @@ public class PlayerController : MonoBehaviour
 
 	private void ChangeGun(int k)
 	{
-		while (guns[k] == null)
+		int count = -1;
+
+		for (int i = 0; i < guns.Length; i++)
 		{
-			k++;
+			if (guns[i] != null)
+				count++;
 
-			if (k >= guns.Length)
+			if (count == k)
+			{
+				Gun = i;
+				guns[i].Activate(this);
 				return;
+			}
 		}
-
-		Gun = k;
-		guns[k].Activate(this);
 	}
 
 	private void Update()
@@ -203,6 +207,7 @@ public class PlayerController : MonoBehaviour
 
 		guns[Gun].Fire(this);
 	}
+
     public bool[] GetGunArray()
     {
         bool[] ret = new bool[GunType.Count];
