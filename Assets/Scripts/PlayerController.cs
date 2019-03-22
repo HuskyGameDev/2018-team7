@@ -130,15 +130,6 @@ public class PlayerController : MonoBehaviour
 			ChangeFacing(Facing.Back);
 	}
 
-	private void ChangeGun(int type)
-	{
-		if (HasGun(type))
-		{
-			Gun = type;
-			guns[type].Activate(this);
-		}
-	}
-
 	private void AddGun<T>(int type) where T: Gun, new()
 	{
 		T gun = new T();
@@ -181,17 +172,31 @@ public class PlayerController : MonoBehaviour
 		return guns[type] != null;
 	}
 
+	private void ChangeGun(int k)
+	{
+		while (guns[k] == null)
+		{
+			k++;
+
+			if (k >= guns.Length)
+				return;
+		}
+
+		Gun = k;
+		guns[k].Activate(this);
+	}
+
 	private void Update()
 	{
 		if (Time.timeScale == 0.0f)
 			return;
 
-		if (Input.GetKeyDown(KeyCode.Alpha1)) ChangeGun(GunType.Pistol);
-		if (Input.GetKeyDown(KeyCode.Alpha2)) ChangeGun(GunType.Shotgun);
-		if (Input.GetKeyDown(KeyCode.Alpha3)) ChangeGun(GunType.SMG);
-		if (Input.GetKeyDown(KeyCode.Alpha4)) ChangeGun(GunType.Sniper);
-		if (Input.GetKeyDown(KeyCode.Alpha5)) ChangeGun(GunType.Minigun);
-		if (Input.GetKeyDown(KeyCode.Alpha6)) ChangeGun(GunType.Klusterfunk);
+		if (Input.GetKeyDown(KeyCode.Alpha1)) ChangeGun(0);
+		if (Input.GetKeyDown(KeyCode.Alpha2)) ChangeGun(1);
+		if (Input.GetKeyDown(KeyCode.Alpha3)) ChangeGun(2);
+		if (Input.GetKeyDown(KeyCode.Alpha4)) ChangeGun(3);
+		if (Input.GetKeyDown(KeyCode.Alpha5)) ChangeGun(4);
+		if (Input.GetKeyDown(KeyCode.Alpha6)) ChangeGun(5);
 
 		room = Floor.Instance.GetRoom(Utils.ToRoomPos(transform.position));
 		room.ActivateEnemies();
