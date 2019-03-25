@@ -201,7 +201,9 @@ public class FloorGenerator
 			float val = Random.value;
 			EnemyType type;
 
-			if (val < 0.2f)
+			if (val < 0.1f)
+				type = EnemyType.Patrol;
+			else if (val < 0.2f)
 				type = EnemyType.Sentry;
 			else if (val < 0.4f)
 				type = EnemyType.Bomber;

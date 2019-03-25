@@ -30,7 +30,6 @@ public class Klusterfunk : Gun
 	private void DoFire(Facing facing)
 	{
 		pc.ChangeFacing(facing);
-		audioSource.Play();
 
 		for (int i = pellets.Count - 1; i >= 0; i--)
 		{
