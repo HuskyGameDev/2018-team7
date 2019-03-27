@@ -2,10 +2,15 @@
 
 public class Sniper : Gun
 {
+
+    // tracks bullet count
+    public int bulletsRemaining = 0;
+
 	protected override void Start()
 	{
 		fireRate = 0.6f;
 		speed = 18.0f;
+        bulletsRemaining += 15;
 	}
 
 	public override void Activate(PlayerController pc)
@@ -15,18 +20,22 @@ public class Sniper : Gun
 
 	private void DoFire(Facing facing)
 	{
+        // If out of bullets, don't fire
+        if (bulletsRemaining <= 0)
+            return;
 		pc.ChangeFacing(facing);
 		audioSource.Play();
 		Bullet go = CreateBullet(pc.transform);
 		go.SetSpeed(speed);
 		timeBeforeFire = fireRate;
+        bulletsRemaining--;
 	}
 
 	public override void Fire(PlayerController pc)
 	{
 		timeBeforeFire -= Time.deltaTime;
 
-		if (timeBeforeFire < 0.0f)
+		if (timeBeforeFire < 0.0f && bulletsRemaining > 0)
 		{
 			if (Input.GetKey(KeyCode.RightArrow))
 				DoFire(Facing.Right);

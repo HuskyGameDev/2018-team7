@@ -10,6 +10,9 @@ public class Shotgun : Gun
     private float timeStamp;
 	List<Quaternion> pellets;
 
+    // The bullets remaining
+    public int bulletsRemaining = 0;
+
 	protected override void Start()
 	{
 		fireRate = 0.75f;
@@ -25,6 +28,8 @@ public class Shotgun : Gun
 		}
 
 		spreadAngle = 15.0f;
+
+        bulletsRemaining  += 25;
 	}
 
 	public override void Activate(PlayerController pc)
@@ -34,6 +39,10 @@ public class Shotgun : Gun
 
 	private void DoFire(Facing facing)
 	{
+        // If out of bullets, don't fire
+        if (bulletsRemaining <= 0)
+            return;
+
 		pc.ChangeFacing(facing);
 		audioSource.Play();
 
@@ -46,13 +55,14 @@ public class Shotgun : Gun
 		}
 
 		timeBeforeFire = fireRate;
+        bulletsRemaining--;
 	}
 
 	public override void Fire(PlayerController pc)
 	{
 		timeBeforeFire -= Time.deltaTime;
 
-		if (timeBeforeFire < 0.0f)
+		if (timeBeforeFire < 0.0f && bulletsRemaining > 0)
 		{
 			if (Input.GetKey(KeyCode.UpArrow))
 				DoFire(Facing.Back);
