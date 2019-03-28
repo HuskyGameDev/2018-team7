@@ -182,9 +182,18 @@ public class FloorGenerator
 		room.AddEnemy(enemy);
 	}
 
+	private PatternFunc GetRoomPattern()
+	{
+		float v = Random.value;
+
+		if (v < 0.1f)
+			return patterns[3];
+		else return patterns[Random.Range(0, patterns.Length - 1)];
+	}
+
 	protected virtual void BuildRoom(Room room, bool stairRoom, bool powerupRoom)
 	{
-		patterns[Random.Range(0, patterns.Length)].Invoke(room);
+		GetRoomPattern().Invoke(room);
 
 		if (stairRoom)
 			room.hasStairs = true;
