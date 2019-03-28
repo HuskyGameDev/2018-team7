@@ -295,7 +295,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameScene: Game
   loadoutScene: Loadout
-  settingsScene: Settings
+  settingsScene: Leaderboard
 --- !u!114 &760927821
 MonoBehaviour:
   m_ObjectHideFlags: 0

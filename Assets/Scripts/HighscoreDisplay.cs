@@ -9,8 +9,7 @@ using UnityEngine.UI;
 public class HighscoreDisplay : MonoBehaviour {
 
 
-    static int LB_MAX = 10;
-    PlayerData[] LB = new PlayerData[LB_MAX];
+    //static int LB_MAX = 10;
 
     public Text text1;
     public Text text2;
@@ -18,55 +17,82 @@ public class HighscoreDisplay : MonoBehaviour {
     public Text text4;
     public Text text5; //All of the text that should be output to the Leaderboard
     public Text text6; //References to these are set inside the Unity Inspector
-    public Text text7;
+    public Text text7; //Because I'm a scrub and bad at Unity
     public Text text8;
     public Text text9;
     public Text text10;
 
+    Leaderboard leaderboard = new Leaderboard();
+    private string dataPath = "";
+    
 
 
 
     // Use this for initialization
     void Start () {
-        Load();		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+        dataPath = Application.persistentDataPath + "/highScore.json";
+        leaderboard = Load();
+        updateScores();
 	}
 
-    public void Load()
+    public void ResetBoard()
     {
-        LB = new PlayerData[10]; //Empty the leaderboard before you load it in.
+        leaderboard = ResetLeaderboard();
+        updateScores();
+    }
 
-        if (File.Exists(Application.persistentDataPath + "/highScore.dat")) //If someone has played this before, and a highscore exists
-        {
-            BinaryFormatter bf = new BinaryFormatter();  //Open new formatter
-            FileStream file = File.Open(Application.persistentDataPath + "/highScore.dat", FileMode.Open); //Open the existing file
-            LB = (PlayerData[]) bf.Deserialize(file); //Make the file readable to me again
-            file.Close(); //Close the file because I read from it already. 
-
-        }
-
-        //I now have either nothing, or the new leaderboard. 
-        updateScores(); //Update what is shown on screen
+    void SaveToJson(Leaderboard newLead)
+    {
+        string dataAsJson = JsonUtility.ToJson(newLead);
+        File.WriteAllText(dataPath, dataAsJson);
     }
 
     void updateScores()
     {
 
         //Literally just updates the text that's seen on screen.
-        text1.text = LB[0].toString();
-        text2.text = LB[1].toString();
-        text3.text = LB[2].toString();
-        text4.text = LB[3].toString();
-        text5.text = LB[4].toString();
-        text6.text = LB[5].toString();
-        text7.text = LB[6].toString();
-        text8.text = LB[7].toString();
-        text9.text = LB[8].toString();
-        text10.text = LB[9].toString();
+        text1.text  = leaderboard.Player1.toString();
+        text2.text  = leaderboard.Player2.toString();
+        text3.text  = leaderboard.Player3.toString();
+        text4.text  = leaderboard.Player4.toString();
+        text5.text  = leaderboard.Player5.toString();
+        text6.text  = leaderboard.Player6.toString();
+        text7.text  = leaderboard.Player7.toString();
+        text8.text  = leaderboard.Player8.toString();
+        text9.text  = leaderboard.Player9.toString();
+        text10.text = leaderboard.Player10.toString();
+    }
+
+    Leaderboard Load()
+    {
+        Leaderboard temp = new Leaderboard();
+        if (File.Exists(dataPath))
+        {
+            string dataAsJson = File.ReadAllText(dataPath);
+            temp = JsonUtility.FromJson<Leaderboard>(dataAsJson);
+        }
+        else
+        {
+            Debug.Log("Couldn't find the leaderboard file boss");
+        }
+        return temp;
+    }
+
+    Leaderboard ResetLeaderboard()
+    {
+        Leaderboard temp = new Leaderboard();
+        temp.Player1 = new PlayerData(-1, "", false);
+        temp.Player2 = new PlayerData(-1, "", false);
+        temp.Player3 = new PlayerData(-1, "", false);
+        temp.Player4 = new PlayerData(-1, "", false);
+        temp.Player5 = new PlayerData(-1, "", false);
+        temp.Player6 = new PlayerData(-1, "", false);
+        temp.Player7 = new PlayerData(-1, "", false);
+        temp.Player8 = new PlayerData(-1, "", false);
+        temp.Player9 = new PlayerData(-1, "", false);
+        temp.Player10 = new PlayerData(-1, "", false);
+        SaveToJson(temp);
+        return temp;
     }
 
 
@@ -75,14 +101,16 @@ public class HighscoreDisplay : MonoBehaviour {
     class PlayerData
     {
         //Private class to hold data about player
-        public PlayerData(long newScore, string newName)
+        public PlayerData(long newScore, string newName, bool newReal)
         {
             name = newName;
             highscore = newScore;
+            realPlayer = newReal;
         }
 
-        public long highscore;
-        public string name;
+        public long highscore = 0;
+        public string name = "Test";
+        public bool realPlayer = false;
 
         //A way to print the information out. 
         public string toString()
@@ -92,6 +120,21 @@ public class HighscoreDisplay : MonoBehaviour {
             return ans;
         }
 
+    }
+
+    [Serializable]
+    class Leaderboard
+    {
+        public PlayerData Player1;
+        public PlayerData Player2;
+        public PlayerData Player3;
+        public PlayerData Player4;
+        public PlayerData Player5;
+        public PlayerData Player6;
+        public PlayerData Player7;
+        public PlayerData Player8;
+        public PlayerData Player9;
+        public PlayerData Player10;
     }
 
 

@@ -6,15 +6,20 @@ using UnityEngine.UI;
 
 public class GameOver : MonoBehaviour
 {
-    private HighscoreSaving HS;
+    //public GameObject SavingObject;
+    public HighscoreSaving HS;
+    //private HighscoreSaving HS;
     private Stats stats;
 
     public InputField IF;
     public Text score;
+    public Text nameText;
+    public Text SaveSuccess;
 
     public void Awake()
     {
         score.text = "Score = " + PlayerPrefs.GetInt("Score");
+        //HS = SavingObject;
     }
 
     public void PlayAgain()
@@ -31,8 +36,11 @@ public class GameOver : MonoBehaviour
 
     public void SaveGame()
     {
-        GameObject InputFieldGO = GameObject.FindWithTag("InputField");
-        IF = InputFieldGO.GetComponent<InputField>();
-        HS.SaveScore(PlayerPrefs.GetInt("Score"), IF.text);
+        //GameObject InputFieldGO = GameObject.FindWithTag("InputField");
+        //IF = InputFieldGO.GetComponent<InputField>(); IF.text
+        HS.SaveScore(PlayerPrefs.GetInt("Score"), nameText.text, true);
+        Debug.Log("Name:" + nameText.text + " Score: " + PlayerPrefs.GetInt("Score"));
+        SaveSuccess.text = "Save Successful!";
+        
     }
 }

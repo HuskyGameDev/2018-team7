@@ -708,6 +708,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Editor\MenuTools.cs" />
     <Compile Include="Assets\Scripts\Editor\TextureBuilder.cs" />
     <Compile Include="Assets\Scripts\Editor\TileEditor.cs" />
   </ItemGroup>

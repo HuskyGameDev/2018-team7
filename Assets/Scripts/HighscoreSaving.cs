@@ -9,9 +9,12 @@ using UnityEngine.UI;
 public class HighscoreSaving : MonoBehaviour {
 
     public static HighscoreSaving ScoreSaving;
-
+    
     static int LB_MAX = 10;
-    PlayerData[] LB = new PlayerData[LB_MAX];
+    //PlayerData[] LB = new PlayerData[LB_MAX];
+    Leaderboard leaderboard;
+    private string dataPath = "";
+    
 
     void Awake()
     {
@@ -24,116 +27,164 @@ public class HighscoreSaving : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        dataPath = Application.persistentDataPath + "/highScore.json";
+        //int score = PlayerPrefs.GetInt("Score");
+        //string name = PlayerPrefs.GetString("Name");
 
-        int score = PlayerPrefs.GetInt("Score");
-        string name = PlayerPrefs.GetString("Name");
-		Debug.Log("Score: " + score);
-        Debug.Log("Name: " + name);
-        SaveScore(score, name);
+
+        //leaderboard = ResetLeaderboard();
+
+		
     }
 
-    public void SaveScore(long newScore, string newName)
+    public void ResetBoard()
+    {
+        leaderboard = ResetLeaderboard();
+    }
+
+    Leaderboard ResetLeaderboard()
+    {
+        Leaderboard temp = new Leaderboard();
+        temp.Player1  = new PlayerData(-1, "", false);
+        temp.Player2  = new PlayerData(-1, "", false);
+        temp.Player3  = new PlayerData(-1, "", false);
+        temp.Player4  = new PlayerData(-1, "", false);
+        temp.Player5  = new PlayerData(-1, "", false);
+        temp.Player6  = new PlayerData(-1, "", false);
+        temp.Player7  = new PlayerData(-1, "", false);
+        temp.Player8  = new PlayerData(-1, "", false);
+        temp.Player9  = new PlayerData(-1, "", false);
+        temp.Player10 = new PlayerData(-1, "", false);
+        SaveToJson(temp);
+        return temp;
+    }
+
+    public void SaveScore(long newScore, string newName, bool realPlay)
 	{
-        BinaryFormatter bf = new BinaryFormatter(); //It's what writes or reads from the file. 
-
-        FileStream file = File.Open(Application.persistentDataPath + "/highScore.dat", FileMode.OpenOrCreate); //Open or create the file if it doesn't exist
-
-		try
-		{
-			PlayerData newData = new PlayerData(newScore, newName); //Save a possible new entry as PlayerData Type
-
-			LeaderSort(newData); //Sort the data like a Leaderboard
-								 //New person could have been added, but now it's sorted, and ready to put back
-		}
-		catch (NullReferenceException)
-		{
-			Debug.Log("TODO: Fix this NullReferenceException!");
-		}
-		finally
-		{
-			bf.Serialize(file, LB); //Make it able to be pushed to the file
-			file.Close();
-		}
+        PlayerData newData = new PlayerData(newScore, newName, realPlay); // newScore, newName Save a possible new entry as PlayerData Type
+        //newData.highscore = newScore;
+        //newData.name = newName;
+        Debug.Log("Score: " + newScore);
+        Debug.Log("Name: " + newName);
+        Debug.Log("Real Player? = " + realPlay);
+        LeaderSort(newData); //Sorts and saves into leaderboard variable
+        SaveToJson(leaderboard); //Save all of that information to the file. 
+        
     }
-    
 
-    //Sort the leaderboard, and only keep the top 10 values.
+    void SaveToJson(Leaderboard newLead)
+    {
+        string dataAsJson = JsonUtility.ToJson(newLead);
+        File.WriteAllText(dataPath, dataAsJson);
+    }
+
     private void LeaderSort(PlayerData newPlayerData)
     {
-        PlayerData[] temp = new PlayerData[LB_MAX + 1]; //Set it to be bigger than what the max is
-        PlayerData swap = null; 
-        
-	//Fill the temp array with real values so I don't manipulate current real data. 
-        for(int i = 0; i < LB_MAX; i++)
-        {
-            
-            temp[i] = LB[i];
-         
-                
-        }
-        temp[LB_MAX] = newPlayerData; //Put the new value on the end.
+        PlayerData[] sort = new PlayerData[LB_MAX + 1]; //Make 
+        Leaderboard temp = LoadForSort();
+        //Hardcoded to help?
+        sort[0] = temp.Player1;
+        sort[1] = temp.Player2;
+        sort[2] = temp.Player3;
+        sort[3] = temp.Player4;
+        sort[4] = temp.Player5;
+        sort[5] = temp.Player6;
+        sort[6] = temp.Player7;
+        sort[7] = temp.Player8;
+        sort[8] = temp.Player9;
+        sort[9] = temp.Player10;
+        sort[10] = newPlayerData;
 
-	
-	//Basic bubble sort to sort the 11 values that could exist.
-        for (int i = 0; i < temp.Length; i++)
+        for (int i = 0; i < LB_MAX + 1; i++)
         {
-            for (int j = 0; j < temp.Length; j++)
+            Debug.Log("sort[" + i + "] = " + sort[i].name);
+        }
+
+        PlayerData swap;
+
+        for(int i = 0; i < LB_MAX + 1; i++)
+        {
+            for(int j = 0; j < LB_MAX + 1; j++)
             {
-                if (temp[i].highscore > temp[j].highscore )
+                if(sort[i].highscore > sort[j].highscore )
                 {
                     //Swap
-                    swap = temp[i];
-                    temp[i] = temp[j];
-                    temp[j] = swap;
+                    swap = sort[i];
+                    sort[i] = sort[j];
+                    sort[j] = swap;
                 }
-                
             }
         }
 
-        //Shave off the extra that was added to see if it was part of the pack of 10, or whatever the max on the leaderboard is.
-        for (int i = 0; i < LB_MAX; i++)
-        {
-            LB[i] = temp[i];
-        }
+
+        //Should be sorted, put back into the leaderboard structure for saving. 
+        temp.Player1 = sort[0];
+        temp.Player2 = sort[1];
+        temp.Player3 = sort[2];
+        temp.Player4 = sort[3];
+        temp.Player5 = sort[4];
+        temp.Player6 = sort[5];
+        temp.Player7 = sort[6];
+        temp.Player8 = sort[7];
+        temp.Player9 = sort[8];
+        temp.Player10 = sort[9];
+
+        leaderboard = temp; //Save it outside this scope
+
+
 
 
     }
 
 
-    /*
-    else if(temp[i].highscore == null && temp[j].highscore != null)
-                {
-                    temp[i] = temp[j];
-                }
-                else if (temp[i].highscore != null && temp[j].highscore == null)
-                {
-                    //Do nothing? 
-                }
 
-        && temp[i].highscore != null && temp[j].highscore != null
+    Leaderboard LoadForSort()
+    {
+        Leaderboard temp = new Leaderboard();
+        if (File.Exists(dataPath))
+        {
+            string dataAsJson = File.ReadAllText(dataPath);
+            temp = JsonUtility.FromJson<Leaderboard>(dataAsJson);
+        }
+        else
+        {
+            temp = ResetLeaderboard();
+        }
+        return temp;
+    }
 
-    */
+
     [Serializable] //Make it Serializable? Easier to put into a file. 
     class PlayerData
     {
-	//Private class to hold data about player
-        public PlayerData(long newScore, string newName)
-            {
-                name = newName;
-                highscore = newScore;
-            }
+        //Private class to hold data about player
+        
+            public PlayerData(long newScore, string newName, bool newReal)
+                {
+                    name = newName;
+                    highscore = newScore;
+                    realPlayer = newReal;
+                }
 
-        public long highscore;
-        public string name;
+        public long highscore = 0;
+        public string name = "Test";
+        public bool realPlayer = false; 
+   
+    }
 
-	//A way to print the information out. 
-        public string toString()
-        {
-            string ans = "";
-            ans += name + " " + highscore ;
-            return ans;
-        }
-
+    [Serializable]
+    class Leaderboard
+    {
+        public PlayerData Player1;
+        public PlayerData Player2;
+        public PlayerData Player3;
+        public PlayerData Player4;
+        public PlayerData Player5;
+        public PlayerData Player6;
+        public PlayerData Player7;
+        public PlayerData Player8;
+        public PlayerData Player9;
+        public PlayerData Player10;
     }
 
 

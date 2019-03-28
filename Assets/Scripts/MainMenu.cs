@@ -9,6 +9,7 @@ public class MainMenu : MonoBehaviour
     public string gameScene;
     public string loadoutScene;
     public string settingsScene;
+    public Scene leaderboard;
 
 	// Use this for initialization
 	void Start ()
@@ -36,8 +37,10 @@ public class MainMenu : MonoBehaviour
     }
     public void Settings()
     {
+        //You've been hijacked for leaderboard - Noah
         SceneManager.LoadScene(settingsScene);
     }
+
 
     
 }
