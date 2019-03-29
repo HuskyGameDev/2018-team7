@@ -176,6 +176,13 @@ public class PlayerController : MonoBehaviour
 	{
 		int count = -1;
 
+		// Guns are stored at fixed locations in the guns array, but the player
+		// may not have them all. This code maps input in such a way to where, 
+		// for example, if the player has the pistol (id 0) and SMG (id 3), we have:
+		// [Pistol] [ ] [SMG] [ ] [ ] [ ] ... 
+		// If we simply map the number key pressed to this array, then 2 would lead to that 
+		// empty spot and not select a gun. We want it to map to SMG, since SMG is the second
+		// gun the player has. That's what the code below does.
 		for (int i = 0; i < guns.Length; i++)
 		{
 			if (guns[i] != null)
