@@ -210,6 +210,7 @@ public class FloorGenerator
 			float val = Random.value;
 			EnemyType type;
 
+            // Spawn rates for different enemies
 			if (val >= .76f && val <= .88)
 				type = EnemyType.Patrol;
 			else if (val >= .51f && val <= .75f)
