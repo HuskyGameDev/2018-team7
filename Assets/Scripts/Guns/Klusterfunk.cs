@@ -24,6 +24,7 @@ public class Klusterfunk : Gun
 			pellets.Add(Quaternion.Euler(Vector3.zero));
 		}
 
+		// Use a spread angle of 360.0f to cover all directions around the player.
 		spreadAngle = 360.0f;
 	}
 

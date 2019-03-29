@@ -85,7 +85,10 @@ public class Floor : MonoBehaviour
 	/// </summary>
 	public void Generate(int floorID)
 	{
-		// Seeds the random generator.
+		// Seeds the random generator. Use the base seed for the level + the floor ID to
+		// offset the seed by the floor. By doing so, we'll get a different generation 
+		// pattern for each successive floor in a way that is easily reproducible 
+		// in a save/load situation.
 		Random.InitState((GameController.seed + floorID) % GameController.MaxSeed);
 
 		generator = generators[Random.Range(0, generators.Length)];
