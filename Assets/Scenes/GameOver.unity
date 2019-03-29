@@ -1087,6 +1087,7 @@ MonoBehaviour:
   score: {fileID: 1269387804}
   nameText: {fileID: 1173218020}
   SaveSuccess: {fileID: 495165049}
+  input: {fileID: 1159991054}
 --- !u!1 &1485699528
 GameObject:
   m_ObjectHideFlags: 0

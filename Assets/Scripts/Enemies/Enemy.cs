@@ -3,7 +3,7 @@ using System.Collections;
 
 public enum EnemyType
 {
-	Helicopter, Sentry, Bomber, Patrol
+	Helicopter, Sentry, Bomber, Patrol, Boss
 }
 
 public class Enemy : MonoBehaviour

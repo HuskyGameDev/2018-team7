@@ -197,10 +197,39 @@ public class PlayerController : MonoBehaviour
 		}
 	}
 
+	private void GetNextGun()
+	{
+		do
+		{
+			Gun = (Gun + 1) % guns.Length;
+		}
+		while (guns[Gun] == null);
+	}
+
+	private void GetPrevGun()
+	{
+		do
+		{
+			Gun--;
+			if (Gun < 0) Gun = guns.Length - 1;
+		}
+		while (guns[Gun] == null);
+	}
+
 	private void Update()
 	{
 		if (Time.timeScale == 0.0f)
 			return;
+
+		if (Input.GetKeyDown(KeyCode.E))
+		{
+			GetNextGun();
+		}
+
+		if (Input.GetKeyDown(KeyCode.Q))
+		{
+			GetPrevGun();
+		}
 
 		if (Input.GetKeyDown(KeyCode.Alpha1)) ChangeGun(0);
 		if (Input.GetKeyDown(KeyCode.Alpha2)) ChangeGun(1);

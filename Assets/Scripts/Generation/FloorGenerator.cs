@@ -116,7 +116,7 @@ public class FloorGenerator
 			bool vertical = Random.value < 0.5f;
 
 			int startX = Random.Range(2, 12);
-			int startY = Random.Range(2, 8);
+			int startY = Random.Range(3, 8);
 
 			if (vertical)
 			{
@@ -191,6 +191,36 @@ public class FloorGenerator
 		else return patterns[Random.Range(0, patterns.Length - 1)];
 	}
 
+	private void SpawnEnemies(Room room)
+	{
+		int minCount = 1 + (2 * floor.FloorID);
+		int maxCount = 3 + (2 * floor.FloorID);
+
+		int enemyCount = Mathf.Min(Random.Range(minCount, maxCount), 15);
+
+		for (int i = 0; i < enemyCount; i++)
+		{
+			float val = Random.value;
+			EnemyType type;
+
+			// Spawn rates for different enemies
+			if (val >= .76f && val <= .88)
+				type = EnemyType.Patrol;
+			else if (val >= .51f && val <= .75f)
+				type = EnemyType.Sentry;
+			else if (val >= .86)
+				type = EnemyType.Bomber;
+			else type = EnemyType.Helicopter;
+
+			SpawnEnemy(type, room, RandomFreePosition(room));
+		}
+	}
+
+	private void SpawnBoss(Room room)
+	{
+		SpawnEnemy(EnemyType.Boss, room, RandomFreePosition(room));
+	}
+
 	protected virtual void BuildRoom(Room room, bool stairRoom, bool powerupRoom)
 	{
 		GetRoomPattern().Invoke(room);
@@ -203,24 +233,10 @@ public class FloorGenerator
 		if (powerupRoom)
 			spawner.SpawnItem(RandomFreePosition(room));
 
-		int enemyCount = Random.Range(3, 6);
-
-		for (int i = 0; i < enemyCount; i++)
-		{
-			float val = Random.value;
-			EnemyType type;
-
-            // Spawn rates for different enemies
-			if (val >= .76f && val <= .88)
-				type = EnemyType.Patrol;
-			else if (val >= .51f && val <= .75f)
-				type = EnemyType.Sentry;
-			else if (val >= .86)
-				type = EnemyType.Bomber;
-			else type = EnemyType.Helicopter;
-
-			SpawnEnemy(type, room, RandomFreePosition(room));
-		}
+		//if (stairRoom && floor.FloorID % 1 == 0)
+		//	SpawnBoss(room);
+		//else
+			SpawnEnemies(room);
 
 		room.Lock();
 	}

@@ -16,6 +16,8 @@ public class GameOver : MonoBehaviour
     public Text nameText;
     public Text SaveSuccess;
 
+	public InputField input;
+
     public void Awake()
     {
         score.text = "Score = " + PlayerPrefs.GetInt("Score");
@@ -34,7 +36,16 @@ public class GameOver : MonoBehaviour
 		SceneManager.LoadScene("MainMenu");
 	}
 
-    public void SaveGame()
+	private void Update()
+	{
+		if (Input.GetKeyDown(KeyCode.Return))
+		{
+			if (!input.text.Equals(string.Empty))
+				SaveGame();
+		}
+	}
+
+	public void SaveGame()
     {
         //GameObject InputFieldGO = GameObject.FindWithTag("InputField");
         //IF = InputFieldGO.GetComponent<InputField>(); IF.text

@@ -85,6 +85,8 @@ public class Floor : MonoBehaviour
 	/// </summary>
 	public void Generate(int floorID)
 	{
+		FloorID = floorID;
+
 		// Seeds the random generator. Use the base seed for the level + the floor ID to
 		// offset the seed by the floor. By doing so, we'll get a different generation 
 		// pattern for each successive floor in a way that is easily reproducible 
@@ -100,7 +102,6 @@ public class Floor : MonoBehaviour
 
 		GameObject.FindWithTag("Player").transform.position = new Vector3(5.0f, 5.0f);
 
-		FloorID = floorID;
 		GameController.Instance.SetScore(FloorID);
 		Pathfinder.Generate();
 	}

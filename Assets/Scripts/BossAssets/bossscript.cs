@@ -3,9 +3,6 @@ using System.Collections;
 
 public class bossscript : MonoBehaviour
 {
-
-
-    public float hp = 100;
     public Transform[] spots;
     public float speed;
     public GameObject projectile;
@@ -18,17 +15,20 @@ public class bossscript : MonoBehaviour
     //public Sprite[] sprites;
     bool dead;
 
+	private Enemy enemy;
+
     // Use this for initialization
     void Start()
     {
         Player = GameObject.FindGameObjectWithTag("Player");
         StartCoroutine("boss");
+		enemy = GetComponent<Enemy>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (hp <= 0 && !dead)
+        if (enemy.health <= 0 && !dead)
         {
             dead = true;
             GetComponent<SpriteRenderer>().color = Color.gray;
@@ -52,7 +52,7 @@ public class bossscript : MonoBehaviour
                 yield return null;
             }
 
-            //transform.localScale = new Vector2(-1, 1);
+            //transform.localScale = new   Vector2(-1, 1);
 
             //Delay before starting to shoot
             yield return new WaitForSeconds(.5f);

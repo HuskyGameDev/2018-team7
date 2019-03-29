@@ -17,7 +17,8 @@ public class BulletPool
 	public Bullet CreateBullet(Transform t)
 	{
 		Bullet bullet = GetBullet();
-		bullet.transform.position = t.position;
+		Vector3 bulletPos = t.position;
+		bullet.transform.position = bulletPos;
 		Physics.IgnoreCollision(bullet.GetComponent<BoxCollider>(), t.GetComponentInChildren<BoxCollider>());
 		return bullet;
 	}
