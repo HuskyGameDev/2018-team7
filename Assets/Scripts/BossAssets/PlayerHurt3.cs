@@ -18,7 +18,7 @@ public class PlayerHurt3 : MonoBehaviour {
     {
         if(other.gameObject.tag == "Player")
         {
-            other.gameObject.GetComponent<PlayerHealthLevel4>().HurtEnemy(damageToGive);
+            //other.gameObject.GetComponent<PlayerHealthLevel4>().HurtEnemy(damageToGive);
         }
 
     }
