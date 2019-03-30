@@ -10,6 +10,8 @@ public class Klusterfunk : Gun
 	private float timeStamp;
 	List<Quaternion> pellets;
 
+	public int bulletsRemaining = 300;
+
 	protected override void Start()
 	{
 		fireRate = 0.01f;
@@ -30,17 +32,21 @@ public class Klusterfunk : Gun
 
 	private void DoFire(Facing facing)
 	{
-		pc.ChangeFacing(facing);
-
-		for (int i = pellets.Count - 1; i >= 0; i--)
+		if (bulletsRemaining > 0)
 		{
-			pellets[i] = Random.rotation;
-			Bullet p = CreateBullet(BarrelExit);
-			p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellets[i], spreadAngle);
-			p.SetSpeed(speed);
-		}
+			pc.ChangeFacing(facing);
 
-		timeBeforeFire = fireRate;
+			for (int i = pellets.Count - 1; i >= 0; i--)
+			{
+				pellets[i] = Random.rotation;
+				Bullet p = CreateBullet(BarrelExit);
+				p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellets[i], spreadAngle);
+				p.SetSpeed(speed);
+				bulletsRemaining--;
+			}
+
+			timeBeforeFire = fireRate;
+		}
 	}
 
 	public override void Fire(PlayerController pc)

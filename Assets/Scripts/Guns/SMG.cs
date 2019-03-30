@@ -13,7 +13,7 @@ public class SMG : Gun
 	{
 		fireRate = 0.11111f;
 		speed = 12.0f;
-        bulletsRemaining += 50;
+        bulletsRemaining = 40;
 	}
 
 	private void DoFire(Facing facing)

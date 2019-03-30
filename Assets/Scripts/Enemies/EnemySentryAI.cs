@@ -14,6 +14,8 @@ public class EnemySentryAI : MonoBehaviour
 	private float timeStamp;
 	private float bulletSpeed = 10.0f;
 
+	private float startDelay = 0.5f;
+
 	private void Start()
 	{
 		int floor = Floor.Instance.FloorID;
@@ -30,9 +32,14 @@ public class EnemySentryAI : MonoBehaviour
 
 	private void Update()
 	{
-		// If player is in range, shoot in direction
-		if (Vector3.Distance(transform.position, target.position) <= range)
-			Shoot(transform, target);
+		startDelay -= Time.deltaTime;
+
+		if (startDelay < 0.0f)
+		{
+			// If player is in range, shoot in direction
+			if (Vector3.Distance(transform.position, target.position) <= range)
+				Shoot(transform, target);
+		}
 	}
 
 	private void Shoot(Transform transform, Transform target)

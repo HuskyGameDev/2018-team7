@@ -7,7 +7,7 @@ using System.Collections.Generic;
 /// </summary>
 public static class GunType
 {
-	public const int Pistol = 0, Shotgun = 1, SMG = 2, Sniper = 3, Minigun = 4, Klusterfunk = 5, Count = 6;
+	public const int Pistol = 0, Shotgun = 1, SMG = 2, Sniper = 3, Minigun = 4, Klusterfunk = 5, Laser = 6, Count = 7;
 }
 
 public class Gun
@@ -18,6 +18,8 @@ public class Gun
 
 	// The gun can fire every 'fireRate' number of seconds.
 	protected float fireRate = 0.0f;
+
+	public int damage { get; protected set; } = 4;
 
 	// The time remaining before the gun can fire again.
 	protected float timeBeforeFire = 0.0f;

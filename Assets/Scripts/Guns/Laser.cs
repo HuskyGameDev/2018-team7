@@ -1,35 +1,32 @@
 ﻿using UnityEngine;
 
-public class Sniper : Gun
+public class Laser : Gun
 {
+	public float spreadAngle;
+	public Transform BarrelExit;
 
-    // tracks bullet count
-    public int bulletsRemaining = 0;
+	// tracks bullet count
+	public int bulletsRemaining = 400;
 
 	protected override void Start()
 	{
-		fireRate = 0.6f;
-		speed = 18.0f;
-        bulletsRemaining = 12;
-		damage = 10;
-	}
-
-	public override void Activate(PlayerController pc)
-	{
-		audioSource.clip = Resources.Load<AudioClip>("Sounds/Guns/Sniper Rifle");
+		fireRate = 0.01f;
+		speed = 12.0f;
+		damage = 1;
 	}
 
 	private void DoFire(Facing facing)
 	{
-        // If out of bullets, don't fire
-        if (bulletsRemaining <= 0)
-            return;
+		// If out of bullets, don't fire
+		if (bulletsRemaining <= 0)
+			return;
 		pc.ChangeFacing(facing);
-		audioSource.Play();
-		Bullet go = CreateBullet(pc.transform);
-		go.SetSpeed(speed);
+		Quaternion rot = Random.rotation;
+		Bullet p = CreateBullet(pc.transform);
+		p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, rot, spreadAngle);
+		p.SetSpeed(speed);
 		timeBeforeFire = fireRate;
-        bulletsRemaining--;
+		bulletsRemaining--;
 	}
 
 	public override void Fire(PlayerController pc)

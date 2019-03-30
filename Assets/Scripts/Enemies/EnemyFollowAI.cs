@@ -26,6 +26,8 @@ public class EnemyFollowAI : MonoBehaviour
 
 	private Enemy enemy;
 
+	private float startDelay = 0.5f;
+
 	void Start()
 	{
 		int floor = Floor.Instance.FloorID;
@@ -61,51 +63,56 @@ public class EnemyFollowAI : MonoBehaviour
 
 	void Update()
 	{
-		timer -= Time.deltaTime;
+		startDelay -= Time.deltaTime;
 
-		if (enemy.pc.Dead || Time.timeScale == 0.0f)
-			return;
-
-		if (path.Count == 0)
-			followingPath = false;
-
-		if (nextCell.HasValue)
+		if (startDelay < 0.0f)
 		{
-			if (timer <= 0.0f)
+			timer -= Time.deltaTime;
+
+			if (enemy.pc.Dead || Time.timeScale == 0.0f)
+				return;
+
+			if (path.Count == 0)
+				followingPath = false;
+
+			if (nextCell.HasValue)
 			{
-				GetPath();
-				timer = 1.0f;
-			}
-
-			Vector2 next = nextCell.Value;
-			Vector2 dir = (next - enemy.Pos).normalized;
-
-			Move(dir);
-
-			if ((next - enemy.Pos).sqrMagnitude < 0.09f)
-			{
-				if (path.Count > 0)
-					nextCell = path.Pop();
-				else
+				if (timer <= 0.0f)
 				{
-					nextCell = null;
-					followingPath = false;
+					GetPath();
+					timer = 1.0f;
 				}
-			}
-		}
-		else
-		{
-			float dist = Vector2.Distance(enemy.Pos, enemy.pc.FeetPosition);
 
-			if (dist <= 1.0f)
-			{
-				Vector2 dir = ((Vector2)enemy.pc.FeetPosition - enemy.Pos).normalized;
+				Vector2 next = nextCell.Value;
+				Vector2 dir = (next - enemy.Pos).normalized;
+
 				Move(dir);
+
+				if ((next - enemy.Pos).sqrMagnitude < 0.09f)
+				{
+					if (path.Count > 0)
+						nextCell = path.Pop();
+					else
+					{
+						nextCell = null;
+						followingPath = false;
+					}
+				}
 			}
 			else
 			{
-				if (!followingPath && dist <= detectRange)
-					GetPath();
+				float dist = Vector2.Distance(enemy.Pos, enemy.pc.FeetPosition);
+
+				if (dist <= 1.0f)
+				{
+					Vector2 dir = ((Vector2)enemy.pc.FeetPosition - enemy.Pos).normalized;
+					Move(dir);
+				}
+				else
+				{
+					if (!followingPath && dist <= detectRange)
+						GetPath();
+				}
 			}
 		}
 	}

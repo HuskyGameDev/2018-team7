@@ -80,7 +80,7 @@ public class Bullet : MonoBehaviour
 		// 8 - player layer, 9 - enemy layer.
 		if (other.gameObject.layer == 9)
 		{
-			other.GetComponentInParent<Enemy>().ApplyDamage(4);
+			other.GetComponentInParent<Enemy>().ApplyDamage(gun.damage);
 
 			// if the weapon is a sniper, don't destroy
 			if (pc.Gun == GunType.Sniper)

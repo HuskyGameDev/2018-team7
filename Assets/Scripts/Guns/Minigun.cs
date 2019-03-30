@@ -22,7 +22,7 @@ public class Minigun : Gun {
 		spreadAngle = 10.0f;
 		pelletFireVel = 400;
 		pellet = Quaternion.Euler(Vector3.zero);
-        bulletsRemaining += 100;
+        bulletsRemaining = 100;
 	}
 
 	private void DoFire(Facing facing)
