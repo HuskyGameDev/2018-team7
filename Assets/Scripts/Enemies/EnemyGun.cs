@@ -1,10 +1,9 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-public class EnemySentryAI : MonoBehaviour
+public class EnemyGun : MonoBehaviour
 {
-	private PlayerController pc;
-	private Transform target;
-	private float range = 20f;
 	private BulletPool bullets = new BulletPool();
 
 	[SerializeField] private float baseFireRate;
@@ -14,17 +13,21 @@ public class EnemySentryAI : MonoBehaviour
 	private float timeStamp;
 	private float bulletSpeed = 10.0f;
 
+	private PlayerController pc;
+	private Transform target;
+	private float range = 20f;
+
 	private float startDelay = 0.5f;
 
-	private void Start()
+	private void Awake()
 	{
-		int floor = Floor.Instance.FloorID;
+		int floorID = Floor.Instance.FloorID;
 
 		// Set bullet speed and time between shots based on the floor we're on.
 		// Bullet speed starts at 10 and goes up 1.5 per floor, up to a max of 50.
 		// Time between shots starts at 1.5 seconds and falls to a minimum of 0.2 seconds.
-		bulletSpeed = Mathf.Min(baseBulletSpeed + ((floor - 1) * 1.5f), 50.0f);
-		timeBetweenShots = Mathf.Max(baseFireRate - (((floor - 1) / 2) * 0.15f), 0.2f);
+		bulletSpeed = Mathf.Min(baseBulletSpeed + ((floorID - 1) * 1.5f), 50.0f);
+		timeBetweenShots = Mathf.Max(baseFireRate - (((floorID - 1) / 2) * 0.15f), 0.2f);
 
 		pc = GetComponent<Enemy>().pc;
 		target = pc.transform;
@@ -42,7 +45,7 @@ public class EnemySentryAI : MonoBehaviour
 		}
 	}
 
-	private void Shoot(Transform transform, Transform target)
+	public void Shoot(Transform transform, Transform target)
 	{
 		timeStamp -= Time.deltaTime;
 

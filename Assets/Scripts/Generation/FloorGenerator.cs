@@ -203,14 +203,19 @@ public class FloorGenerator
 			float val = Random.value;
 			EnemyType type;
 
-			// Spawn rates for different enemies
-			if (val >= .76f && val <= .88)
-				type = EnemyType.Patrol;
-			else if (val >= .51f && val <= .75f)
+			if (val < 0.45f)
+				type = EnemyType.Helicopter;
+			else if (val < 0.5f)
 				type = EnemyType.Sentry;
-			else if (val >= .86)
-				type = EnemyType.Bomber;
-			else type = EnemyType.Helicopter;
+			else if (val < 0.6f)
+				type = EnemyType.Patrol;
+			else if (val < 0.7f)
+				type = EnemyType.AssaultPatrol;
+			else if (val < 0.8f)
+				type = EnemyType.ShotgunPatrol;
+			else if (val < 0.9f)
+				type = EnemyType.Tank;
+			else type = EnemyType.Bomber;
 
 			SpawnEnemy(type, room, RandomFreePosition(room));
 		}

@@ -24,14 +24,13 @@ GameObject:
   - component: {fileID: 114100062595448366}
   - component: {fileID: 114762782228056692}
   - component: {fileID: 114498489858372404}
-  - component: {fileID: 114127033004208812}
   m_Layer: 10
-  m_Name: Patrol
+  m_Name: Tank
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1574550569970588
 GameObject:
   m_ObjectHideFlags: 0
@@ -122,19 +121,6 @@ MonoBehaviour:
   - {fileID: 1482416244701846, guid: 684b650fa6f2cf44ab819dfefd5657b7, type: 2}
   - {fileID: 1482416244701846, guid: f8d8d8bf433f90e4aa8a6c1ab602efc6, type: 2}
   - {fileID: 1482416244701846, guid: f63740ec91ecdb34780f024f594de433, type: 2}
---- !u!114 &114127033004208812
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1503997127288984}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6ad6ddbaf6b43344a2081f54cc75ece, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  baseFireRate: 1.5
-  baseBulletSpeed: 10
 --- !u!114 &114356079524143378
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -157,7 +143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa5ef469b0ea6f24b9335abb46d652b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseSpeed: 2
+  baseSpeed: 4
   detectRange: 50
 --- !u!114 &114762782228056692
 MonoBehaviour:
@@ -224,7 +210,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: f9c035780cc99a04dba728ee47ed9256, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0.116336584, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

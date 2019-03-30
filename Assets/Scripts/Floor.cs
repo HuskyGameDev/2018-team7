@@ -34,7 +34,7 @@ public class Floor : MonoBehaviour
 	private FloorGenerator[] generators = new FloorGenerator[1];
 	private FloorGenerator generator;
 
-	private void Start()
+	private void Awake()
 	{
 		Instance = this;
 

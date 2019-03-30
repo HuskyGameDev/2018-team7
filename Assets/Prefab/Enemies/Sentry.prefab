@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212176022921022404}
   - component: {fileID: 114492561613643236}
   - component: {fileID: 114969694396339264}
-  - component: {fileID: 114114327572650704}
+  - component: {fileID: 114975434556349214}
   m_Layer: 10
   m_Name: Sentry
   m_TagString: Enemy
@@ -102,19 +102,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.9434896, y: 1.2874715, z: 1}
   m_Center: {x: 0.096744806, y: 0.107494235, z: 0}
---- !u!114 &114114327572650704
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1138409100399486}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 063532a451c34bf4ca9a451e6e7210cc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  baseFireRate: 1.5
-  baseBulletSpeed: 10
 --- !u!114 &114220002544980250
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -156,6 +143,19 @@ MonoBehaviour:
   - {fileID: 1482416244701846, guid: 684b650fa6f2cf44ab819dfefd5657b7, type: 2}
   - {fileID: 1482416244701846, guid: f8d8d8bf433f90e4aa8a6c1ab602efc6, type: 2}
   - {fileID: 1482416244701846, guid: f63740ec91ecdb34780f024f594de433, type: 2}
+--- !u!114 &114975434556349214
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1138409100399486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6ad6ddbaf6b43344a2081f54cc75ece, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseFireRate: 1.5
+  baseBulletSpeed: 10
 --- !u!212 &212176022921022404
 SpriteRenderer:
   m_ObjectHideFlags: 1
