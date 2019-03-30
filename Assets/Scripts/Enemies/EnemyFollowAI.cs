@@ -80,7 +80,7 @@ public class EnemyFollowAI : MonoBehaviour
 				if (timer <= 0.0f)
 				{
 					GetPath();
-					timer = 1.0f;
+					timer = 0.5f;
 				}
 
 				Vector2 next = nextCell.Value;
@@ -105,7 +105,7 @@ public class EnemyFollowAI : MonoBehaviour
 
 				if (dist <= 1.0f)
 				{
-					Vector2 dir = ((Vector2)enemy.pc.FeetPosition - enemy.Pos).normalized;
+					Vector2 dir = (enemy.pc.FeetPosition - enemy.Pos).normalized;
 					Move(dir);
 				}
 				else

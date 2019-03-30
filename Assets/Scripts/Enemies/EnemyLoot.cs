@@ -36,8 +36,6 @@ public class EnemyLoot : MonoBehaviour
 	 {
 		if (doSpawn)
 		{
-			gunToSpawn = 0.95f;
-
 			if (gunToSpawn < 0.02f) return SpawnPickup("Klusterfunk", x, y);
 			else if (gunToSpawn < 0.2f) return SpawnPickup("Shotgun", x, y);
 			else if (gunToSpawn < 0.7f) return SpawnPickup("SMG", x, y);
