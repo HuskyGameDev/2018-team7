@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 114498489858372404}
   - component: {fileID: 114711325076086576}
   m_Layer: 10
-  m_Name: Patrol
+  m_Name: AssaultPatrol
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 063532a451c34bf4ca9a451e6e7210cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseFireRate: 2.5
+  baseFireRate: 2
   baseBulletSpeed: 10
 --- !u!114 &114762782228056692
 MonoBehaviour:
