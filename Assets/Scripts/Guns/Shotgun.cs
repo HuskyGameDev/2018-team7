@@ -29,7 +29,7 @@ public class Shotgun : Gun
 
 		spreadAngle = 15.0f;
 
-        bulletsRemaining = 15;
+		bulletsRemaining = 10;
 	}
 
 	public override void Activate(PlayerController pc)

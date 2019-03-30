@@ -8,7 +8,7 @@ public class Sniper : Gun
 
 	protected override void Start()
 	{
-		fireRate = 0.6f;
+		fireRate = 1.5f;
 		speed = 18.0f;
         bulletsRemaining = 12;
 		damage = 10;

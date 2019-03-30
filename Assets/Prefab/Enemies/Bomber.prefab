@@ -158,6 +158,7 @@ MonoBehaviour:
   - {fileID: 1273204478419478, guid: a2405f91e413c644ca0ab8875260cb33, type: 2}
   - {fileID: 1412399656324280, guid: 4b2f973dd56c42a4693b4fb73e977a1c, type: 2}
   - {fileID: 1482416244701846, guid: 684b650fa6f2cf44ab819dfefd5657b7, type: 2}
+  - {fileID: 1482416244701846, guid: f63740ec91ecdb34780f024f594de433, type: 2}
 --- !u!143 &143237577581749002
 CharacterController:
   m_ObjectHideFlags: 1

@@ -13,7 +13,7 @@ public class EnemyLoot : MonoBehaviour
 	/// </summary>
 	public void SetWeaponDrop()
 	{
-		int decide = Random.Range(0, 4);
+		int decide = Random.Range(0, 5);
 		if (decide == 1)
 		{
 			doSpawn = true;
@@ -36,13 +36,16 @@ public class EnemyLoot : MonoBehaviour
 	 {
 		if (doSpawn)
 		{
+			gunToSpawn = 0.95f;
+
 			if (gunToSpawn < 0.02f) return SpawnPickup("Klusterfunk", x, y);
 			else if (gunToSpawn < 0.2f) return SpawnPickup("Shotgun", x, y);
 			else if (gunToSpawn < 0.7f) return SpawnPickup("SMG", x, y);
-			else if (gunToSpawn < 0.97f) return SpawnPickup("Sniper", x, y);
+			else if (gunToSpawn < 0.94f) return SpawnPickup("Sniper", x, y);
+			else if (gunToSpawn < 0.97f) return SpawnPickup("Laser", x, y);
 			else return SpawnPickup("Minigun", x, y);
 		}
-
+		
 		return null;
 	 }
 

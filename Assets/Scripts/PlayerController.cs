@@ -164,6 +164,10 @@ public class PlayerController : MonoBehaviour
 			case GunType.Klusterfunk:
 				AddGun<Klusterfunk>(GunType.Klusterfunk);
 				break;
+
+			case GunType.Laser:
+				AddGun<Laser>(GunType.Laser);
+				break;
 		}
     }
    

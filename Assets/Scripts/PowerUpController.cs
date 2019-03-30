@@ -60,6 +60,10 @@ public class PowerUpController : MonoBehaviour
 				case "Klusterfunk":
 					playerController.AddGun(GunType.Klusterfunk);
 					break;
+
+				case "Laser":
+					playerController.AddGun(GunType.Laser);
+					break;
 			}
 
 			Destroy(collision.gameObject);
