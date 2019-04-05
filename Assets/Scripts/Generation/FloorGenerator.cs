@@ -203,19 +203,19 @@ public class FloorGenerator
 			float val = Random.value;
 			EnemyType type;
 
-			if (val < 0.45f)
+			if (val < 0.4f) // 40% chance of helicopter
 				type = EnemyType.Helicopter;
-			else if (val < 0.5f)
+			else if (val < 0.55f) // 15% chance of sentry
 				type = EnemyType.Sentry;
-			else if (val < 0.6f)
+			else if (val < 0.7f) // 15% chance of patrol
 				type = EnemyType.Patrol;
-			else if (val < 0.7f)
+			else if (val < 0.8f) // 10% chance of assault patrol
 				type = EnemyType.AssaultPatrol;
-			else if (val < 0.8f)
+			else if (val < 0.85f) // 5% chance of shotgun patrol
 				type = EnemyType.ShotgunPatrol;
-			else if (val < 0.9f)
-				type = EnemyType.Tank;
-			else type = EnemyType.Bomber;
+			else if (val < 0.87f) // 2% chance of tank
+				type = EnemyType.Tank; 
+			else type = EnemyType.Bomber; // 13% chance of bomber
 
 			SpawnEnemy(type, room, RandomFreePosition(room));
 		}

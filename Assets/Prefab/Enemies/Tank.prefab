@@ -24,13 +24,14 @@ GameObject:
   - component: {fileID: 114100062595448366}
   - component: {fileID: 114762782228056692}
   - component: {fileID: 114498489858372404}
+  - component: {fileID: 114505114370336736}
   m_Layer: 10
   m_Name: Tank
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1574550569970588
 GameObject:
   m_ObjectHideFlags: 0
@@ -143,8 +144,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa5ef469b0ea6f24b9335abb46d652b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseSpeed: 4
+  baseSpeed: 1
   detectRange: 50
+--- !u!114 &114505114370336736
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1503997127288984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f48de645e03057840a4d1a4000200945, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseFireRate: 0.05
+  baseBulletSpeed: 10
 --- !u!114 &114762782228056692
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -156,7 +170,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f37a82cdb9dcfe5429865291e110d103, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 10
+  health: 40
 --- !u!143 &143714236107967198
 CharacterController:
   m_ObjectHideFlags: 1

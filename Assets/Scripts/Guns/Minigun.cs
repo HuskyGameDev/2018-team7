@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
 
-public class Minigun : Gun {
+public class Minigun : Gun
+{
     public int pelletCount;
     public float spreadAngle;
     public float pelletFireVel = 1;
