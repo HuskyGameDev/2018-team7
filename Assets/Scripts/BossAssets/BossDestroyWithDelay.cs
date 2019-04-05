@@ -4,7 +4,7 @@ using System.Collections;
 public class BossDestroyWithDelay : MonoBehaviour
 {
     public float delay;
-    void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player" || other.gameObject.tag == "Block")
         {

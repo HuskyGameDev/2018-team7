@@ -6,7 +6,7 @@ public class TempPickup : MonoBehaviour
 {
     public GameObject effect;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
@@ -14,7 +14,7 @@ public class TempPickup : MonoBehaviour
         }
     }
 
-    void Pickup(Collider2D player)
+    void Pickup(Collider player)
     {
         Instantiate(effect, transform.position, transform.rotation);
 

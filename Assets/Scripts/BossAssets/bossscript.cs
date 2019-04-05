@@ -62,7 +62,7 @@ public class bossscript : MonoBehaviour
             {
 
                 GameObject bullet = (GameObject)Instantiate(projectile, holes[Random.Range(0, 2)].position, Quaternion.identity);
-                bullet.GetComponent<Rigidbody2D>().velocity = Vector2.left * 10;
+                bullet.GetComponent<Rigidbody>().velocity = Vector2.left * 10;
 
                 i++;
                 //Delay between shots
@@ -90,7 +90,7 @@ public class bossscript : MonoBehaviour
             {
 
                 GameObject bullet = (GameObject)Instantiate(projectile, holes[Random.Range(0, 2)].position, Quaternion.identity);
-                bullet.GetComponent<Rigidbody2D>().velocity = Vector2.down * 8;
+                bullet.GetComponent<Rigidbody>().velocity = Vector2.down * 8;
 
                 i++;
                 yield return new WaitForSeconds(3f);
@@ -117,7 +117,7 @@ public class bossscript : MonoBehaviour
             {
 
                 GameObject bullet = (GameObject)Instantiate(projectile, holes[Random.Range(0, 2)].position, Quaternion.identity);
-                bullet.GetComponent<Rigidbody2D>().velocity = Vector2.right * 10;
+                bullet.GetComponent<Rigidbody>().velocity = Vector2.right * 10;
 
                 i++;
                 yield return new WaitForSeconds(3f);
