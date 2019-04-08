@@ -48,7 +48,7 @@ public class EnemyTank : MonoBehaviour
 		if (timeStamp <= 0.0f)
 		{
 			Quaternion rot = Random.rotation;
-			Bullet p = bullets.CreateBullet(transform);
+			Bullet p = bullets.CreateBullet(transform, transform);
 			Vector3 dir = (target.position - transform.position).normalized;
 			p.transform.rotation = Utils.LookX(dir);
 			p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, rot, spreadAngle);

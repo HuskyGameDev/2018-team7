@@ -7,11 +7,13 @@ public class bossscript : MonoBehaviour
     public float speed;
     public GameObject projectile;
     GameObject Player;
-    public Transform[] holes;
+	public Transform hole;
     Vector3 playerPos;
     public bool vulnerable;
 
-    public GameObject explosion;
+	private BulletPool bullets = new BulletPool();
+
+	public GameObject explosion;
     //public Sprite[] sprites;
     bool dead;
 
@@ -23,7 +25,7 @@ public class bossscript : MonoBehaviour
         Player = GameObject.FindGameObjectWithTag("Player");
         StartCoroutine("boss");
 		enemy = GetComponent<Enemy>();
-    }
+	}
 
     // Update is called once per frame
     void Update()
@@ -32,14 +34,29 @@ public class bossscript : MonoBehaviour
         {
             dead = true;
             GetComponent<SpriteRenderer>().color = Color.gray;
-            StopCoroutine("boss");
-            Instantiate(explosion, transform.position, Quaternion.identity);
+			StopCoroutine("boss");
+			Instantiate(explosion, transform.position, Quaternion.identity);
         }
     }
 
+	public void CreateSpots(Room room)
+	{
+		Vector2 wPos = room.WorldPos;
+
+		Transform spot1 = new GameObject("Spot1").GetComponent<Transform>();
+		Transform spot2 = new GameObject("Spot2").GetComponent<Transform>();
+		Transform spot3 = new GameObject("Spot3").GetComponent<Transform>();
+
+		spot1.position = wPos + new Vector2(5.0f, 4.0f);
+		spot2.position = wPos + new Vector2(Room.Width / 2.0f, Room.Height - 4.0f);
+		spot3.position = wPos + new Vector2(Room.Width - 4.0f, 4.0f);
+
+		spots = new Transform[] { spot1, spot2, spot3 };
+	}
+
     IEnumerator boss()
     {
-        while (true)
+		while (true)
         {
             //FIRST ATTACK
 
@@ -47,7 +64,7 @@ public class bossscript : MonoBehaviour
             {
                 //Only changes X Position
                 //transform.position = Vector2.MoveTowards(transform.position, new Vector2(spots[0].position.x, transform.position.y), speed);
-                transform.position = Vector2.MoveTowards(transform.position, spots[0].position, speed);
+                transform.position = Vector2.MoveTowards(transform.position, spots[0].position, speed * Time.deltaTime);
 
                 yield return null;
             }
@@ -61,10 +78,12 @@ public class bossscript : MonoBehaviour
             while (i < 1)
             {
 
-                GameObject bullet = (GameObject)Instantiate(projectile, holes[Random.Range(0, 2)].position, Quaternion.identity);
-                bullet.GetComponent<Rigidbody>().velocity = Vector2.left * 10;
+				Bullet bullet = bullets.CreateBullet(transform, hole);
+				bullet.ChangeFacing(Facing.Right);
+				bullet.SetSpeed(50.0f);
+				bullet.gameObject.layer = 15;
 
-                i++;
+				i++;
                 //Delay between shots
                 yield return new WaitForSeconds(3f);
                 // should be .7f
@@ -75,7 +94,7 @@ public class bossscript : MonoBehaviour
             //    GetComponent<Rigidbody2D>().isKinematic = true;
             while (transform.position.x != spots[2].position.x)
             {
-                transform.position = Vector2.MoveTowards(transform.position, spots[2].position, speed);
+                transform.position = Vector2.MoveTowards(transform.position, spots[2].position, speed * Time.deltaTime);
                 //Only changes Y and X Position
 
                 yield return null;
@@ -89,10 +108,12 @@ public class bossscript : MonoBehaviour
             while (i < 1)
             {
 
-                GameObject bullet = (GameObject)Instantiate(projectile, holes[Random.Range(0, 2)].position, Quaternion.identity);
-                bullet.GetComponent<Rigidbody>().velocity = Vector2.down * 8;
+				Bullet bullet = bullets.CreateBullet(transform, hole);
+				bullet.ChangeFacing(Facing.Left);
+				bullet.SetSpeed(50.0f);
+				bullet.gameObject.layer = 15;
 
-                i++;
+				i++;
                 yield return new WaitForSeconds(3f);
                 // should be .7f
             }
@@ -104,7 +125,7 @@ public class bossscript : MonoBehaviour
 
             while (transform.position.x != spots[1].position.x)
             {
-                transform.position = Vector2.MoveTowards(transform.position, spots[1].position, speed);
+                transform.position = Vector2.MoveTowards(transform.position, spots[1].position, speed * Time.deltaTime);
                
 
                 yield return null;
@@ -116,10 +137,12 @@ public class bossscript : MonoBehaviour
             while (i < 1)
             {
 
-                GameObject bullet = (GameObject)Instantiate(projectile, holes[Random.Range(0, 2)].position, Quaternion.identity);
-                bullet.GetComponent<Rigidbody>().velocity = Vector2.right * 10;
+				Bullet bullet = bullets.CreateBullet(transform, hole);
+				bullet.ChangeFacing(Facing.Front);
+				bullet.SetSpeed(50.0f);
+				bullet.gameObject.layer = 15;
 
-                i++;
+				i++;
                 yield return new WaitForSeconds(3f);
             }
 
@@ -148,18 +171,7 @@ public class bossscript : MonoBehaviour
                   yield return null;
               }
               */
-   
-            while (transform.position.x != spots[0].position.x)
-            {
-                
-                transform.position = Vector2.MoveTowards(transform.position, new Vector2(spots[0].position.x, transform.position.y), speed);
-
-                yield return null;
-            }
-
-         
-
-            yield return new WaitForSeconds(2f);
+  
 
            /* i = 0;
             while (i < 6)

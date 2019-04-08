@@ -35,11 +35,12 @@ public class FloorGenerator
 		this.enemyPrefabs = enemyPrefabs;
 		spawner = GameObject.FindWithTag("ItemSpawner").GetComponent<ItemSpawner>();
 
-		patterns = new PatternFunc[4];
+		patterns = new PatternFunc[5];
 		patterns[0] = NormalPattern;
 		patterns[1] = ExtraObstacles;
 		patterns[2] = WallsPattern;
 		patterns[3] = XPattern;
+		patterns[4] = BossPattern;
 	}
 
 	protected void AddBase(Room room)
@@ -153,6 +154,11 @@ public class FloorGenerator
 		}
 	}
 
+	protected void BossPattern(Room room)
+	{
+		AddBase(room);
+	}
+
 	// Returns a random position in the room not blocked by 
 	// an obstacle, and inset by 4 tiles from each wall.
 	protected Vector2 RandomFreePosition(Room room)
@@ -180,15 +186,20 @@ public class FloorGenerator
 		enemy.GetComponent<Enemy>().room = room;
 		enemy.GetComponent<EnemyLoot>()?.SetWeaponDrop();
 		room.AddEnemy(enemy);
+
+		if (type == EnemyType.Boss)
+			enemy.GetComponent<bossscript>().CreateSpots(room);
 	}
 
-	private PatternFunc GetRoomPattern()
+	private PatternFunc GetRoomPattern(bool endRoom)
 	{
 		float v = Random.value;
 
 		if (v < 0.1f)
 			return patterns[3];
-		else return patterns[Random.Range(0, patterns.Length - 1)];
+		else if (endRoom)
+			return patterns[patterns.Length - 1];
+		else return patterns[Random.Range(0, patterns.Length - 2)];
 	}
 
 	private void SpawnEnemies(Room room)
@@ -228,7 +239,9 @@ public class FloorGenerator
 
 	protected virtual void BuildRoom(Room room, bool stairRoom, bool powerupRoom)
 	{
-		GetRoomPattern().Invoke(room);
+		bool endRoom = stairRoom;
+
+		GetRoomPattern(endRoom).Invoke(room);
 
 		if (stairRoom)
 			room.hasStairs = true;
@@ -238,9 +251,9 @@ public class FloorGenerator
 		if (powerupRoom)
 			spawner.SpawnItem(RandomFreePosition(room));
 
-		//if (stairRoom && floor.FloorID % 1 == 0)
-		//	SpawnBoss(room);
-		//else
+		if (endRoom)
+			SpawnBoss(room);
+		else
 			SpawnEnemies(room);
 
 		room.Lock();

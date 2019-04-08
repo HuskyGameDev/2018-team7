@@ -62,7 +62,7 @@ public class EnemyShotgun : MonoBehaviour
 			for (int i = 9; i >= 0; i--)
 			{
 				pellets[i] = Random.rotation;
-				Bullet p = bullets.CreateBullet(transform);
+				Bullet p = bullets.CreateBullet(transform, transform);
 				Vector3 dir = (target.position - transform.position).normalized;
 				p.transform.rotation = Utils.LookX(dir);
 				p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellets[i], spreadAngle);

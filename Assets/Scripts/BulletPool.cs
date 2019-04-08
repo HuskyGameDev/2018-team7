@@ -14,12 +14,12 @@ public class BulletPool
 	/// Returns a new bullet from the pool and sets its position to the position given.
 	/// The bullet won't collide with the object firing it.
 	/// </summary>
-	public Bullet CreateBullet(Transform t)
+	public Bullet CreateBullet(Transform thing, Transform location)
 	{
 		Bullet bullet = GetBullet();
-		Vector3 bulletPos = t.position;
+		Vector3 bulletPos = location.position;
 		bullet.transform.position = bulletPos;
-		Physics.IgnoreCollision(bullet.GetComponent<BoxCollider>(), t.GetComponentInChildren<BoxCollider>());
+		Physics.IgnoreCollision(bullet.GetComponent<BoxCollider>(), thing.GetComponentInChildren<BoxCollider>());
 		return bullet;
 	}
 

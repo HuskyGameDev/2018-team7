@@ -9,7 +9,7 @@ public class ShootingAI : MonoBehaviour {
 
     public float fireDelay = 0.5f;
     float cooldownTimer = 0;
-	
+
 	// Update is called once per frame
 	void Update () {
         cooldownTimer -= Time.deltaTime;
