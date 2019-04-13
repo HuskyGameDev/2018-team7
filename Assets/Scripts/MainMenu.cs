@@ -14,7 +14,7 @@ public class MainMenu : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		GameController.ResetSeed();
+		GameController.Instance.ResetSeed();
 	}
 	
     public void Load()

@@ -275,7 +275,6 @@ public class PlayerController : MonoBehaviour
 		return ret;
 	}
 
-    //this breaks once new guns are added, be wary
     public void SetGunArray(bool[] gunArray)
     {
         for (int i = 0; i < GunType.Count; i++)
@@ -286,6 +285,17 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+
+	public void SetGunAmmo(int[] gunAmmo)
+	{
+		for (int i = 0; i < GunType.Count; i++)
+		{
+			Gun gun = guns[i];
+
+			if (gun != null)
+				gun.bulletsRemaining = gunAmmo[i];
+		}
+	}
 
 	private void LoadGameOver()
 	{

@@ -18,21 +18,19 @@ public class GameOver : MonoBehaviour
 
 	public InputField input;
 
-    public void Awake()
-    {
-        score.text = "Score = " + PlayerPrefs.GetInt("Score");
-        //HS = SavingObject;
-    }
+	public void Awake()
+	{
+		score.text = "Score = " + PlayerPrefs.GetInt("Score");
+		GameController.ResetGame();
+	}
 
     public void PlayAgain()
 	{
-		GameController.ResetSeed();
         SceneManager.LoadScene("Game");
 	}
 
 	public void Menu()
 	{
-		GameController.ResetSeed();
 		SceneManager.LoadScene("MainMenu");
 	}
 
