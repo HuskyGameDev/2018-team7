@@ -157,16 +157,16 @@ public class GameController : MonoBehaviour
 		SceneManager.LoadScene("MainMenu");
 	}
 
-	public void QuickSaveButtonHandler()
+	public void SaveGame()
 	{
-		//TODO:populate object with relavent data
 		SaveData newSave = new SaveData(null, null, null, null);
 		newSave.floor = Floor.Instance.FloorID;
 		newSave.seed = seed;
 
 		PlayerController pc = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
 		newSave.guns = pc.GetGunArray();
-		newSave.score = newSave.floor;
+		newSave.gunAmmo = pc.GetGumAmmoArray();
+		newSave.score = score;
 
 		BinaryFormatter bf = new BinaryFormatter(); //Honestly unsure, but it works
 		FileStream file = File.Open(Application.persistentDataPath + "/SaveGame.dat", FileMode.OpenOrCreate); //Open or create the file if it doesn't exist
@@ -230,4 +230,5 @@ public class SaveData
 	public int? score;
 	public int? floor;
 	public bool[] guns;
+	public int[] gunAmmo;
 }

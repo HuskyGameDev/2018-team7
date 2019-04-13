@@ -7,9 +7,6 @@ public class Minigun : Gun
     public float pelletFireVel = 1;
     public Transform BarrelExit;
 
-    // The bullets remaining
-    //public int bulletsRemaining = 0;
-
 	Quaternion pellet;
 
 	protected override void Start()

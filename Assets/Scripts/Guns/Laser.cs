@@ -5,14 +5,12 @@ public class Laser : Gun
 	public float spreadAngle;
 	public Transform BarrelExit;
 
-	// tracks bullet count
-	//public int bulletsRemaining = 400;
-
 	protected override void Start()
 	{
 		fireRate = 0.01f;
 		speed = 12.0f;
 		damage = 1;
+		bulletsRemaining = 400;
 	}
 
 	private void DoFire(Facing facing)

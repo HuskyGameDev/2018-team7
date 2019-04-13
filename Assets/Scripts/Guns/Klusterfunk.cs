@@ -10,8 +10,6 @@ public class Klusterfunk : Gun
 	private float timeStamp;
 	List<Quaternion> pellets;
 
-	//public int bulletsRemaining = 300;
-
 	protected override void Start()
 	{
 		fireRate = 0.01f;
@@ -28,6 +26,8 @@ public class Klusterfunk : Gun
 
 		// Use a spread angle of 360.0f to cover all directions around the player.
 		spreadAngle = 360.0f;
+
+		bulletsRemaining = 300;
 	}
 
 	private void DoFire(Facing facing)

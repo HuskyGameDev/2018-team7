@@ -10,9 +10,6 @@ public class Shotgun : Gun
     private float timeStamp;
 	List<Quaternion> pellets;
 
-    // The bullets remaining
-    //public int bulletsRemaining = 0;
-
 	protected override void Start()
 	{
 		fireRate = 0.75f;

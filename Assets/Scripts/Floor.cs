@@ -116,6 +116,7 @@ public class Floor : MonoBehaviour
             GameController.Instance.AddScore(10);
 		
 		Pathfinder.Generate();
+		GameController.Instance.SaveGame();
 	}
 
 	/// <summary>
