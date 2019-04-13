@@ -13,6 +13,8 @@ public class GameController : MonoBehaviour
 	// This is static so that its value is preserved between scene changes.
 	public static int seed { get; private set; } = -1;
 
+	public static bool pendingLoadGame;
+
 	public const int MaxSeed = 100000000;
 
 	public bool Paused { get; private set; }
@@ -30,6 +32,12 @@ public class GameController : MonoBehaviour
 	private void Awake()
 	{
 		Instance = this;
+
+		if (pendingLoadGame)
+		{
+			LoadGame();
+			pendingLoadGame = false;
+		}
 
 		// Awake is called when the game scene is loaded. If we have a seed set,
 		// we want to use that seed - the level regenerated with a certain seed requested.
@@ -168,8 +176,8 @@ public class GameController : MonoBehaviour
 
 		Debug.Log("Game saved!");
 	}
-	//
-	public void QuickLoadButtonHandler()
+
+	private void LoadGame()
 	{
 		SaveData loaded = new SaveData(null, null, null, null); //empty savedata to add the file info to
 
@@ -184,7 +192,7 @@ public class GameController : MonoBehaviour
 
 			PlayerController pc = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
 			pc.SetGunArray(loaded.guns);
-			
+
 			Floor floor = Floor.Instance;
 			floor.Destroy();
 			floor.Generate(loaded.floor ?? 1);
@@ -193,7 +201,6 @@ public class GameController : MonoBehaviour
 			Debug.Log("Game loaded!");
 		}
 	}
-
 
 	private void Update()
 	{
