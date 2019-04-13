@@ -25,6 +25,7 @@ public class Pistol : Gun
 				DoFire(Facing.Back);
 			else if (Input.GetKey(KeyCode.DownArrow))
 				DoFire(Facing.Front);
+            }
+            
 		}
 	}
-}
