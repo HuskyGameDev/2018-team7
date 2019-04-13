@@ -34,8 +34,8 @@ public class Minigun : Gun
 		Bullet p = CreateBullet(BarrelExit);
 		p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellet, spreadAngle);
 		p.SetSpeed(speed);
-		timeBeforeFire = fireRate;
-        bulletsRemaining--;
+		ResetTimeToFire();
+		bulletsRemaining--;
     }
 
 	public override void Fire(PlayerController pc)

@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour
 
 	private CharacterController controller;
 
+	public float FireRateModifier { get; private set; } = 1.0f;
+
 	/// <summary>
 	/// Returns the position at the player's feet. The character controller is centered around the area
 	/// we wish to return and is specified using an offset from the transform position.
@@ -68,15 +70,10 @@ public class PlayerController : MonoBehaviour
 	{
 		return transform.Find("Gun Audio Source").GetComponent<AudioSource>();
 	}
-
-	public float getBulletSpeed()
-	{
-		return guns[Gun].speed;
-	}
     
-	public void setBulletSpeed(float speed)
+	public void SetFireRateModifier(float modifier)
 	{
-		guns[Gun].speed = speed;
+		FireRateModifier = modifier;
 	}
 
 	private IEnumerator TintRed()

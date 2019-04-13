@@ -25,7 +25,7 @@ public class Laser : Gun
 		Bullet p = CreateBullet(pc.transform);
 		p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, rot, spreadAngle);
 		p.SetSpeed(speed);
-		timeBeforeFire = fireRate;
+		ResetTimeToFire();
 		bulletsRemaining--;
 	}
 

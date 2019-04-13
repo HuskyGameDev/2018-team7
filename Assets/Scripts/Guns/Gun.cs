@@ -14,7 +14,7 @@ public class Gun
 {
 	protected PlayerController pc;
 	protected AudioSource audioSource;
-	[HideInInspector] public float speed; // the speed at which the player shoots
+	protected float speed; // the speed at which the player shoots
 
 	// The gun can fire every 'fireRate' number of seconds.
 	protected float fireRate = 0.0f;
@@ -58,4 +58,9 @@ public class Gun
 	// firing when the game is paused. If every gun implements its own update method, then we have to
 	// duplicate the checking code for every single gun - not the best code design.
 	public virtual void Fire(PlayerController pc) { }
+
+	protected void ResetTimeToFire()
+	{
+		timeBeforeFire = fireRate * pc.FireRateModifier;
+	}
 }

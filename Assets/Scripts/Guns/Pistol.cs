@@ -8,7 +8,7 @@ public class Pistol : Gun
 		audioSource.Play();
 		Bullet go = CreateBullet(pc.transform);
 		go.SetSpeed(speed);
-		timeBeforeFire = fireRate;
+		ResetTimeToFire();
 	}
 
 	public override void Fire(PlayerController pc)

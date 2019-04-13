@@ -34,6 +34,7 @@ public class GameController : MonoBehaviour
 		// Awake is called when the game scene is loaded. If we have a seed set,
 		// we want to use that seed - the level regenerated with a certain seed requested.
 		SetSeed(seed == -1 ? Random.Range(0, MaxSeed) : seed);
+        SetScore(0);
 	}
 
 	public static void ResetSeed()
@@ -62,6 +63,11 @@ public class GameController : MonoBehaviour
 	{
 		score = value;
 	}
+
+    public int GetScore()
+    {
+        return score;
+    }
 
 	public void Pause()
 	{

@@ -5,8 +5,8 @@ using UnityEngine;
 public class PowerUpController : MonoBehaviour
 {
 
-    private PlayerController playerController; // the player object
-    private Move playerMovement; // Object for the move class
+    private PlayerController pc; // the player object
+    private Move playerMovement; // Object for the move class\
 	
     /**
      * Start
@@ -14,7 +14,7 @@ public class PowerUpController : MonoBehaviour
      */
 	void Start ()
 	{
-		playerController = GetComponentInParent<PlayerController>();
+		pc = GetComponentInParent<PlayerController>();
 		playerMovement = GetComponentInParent<Move>();
     }
 
@@ -42,27 +42,27 @@ public class PowerUpController : MonoBehaviour
 					break;
 
 				case "Sniper":
-					playerController.AddGun(GunType.Sniper);
+					pc.AddGun(GunType.Sniper);
 					break;
 
 				case "SMG":
-					playerController.AddGun(GunType.SMG);
+					pc.AddGun(GunType.SMG);
 					break;
 
 				case "Minigun":
-					playerController.AddGun(GunType.Minigun);
+					pc.AddGun(GunType.Minigun);
 					break;
 
 				case "Shotgun":
-					playerController.AddGun(GunType.Shotgun);
+					pc.AddGun(GunType.Shotgun);
 					break;
 
 				case "Klusterfunk":
-					playerController.AddGun(GunType.Klusterfunk);
+					pc.AddGun(GunType.Klusterfunk);
 					break;
 
 				case "Laser":
-					playerController.AddGun(GunType.Laser);
+					pc.AddGun(GunType.Laser);
 					break;
 			}
 
@@ -76,8 +76,8 @@ public class PowerUpController : MonoBehaviour
      */ 
     void HealthPickup()
     {
-		if (playerController.health < 100)
-			playerController.Heal(20);
+		if (pc.health < 100)
+			pc.Heal(20);
     }
 
     /**
@@ -87,7 +87,6 @@ public class PowerUpController : MonoBehaviour
      */ 
     IEnumerator SpeedPickup()
     {
-
 		playerMovement.SpeedModifier = 2.0f;
         yield return StartCoroutine(PickupWait(30));
 		playerMovement.SpeedModifier = 1.0f;
@@ -95,14 +94,14 @@ public class PowerUpController : MonoBehaviour
 
     /**
      * ShootingSpeed
-     * increases the shooting speed of the player by .05f 
+     * increases the fire rate of the player.
      * IEnumerator -> Uses a coroutine in order to wait for 30 seconds
      */
     IEnumerator ShootingSpeedPickUp()
     {
-        playerController.setBulletSpeed(playerController.getBulletSpeed() + .05f);
+		pc.SetFireRateModifier(0.75f);
         yield return StartCoroutine(PickupWait(30));
-        playerController.setBulletSpeed(playerController.getBulletSpeed() - .05f);
+        pc.SetFireRateModifier(1.0f);
     }
 
     /**

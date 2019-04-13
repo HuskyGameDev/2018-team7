@@ -28,8 +28,8 @@ public class Sniper : Gun
 		audioSource.Play();
 		Bullet go = CreateBullet(pc.transform);
 		go.SetSpeed(speed);
-		timeBeforeFire = fireRate;
-        bulletsRemaining--;
+		ResetTimeToFire();
+		bulletsRemaining--;
 	}
 
 	public override void Fire(PlayerController pc)

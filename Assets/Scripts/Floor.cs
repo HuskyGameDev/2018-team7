@@ -34,7 +34,9 @@ public class Floor : MonoBehaviour
 	private FloorGenerator[] generators = new FloorGenerator[1];
 	private FloorGenerator generator;
 
-	private void Awake()
+    private bool firstTime = true;
+
+    private void Awake()
 	{
 		Instance = this;
 
@@ -101,8 +103,11 @@ public class Floor : MonoBehaviour
 		ClearAround(new Vec2i(5, 5));
 
 		GameObject.FindWithTag("Player").transform.position = new Vector3(5.0f, 5.0f);
-
-		GameController.Instance.SetScore(FloorID);
+        if (firstTime)
+            firstTime = false;//Don't
+        else
+            GameController.Instance.AddScore(10);
+		
 		Pathfinder.Generate();
 	}
 
