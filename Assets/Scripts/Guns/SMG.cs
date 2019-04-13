@@ -26,8 +26,8 @@ public class SMG : Gun
 		Bullet p = CreateBullet(pc.transform);
 		p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, rot, spreadAngle);
 		p.SetSpeed(speed);
-		timeBeforeFire = fireRate;
-        bulletsRemaining--;
+		ResetTimeToFire();
+		bulletsRemaining--;
 	}
 
 	public override void Fire(PlayerController pc)

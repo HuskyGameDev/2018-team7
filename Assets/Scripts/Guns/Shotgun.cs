@@ -54,8 +54,8 @@ public class Shotgun : Gun
 			p.SetSpeed(speed);
 		}
 
-		timeBeforeFire = fireRate;
-        bulletsRemaining--;
+		ResetTimeToFire();
+		bulletsRemaining--;
 	}
 
 	public override void Fire(PlayerController pc)

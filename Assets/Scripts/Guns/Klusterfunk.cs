@@ -45,7 +45,7 @@ public class Klusterfunk : Gun
 				bulletsRemaining--;
 			}
 
-			timeBeforeFire = fireRate;
+			ResetTimeToFire();
 		}
 	}
 
