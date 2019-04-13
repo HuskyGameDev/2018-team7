@@ -4,7 +4,7 @@ public class Sniper : Gun
 {
 
     // tracks bullet count
-    public int bulletsRemaining = 0;
+    //public int bulletsRemaining = 0;
 
 	protected override void Start()
 	{

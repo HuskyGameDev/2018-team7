@@ -7,10 +7,11 @@ public class UIElements : MonoBehaviour
 {
 	private PlayerController playerController;
 	private Floor floor;
-	private Stats stats;
+    private Stats stats;
 	private RectTransform t;
-
 	public Text text;
+    public Text ammoCount;
+    private Gun currentGun;
 
 	// Use this for initialization
 	void Start()
@@ -20,6 +21,9 @@ public class UIElements : MonoBehaviour
 		GameObject playerControllerObject = GameObject.FindWithTag("Player");
 		GameObject floorObject = GameObject.FindWithTag("Floor");
 		GameObject statsObject = GameObject.FindWithTag("Stats");
+        
+        
+        
 
 		stats = statsObject.GetComponent<Stats>(); //Find the stats component on the Stats gameObject
 
@@ -41,6 +45,19 @@ public class UIElements : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
+        currentGun = playerController.GetCurrentGun();
+
+
+        if(playerController.Gun == 0)
+        {
+            ammoCount.text = "INFINITE";
+           
+        }
+        else
+        {
+            ammoCount.text = currentGun.bulletsRemaining.ToString();
+        }
+            
 		text.text = floor.FloorID.ToString(); //Update the UI for the player
 		stats.setScore(floor.FloorID); //Update the stats file when the floor changes
 		float pos = ((playerController.health / 100f) * 130f) - 65f;

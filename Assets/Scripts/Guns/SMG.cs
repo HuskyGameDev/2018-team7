@@ -7,7 +7,7 @@ public class SMG : Gun
     public Transform BarrelExit;
 
     // tracks bullet count
-    public int bulletsRemaining = 0;
+    //public int bulletsRemaining = 0;
 
 	protected override void Start()
 	{

@@ -6,7 +6,7 @@ public class Laser : Gun
 	public Transform BarrelExit;
 
 	// tracks bullet count
-	public int bulletsRemaining = 400;
+	//public int bulletsRemaining = 400;
 
 	protected override void Start()
 	{

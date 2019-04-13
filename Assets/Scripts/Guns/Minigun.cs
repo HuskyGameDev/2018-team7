@@ -8,7 +8,7 @@ public class Minigun : Gun
     public Transform BarrelExit;
 
     // The bullets remaining
-    public int bulletsRemaining = 0;
+    //public int bulletsRemaining = 0;
 
 	Quaternion pellet;
 

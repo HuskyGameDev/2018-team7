@@ -10,7 +10,7 @@ public class Klusterfunk : Gun
 	private float timeStamp;
 	List<Quaternion> pellets;
 
-	public int bulletsRemaining = 300;
+	//public int bulletsRemaining = 300;
 
 	protected override void Start()
 	{

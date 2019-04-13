@@ -20,9 +20,10 @@ public class Gun
 	protected float fireRate = 0.0f;
 
 	public int damage { get; protected set; } = 4;
+    public int bulletsRemaining = 0;
 
-	// The time remaining before the gun can fire again.
-	protected float timeBeforeFire = 0.0f;
+    // The time remaining before the gun can fire again.
+    protected float timeBeforeFire = 0.0f;
 
 	protected BulletPool bulletPool = new BulletPool();
 

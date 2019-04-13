@@ -56,6 +56,11 @@ public class PlayerController : MonoBehaviour
 	// unlocked that gun yet.
 	private Gun[] guns = new Gun[GunType.Count];
 
+    public Gun GetCurrentGun()
+    {
+        return guns[Gun];
+    }
+
 	private SpriteRenderer rend;
 	public Sprite[] sprites;
 

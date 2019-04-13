@@ -11,7 +11,7 @@ public class Shotgun : Gun
 	List<Quaternion> pellets;
 
     // The bullets remaining
-    public int bulletsRemaining = 0;
+    //public int bulletsRemaining = 0;
 
 	protected override void Start()
 	{
