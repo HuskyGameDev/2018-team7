@@ -45,7 +45,7 @@ public class UIElements : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-<<<<<<< HEAD
+
         currentGun = playerController.GetCurrentGun();
 
 
@@ -61,9 +61,8 @@ public class UIElements : MonoBehaviour
             
 		text.text = floor.FloorID.ToString(); //Update the UI for the player
 		stats.setScore(floor.FloorID); //Update the stats file when the floor changes
-=======
+
 		text.text = " " + GameController.Instance.GetScore(); //Update the UI for the player
->>>>>>> 5227c00c4a295d6a2ec168f4a229ac24f352d32e
 		float pos = ((playerController.health / 100f) * 130f) - 65f;
 		t.anchoredPosition = new Vector2(pos, t.anchoredPosition.y);
 	}
