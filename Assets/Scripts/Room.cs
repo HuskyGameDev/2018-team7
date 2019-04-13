@@ -72,7 +72,7 @@ public class Room
 
 	// References to floor variables.
 	private SpritePool spritePool;
-	private RoomCollision collision;
+    private RoomCollision collision;
 
 	/// <summary>
 	/// The room's position, in room coordinates.
@@ -213,7 +213,7 @@ public class Room
 
 		if (hasStairs)
 			SetTile(Room.LimX / 2, Room.LimY / 2, TileType.Stair);
-
+        GameController.Instance.AddScore(1);
 		locked = false;
 		Rebuild();
 	}
