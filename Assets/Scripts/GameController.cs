@@ -192,14 +192,10 @@ public class GameController : MonoBehaviour
 
 			PlayerController pc = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
 			pc.SetGunArray(loaded.guns);
-
-			Floor floor = Floor.Instance;
-			floor.Destroy();
-			floor.Generate(loaded.floor ?? 1);
-			Unpause();
-
-			Debug.Log("Game loaded!");
 		}
+
+		Floor floor = Floor.Instance;
+		floor.saveData = loaded;
 	}
 
 	private void Update()
@@ -212,26 +208,26 @@ public class GameController : MonoBehaviour
 		}
 	}
 
-	[Serializable]
-	class SaveData
-	{
-		//Private class to hold data about player
-		public SaveData(int? seed, int? floor, int? score, bool[] guns)
-		{
-			this.seed = seed;
-			this.floor = floor;
-			this.score = score;
-			this.guns = guns;
-		}
-
-		public int? seed;
-		public int? score;
-		public int? floor;
-		public bool[] guns;
-	}
-
 	private void OnDestroy()
 	{
 		PlayerPrefs.SetInt("Score", score);
 	}
+}
+
+[Serializable]
+public class SaveData
+{
+	//Private class to hold data about player
+	public SaveData(int? seed, int? floor, int? score, bool[] guns)
+	{
+		this.seed = seed;
+		this.floor = floor;
+		this.score = score;
+		this.guns = guns;
+	}
+
+	public int? seed;
+	public int? score;
+	public int? floor;
+	public bool[] guns;
 }

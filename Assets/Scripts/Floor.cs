@@ -34,6 +34,8 @@ public class Floor : MonoBehaviour
 	private FloorGenerator[] generators = new FloorGenerator[1];
 	private FloorGenerator generator;
 
+	public SaveData saveData { get; set; }
+
     private bool firstTime = true;
 
     private void Awake()
@@ -46,8 +48,13 @@ public class Floor : MonoBehaviour
 		generators[0] = new LinearGenerator(this, enemyPrefabs);
 
 		Pathfinder = new FloorPathfinder(this);
+	}
 
-		Generate(FloorID);
+	private void Start()
+	{
+		if (saveData != null)
+			Generate(saveData.floor ?? 1);
+		else Generate(FloorID);
 	}
 
 	public void Destroy()
