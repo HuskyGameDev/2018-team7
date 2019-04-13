@@ -30,7 +30,7 @@ public class Move : MonoBehaviour {
     {
         pc = GetComponent<CharacterController>();
 		playerController = GetComponent<PlayerController>();
-        speed = 100f;
+        speed = 110f;
     }
 
 	public void ApplyKnockback(Vector3 dir, float force)
@@ -45,8 +45,8 @@ public class Move : MonoBehaviour {
 
 		float currentSpeed = speed * SpeedModifier;
 
-		if (Input.GetKey(KeyCode.LeftShift))
-			currentSpeed *= 2.0f;
+		//if (Input.GetKey(KeyCode.LeftShift))
+			//currentSpeed *= 2.0f;
 
 		Vector2 accel = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 		playerController.UpdateSprite(accel);
