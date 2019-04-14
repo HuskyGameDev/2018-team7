@@ -234,7 +234,7 @@ public class FloorGenerator
 
 	private void SpawnBoss(Room room)
 	{
-		SpawnEnemy(EnemyType.Boss, room, RandomFreePosition(room));
+		SpawnEnemy(EnemyType.Boss, room, room.WorldPos + new Vector2(Room.Width / 2, Room.Height / 2));
 	}
 
 	protected virtual void BuildRoom(Room room, bool stairRoom, bool powerupRoom)

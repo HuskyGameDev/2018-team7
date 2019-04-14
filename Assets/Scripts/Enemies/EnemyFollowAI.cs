@@ -28,13 +28,14 @@ public class EnemyFollowAI : MonoBehaviour
 
 	private float startDelay = 0.5f;
 
-	void Start()
+	void Awake()
 	{
 		int floor = Floor.Instance.FloorID;
 
 		// Set the enemy's speed based on the floor we're on. For each additional floor,
 		// the enemy will get 0.25 higher speed up to a max speed of 10.0.
 		speed = Mathf.Min(baseSpeed + ((floor - 1) * 0.25f), 10.0f);
+		Debug.Log("Ran awake");
 
 		controller = GetComponent<CharacterController>();
 		transform.SetZ(-0.1f);
@@ -46,6 +47,12 @@ public class EnemyFollowAI : MonoBehaviour
 	private void PathFinished()
 	{
 		nextCell = path.Pop();
+	}
+
+	public void SetSpeed(float speed)
+	{
+		this.speed = speed;
+		Debug.Log("Set speed");
 	}
 
 	private void GetPath()

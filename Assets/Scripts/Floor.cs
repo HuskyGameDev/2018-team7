@@ -50,6 +50,11 @@ public class Floor : MonoBehaviour
 		Pathfinder = new FloorPathfinder(this);
 	}
 
+	public GameObject[] GetEnemyPrefabs()
+	{
+		return enemyPrefabs;
+	}
+
 	private void Start()
 	{
 		if (saveData != null)
