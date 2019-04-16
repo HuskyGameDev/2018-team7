@@ -57,7 +57,6 @@ public class EnemyGun : MonoBehaviour
 			bullet.transform.rotation = Utils.LookX(dir);
 			bullet.SetSpeed(bulletSpeed);
 			bullet.gameObject.layer = 15;
-			bullet.OnFired();
 		}
 	}
 }

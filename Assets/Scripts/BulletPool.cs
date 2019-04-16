@@ -14,9 +14,9 @@ public class BulletPool
 	/// Returns a new bullet from the pool and sets its position to the position given.
 	/// The bullet won't collide with the object firing it.
 	/// </summary>
-	public Bullet CreateBullet(Transform thing, Transform location)
+	public Bullet CreateBullet(Transform thing, Transform location, float duration = 2.0f)
 	{
-		Bullet bullet = GetBullet();
+		Bullet bullet = GetBullet(duration);
 		Vector3 bulletPos = location.position;
 		bullet.transform.position = bulletPos;
 		Physics.IgnoreCollision(bullet.GetComponent<BoxCollider>(), thing.GetComponentInChildren<BoxCollider>());
@@ -24,7 +24,7 @@ public class BulletPool
 	}
 
 	// Returns a new bullet from the pool if one exists. If not, instantiates a new one.
-	private Bullet GetBullet()
+	private Bullet GetBullet(float duration)
 	{
 		Bullet bullet;
 
@@ -44,7 +44,7 @@ public class BulletPool
 		}
 
 		// Starts the coroutine to destroy the bullet after a certain amount of time.
-		bullet.OnFired();
+		bullet.OnFired(duration);
 
 		return bullet;
 	}

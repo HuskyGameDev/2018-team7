@@ -15,12 +15,10 @@ public class bossscript : MonoBehaviour
 	private BulletPool bullets = new BulletPool();
 
 	public GameObject explosion;
-    //public Sprite[] sprites;
-    bool dead;
 
 	private Enemy enemy;
 
-	private float fireRate = 0.20f;
+	private float fireRate;
 	private float timeBeforeFire;
 
 	private float maxHealth;
@@ -46,9 +44,9 @@ public class bossscript : MonoBehaviour
 
 		if (enemy.health <= 0.0f)
 		{
-			dead = true;
 			GetComponent<SpriteRenderer>().color = Color.gray;
 			Instantiate(explosion, transform.position, Quaternion.identity);
+			Destroy(gameObject);
 		}
     }
 
@@ -67,16 +65,19 @@ public class bossscript : MonoBehaviour
 		spots = new Transform[] { spot1, spot2, spot3 };
 	}
 
+	private void RandomBullet(float speed)
+	{
+		Quaternion quat = Random.rotation;
+		Bullet p = bullets.CreateBullet(transform, transform, 25.0f);
+		p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, quat, 360.0f);
+		p.SetSpeed(speed);
+		p.gameObject.layer = 15;
+	}
+
 	private void Burst()
 	{
 		for (int i = 50; i >= 0; i--)
-		{
-			Quaternion quat = Random.rotation;
-			Bullet p = bullets.CreateBullet(transform, transform);
-			p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, quat, 360.0f);
-			p.SetSpeed(25.0f);
-			p.gameObject.layer = 15;
-		}
+			RandomBullet(25.0f);
 	}
 
 	private void TargetPlayer()
@@ -86,12 +87,11 @@ public class bossscript : MonoBehaviour
 		if (timeBeforeFire <= 0.0f)
 		{
 			timeBeforeFire = fireRate;
-			Bullet bullet = bullets.CreateBullet(transform, transform);
+			Bullet bullet = bullets.CreateBullet(transform, transform, 25.0f);
 			Vector3 dir = (Player.transform.position - transform.position).normalized;
 			bullet.transform.rotation = Utils.LookX(dir);
 			bullet.SetSpeed(15.0f);
 			bullet.gameObject.layer = 15;
-			bullet.OnFired();
 		}
 	}
 
@@ -103,63 +103,44 @@ public class bossscript : MonoBehaviour
 
     IEnumerator Phase1()
     {
+		fireRate = 0.2f;
 		speed = 8.0f;
 
 		while (true)
         {
-            //FIRST ATTACK
-
             while (transform.position.x != spots[0].position.x)
             {
 				TargetPlayer();
-
-                //Only changes X Position
-                //transform.position = Vector2.MoveTowards(transform.position, new Vector2(spots[0].position.x, transform.position.y), speed);
                 transform.position = Vector2.MoveTowards(transform.position, spots[0].position, speed * Time.deltaTime);
 
                 yield return null;
             }
 
-            //transform.localScale = new   Vector2(-1, 1);
-
-            //Delay before starting to shoot
-            yield return new WaitForSeconds(.5f);
-
+            yield return new WaitForSeconds(0.5f);
 			Burst();
-           
-			yield return new WaitForSeconds(1f);
+			yield return new WaitForSeconds(1.0f);
  
-            //SECOND ATTACK
-            //    GetComponent<Rigidbody2D>().isKinematic = true;
             while (transform.position.x != spots[2].position.x)
             {
 				TargetPlayer();
-
 				transform.position = Vector2.MoveTowards(transform.position, spots[2].position, speed * Time.deltaTime);
-                //Only changes Y and X Position
-
                 yield return null;
             }
 
-			yield return new WaitForSeconds(.5f);
-
+			yield return new WaitForSeconds(0.5f);
 			Burst();
-
-			yield return new WaitForSeconds(1f);
+			yield return new WaitForSeconds(1.0f);
             
             while (transform.position.x != spots[1].position.x)
             {
 				TargetPlayer();
-
 				transform.position = Vector2.MoveTowards(transform.position, spots[1].position, speed * Time.deltaTime);
                 yield return null;
             }
 
-			yield return new WaitForSeconds(.5f);
-
+			yield return new WaitForSeconds(0.5f);
 			Burst();
-
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(1.0f);
         }
 
     }
@@ -175,11 +156,14 @@ public class bossscript : MonoBehaviour
 
 	IEnumerator Phase2()
 	{
+		fireRate = 0.06f;
 		speed = 3.0f;
+
 		float bomberDelay = 5.0f;
 
 		while (true)
 		{
+			timeBeforeFire -= Time.deltaTime;
 			bomberDelay -= Time.deltaTime;
 
 			if (bomberDelay < 0.0f)
@@ -188,19 +172,14 @@ public class bossscript : MonoBehaviour
 				bomberDelay = 5.0f;
 			}
 
+			if (timeBeforeFire <= 0.0f)
+			{
+				RandomBullet(5.0f);
+				timeBeforeFire = fireRate;
+			}
+
 			transform.position = Vector2.MoveTowards(transform.position, Player.transform.position, speed * Time.deltaTime);
 			yield return null;
 		}
 	}
 }
-  /*  void OnCollisionEnter2D(Collision2D col)
-    {
-        if (col.collider.tag == "Player" && vulnerable)
-        {
-            hp -= 30;
-            vulnerable = false;
-            //GetComponent<SpriteRenderer>().sprite = sprites[0];
-        }
-    }
-
-}*/

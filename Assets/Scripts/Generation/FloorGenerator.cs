@@ -193,13 +193,16 @@ public class FloorGenerator
 
 	private PatternFunc GetRoomPattern(bool endRoom)
 	{
-		float v = Random.value;
-
-		if (v < 0.1f)
-			return patterns[3];
-		else if (endRoom)
+		if (endRoom)
 			return patterns[patterns.Length - 1];
-		else return patterns[Random.Range(0, patterns.Length - 2)];
+		else
+		{
+			float v = Random.value;
+
+			if (v < 0.1f)
+				return patterns[3];
+			else return patterns[Random.Range(0, patterns.Length - 2)];
+		}
 	}
 
 	private void SpawnEnemies(Room room)

@@ -14,12 +14,17 @@ public class Bomber : MonoBehaviour
     {
         pc = GetComponent<Enemy>().pc;
 		ps = GetComponent<ParticleSystem>();
-        target = pc.transform;    
+
+		if (pc != null)
+			target = pc.transform;
     }
 
     // Update is called once per frame
     void Update()
-    {
+	{
+		if (target == null)
+			return;
+
         if (Vector3.Distance(transform.position, target.position) <= range)
             Explode();
     }

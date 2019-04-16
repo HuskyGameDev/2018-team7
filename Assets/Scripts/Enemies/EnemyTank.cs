@@ -54,7 +54,6 @@ public class EnemyTank : MonoBehaviour
 			p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, rot, spreadAngle);
 			p.SetSpeed(bulletSpeed);
 			p.gameObject.layer = 15;
-			p.OnFired();
 			timeStamp = timeBetweenShots;
 		}
 	}

@@ -68,7 +68,6 @@ public class EnemyShotgun : MonoBehaviour
 				p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellets[i], spreadAngle);
 				p.SetSpeed(bulletSpeed);
 				p.gameObject.layer = 15;
-				p.OnFired();
 			}
 
 			timeStamp = timeBetweenShots;

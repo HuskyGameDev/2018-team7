@@ -26,9 +26,9 @@ public class Bullet : MonoBehaviour
 		}
 	}
 
-	public void OnFired()
+	public void OnFired(float duration)
 	{
-		StartCoroutine(DestroyBullet());
+		StartCoroutine(DestroyBullet(duration));
 	}
 
 	public void SetSpeed(float speed)
@@ -69,9 +69,9 @@ public class Bullet : MonoBehaviour
 		}
 	}
 
-	IEnumerator DestroyBullet()
+	IEnumerator DestroyBullet(float duration)
 	{
-		yield return new WaitForSeconds(2f);
+		yield return new WaitForSeconds(duration);
 		Pool.ReturnBullet(this);
 	}
 

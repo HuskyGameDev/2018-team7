@@ -25,7 +25,11 @@ public class Enemy : MonoBehaviour
 	{
 		rend = GetComponent<SpriteRenderer>();
 		baseColor = rend.color;
-		pc = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+
+		GameObject player = GameObject.FindWithTag("Player");
+
+		if (player != null)
+			pc = player.GetComponent<PlayerController>();
 	}
 
 	public void ApplyDamage(int damage)
