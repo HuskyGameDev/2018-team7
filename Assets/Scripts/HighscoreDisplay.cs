@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class HighscoreDisplay : MonoBehaviour {
@@ -136,7 +137,9 @@ public class HighscoreDisplay : MonoBehaviour {
         public PlayerData Player9;
         public PlayerData Player10;
     }
-
-
+    public void Menu()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
 
 }

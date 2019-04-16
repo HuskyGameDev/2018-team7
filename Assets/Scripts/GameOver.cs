@@ -34,6 +34,10 @@ public class GameOver : MonoBehaviour
 		SceneManager.LoadScene("MainMenu");
 	}
 
+    public void Leaderboard()
+    {
+        SceneManager.LoadScene("Leaderboard");
+    }
 	private void Update()
 	{
 		if (Input.GetKeyDown(KeyCode.Return))
