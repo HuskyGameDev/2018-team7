@@ -77,7 +77,7 @@ public class PowerUpController : MonoBehaviour
     void HealthPickup()
     {
 		if (pc.health < 100)
-			pc.Heal(20);
+			pc.Heal(45);
     }
 
     /**
