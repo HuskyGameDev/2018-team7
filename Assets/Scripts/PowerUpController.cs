@@ -88,7 +88,7 @@ public class PowerUpController : MonoBehaviour
     IEnumerator SpeedPickup()
     {
 		playerMovement.SpeedModifier = 2.0f;
-        yield return StartCoroutine(PickupWait(30));
+        yield return StartCoroutine(PickupWait(15));
 		playerMovement.SpeedModifier = 1.0f;
     }
 
