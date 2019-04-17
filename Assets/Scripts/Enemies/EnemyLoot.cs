@@ -13,8 +13,8 @@ public class EnemyLoot : MonoBehaviour
 	/// </summary>
 	public void SetWeaponDrop()
 	{
-		int decide = Random.Range(0, 5);
-		if (decide == 1)
+		int decide = Random.Range(0, 100);
+		if (decide <= 30)
 		{
 			doSpawn = true;
 			gunToSpawn = Random.value;
