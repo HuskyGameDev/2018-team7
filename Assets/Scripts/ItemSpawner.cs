@@ -7,8 +7,8 @@ public class PickupSpec
 {
 	public GameObject obj;
 
-	[Range(0.0f, 1.0f)]
-	public float chance;
+	[Range(0, 100)]
+	public int chance;
 }
 
 public class ItemSpawner : MonoBehaviour
@@ -16,14 +16,9 @@ public class ItemSpawner : MonoBehaviour
 	public PickupSpec[] items;
     int whatToSpawn;
 
-	// public float spawnRate = 2f;
-    // float nextSpawn = 0f;
-
-    GameObject forNaming;
-
     public void SpawnItem(Vector2 pos)
 	{
-		float r = Random.value;
+		float r = Random.Range(0, 100);
 
 		for (int i = 0; i < items.Length; i++)
 		{
