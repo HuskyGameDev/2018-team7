@@ -68,6 +68,9 @@ public class EnemyFollowAI : MonoBehaviour
 
 	void Update()
 	{
+		if (enemy.pc == null)
+			return;
+
 		startDelay -= Time.deltaTime;
 
 		if (startDelay < 0.0f)

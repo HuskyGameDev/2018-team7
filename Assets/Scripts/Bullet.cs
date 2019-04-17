@@ -11,6 +11,8 @@ public class Bullet : MonoBehaviour
 	public Gun gun { get; set; }
 	public BulletPool Pool { get; set; }
 
+	public bool rotate, bounce;
+
 	// Use this for initialization
 	void Start()
 	{
@@ -41,6 +43,10 @@ public class Bullet : MonoBehaviour
 	{
 		// Only rotate on z.
 		Vector3 rot = transform.rotation.eulerAngles;
+
+		if (rotate)
+			rot.z += 50.0f * Time.deltaTime;
+
 		transform.rotation = Quaternion.Euler(0.0f, 0.0f, rot.z);
 
 		transform.Translate(velocity * Time.deltaTime, Space.Self);
@@ -77,6 +83,8 @@ public class Bullet : MonoBehaviour
 
 	private void OnTriggerEnter(Collider other)
 	{
+		Vector3 dir = (other.transform.position - transform.position).normalized;
+
 		// 8 - player layer, 9 - enemy layer.
 		if (other.gameObject.layer == 9)
 		{
@@ -87,11 +95,17 @@ public class Bullet : MonoBehaviour
 				return;
 		}
 		else if (other.gameObject.layer == 8)
-		{
-			Vector3 dir = (other.transform.position - transform.position).normalized;
 			pc.ApplyDamage(10, dir, 25.0f);
-		}
 
-		Pool.ReturnBullet(this);
+		if (bounce)
+		{
+			RaycastHit hit;
+			Ray ray = new Ray(other.ClosestPointOnBounds(transform.position) + (-dir * 0.05f), dir);
+			Physics.Raycast(ray, out hit);
+			Vector3 reflect = Vector3.Reflect(dir, hit.normal);
+			Vector3 rot = Vector3.RotateTowards(dir, reflect, Mathf.PI * 2, 0.0f);
+			transform.rotation = Utils.LookX(rot);
+		}
+		else Pool.ReturnBullet(this);
 	}
 }

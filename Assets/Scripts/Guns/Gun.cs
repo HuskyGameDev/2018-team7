@@ -36,7 +36,7 @@ public class Gun
 
 	protected Bullet CreateBullet(Transform t)
 	{
-		Bullet bullet = bulletPool.CreateBullet(t, t);
+		Bullet bullet = bulletPool.CreateBullet(t, t, 2.0f);
 		bullet.ChangeFacing(pc.FacingDir);
 		bullet.gun = this;
 		bullet.gameObject.layer = 11;

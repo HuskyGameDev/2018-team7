@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
+using UnityEngine.Assertions;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -26,9 +27,6 @@ public class HighscoreDisplay : MonoBehaviour {
     Leaderboard leaderboard = new Leaderboard();
     private string dataPath = "";
     
-
-
-
     // Use this for initialization
     void Start () {
         dataPath = Application.persistentDataPath + "/highScore.json";
@@ -50,18 +48,24 @@ public class HighscoreDisplay : MonoBehaviour {
 
     void updateScores()
     {
+		//Literally just updates the text that's seen on screen.
+		try
+		{
+			text1.text = leaderboard.Player1.toString();
+			text2.text = leaderboard.Player2.toString();
+			text3.text = leaderboard.Player3.toString();
+			text4.text = leaderboard.Player4.toString();
+			text5.text = leaderboard.Player5.toString();
+			text6.text = leaderboard.Player6.toString();
+			text7.text = leaderboard.Player7.toString();
+			text8.text = leaderboard.Player8.toString();
+			text9.text = leaderboard.Player9.toString();
+			text10.text = leaderboard.Player10.toString();
+		}
+		catch
+		{
 
-        //Literally just updates the text that's seen on screen.
-        text1.text  = leaderboard.Player1.toString();
-        text2.text  = leaderboard.Player2.toString();
-        text3.text  = leaderboard.Player3.toString();
-        text4.text  = leaderboard.Player4.toString();
-        text5.text  = leaderboard.Player5.toString();
-        text6.text  = leaderboard.Player6.toString();
-        text7.text  = leaderboard.Player7.toString();
-        text8.text  = leaderboard.Player8.toString();
-        text9.text  = leaderboard.Player9.toString();
-        text10.text = leaderboard.Player10.toString();
+		}
     }
 
     Leaderboard Load()

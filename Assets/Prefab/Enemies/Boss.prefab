@@ -43,7 +43,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1774822887176926
 GameObject:
   m_ObjectHideFlags: 0
@@ -83,7 +83,7 @@ Transform:
   m_GameObject: {fileID: 1140223480533030}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4123399069767518}
   - {fileID: 4656094217982170}
@@ -128,8 +128,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 15.236778, y: 8.724594, z: 1}
-  m_Center: {x: -1.0071754, y: -3.7272644, z: 0}
+  m_Size: {x: 2.6794016, y: 2.4740782, z: 1}
+  m_Center: {x: 0.04589975, y: 0.04342699, z: 0}
 --- !u!114 &114800442791703428
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f37a82cdb9dcfe5429865291e110d103, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  health: 200
 --- !u!114 &114966887887992068
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -169,6 +169,10 @@ MonoBehaviour:
   projectile: {fileID: 1053157358583222, guid: e95a1372f82395143a437bcdce21555c, type: 2}
   hole: {fileID: 4656094217982170}
   vulnerable: 0
+  sprites:
+  - {fileID: 21300000, guid: 8777461e12e3b2c4ebde58860177e7bb, type: 3}
+  - {fileID: 21300000, guid: e81c833f736953644ad6520d6308f395, type: 3}
+  - {fileID: 21300000, guid: 060e769a0feb0574fa05ef5ac6e17719, type: 3}
   explosion: {fileID: 0}
 --- !u!212 &212784659192479850
 SpriteRenderer:
@@ -205,7 +209,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: fe09a42727629074691ff1d723560b67, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8777461e12e3b2c4ebde58860177e7bb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

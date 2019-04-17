@@ -52,7 +52,7 @@ public class EnemyGun : MonoBehaviour
 		if (timeStamp <= 0.0f)
 		{
 			timeStamp = timeBetweenShots;
-			Bullet bullet = bullets.CreateBullet(transform, transform);
+			Bullet bullet = bullets.CreateBullet(transform, transform, 2.0f);
 			Vector3 dir = (target.position - transform.position).normalized;
 			bullet.transform.rotation = Utils.LookX(dir);
 			bullet.SetSpeed(bulletSpeed);

@@ -14,7 +14,7 @@ public class BulletPool
 	/// Returns a new bullet from the pool and sets its position to the position given.
 	/// The bullet won't collide with the object firing it.
 	/// </summary>
-	public Bullet CreateBullet(Transform thing, Transform location, float duration = 2.0f)
+	public Bullet CreateBullet(Transform thing, Transform location, float duration)
 	{
 		Bullet bullet = GetBullet(duration);
 		Vector3 bulletPos = location.position;
@@ -54,6 +54,8 @@ public class BulletPool
 	/// </summary>
 	public void ReturnBullet(Bullet obj)
 	{
+		obj.rotate = false;
+		obj.bounce = false;
 		obj.gameObject.SetActive(false);
 		bulletPool.Enqueue(obj);
 	}

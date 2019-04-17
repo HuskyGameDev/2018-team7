@@ -188,7 +188,7 @@ public class FloorGenerator
 		room.AddEnemy(enemy);
 
 		if (type == EnemyType.Boss)
-			enemy.GetComponent<bossscript>().CreateSpots(room);
+			enemy.GetComponent<bossscript>().CreatePhase1Spots(room);
 	}
 
 	private PatternFunc GetRoomPattern(bool endRoom)
