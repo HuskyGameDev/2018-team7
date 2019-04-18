@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class PowerUpController : MonoBehaviour
 {
-
     private PlayerController pc; // the player object
     private Move playerMovement; // Object for the move class\
-	
+
+    private Coroutine fireRateRoutine;
+    private Coroutine speedRoutine;
+
     /**
      * Start
      * Instantiates the playerController and the playerMovement objects for later use
      */
-	void Start ()
+    void Start ()
 	{
 		pc = GetComponentInParent<PlayerController>();
 		playerMovement = GetComponentInParent<Move>();
@@ -34,11 +36,17 @@ public class PowerUpController : MonoBehaviour
 					break;
 
 				case "Speed":
-					StartCoroutine(SpeedPickup());
+                    if (speedRoutine != null)
+                        StopCoroutine(speedRoutine);
+
+					speedRoutine = StartCoroutine(SpeedPickup());
 					break;
 
 				case "BulletSpeed":
-					StartCoroutine(ShootingSpeedPickUp());
+                    if (fireRateRoutine != null)
+                        StopCoroutine(fireRateRoutine);
+
+					fireRateRoutine = StartCoroutine(ShootingSpeedPickUp());
 					break;
 
 				case "Sniper":
