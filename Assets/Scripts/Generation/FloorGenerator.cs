@@ -7,6 +7,8 @@ public class FloorGenerator
 	protected ItemSpawner spawner;
 	protected GameObject[] enemyPrefabs;
 
+    protected TileType wallType, floorType;
+
 	// Used for connecting two rooms together via a pathway.
 	// Stores the axis the pathway will exist on as well as positions 
 	// for the pathway.
@@ -48,29 +50,29 @@ public class FloorGenerator
 		// Add top and bottom walls.
 		for (int x = 1; x <= Room.LimX - 1; x++)
 		{
-			room.SetTile(x, Room.LimY, TileType.Wall);
-			room.SetTile(x, 0, TileType.Wall);
+			room.SetTile(x, Room.LimY, wallType);
+			room.SetTile(x, 0, wallType);
 		}
 
 		// Add left and right walls.
 		for (int y = 1; y <= Room.LimY - 1; y++)
 		{
-			room.SetTile(0, y, TileType.Wall);
-			room.SetTile(Room.LimX, y, TileType.Wall);
+			room.SetTile(0, y, wallType);
+			room.SetTile(Room.LimX, y, wallType);
 		}
 
 		// Add corner walls. These could be baked into the above two loops, but I left them separate
 		// since it depends on the art complexity.
-		room.SetTile(0, Room.LimY, TileType.Wall);
-		room.SetTile(Room.LimX, Room.LimY, TileType.Wall);
-		room.SetTile(0, 0, TileType.Wall);
-		room.SetTile(Room.LimX, 0, TileType.Wall);
+		room.SetTile(0, Room.LimY, wallType);
+		room.SetTile(Room.LimX, Room.LimY, wallType);
+		room.SetTile(0, 0, wallType);
+		room.SetTile(Room.LimX, 0, wallType);
 
 		// Add floor.
 		for (int y = 1; y <= Room.LimY - 1; y++)
 		{
 			for (int x = 1; x <= Room.LimX - 1; x++)
-				room.SetTile(x, y, TileType.Floor);
+				room.SetTile(x, y, floorType);
 		}
 	}
 
@@ -86,7 +88,7 @@ public class FloorGenerator
 		{
 			int x = Random.Range(2, Room.LimX - 1);
 			int y = Random.Range(2, Room.LimY - 1);
-			room.SetTile(x, y, TileType.Wall);
+			room.SetTile(x, y, wallType);
 		}
 	}
 
@@ -101,7 +103,7 @@ public class FloorGenerator
 		{
 			int x = Random.Range(2, Room.LimX - 1);
 			int y = Random.Range(2, Room.LimY - 1);
-			room.SetTile(x, y, TileType.Wall);
+			room.SetTile(x, y, wallType);
 		}
 	}
 
@@ -124,14 +126,14 @@ public class FloorGenerator
 				int dist = Random.Range(4, 9);
 
 				for (int j = startY; j < startY + dist; j++)
-					room.SetTile(startX, j, TileType.Wall);
+					room.SetTile(startX, j, wallType);
 			}
 			else
 			{
 				int dist = Random.Range(8, 15);
 
 				for (int j = startX; j < startX + dist; j++)
-					room.SetTile(j, startY, TileType.Wall);
+					room.SetTile(j, startY, wallType);
 			}
 		}
 	}
@@ -147,10 +149,10 @@ public class FloorGenerator
 
 		for (int x = start; x < end; x++, y--)
 		{
-			room.SetTile(x, y, TileType.Wall);
-			room.SetTile(x, Room.Height - 1 - y, TileType.Wall);
-			room.SetTile(Room.Width - 1 - x, y, TileType.Wall);
-			room.SetTile(Room.Width - 1 - x, Room.Height - 1 - y, TileType.Wall);
+			room.SetTile(x, y, wallType);
+			room.SetTile(x, Room.Height - 1 - y, wallType);
+			room.SetTile(Room.Width - 1 - x, y, wallType);
+			room.SetTile(Room.Width - 1 - x, Room.Height - 1 - y, wallType);
 		}
 	}
 
@@ -170,7 +172,7 @@ public class FloorGenerator
 			x = Random.Range(4, Room.Width - 4);
 			y = Random.Range(4, Room.Height - 4);
 		}
-		while (room.GetTile(x, y) != TileType.Floor);
+		while (room.GetTile(x, y) != floorType);
 
 		return room.WorldPos + new Vector2(x, y);
 	}
@@ -193,6 +195,17 @@ public class FloorGenerator
 
 	private PatternFunc GetRoomPattern(bool endRoom)
 	{
+        if (Random.value < 0.5f)
+        {
+            wallType = TileType.ColoredWall;
+            floorType = TileType.ColoredFloor;
+        }
+        else
+        {
+            wallType = TileType.Wall;
+            floorType = TileType.Floor;
+        }
+
 		if (endRoom)
 			return patterns[patterns.Length - 1];
 		else
@@ -287,7 +300,7 @@ public class FloorGenerator
 			Vec2i a = info.a * new Vec2i(Room.Width, Room.Height);
 			Vec2i b = info.b * new Vec2i(Room.Width, Room.Height);
 
-			PathOrder order = new PathOrder(TileType.TempWall, TileType.Floor);
+			PathOrder order = new PathOrder(TileType.TempWall, floorType);
 
 			if (info.xAxis)
 			{

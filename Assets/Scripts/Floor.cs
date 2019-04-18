@@ -58,10 +58,7 @@ public class Floor : MonoBehaviour
 	private void Start()
 	{
 		if (saveData != null)
-		{
-			Debug.Log("Saved floor: " + saveData.floor);
 			Generate(saveData.floor ?? 1);
-		}
 		else Generate(FloorID);
 	}
 
