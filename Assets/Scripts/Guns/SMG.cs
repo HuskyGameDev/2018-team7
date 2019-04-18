@@ -16,12 +16,19 @@ public class SMG : Gun
         bulletsRemaining = 40;
 	}
 
-	private void DoFire(Facing facing)
+    public override void Activate(PlayerController pc)
+    {
+        audioSource.clip = Resources.Load<AudioClip>("Sounds/Guns/Assault");
+    }
+
+    private void DoFire(Facing facing)
 	{
         // If out of bullets, don't fire
         if (bulletsRemaining <= 0)
             return;
-		pc.ChangeFacing(facing);
+
+        audioSource.Play();
+        pc.ChangeFacing(facing);
 		Quaternion rot = Random.rotation;
 		Bullet p = CreateBullet(pc.transform);
 		p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, rot, spreadAngle);

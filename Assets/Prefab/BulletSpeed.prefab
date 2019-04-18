@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212223960691395628}
   - component: {fileID: 65456208746137436}
   - component: {fileID: 54843933960657442}
+  - component: {fileID: 114624746748092172}
   m_Layer: 12
   m_Name: BulletSpeed
   m_TagString: Pickup
@@ -69,6 +70,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.32, y: 0.32, z: 5}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114624746748092172
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1208549350780950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e6e9e81c8cf94249a0d20516ccc418c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clip: {fileID: 8300000, guid: 35f036ead60019c4cbb7db00ac67d2ff, type: 3}
 --- !u!212 &212223960691395628
 SpriteRenderer:
   m_ObjectHideFlags: 1

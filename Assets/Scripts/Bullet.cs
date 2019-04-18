@@ -74,7 +74,6 @@ public class Bullet : MonoBehaviour
 		{
 			other.GetComponentInParent<Enemy>().ApplyDamage(gun.damage);
 
-			// if the weapon is a sniper, don't destroy
 			if (pierce)
 				return;
 		}
