@@ -27,6 +27,7 @@ public class Sniper : Gun
 		pc.ChangeFacing(facing);
 		audioSource.Play();
 		Bullet go = CreateBullet(pc.transform);
+        go.pierce = true;
 		go.SetSpeed(speed);
 		ResetTimeToFire();
 		bulletsRemaining--;

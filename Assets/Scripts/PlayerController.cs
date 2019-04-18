@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
 	// Use ApplyDamage() and Heal() instead.
 	public int health
 	{
-		get { return _health; }
+        get { return _health; }
 		private set
 		{
 			_health = value;

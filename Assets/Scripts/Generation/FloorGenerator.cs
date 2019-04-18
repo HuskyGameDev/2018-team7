@@ -254,7 +254,7 @@ public class FloorGenerator
 		if (powerupRoom)
 			spawner.SpawnItem(RandomFreePosition(room));
 
-		if (endRoom)
+		if (endRoom && floor.FloorID % 2 == 0)
 			SpawnBoss(room);
 		else
 			SpawnEnemies(room);
