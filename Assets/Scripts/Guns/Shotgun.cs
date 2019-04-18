@@ -55,13 +55,35 @@ public class Shotgun : Gun
 		bulletsRemaining--;
 	}
 
-	public override void Fire(PlayerController pc)
+    private void DoFire(Vector3 aimPos) {
+        // If out of bullets, don't fire
+        if (bulletsRemaining <= 0)
+            return;
+
+        aimPos = aimPos - pc.transform.position;
+        audioSource.Play();
+
+        for (int i = pellets.Count - 1; i >= 0; i--) {
+            pellets[i] = Random.rotation;
+            Bullet p = CreateBullet(BarrelExit);
+            p.ChangeFacing(aimPos);
+            p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellets[i], spreadAngle);
+            p.SetSpeed(speed);
+        }
+
+        ResetTimeToFire();
+        bulletsRemaining--;
+    }
+
+    public override void Fire(PlayerController pc)
 	{
 		timeBeforeFire -= Time.deltaTime;
 
 		if (timeBeforeFire < 0.0f && bulletsRemaining > 0)
 		{
-			if (Input.GetKey(KeyCode.UpArrow))
+            if (Input.GetKey(KeyCode.Mouse0))
+                DoFire(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+            else if (Input.GetKey(KeyCode.UpArrow))
 				DoFire(Facing.Back);
 			else if (Input.GetKey(KeyCode.DownArrow))
 				DoFire(Facing.Front);

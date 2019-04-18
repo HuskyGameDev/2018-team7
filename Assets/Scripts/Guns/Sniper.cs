@@ -32,13 +32,28 @@ public class Sniper : Gun
 		bulletsRemaining--;
 	}
 
-	public override void Fire(PlayerController pc)
+    private void DoFire(Vector3 aimPos) {
+        // If out of bullets, don't fire
+        if (bulletsRemaining <= 0)
+            return;
+        audioSource.Play();
+        aimPos = aimPos - pc.transform.position;
+        Bullet go = CreateBullet(pc.transform);
+        go.ChangeFacing(aimPos);
+        go.SetSpeed(speed);
+        ResetTimeToFire();
+        bulletsRemaining--;
+    }
+
+    public override void Fire(PlayerController pc)
 	{
 		timeBeforeFire -= Time.deltaTime;
 
 		if (timeBeforeFire < 0.0f && bulletsRemaining > 0)
 		{
-			if (Input.GetKey(KeyCode.RightArrow))
+            if (Input.GetKey(KeyCode.Mouse0))
+                DoFire(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+            else if (Input.GetKey(KeyCode.RightArrow))
 				DoFire(Facing.Right);
 			else if (Input.GetKey(KeyCode.LeftArrow))
 				DoFire(Facing.Left);

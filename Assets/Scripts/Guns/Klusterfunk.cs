@@ -55,14 +55,16 @@ public class Klusterfunk : Gun
 
 		if (timeBeforeFire < 0.0f)
 		{
-			if (Input.GetKey(KeyCode.UpArrow))
-				DoFire(Facing.Back);
-			else if (Input.GetKey(KeyCode.DownArrow))
-				DoFire(Facing.Front);
-			else if (Input.GetKey(KeyCode.LeftArrow))
-				DoFire(Facing.Left);
-			else if (Input.GetKey(KeyCode.RightArrow))
-				DoFire(Facing.Right);
+            if (Input.GetKey(KeyCode.Mouse0))
+                DoFire(Facing.Front);
+            else if (Input.GetKey(KeyCode.UpArrow))
+                DoFire(Facing.Back);
+            else if (Input.GetKey(KeyCode.DownArrow))
+                DoFire(Facing.Front);
+            else if (Input.GetKey(KeyCode.LeftArrow))
+                DoFire(Facing.Left);
+            else if (Input.GetKey(KeyCode.RightArrow))
+                DoFire(Facing.Right);
 		}
 	}
 }

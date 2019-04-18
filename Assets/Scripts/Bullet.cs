@@ -75,6 +75,13 @@ public class Bullet : MonoBehaviour
 		}
 	}
 
+    // Uses a Vector3 to point in the direction of the mouse
+    public void ChangeFacing(Vector3 aimPos) 
+    {
+        float rotZ = Mathf.Atan2(aimPos.y, aimPos.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0f, 0f, rotZ);
+    }
+
 	IEnumerator DestroyBullet(float duration)
 	{
 		yield return new WaitForSeconds(duration);
