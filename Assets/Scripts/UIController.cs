@@ -43,8 +43,7 @@ public class UIController : MonoBehaviour
 		for (int i = 0; i < GunType.Count; i++)
 		{
 			// Change the size of the gun UI display based on which is selected by the player.
-			// Until we get pistol art I want to leave the pistol slot at size 32, 32 (pistol is i == 0).
-			if (i != 0 && loaded[i])
+			if (loaded[i])
 				transforms[i].sizeDelta = i == pc.Gun ? new Vector2(72.0f, 72.0f) : new Vector2(45.0f, 45.0f);
 
 			if (!loaded[i] && pc.HasGun(i))
