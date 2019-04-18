@@ -103,8 +103,8 @@ public class bossscript : MonoBehaviour
 
 	private void Burst()
 	{
-		for (int i = 20; i >= 0; i--)
-			RandomBullet(20.0f);
+		for (int i = 15; i >= 0; i--)
+			RandomBullet(17.0f);
 	}
 
 	private void SpiralShot()
@@ -145,10 +145,10 @@ public class bossscript : MonoBehaviour
 		if (timeBeforeFire <= 0.0f)
 		{
 			timeBeforeFire = fireRate;
-			Bullet bullet = bullets.CreateBullet(transform, transform, 8.0f);
+			Bullet bullet = bullets.CreateBullet(transform, transform, 5.0f);
 			Vector3 dir = (Player.transform.position - transform.position).normalized;
 			bullet.transform.rotation = Utils.LookX(dir);
-			bullet.SetSpeed(10.0f);
+			bullet.SetSpeed(8.0f);
 			bullet.gameObject.layer = 15;
 		}
 	}
