@@ -95,7 +95,7 @@ public class bossscript : MonoBehaviour
 	private void RandomBullet(float speed)
 	{
 		Quaternion quat = Random.rotation;
-		Bullet p = bullets.CreateBullet(transform, transform, 25.0f);
+		Bullet p = bullets.CreateBullet(transform, transform, 20.0f);
 		p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, quat, 360.0f);
 		p.SetSpeed(speed);
 		p.gameObject.layer = 15;
@@ -103,8 +103,8 @@ public class bossscript : MonoBehaviour
 
 	private void Burst()
 	{
-		for (int i = 50; i >= 0; i--)
-			RandomBullet(25.0f);
+		for (int i = 20; i >= 0; i--)
+			RandomBullet(20.0f);
 	}
 
 	private void SpiralShot()
@@ -133,7 +133,7 @@ public class bossscript : MonoBehaviour
 			timeBeforeReflect = reflectRate;
 			Bullet bullet = bullets.CreateBullet(transform, transform, 3.0f);
 			bullet.bounce = true;
-			bullet.SetSpeed(15.0f);
+			bullet.SetSpeed(10.0f);
 			bullet.gameObject.layer = 15;
 		}
 	}
@@ -145,10 +145,10 @@ public class bossscript : MonoBehaviour
 		if (timeBeforeFire <= 0.0f)
 		{
 			timeBeforeFire = fireRate;
-			Bullet bullet = bullets.CreateBullet(transform, transform, 25.0f);
+			Bullet bullet = bullets.CreateBullet(transform, transform, 8.0f);
 			Vector3 dir = (Player.transform.position - transform.position).normalized;
 			bullet.transform.rotation = Utils.LookX(dir);
-			bullet.SetSpeed(15.0f);
+			bullet.SetSpeed(10.0f);
 			bullet.gameObject.layer = 15;
 		}
 	}
@@ -235,7 +235,8 @@ public class bossscript : MonoBehaviour
 
 	IEnumerator Phase2()
 	{
-		GetComponent<SpriteRenderer>().sprite = sprites[1];
+        yield return new WaitForSeconds(1.0f);
+        GetComponent<SpriteRenderer>().sprite = sprites[1];
 
 		fireRate = 0.15f;
 		speed = 3.0f;
@@ -267,7 +268,8 @@ public class bossscript : MonoBehaviour
 
 	IEnumerator Phase3()
 	{
-		GetComponent<SpriteRenderer>().sprite = sprites[2];
+        yield return new WaitForSeconds(1.0f);
+        GetComponent<SpriteRenderer>().sprite = sprites[2];
 
 		speed = 5.0f;
 		fireRate = 0.15f;

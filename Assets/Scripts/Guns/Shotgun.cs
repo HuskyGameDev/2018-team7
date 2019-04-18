@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Shotgun : Gun
 {
-	private int pelletCount = 10;
+	private int pelletCount = 5;
 	private float spreadAngle;
     public Transform BarrelExit;
     private float timeStamp;
