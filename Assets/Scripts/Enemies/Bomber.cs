@@ -8,12 +8,14 @@ public class Bomber : MonoBehaviour
 	private float range = 1.0f;
     private Transform target;
 	private ParticleSystem ps;
+    private AudioSource sound;
 
     // Start is called before the first frame update
     void Start()
     {
         pc = GetComponent<Enemy>().pc;
 		ps = GetComponent<ParticleSystem>();
+        sound = GetComponent<AudioSource>();
 
 		if (pc != null)
 			target = pc.transform;
@@ -40,9 +42,10 @@ public class Bomber : MonoBehaviour
 		enabled = false;
 
 		ps.Play();
+        sound.Play();
 
 		// Destroy after the particles have fully played out
 		// to prevent them from being cut off.
-		Destroy(gameObject, ps.main.startLifetime.constant);
+		Destroy(gameObject, sound.clip.length);
     }
 }

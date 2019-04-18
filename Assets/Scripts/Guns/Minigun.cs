@@ -21,14 +21,21 @@ public class Minigun : Gun
         bulletsRemaining = 100;
 	}
 
-	private void DoFire(Facing facing)
+    public override void Activate(PlayerController pc)
+    {
+        audioSource.clip = Resources.Load<AudioClip>("Sounds/Guns/Assault");
+    }
+
+    private void DoFire(Facing facing)
 	{
         // If out of bullets, don't fire
         if (bulletsRemaining <= 0)
             return;
+
 		pc.ChangeFacing(facing);
 		pellet = Random.rotation;
-		Bullet p = CreateBullet(BarrelExit);
+        audioSource.Play();
+        Bullet p = CreateBullet(BarrelExit);
 		p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellet, spreadAngle);
 		p.SetSpeed(speed);
 		ResetTimeToFire();

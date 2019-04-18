@@ -9,8 +9,13 @@ public enum Facing
 
 public class PlayerController : MonoBehaviour
 {
+    private int gun;
+
 	// The player's current gun.
-	public int Gun { get; private set; }
+	public int Gun
+    {
+        get { return gun; }
+    }
 
 	public bool Dead { get; set; } = false;
 
@@ -39,7 +44,7 @@ public class PlayerController : MonoBehaviour
 	// Use ApplyDamage() and Heal() instead.
 	public int health
 	{
-		get { return _health; }
+        get { return _health; }
 		private set
 		{
 			_health = value;
@@ -110,9 +115,10 @@ public class PlayerController : MonoBehaviour
 
 		health = 100;
 
-		AddGun<Pistol>(GunType.Pistol);
-		Gun = GunType.Pistol;
-	}
+        AddGun<Pistol>(GunType.Pistol);
+        gun = GunType.Pistol;
+        guns[GunType.Pistol].Activate(this);
+    }
 
 	public void ChangeFacing(Facing facing)
 	{
@@ -196,9 +202,9 @@ public class PlayerController : MonoBehaviour
 
 			if (count == k)
 			{
-				Gun = i;
-				guns[i].Activate(this);
-				return;
+                gun = i;
+                guns[i].Activate(this);
+                return;
 			}
 		}
 	}
@@ -207,20 +213,24 @@ public class PlayerController : MonoBehaviour
 	{
 		do
 		{
-			Gun = (Gun + 1) % guns.Length;
+			gun = (gun + 1) % guns.Length;
 		}
-		while (guns[Gun] == null);
-	}
+		while (guns[gun] == null);
+
+        guns[gun].Activate(this);
+    }
 
 	private void GetPrevGun()
 	{
 		do
 		{
-			Gun--;
-			if (Gun < 0) Gun = guns.Length - 1;
+			gun--;
+			if (gun < 0) gun = guns.Length - 1;
 		}
-		while (guns[Gun] == null);
-	}
+		while (guns[gun] == null);
+
+        guns[gun].Activate(this);
+    }
 
 	private void Update()
 	{
@@ -243,11 +253,12 @@ public class PlayerController : MonoBehaviour
 		if (Input.GetKeyDown(KeyCode.Alpha4)) ChangeGun(3);
 		if (Input.GetKeyDown(KeyCode.Alpha5)) ChangeGun(4);
 		if (Input.GetKeyDown(KeyCode.Alpha6)) ChangeGun(5);
+        if (Input.GetKeyDown(KeyCode.Alpha7)) ChangeGun(6);
 
-		room = Floor.Instance.GetRoom(Utils.ToRoomPos(transform.position));
+        room = Floor.Instance.GetRoom(Utils.ToRoomPos(transform.position));
 		room.ActivateEnemies();
 
-		guns[Gun].Fire(this);
+		guns[gun].Fire(this);
 	}
 
     public bool[] GetGunArray()

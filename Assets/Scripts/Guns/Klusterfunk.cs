@@ -30,7 +30,7 @@ public class Klusterfunk : Gun
 		bulletsRemaining = 300;
 	}
 
-	private void DoFire(Facing facing)
+    private void DoFire(Facing facing)
 	{
 		if (bulletsRemaining > 0)
 		{
@@ -40,7 +40,7 @@ public class Klusterfunk : Gun
 			{
 				pellets[i] = Random.rotation;
 				Bullet p = CreateBullet(BarrelExit);
-				p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellets[i], spreadAngle);
+                p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellets[i], spreadAngle);
 				p.SetSpeed(speed);
 				bulletsRemaining--;
 			}

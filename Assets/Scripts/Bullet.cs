@@ -5,28 +5,12 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
 	private Vector3 velocity;
-	private PlayerController pc;
 
 	// The gun this bullet belongs to.
 	public Gun gun { get; set; }
 	public BulletPool Pool { get; set; }
 
-	public bool rotate, bounce;
-
-	// Use this for initialization
-	void Start()
-	{
-		// retrieve the player object
-		GameObject playerControllerObject = GameObject.FindWithTag("Player");
-		if (playerControllerObject != null)
-		{
-			pc = playerControllerObject.GetComponent<PlayerController>();
-		}
-		else
-		{
-			Debug.Log("Cannot find Player");
-		}
-	}
+    public bool rotate, bounce, pierce;
 
 	public void OnFired(float duration)
 	{
@@ -97,12 +81,11 @@ public class Bullet : MonoBehaviour
 		{
 			other.GetComponentInParent<Enemy>().ApplyDamage(gun.damage);
 
-			// if the weapon is a sniper, don't destroy
-			if (pc.Gun == GunType.Sniper)
+			if (pierce)
 				return;
 		}
 		else if (other.gameObject.layer == 8)
-			pc.ApplyDamage(10, dir, 25.0f);
+			other.GetComponentInParent<PlayerController>().ApplyDamage(10, dir, 25.0f);
 
 		if (bounce)
 		{

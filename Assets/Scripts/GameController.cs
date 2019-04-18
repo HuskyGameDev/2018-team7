@@ -44,10 +44,15 @@ public class GameController : MonoBehaviour
 		SetSeed(seed == -1 ? Random.Range(0, MaxSeed) : seed);
 	}
 
+    private static void ClearSaveData()
+    {
+        File.Delete(Application.persistentDataPath + "/SaveGame.dat");
+    }
+
 	public static void ResetGame()
 	{
 		seed = -1;
-		File.Delete(Application.persistentDataPath + "/SaveGame.dat");
+        ClearSaveData();
 		Floor.Instance.saveData = null;
 	}
 
@@ -179,8 +184,6 @@ public class GameController : MonoBehaviour
 
 		bf.Serialize(file, newSave); //Make it able to be pushed to the file
 		file.Close();
-
-		Debug.Log("Game saved!");
 	}
 
 	private void LoadGame()

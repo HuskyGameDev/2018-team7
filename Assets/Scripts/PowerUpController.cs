@@ -4,18 +4,23 @@ using UnityEngine;
 
 public class PowerUpController : MonoBehaviour
 {
-
     private PlayerController pc; // the player object
     private Move playerMovement; // Object for the move class\
-	
+
+    private Coroutine fireRateRoutine;
+    private Coroutine speedRoutine;
+
+    private AudioSource audioSrc;
+
     /**
      * Start
      * Instantiates the playerController and the playerMovement objects for later use
      */
-	void Start ()
+    void Start ()
 	{
 		pc = GetComponentInParent<PlayerController>();
 		playerMovement = GetComponentInParent<Move>();
+        audioSrc = GetComponent<AudioSource>();
     }
 
     /**
@@ -31,15 +36,27 @@ public class PowerUpController : MonoBehaviour
 			{
 				case "Health":
 					HealthPickup();
+                    audioSrc.clip = collision.GetComponent<PowerupAudio>().clip;
+                    audioSrc.Play();
 					break;
 
 				case "Speed":
-					StartCoroutine(SpeedPickup());
-					break;
+                    if (speedRoutine != null)
+                        StopCoroutine(speedRoutine);
+
+					speedRoutine = StartCoroutine(SpeedPickup());
+                    audioSrc.clip = collision.GetComponent<PowerupAudio>().clip;
+                    audioSrc.Play();
+                    break;
 
 				case "BulletSpeed":
-					StartCoroutine(ShootingSpeedPickUp());
-					break;
+                    if (fireRateRoutine != null)
+                        StopCoroutine(fireRateRoutine);
+
+					fireRateRoutine = StartCoroutine(ShootingSpeedPickUp());
+                    audioSrc.clip = collision.GetComponent<PowerupAudio>().clip;
+                    audioSrc.Play();
+                    break;
 
 				case "Sniper":
 					pc.AddGun(GunType.Sniper);

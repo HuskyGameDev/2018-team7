@@ -59,7 +59,7 @@ public class EnemyShotgun : MonoBehaviour
 
 		if (timeStamp <= 0.0f)
 		{
-			for (int i = 9; i >= 0; i--)
+			for (int i = 3; i >= 0; i--)
 			{
 				pellets[i] = Random.rotation;
 				Bullet p = bullets.CreateBullet(transform, transform, 2.0f);

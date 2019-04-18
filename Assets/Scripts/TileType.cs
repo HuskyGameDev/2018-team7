@@ -2,8 +2,10 @@
 public enum TileType
 {
 	Air,
-	Wall, 
+	Wall,
+    ColoredWall,
 	Floor,
+    ColoredFloor,
     Stair,
 	TempWall
 }
