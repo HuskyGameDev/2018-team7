@@ -4,11 +4,16 @@ using System.Collections.Generic;
 
 public class bossscript : MonoBehaviour
 {
+    // Transforms the boss will move between.
     public Transform[] spots;
+
     public float speed;
     public GameObject projectile;
     GameObject Player;
+
+    // Transform the bullets come from.
 	public Transform hole;
+
     Vector3 playerPos;
     public bool vulnerable;
 
@@ -54,6 +59,7 @@ public class bossscript : MonoBehaviour
 		}
     }
 
+    // Create the points the boss will move between in phase 1.
 	public void CreatePhase1Spots(Room room)
 	{
 		this.room = room;
@@ -70,6 +76,7 @@ public class bossscript : MonoBehaviour
 		spots = new Transform[] { spot1, spot2, spot3 };
 	}
 
+    // Create the points the boss will move between in phase 2.
 	public void CreatePhase3Spots()
 	{
 		Vector2 wPos = room.WorldPos;
@@ -92,6 +99,7 @@ public class bossscript : MonoBehaviour
 		spots = new Transform[] { spot1, spot2, spot3, spot4, spot5 };
 	}
 
+    // Fires a bullet in a random direction.
 	private void RandomBullet(float speed)
 	{
 		Quaternion quat = Random.rotation;
@@ -100,13 +108,15 @@ public class bossscript : MonoBehaviour
 		p.SetSpeed(speed);
 		p.gameObject.layer = 15;
 	}
-
+    
+    // Fires a burst of random bullets at once.
 	private void Burst()
 	{
 		for (int i = 15; i >= 0; i--)
 			RandomBullet(17.0f);
 	}
 
+    // Fires a bullet that will spiral around.
 	private void SpiralShot()
 	{
 		spiralStartRot -= 15.0f * Time.deltaTime;
@@ -126,6 +136,7 @@ public class bossscript : MonoBehaviour
 		}
 	}
 
+    // Fires a bullet that will reflect off walls.
 	private void ReflectShot()
 	{
 		if (timeBeforeReflect < 0.0f)
@@ -138,6 +149,7 @@ public class bossscript : MonoBehaviour
 		}
 	}
 
+    // Fires a bullet directly toward the player.
 	private void TargetPlayer()
 	{
 		timeBeforeFire -= Time.deltaTime;
@@ -153,6 +165,7 @@ public class bossscript : MonoBehaviour
 		}
 	}
 
+    // Begins the first boss phase after a second.
 	IEnumerator StartAfterDelay()
 	{
 		yield return new WaitForSeconds(1.0f);
@@ -160,6 +173,7 @@ public class bossscript : MonoBehaviour
 		StartCoroutine(Phase1());
 	}
 
+    // Checks the boss's health - at 60% of max HP the boss transitions to phase 2.
 	IEnumerator CheckPhase2()
 	{
 		while (enemy.health > (maxHealth * 0.6f))
@@ -170,6 +184,7 @@ public class bossscript : MonoBehaviour
 		StartCoroutine(Phase2());
 	}
 
+    // At 30% of max HP the boss transitions to phase 3.
 	IEnumerator CheckPhase3()
 	{
 		while (enemy.health > (maxHealth * 0.3f))
@@ -179,6 +194,8 @@ public class bossscript : MonoBehaviour
 		StartCoroutine(Phase3());
 	}
 
+    // During phase 1, the boss rotates between three points and fires toward the player.
+    // At each point, he will fire a circular burst of bullets.
     IEnumerator Phase1()
     {
 		GetComponent<SpriteRenderer>().sprite = sprites[0];
@@ -233,6 +250,8 @@ public class bossscript : MonoBehaviour
 		bombers.Add(bomber);
 	}
 
+    // During phase 2, the boss will approach the player will firing bullets all around. 
+    // He will summon a bomber enemy every 2 seconds.
 	IEnumerator Phase2()
 	{
         yield return new WaitForSeconds(1.0f);
@@ -266,6 +285,8 @@ public class bossscript : MonoBehaviour
 		}
 	}
 
+    // During phase 3, the boss will rotate between 4 spots. He will fire bullets that reflect off the walls.
+    // After each rotation, he'll go to the center and fire waves of spiraling bullets.
 	IEnumerator Phase3()
 	{
         yield return new WaitForSeconds(1.0f);
