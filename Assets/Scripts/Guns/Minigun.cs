@@ -46,6 +46,8 @@ public class Minigun : Gun
         // If out of bullets, don't fire
         if (bulletsRemaining <= 0)
             return;
+
+        audioSource.Play();
         pellet = Random.rotation;
         aimPos = aimPos - pc.transform.position;
         Bullet p = CreateBullet(BarrelExit);

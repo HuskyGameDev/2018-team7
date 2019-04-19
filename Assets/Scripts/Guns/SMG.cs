@@ -37,10 +37,13 @@ public class SMG : Gun
 		bulletsRemaining--;
 	}
 
-    private void DoFire(Vector3 aimPos) {
+    private void DoFire(Vector3 aimPos)
+    {
         // If out of bullets, don't fire
         if (bulletsRemaining <= 0)
             return;
+
+        audioSource.Play();
         aimPos = aimPos - pc.transform.position;
         Quaternion rot = Random.rotation;
         Bullet p = CreateBullet(pc.transform);
